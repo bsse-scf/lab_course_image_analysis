@@ -13,7 +13,7 @@ to the morning.
 
 | | |
 |---|---|
-| morning | Lecture, then [Fiji](fiji/index.md): intensities, channels, thresholding, cleaning up a mask, measuring objects, and pixel classification with Weka |
+| morning | Lecture, then [Fiji](fiji/index.md): intensities, channels, thresholding, cleaning up a binary image, measuring objects, and pixel classification with Weka |
 | afternoon | The same analysis in Python: [image handling](../notebooks/01_image_handling.ipynb) and [image processing](../notebooks/02_image_processing.ipynb) |
 
 The afternoon deliberately repeats the morning on the same images. Fiji is faster

@@ -8,7 +8,7 @@ Your homework will use images you acquire yourselves on a microscope you built
 yourselves. On that setup you change the filter by hand between channels, and the
 sample moves a little every time. So the DAPI, GFP and Cy3 images of the *same
 cells* will not overlap, and if they do not overlap, you cannot ask "how bright
-is the GFP inside this nucleus?", because the nucleus is not where the mask says
+is the GFP inside this nucleus?", because the nucleus is not where the binary image says
 it is.
 
 Fixing that is called **registration**: finding the transform that brings one

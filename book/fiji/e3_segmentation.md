@@ -28,7 +28,7 @@ values are gone. This is why you duplicated first.
 
 ## Part 2: cleaning up
 
-4. Look closely at the mask. **Can you see small specks that are not nuclei? Are
+4. Look closely at the binary image. **Can you see small specks that are not nuclei? Are
    there nuclei with holes in them?**
 
 5. Fill the holes with `Process ▸ Binary ▸ Fill Holes`.

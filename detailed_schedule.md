@@ -156,8 +156,8 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 | 3. Cropping is just indexing | slicing, 1D profiles |
 | 4. Two channels | channel arrays, building an RGB composite |
 | 5. The histogram | `plt.hist`, log scale, background peak vs object tail |
-| 6. From image to mask: semantic segmentation | comparison operators, boolean masks, `threshold_otsu`; **semantic segmentation named**; the kinds of mask (boolean, label, probability) |
-| 7. From mask to objects: connected components | **instance segmentation named**; `label` as the first route from semantic to instance, and where it fails |
+| 6. From intensity image to binary image: semantic segmentation | comparison operators, `threshold_otsu`; **semantic segmentation named**; the four kinds of image (intensity, binary, label, probability) |
+| 7. From binary image to objects: connected component labeling | **instance segmentation named**; `label` as the first route from semantic to instance, and where it fails |
 | 8. Viewing images interactively | `stackview`, `napari` |
 
 ### `notebooks/01_image_handling_ex.ipynb`
@@ -178,9 +178,9 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 | 1. Why did we get 34 instead of 39? | inspecting the object size distribution before filtering |
 | 2. Uneven illumination | background estimation by heavy blur, `white_tophat` |
 | 3. Denoising: Gaussian vs median | which filter suits which noise |
-| 4. Morphology: cleaning up a mask | erosion, dilation, `opening`, `closing`, `binary_fill_holes` |
+| 4. Morphology: cleaning up a binary image | erosion, dilation, `opening`, `closing`, `binary_fill_holes` |
 | 5. Putting it together | a full pipeline; `remove_small_objects`; steps that earn nothing |
-| 6. Watershed: a second route from semantic to instance | distance transform; **raw peaks → distance threshold → smoothed distance**; seeding is the failure mode; when connected components is not enough |
+| 6. Watershed: a second route from semantic to instance | distance transform; **raw peaks → distance threshold → smoothed distance**; seeding is the failure mode; when connected component labeling is not enough |
 
 ### `notebooks/02_image_processing_ex.ipynb`
 
@@ -342,8 +342,8 @@ it that relies on it has to move too.
 | thresholding, Otsu | Fiji E3 part 1; Python `01` §6 |
 | kinds of mask (boolean, label, probability) | Python `01` §6 |
 | morphological cleanup | Fiji E3 part 2; Python `02` §4 |
-| connected components / labelling | Python `01` §7: the first semantic→instance route |
-| measuring a second channel through a mask | Fiji E3 part 4 |
+| connected component labeling / labeling | Python `01` §7: the first semantic→instance route |
+| measuring a second channel through a binary image | Fiji E3 part 4 |
 | ground truth as a reference | Python `01` §7 |
 | uneven illumination, background subtraction | Python `02` §2 |
 | denoising | Python `02` §3 |

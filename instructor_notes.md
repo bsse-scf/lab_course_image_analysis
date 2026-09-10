@@ -128,7 +128,7 @@ Day 2's headline result, on `24h_2`:
 | Cellpose | 0.898 | 0.946 | 0.863 |
 
 The two Weka rows are the teaching point: **identical pixel scores, F1 nearly
-doubled.** A watershed only redraws boundaries inside the mask it was given, so
+doubled.** A watershed only redraws boundaries inside the binary image it was given, so
 Dice cannot see the improvement at all.
 
 ### Solutions run headlessly
