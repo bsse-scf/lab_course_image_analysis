@@ -71,7 +71,16 @@ iaf = ">=1.5.3"
 [tasks]
 lab = "jupyter lab"
 test = "pytest notebooks/tests"
-test-nb = "pytest --nbmake --nbmake-timeout=600 notebooks/0*.ipynb"
+# Execute the walkthrough notebooks. Named explicitly rather than globbed: the
+# generated *_ex.ipynb are blank by construction and MUST fail if executed, and
+# 03 is slow because it runs cellpose.
+test-nb = """pytest --nbmake --nbmake-timeout=900 \
+  notebooks/00_python_basics.ipynb \
+  notebooks/01_image_handling.ipynb \
+  notebooks/02_image_processing.ipynb \
+  notebooks/04_segmentation_metrics.ipynb \
+  notebooks/05_features.ipynb \
+  notebooks/06_curve_fitting.ipynb"""
 test-nb-heavy = "pytest --nbmake --nbmake-timeout=1800 notebooks/03_ml_segmentation.ipynb"
 fetch-data = "python scripts/fetch_data.py"
 make-exercises = "python scripts/make_exercises.py"

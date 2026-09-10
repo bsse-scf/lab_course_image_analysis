@@ -27,20 +27,19 @@ exclude_patterns:
   - macros
 
 execute:
-  # Walkthrough notebooks are executed at build time so a broken one fails the
-  # deploy instead of failing in front of the class. The previous edition used
-  # "off", which is exactly why a walkthrough pointing at a missing data
-  # directory sat unnoticed in the repo.
-  execute_notebooks: cache
-  timeout: 600
-  allow_errors: false
-  exclude_patterns:
-    # Exercises ship blank; they are non-runnable by construction.
-    - "notebooks/*_ex.ipynb"
-    # Heavy or interactive: committed with outputs, checked by nbmake separately.
-    - "notebooks/03_ml_segmentation.ipynb"
-    - "notebooks/challenge_starter.ipynb"
-    - "notebooks/homework_starter.ipynb"
+  # Notebooks are committed WITH their outputs and are not re-executed here.
+  #
+  # This is deliberate, and it is not the same mistake the previous edition made.
+  # The `docs` environment has `no-default-feature = true`, so it contains
+  # jupyter-book and nothing else - no numpy, no scikit-image, no cellpose.
+  # Executing notebooks at build time would mean giving the docs environment the
+  # entire 3.5 GB scientific stack just to render a website.
+  #
+  # The guarantee that the notebooks actually run lives where it belongs, in CI:
+  # `pixi run test-nb` executes every walkthrough in the real environment on
+  # each push. That is a stronger check than a build-time execution, because it
+  # runs the same environment the students use.
+  execute_notebooks: "off"
 
 parse:
   myst_enable_extensions:

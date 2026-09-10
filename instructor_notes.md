@@ -198,10 +198,11 @@ course keeps making.
 ## Challenge
 
 - `segmentation.ijm` in the parent directory is the origin of
-  `plate01_summary.csv`. It has two real bugs — `saveAs` sits outside both loops
-  using a stale `filename`, and it saves `"Results"` when `Analyze Particles` was
-  called with `summarize`, so the numbers actually live in the **Summary** window.
-  The corrected version ships as `macros/challenge_segmentation.ijm`.
+  `plate01_summary.csv`. If you reuse it, note two real bugs: `saveAs` sits
+  outside both loops using a stale `filename`, and it saves `"Results"` when
+  `Analyze Particles` was called with `summarize`, so the numbers actually live
+  in the **Summary** window. No corrected version is shipped — students write
+  their own segmentation for the challenge.
 - `size=0-409` in that macro is in **calibrated units** and is silently
   meaningless on uncalibrated or differently-binned images. Say so out loud.
 - Two traps students reliably hit: the acquisition **snake pattern** (odd rows

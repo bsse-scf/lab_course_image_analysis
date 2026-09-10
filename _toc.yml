@@ -1,84 +1,67 @@
-# Part captions mirror the day/session structure in book/schedule.md, so a
-# student can navigate the site by "where am I right now".
+# Part captions mirror the structure in detailed_schedule.md.
+#
+# Only pages that EXIST are listed here. Pages still to be written -- the concept
+# pages and the two starter notebooks -- are tracked in detailed_schedule.md
+# and should be added below as they land. A TOC entry for a file that does not
+# exist breaks the book build.
 format: jb-book
 root: book/landing.md
 
 parts:
-- caption: Course information
-  chapters:
-  - file: book/schedule.md
-  - file: book/setup/index.md
-    sections:
-    - file: book/setup/install_fiji.md
-    - file: book/setup/install_python.md
-    - file: book/setup/setup_environment.md
-    - file: book/setup/download_data.md
+  - caption: Course information
+    chapters:
+      - file: book/course_schedule.md
+      - file: book/setup/index.md
+        sections:
+          - file: book/setup/install_fiji.md
+          - file: book/setup/install_python.md
+          - file: book/setup/setup_environment.md
+          - file: book/setup/download_data.md
+      - file: notebooks/00_python_basics.ipynb
+        sections:
+          - file: notebooks/00_python_basics_ex.ipynb
 
-- caption: "Day 0 — Introduction"
-  chapters:
-  - file: book/intro_lecture.md
-  - file: notebooks/00_python_basics.ipynb
-    sections:
-    - file: notebooks/00_python_basics_ex.ipynb
+  - caption: Image Analysis Basics with Fiji
+    chapters:
+      - file: book/fiji/index.md
+        sections:
+          - file: book/fiji/e1_basics.md
+          - file: book/fiji/e2_registration.md
+          - file: book/fiji/e3_segmentation.md
+          - file: book/fiji/e4_weka.md
+          - file: book/fiji/e5_macros.md
+          - file: book/fiji/fun/how_wide_is_a_filament.md
+          - file: book/fiji/fun/spot_the_artifact.md
+      - file: book/fiji/cheat_sheet_basics.md
+      - file: book/fiji/cheat_sheet_macros.md
 
-- caption: "Day 1 — Morning: Fiji"
-  chapters:
-  - file: book/fiji/index.md
-    sections:
-    - file: book/fiji/e1_basics.md
-    - file: book/fiji/e2_registration.md
-    - file: book/fiji/e3_segmentation.md
-    - file: book/fiji/e4_weka.md
-    - file: book/fiji/e5_macros.md
-    - file: book/fiji/fun/how_wide_is_a_filament.md
-    - file: book/fiji/fun/spot_the_artifact.md
+  - caption: Workflows in Python
+    chapters:
+      - file: notebooks/01_image_handling.ipynb
+        sections:
+          - file: notebooks/01_image_handling_ex.ipynb
+      - file: notebooks/02_image_processing.ipynb
+        sections:
+          - file: notebooks/02_image_processing_ex.ipynb
+      - file: notebooks/03_ml_segmentation.ipynb
+        sections:
+          - file: notebooks/03_ml_segmentation_ex.ipynb
+      - file: notebooks/04_segmentation_metrics.ipynb
+        sections:
+          - file: notebooks/04_segmentation_metrics_ex.ipynb
+      - file: notebooks/05_features.ipynb
+        sections:
+          - file: notebooks/05_detective_game_ex.ipynb
+      - file: notebooks/06_curve_fitting.ipynb
+        sections:
+          - file: notebooks/06_curve_fitting_ex.ipynb
 
-- caption: "Day 1 — Afternoon: Python"
-  chapters:
-  - file: book/python/index.md
-  - file: book/python/concepts_fundamentals.md
-    sections:
-    - file: notebooks/01_image_handling.ipynb
-    - file: notebooks/01_image_handling_ex.ipynb
-  - file: book/python/concepts_processing.md
-    sections:
-    - file: notebooks/02_image_processing.ipynb
-    - file: notebooks/02_image_processing_ex.ipynb
+  - caption: Independent work
+    chapters:
+      - file: book/challenge.md
+      - file: book/homework.md
 
-- caption: "Day 2 — Morning: Machine learning & features"
-  chapters:
-  - file: book/python/concepts_ml.md
-    sections:
-    - file: notebooks/03_ml_segmentation.ipynb
-    - file: notebooks/03_ml_segmentation_ex.ipynb
-  - file: book/python/concepts_metrics.md
-    sections:
-    - file: notebooks/04_segmentation_metrics.ipynb
-    - file: notebooks/04_segmentation_metrics_ex.ipynb
-  - file: book/python/concepts_features.md
-    sections:
-    - file: notebooks/05_features.ipynb
-    - file: notebooks/05_detective_game_ex.ipynb
-    - file: notebooks/06_curve_fitting.ipynb
-    - file: notebooks/06_curve_fitting_ex.ipynb
-
-- caption: "Day 2 — Afternoon: Challenge"
-  chapters:
-  - file: book/challenge.md
-    sections:
-    - file: notebooks/challenge_starter.ipynb
-
-- caption: Homework
-  chapters:
-  - file: book/homework.md
-    sections:
-    - file: notebooks/homework_starter.ipynb
-
-- caption: Reference
-  chapters:
-  - file: book/cheatsheets/python.md
-  - file: book/fiji/cheat_sheet_basics.md
-  - file: book/fiji/cheat_sheet_macros.md
-  - file: book/further_reading.md
-  - file: book/data_credits.md
-  - file: book/acknowledgements.md
+  - caption: Further information
+    chapters:
+      - file: book/further_reading.md
+      - file: book/acknowledgements.md

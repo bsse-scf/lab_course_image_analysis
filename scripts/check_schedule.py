@@ -71,6 +71,14 @@ def material() -> dict[str, list[str]]:
         if path.name in {"index.md"} or path.name.startswith("cheat_sheet"):
             continue
         found[str(path.relative_to(REPO))] = markdown_sections(path)
+
+    # Top-level book pages that carry teaching content. Navigation and
+    # reference pages - landing, schedule, setup, further reading,
+    # acknowledgements - are not scheduled section by section.
+    for name in ("challenge.md", "homework.md"):
+        path = REPO / "book" / name
+        if path.exists():
+            found[f"book/{name}"] = markdown_sections(path)
     return found
 
 

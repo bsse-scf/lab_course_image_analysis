@@ -1,0 +1,104 @@
+# CI for the Image Analysis lab course.
+#
+# GitLab is the primary home; .github/workflows/ mirrors this for the GitHub
+# copy of the repository.
+
+variables:
+  # `solutions/` is a private submodule. CI must NOT try to fetch it: the job
+  # would fail for any runner without access to that repository, and nothing
+  # the CI does needs it. The exercise-sync check warns loudly when it is
+  # absent - see AGENTS.md.
+  GIT_SUBMODULE_STRATEGY: none
+  # pixi caches its package downloads here so the cache below can pick them up.
+  PIXI_CACHE_DIR: "$CI_PROJECT_DIR/.pixi-cache"
+
+default:
+  image: ghcr.io/prefix-dev/pixi:0.77.1
+  # The environment is ~3.5 GB, so caching it is the difference between a
+  # two-minute pipeline and a fifteen-minute one. Keyed on the lock file:
+  # a dependency change invalidates it, nothing else does.
+  cache:
+    key:
+      files:
+        - pixi.lock
+    paths:
+      - .pixi-cache/
+      - .pixi/envs/
+
+stages:
+  - test
+  - build
+  - deploy
+
+# --- Qt/OpenGL libraries, needed for `import napari` on a headless runner ---
+.qt_deps: &qt_deps
+  - apt-get update -qq
+  - >-
+    apt-get install -y --no-install-recommends
+    libgl1 libegl1 libxkbcommon-x11-0 libdbus-1-3 xvfb
+    libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0
+    libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-cursor0
+
+unit tests:
+  stage: test
+  before_script: *qt_deps
+  script:
+    - pixi run test
+    - pixi run check-schedule
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+    expire_in: 1 week
+
+notebooks execute:
+  stage: test
+  before_script: *qt_deps
+  script:
+    # xvfb supplies a virtual display so napari cells can run.
+    - xvfb-run -a pixi run test-nb
+  # Slower than the unit tests; do not block a merge request on it.
+  allow_failure: false
+
+data integrity:
+  stage: test
+  script:
+    # Every file named in data/MANIFEST.md must be present and match its
+    # checksum. Catches a truncated clone or a corrupted image.
+    - pixi run fetch-data --verify
+
+book:
+  stage: build
+  script:
+    - pixi run -e docs book-clean
+    - pixi run -e docs book
+  artifacts:
+    paths:
+      - _build/html
+    expire_in: 1 week
+
+pages:
+  stage: deploy
+  script:
+    - pixi run -e docs book-clean
+    - pixi run -e docs book
+    - pixi run -e docs lite || echo "no jupyterlite config yet - skipping"
+    - mv _build/html public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "2026"
+
+links:
+  stage: test
+  image: lycheeverse/lychee:latest
+  cache: []
+  script:
+    - >-
+      lychee --no-progress --accept 200,206,403,429
+      --exclude-path _build --exclude-path .pixi
+      "book/**/*.md" "notebooks/*.ipynb" "*.md"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  allow_failure: true

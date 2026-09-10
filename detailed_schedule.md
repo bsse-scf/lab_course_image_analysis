@@ -8,6 +8,9 @@ To change the course, change this file first, then bring the material into line
 with it. `pixi run check-schedule` reports any disagreement and runs as part of
 `pixi run test`, so the two cannot drift apart silently.
 
+The book's part captions mirror the headings here: *Course information*,
+*Image Analysis Basics with Fiji*, *Workflows in Python*, *Further information*.
+
 The **Section** column must match the level-2 headings in the file it describes,
 exactly and in order. `Recap` and `If you finish early` sections are structural
 and are deliberately not listed.
@@ -68,7 +71,9 @@ downloaded.
 
 ---
 
-## Day 1, morning — Fiji
+## Image Analysis Basics with Fiji
+
+*Day 1, morning.*
 
 Everything uses **`data/bbbc020/` field `2h_1`**, the same field the afternoon
 notebooks use, so the two halves of the day are literally the same images.
@@ -138,7 +143,7 @@ belong to the Python track — see `01` §7 and `02` §6.
 
 ---
 
-## Day 1, afternoon — Python
+## Workflows in Python — day 1 afternoon
 
 The same workflow as the morning, in code. Same field, `2h_1`.
 
@@ -189,7 +194,7 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 
 ---
 
-## Day 2, morning — machine learning, metrics, features
+## Workflows in Python — day 2 morning
 
 Uses **`24h_2`** for the machine-learning walkthrough and **`15min_3`** wherever
 a segmentation is scored, because `15min_3` has the most complete annotation.
@@ -282,18 +287,41 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 
 ---
 
-## Day 2, afternoon — the challenge
+## Independent work
+
+### `book/challenge.md`
+
+Day 2 afternoon. Written; the starter notebook is not.
+
+| Section | Covers |
+|---|---|
+| The experiment | the plate layout and the 10,240 cells/well expectation |
+| Two properties of the data to account for | the snake scan pattern; field of view vs well area |
+| Two ways to approach it | Track A from the ND2 images, Track B from the shipped summary CSV |
+| Working through it | plate layout, dose-response plot, fit, IC50, reliability |
+| Hints | dropdowns: reshaping, area scaling, model choice, checking the result |
+
+No submission: this is worked through in the session.
+
+### `book/homework.md`
+
+After the course, on images the students acquire themselves. Written; the starter
+notebook is not.
+
+| Section | Covers |
+|---|---|
+| The question | transfection efficiency as a fraction of GFP-positive nuclei |
+| The complication | channels do not overlap - registration is required first |
+| Your data | the pooled triplets from the microscopy module |
+| Tasks | register; **assess illumination and background correction**; segment; pool; threshold the intensity distribution; report |
+| Points to consider | overlapping populations, effect of the corrections, replication unit, bias from missed dim nuclei |
+| Submission | what to upload, and the deadline |
+
+### Still to be written
 
 | planned | covers |
 |---|---|
-| `book/challenge.md` | the dose-response task; Track A (full ND2) and Track B (summary CSV) |
-| `notebooks/challenge_starter.ipynb` | snake-pattern plate reshape, FOV-to-well area scaling, exponential fit, IC50 |
-
-## Homework
-
-| planned | covers |
-|---|---|
-| `book/homework.md` | transfection efficiency |
+| `notebooks/challenge_starter.ipynb` | snake-pattern reshape, FOV-to-well scaling, exponential fit, IC50 |
 | `notebooks/homework_starter.ipynb` | `iaf.reg.multi_image_alignment`, nuclei segmentation, `iaf.stats.prepare_histogram` |
 
 ---

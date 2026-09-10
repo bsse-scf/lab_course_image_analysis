@@ -1,0 +1,42 @@
+name: deploy book
+
+on:
+  push:
+    branches: ["2026"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-book
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Never fetch the private solutions submodule; and _config.yml
+          # excludes it from the site in any case.
+          submodules: false
+
+      - uses: prefix-dev/setup-pixi@v0.9.6
+        with:
+          pixi-version: v0.77.1
+          cache: true
+          environments: docs
+
+      - name: build the book
+        run: |
+          pixi run -e docs book-clean
+          pixi run -e docs book
+
+      - name: build the JupyterLite pages
+        run: pixi run -e docs lite || echo "no jupyterlite config yet - skipping"
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/html
