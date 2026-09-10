@@ -209,12 +209,12 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 
 | Task | Practises |
 |---|---|
-| Task 1 — look at what you are dealing with | forming a hypothesis before measuring |
-| Task 2 — build the pooled table | measuring two datasets into one table; keeping an answer key |
-| Task 3 — add a ratio of your own | deriving a magnification-independent feature |
-| Task 4 — which feature separates them? | overlaid distributions |
-| Task 5 — put a number on it | scoring a single-threshold classifier |
-| Task 6 — the honest check | confusion matrix; asymmetric errors |
+| Task 1 — look before you measure | forming a hypothesis before measuring |
+| Task 2 — measure every worm in every well | pooling 24 wells; keeping `well` and `kind` |
+| Task 3 — can you classify a single worm? | scoring a single-threshold rule; individual objects overlap |
+| Task 4 — but you do not have to classify a single worm | aggregating per image averages the noise away |
+| Task 5 — score the well-level rule | the same features now separate perfectly |
+| Task 6 — do not believe your own 100% | **leave-one-out cross-validation**; accuracy on the data you tuned on is optimistic |
 
 ### `notebooks/06_curve_fitting.ipynb`
 

@@ -112,13 +112,25 @@ DATASETS: dict[str, Dataset] = {
         licence="CC BY 3.0 - Broad Bioimage Benchmark Collection",
         builder="build_bbbc010",
         crop_margin=105,   # median worm extent is ~104 px here
-        # Columns 1-12 are ampicillin (mostly dead, rod-shaped), 13-24 untreated
-        # (live, curled). Take some of each so the detective game has both.
-        fields=["A22", "B22", "C14", "D17", "A09", "B09", "C09", "D09"],
+        # Per the BBBC010 page: columns 1-12 are the ampicillin-treated POSITIVE
+        # control and are mostly ALIVE (worms curved and smooth); columns 13-24
+        # are the untreated NEGATIVE control and are mostly DEAD (rod-like and
+        # uneven). Twelve wells of each, spread over the rows, so the detective
+        # game has enough images to classify.
+        fields=[
+            # alive - ampicillin treated
+            "A01", "A05", "A09", "B02", "B06", "B10",
+            "C03", "C07", "C11", "D04", "D08", "D12",
+            # dead - untreated
+            "A13", "A17", "A21", "B14", "B18", "B22",
+            "C15", "C19", "C23", "D16", "D20", "D24",
+        ],
         notes=(
             "520x696 uint16, two channels per well (w1 GFP, w2 brightfield). Images sit "
             "flat in the archive with a UUID suffix; ground truth is one binary PNG per "
-            "worm, merged here into a uint16 label image per well."
+            "worm, merged here into a uint16 label image per well. Columns 01-12 are "
+            "alive (ampicillin-treated positive control), columns 13-24 are dead "
+            "(untreated negative control)."
         ),
         archives=[
             Archive("images", f"{BASE}/BBBC010/BBBC010_v2_images.zip",

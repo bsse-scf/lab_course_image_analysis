@@ -73,8 +73,14 @@ Day 2 uses **`24h_2`** cells, and the metrics exercise uses **`15min_3`**.
 520×696 uint16, two channels per well (`w1` GFP, `w2` brightfield). Images lie
 flat in the archive with a UUID suffix, so they are matched on the `_<well>_<w1|w2>_`
 infix. Ground truth is one binary PNG per worm (4231 files), merged per well.
-Columns 1–12 are ampicillin-treated (mostly dead, rod-shaped), 13–24 untreated
-(live, curled) — the detective game needs both, so the shipped wells mix them.
+**The treatment assignment is the opposite of what most people guess.** Per the
+BBBC010 page: **columns 01–12 are the ampicillin-treated positive control and are
+mostly ALIVE** (worms curved and smooth); **columns 13–24 are the untreated
+negative control and are mostly DEAD** (rod-like and uneven). The drug protects
+against the pathogen, so treated worms live.
+
+Twelve wells of each are shipped, spread over the rows, because the detective
+game classifies whole wells and needs enough of them to validate on.
 
 ### BBBC030 — CHO cells
 
@@ -166,6 +172,28 @@ all afternoon otherwise.
 **Every one of these numbers changes if the data is rebuilt at a different crop
 or scale.** `fiji/solutions/run_all.sh` and the notebooks recompute them, but the
 prose in the sheets does not — re-derive rather than assume.
+
+### Detective game — the numbers, and the point
+
+Classifying a whole well as dead or alive, from `data/bbbc010/` (12 wells each):
+
+| level | best feature | accuracy |
+|---|---|---|
+| a single worm | solidity | **0.78** |
+| a whole well (median solidity) | solidity | **1.00** |
+| a whole well, leave-one-out | solidity | **0.96** |
+
+The arc is the lesson. Individual worms overlap heavily — some treated worms die
+anyway — so no per-worm rule does well. Summarising each well by its median
+averages that away and the wells separate perfectly. But that 100% was measured
+on the same 24 wells used to pick the cut-off; leave-one-out gives 23/24, missing
+`C07`, an alive well that sits exactly on the boundary.
+
+`solidity` is the feature to steer discussion towards, because it has a
+mechanical explanation: a straight rod nearly fills its convex hull, a curled
+worm does not. `eccentricity` and aspect ratio also reach 1.00; `area` manages
+only 0.75, which is the same "the obvious feature is the weak one" point the
+course keeps making.
 
 ## Challenge
 
