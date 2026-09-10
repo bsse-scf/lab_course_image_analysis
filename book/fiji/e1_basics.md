@@ -26,7 +26,7 @@ look.
 4. **What is the value of the pixel at x=25, y=336? And at x=472, y=190?**
    *Hint: hover the mouse over the image and read the status bar in the main Fiji
    window. Note Fiji reports `x,y`, column first, which is the opposite order
-   from the `(row, column)` you will use in Python this afternoon.*
+   from the `(row, column)` used in the Python notebooks.*
 
 5. One of those two pixels is inside a nucleus and one is background.
    **Which is which, and by how much do they differ?**

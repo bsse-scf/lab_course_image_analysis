@@ -23,9 +23,9 @@ Done at home, before the course. Covered by `book/setup/`.
 
 | topic | why |
 |---|---|
-| Install Fiji | day 1 morning needs it |
+| Install Fiji | the day 1 Fiji practical needs it |
 | Install pixi, clone the repo, `pixi install` | the whole Python track |
-| Download the challenge dataset | day 2 afternoon; ~3.3 GB, do not leave to the day |
+| Download the challenge dataset | the day 2 challenge; ~3.3 GB, do not leave to the day |
 | Work through `00_python_basics` | so nobody spends the course fighting the language |
 
 ### `notebooks/00_python_basics.ipynb`
@@ -73,9 +73,9 @@ downloaded.
 
 ## Image Analysis Basics with Fiji
 
-*Day 1, morning.*
+*Day 1, first session.*
 
-Everything uses **`data/bbbc020/` field `2h_1`**, the same field the afternoon
+Everything uses **`data/bbbc020/` field `2h_1`**, the same field the Python
 notebooks use, so the two halves of the day are literally the same images.
 
 ### `book/fiji/e1_basics.md`
@@ -116,7 +116,7 @@ belong to the Python track: see `01` §7 and `02` §6.
 | Why | what a threshold cannot express |
 | Part 1: train a classifier | Trainable Weka, classes, features, iterative correction |
 | Part 2: apply a classifier you did not train | reuse, generalisation, distribution shift |
-| Part 3: export for tomorrow | probability map vs hard classification |
+| Part 3: export for day 2 | probability map vs hard classification |
 | Think about it | reproducibility of a hand-trained model |
 
 ### `book/fiji/e5_macros.md` *(optional)*
@@ -143,9 +143,9 @@ belong to the Python track: see `01` §7 and `02` §6.
 
 ---
 
-## Workflows in Python: day 1 afternoon
+## Workflows in Python: day 1
 
-The same workflow as the morning, in code. Same field, `2h_1`.
+The same workflow as the Fiji practical, in code. Same field, `2h_1`.
 
 ### `notebooks/01_image_handling.ipynb`
 
@@ -194,7 +194,7 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 
 ---
 
-## Workflows in Python: day 2 morning
+## Workflows in Python: day 2
 
 Uses **`24h_2`** for the machine-learning walkthrough and **`15min_3`** wherever
 a segmentation is scored, because `15min_3` has the most complete annotation.
@@ -203,7 +203,7 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 
 | Section | Introduces |
 |---|---|
-| 1. Yesterday's classifier, in Python | reading Weka exports; probability vs classification; **checking which class is which** |
+| 1. The Fiji classifier, in Python | reading Weka exports; probability vs classification; **checking which class is which** |
 | 2. Semantic and instance segmentation | why a pixel classifier under-counts; watershed as the bridge |
 | 3. Cellpose | a pretrained deep model that outputs instances |
 | 4. The one parameter that matters | `diameter`, and how to sanity-check it |
@@ -225,7 +225,7 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 | Section | Introduces |
 |---|---|
 | 1. The two pixel scores | IoU / Jaccard, Dice, and how they differ |
-| 2. Scoring yesterday's three methods | applying them; pixel score vs object count |
+| 2. Scoring the three methods | applying them; pixel score vs object count |
 | 3. Matching objects instead of pixels | per-object matching, TP/FP/FN, precision, recall, F1 |
 | 4. When the ground truth is wrong | annotation is not truth; border-cropping; unlabelled objects |
 | 5. Choosing the matching threshold | the 0.5 convention; reporting it |
@@ -291,7 +291,7 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 
 ### `book/challenge.md`
 
-Day 2 afternoon. Written; the starter notebook is not.
+Day 2. Written; the starter notebook is not.
 
 | Section | Covers |
 |---|---|

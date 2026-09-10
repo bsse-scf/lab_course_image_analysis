@@ -1,14 +1,14 @@
-# Day 1, morning: Fiji
+# Fiji practical
 
 [Fiji](https://fiji.sc) is ImageJ with a large collection of plugins already
 installed. It is the most widely used tool in bioimage analysis, and for good
 reason: you can open an image and have a measurement thirty seconds later,
 without writing anything.
 
-This morning you will do a complete analysis by clicking: open images, look at
+This practical is a complete analysis done by clicking: open images, look at
 their intensities, threshold them, separate touching objects and measure the
-result. This afternoon you will do the *same* analysis in Python, and the
-comparison is the point. Fiji is faster to start; Python is what you reach for
+result. The Python notebooks then repeat the *same* analysis, and the comparison
+is the point. Fiji is faster to start; Python is what you reach for
 when you have four hundred images instead of four, or when you need to be able
 to say exactly what you did six months later.
 
@@ -26,7 +26,7 @@ Two shorter ones to try if you are ahead:
 [how wide is a filament?](fun/how_wide_is_a_filament.md) and
 [spot the artifact](fun/spot_the_artifact.md).
 
-**E4 produces files that you will use again tomorrow**, so do not skip it. E5 is
+**E4 produces files that are used again on day 2**, so do not skip it. E5 is
 genuinely optional: macros are useful, but batch processing is the thing Python
 does better, and that is where we are heading.
 

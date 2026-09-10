@@ -62,4 +62,4 @@ image, and if the last entry was skipped, whatever variable you used is stale.
 ## When to stop
 
 If you find yourself wanting a plot, a conditional, a table join, or a second
-opinion from a library: stop, and use Python. That is what the afternoon is for.
+opinion from a library: stop, and use Python. That is what the notebooks are for.

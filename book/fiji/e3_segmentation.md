@@ -58,7 +58,7 @@ values are gone. This is why you duplicated first.
 `Analyze Particles` decides what counts as "an object" by following connected
 runs of foreground pixels. Two nuclei that touch share a border, so they form one
 connected region and are counted once. There is a way to separate them, and it is
-the first thing you will meet this afternoon, but it is worth seeing the problem
+the first thing covered in the Python notebooks, but it is worth seeing the problem
 before seeing the fix.
 ```
 

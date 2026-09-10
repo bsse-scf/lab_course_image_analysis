@@ -3,7 +3,7 @@
 **~50 min.** When you cannot write down the rule, show examples instead.
 
 ```{important}
-This exercise produces files that tomorrow morning's Python session reads back
+This exercise produces files that the day 2 notebooks read back
 in. Do part 3 even if you are running short of time.
 ```
 
@@ -81,9 +81,9 @@ was trained on and nothing else. What could change about your imaging between
 Monday and Friday that would silently break it?
 ```
 
-## Part 3: export for tomorrow
+## Part 3: export for day 2
 
-Tomorrow morning you will load these results into Python and compare them against
+On day 2 these results are loaded into Python and compared against
 a deep-learning method, so they need to be on disk.
 
 For each of the three images `15min_1`, `15min_2` and `24h_2`:
@@ -101,7 +101,7 @@ For each of the three images `15min_1`, `15min_2` and `24h_2`:
 You should end up with six files.
 
 ```{note}
-If you run out of time or something goes wrong, tomorrow's notebook falls back to
+If you run out of time or something goes wrong, the day 2 notebook falls back to
 a reference copy in `data/bbbc020/weka/`. You will get more out of it using your
 own, though: comparing *your* classifier against a deep-learning model is more
 interesting than comparing someone else's.

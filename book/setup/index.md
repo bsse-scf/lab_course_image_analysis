@@ -1,6 +1,6 @@
 # Setup
 
-Four things, all of which should be done **before the first morning**. The
+Four things, all of which should be done **before the course starts**. The
 downloads are large and the lecture-room network is shared.
 
 1. [Install Fiji](install_fiji.md): for day 1

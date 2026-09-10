@@ -1,6 +1,6 @@
 # E5: Macros *(optional)*
 
-**~25 min.** Skip this if you are short of time: the afternoon covers the same
+**~25 min.** Skip this if you are short of time: the Python notebooks cover the same
 ground more thoroughly.
 
 ## Why this is optional
@@ -10,7 +10,7 @@ repeating a fixed pipeline over a folder. But the macro language is peculiar to
 ImageJ, the tooling is thin, and once you want to plot the results or do anything
 conditional you will wish you were somewhere else.
 
-That somewhere else is this afternoon. Treat this as a look at what the recorder
+That somewhere else is the Python notebooks. Treat this as a look at what the recorder
 can do, not as a language to learn.
 
 ## Practical

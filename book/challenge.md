@@ -1,6 +1,6 @@
 # Challenge: a drug dose-response curve
 
-**Day 2, afternoon.** Work in pairs.
+**Day 2.** Work in pairs.
 
 This exercise applies the whole course to one experiment: images in, a
 biological quantity out.

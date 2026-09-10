@@ -20,7 +20,7 @@ hundred images instead of four.
 
 **Day 2** is about the two things that make an analysis trustworthy: methods
 that cope with images a threshold cannot handle, and measures that tell you
-honestly how well any of it worked. The afternoon is a challenge on real
+honestly how well any of it worked. It ends with a challenge on real
 screening data.
 
 ## Before you arrive
@@ -28,7 +28,7 @@ screening data.
 Work through [Setup](setup/index.md) and the
 [Python primer](../notebooks/00_python_basics.ipynb). The primer teaches only
 what this course uses and needs no data, so it can be done on a train; the
-environment install cannot, so do not leave it to the morning.
+environment install cannot, so do not leave it to the first day.
 
 ```{note}
 Clone the repository with a plain `git clone`, not `--recurse-submodules`: 

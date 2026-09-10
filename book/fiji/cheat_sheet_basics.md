@@ -62,7 +62,7 @@ bright is the GFP inside each nucleus?".
 
 **Summarize** in `Analyze Particles…` puts per-image counts in the **Summary**
 window, which is a different window from **Results**. Saving the wrong one is a
-classic way to lose an afternoon.
+classic way to lose a lot of time.
 
 ## Getting unstuck
 

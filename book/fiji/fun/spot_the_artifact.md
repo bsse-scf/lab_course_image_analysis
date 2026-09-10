@@ -48,7 +48,7 @@ histogram: you will see single white dots on the background and single black
 dots *inside* the nuclei, neither of which occurs naturally.
 
 It wrecks thresholding, every white speck becomes an "object", but a median
-filter removes it almost perfectly, which you will see this afternoon.
+filter removes it almost perfectly, as the Python notebooks show.
 ```
 
 ## Why this matters
