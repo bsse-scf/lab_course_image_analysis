@@ -23,7 +23,48 @@ Done at home, before the course. Covered by `book/setup/`.
 | Install Fiji | day 1 morning needs it |
 | Install pixi, clone the repo, `pixi install` | the whole Python track |
 | Download the challenge dataset | day 2 afternoon; ~3.3 GB, do not leave to the day |
-| Python basics *(optional)* | for students who have never written any |
+| Work through `00_python_basics` | so nobody spends the course fighting the language |
+
+### `notebooks/00_python_basics.ipynb`
+
+Covers only what the course notebooks actually use, in the order they are met.
+Self-contained: it invents its own numbers, so it can be done before the data is
+downloaded.
+
+| Section | Introduces |
+|---|---|
+| 1. How a notebook works | cells, Shift+Enter, `print`, run order |
+| 2. Variables | assignment, `int` / `float` / `str` / `bool`, `type()` |
+| 3. Showing values: f-strings | `f"{x}"`, `:.2f`, `:.1%`, `:5d` |
+| 4. Lists and tuples | indexing from zero, `[-1]`, slices, unpacking |
+| 5. Dictionaries | key/value storage |
+| 6. Doing something to everything: loops | `for`, indentation as syntax, `enumerate`, `zip` |
+| 7. Making decisions | `if` / `elif` / `else`, `==` vs `=` |
+| 8. Functions | `def`, `return`, docstrings, defaults, keyword arguments |
+| 9. Using other people's code | `import x as y`, `from x import y` |
+| 10. NumPy arrays | an image *is* an array; `shape` is (rows, columns); `zeros`, `arange`, `linspace` |
+| 11. Indexing and slicing an array | one pixel, a row, a column, a crop |
+| 12. Asking a question of every pixel at once | boolean masks, `.sum()`, `.mean()`, `image[mask]`, **`.copy()`** |
+| 13. Summarising an array | `.min()`, `.max()`, `.mean()`, `.std()` |
+| 14. Plotting | `plt.plot`, `imshow`, `subplots` + unpacking, `.ravel()` |
+| 15. File paths | `pathlib`, the `/` operator |
+| 16. Tables | `DataFrame`, a column, filtering, `groupby` |
+
+### `notebooks/00_python_basics_ex.ipynb`
+
+| Task | Practises |
+|---|---|
+| Task 1 — variables and f-strings | formatted output |
+| Task 2 — lists | `len`/`min`/`max`/`sum`, slicing |
+| Task 3 — loops and decisions | loop with branching, counting |
+| Task 4 — zip | walking two lists together |
+| Task 5 — a function | `def` with a default argument |
+| Task 6 — build an array and describe it | array creation, `shape`, `dtype` |
+| Task 7 — indexing and cropping | pixel, row, column, rectangle |
+| Task 8 — masks | boolean masks, selection, `.copy()` |
+| Task 9 — three panels | `subplots`, `imshow`, `hist` |
+| Task 10 — a table | DataFrame, filtering, `groupby` |
+| Task 11 — put it together | applying a function across a column |
 
 ---
 

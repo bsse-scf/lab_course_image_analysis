@@ -62,7 +62,9 @@ def material() -> dict[str, list[str]]:
     """Every teaching file, mapped to its section headings."""
     found: dict[str, list[str]] = {}
     for path in sorted((REPO / "notebooks").glob("*.ipynb")):
-        if "_solution" in path.name:
+        # Solutions are instructor material; " copy" files are scratch working
+        # copies that editors create and are not part of the course.
+        if "_solution" in path.name or " copy" in path.name:
             continue
         found[f"notebooks/{path.name}"] = notebook_sections(path)
     for path in sorted((REPO / "book" / "fiji").rglob("*.md")):
