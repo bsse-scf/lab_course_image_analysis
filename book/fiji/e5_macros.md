@@ -1,6 +1,6 @@
 # E5: Macros *(optional)*
 
-**~25 min.** Skip this if you are short of time — the afternoon covers the same
+**~25 min.** Skip this if you are short of time: the afternoon covers the same
 ground more thoroughly.
 
 ## Why this is optional
@@ -28,7 +28,7 @@ can do, not as a language to learn.
    of the image to check it still works.
 
 5. Now make it work on a folder. `macros/count_objects.ijm` in the repository
-   does this — open it and compare it with what you recorded. The processing is
+   does this: open it and compare it with what you recorded. The processing is
    the same; what is wrapped around it is a loop over `getFileList()`.
 
 6. Run it on `data/bbbc020/images/`. **How many images did it process, and how

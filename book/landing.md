@@ -14,7 +14,7 @@ See the [schedule](course_schedule.md) for how the two days run.
 from an image to a measurement. You will look at what an image actually is,
 threshold it, count objects, and measure one channel through another's mask.
 
-Then the same analysis again in Python — not because Python is more powerful,
+Then the same analysis again in Python, not because Python is more powerful,
 but because it is *text*: repeatable, reviewable, and able to run over four
 hundred images instead of four.
 
@@ -31,7 +31,7 @@ what this course uses and needs no data, so it can be done on a train; the
 environment install cannot, so do not leave it to the morning.
 
 ```{note}
-Clone the repository with a plain `git clone`, not `--recurse-submodules` —
+Clone the repository with a plain `git clone`, not `--recurse-submodules`: 
 see the README for why.
 ```
 

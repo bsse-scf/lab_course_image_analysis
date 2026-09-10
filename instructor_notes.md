@@ -1,17 +1,17 @@
 # Instructor notes
 
-Not published — excluded from the book in `_config.yml`.
+Not published: excluded from the book in `_config.yml`.
 
 ## Dataset quirks (verified, not assumed)
 
 The BBBC pages document none of this. Everything below was established by
 inspecting the archives; `scripts/fetch_data.py` handles each point.
 
-### BBBC020 — the guiding dataset
+### BBBC020: the guiding dataset
 
 - **The channel naming is counter-intuitive.** `c5` is the blue DAPI channel
   (nuclei); `c1` is CD11b/APC on the cell surface. Source images are RGB uint8
-  with a false-colour LUT baked in — c5 signal sits in B, c1 in R+G — so
+  with a false-colour LUT baked in, c5 signal sits in B, c1 in R+G, so
   intensity is recovered as the max over the channel axis.
 - Getting this backwards is not a subtle error: Otsu scores IoU ≈ 0.08 against
   both ground truths when the channels are swapped, versus 0.68 / 0.44 when
@@ -20,7 +20,7 @@ inspecting the archives; `scripts/fetch_data.py` handles each point.
   unannotated.** The 12 fields we ship all have both nuclei and cell outlines.
 - Ground truth ships as one binary TIFF per object (702 nuclei + 518 cell files,
   ~1.75 GB unpacked), merged into one uint16 label image per field.
-- The outline archives spell their top directory `BBC020` — one B short. The
+- The outline archives spell their top directory `BBC020`: one B short. The
   fetcher globs rather than hardcoding either spelling.
 
 ### Images are border-cropped, and why
@@ -31,7 +31,7 @@ while the images plainly contained objects there. On BBBC020 roughly a quarter o
 the outer band was stained tissue and **only 8% of it was annotated**.
 
 Scoring against that punishes a method for correctly finding the objects the
-annotator skipped, and the penalty lands entirely in false positives — which is
+annotator skipped, and the penalty lands entirely in false positives, which is
 exactly the metric day 2 is teaching.
 
 `scripts/fetch_data.py` therefore trims every image by about one typical object
@@ -51,7 +51,7 @@ Consequences worth knowing:
 
 Otsu IoU against ground truth, averaged over the 12 shipped fields:
 
-Day 1 uses field **`2h_1`** throughout — Fiji E1/E3 and notebooks 01/02 — so the
+Day 1 uses field **`2h_1`** throughout, Fiji E1/E3 and notebooks 01/02, so the
 "same images, two tools" comparison is literal. It was chosen because a plain
 Otsu threshold gets it visibly wrong in an instructive way:
 
@@ -60,7 +60,7 @@ Otsu threshold gets it visibly wrong in an instructive way:
 | `2h_1` nuclei | 34 | **39** |
 | `2h_1` cells | 114 | **33** |
 
-The nuclei **under**-count, which surprises people — merged neighbours share one
+The nuclei **under**-count, which surprises people: merged neighbours share one
 label, so each merge costs a nucleus. The cells over-count wildly. After the
 border crop most other fields segment almost perfectly (`Kontrolle1` gives 14
 against 14), which makes them useless for teaching; if you change field, check
@@ -68,7 +68,7 @@ this table first.
 
 Day 2 uses **`24h_2`** cells, and the metrics exercise uses **`15min_3`**.
 
-### BBBC010 — worms
+### BBBC010: worms
 
 520×696 uint16, two channels per well (`w1` GFP, `w2` brightfield). Images lie
 flat in the archive with a UUID suffix, so they are matched on the `_<well>_<w1|w2>_`
@@ -82,12 +82,12 @@ against the pathogen, so treated worms live.
 Twelve wells of each are shipped, spread over the rows, because the detective
 game classifies whole wells and needs enough of them to validate on.
 
-### BBBC030 — CHO cells
+### BBBC030: CHO cells
 
 **Ground truth is cell outlines, not filled masks.** Roughly 3000 foreground
 pixels for ~12 cells in a 1032×1376 image. The fetcher hole-fills and
 connected-component labels them, dropping components under 500 px (anti-aliasing
-specks — `cho01` has a stray 73 px one).
+specks: `cho01` has a stray 73 px one).
 
 ### Archive junk
 
@@ -96,7 +96,7 @@ extraction.
 
 ## Fiji day (M2)
 
-### Weka artifacts — done
+### Weka artifacts: done
 
 `data/bbbc020/weka/` holds the trained classifier and all six day-2 reference
 exports. The classifier was trained by hand on `15min_3` (the only field with
@@ -113,7 +113,7 @@ ever need regenerating.
 | `24h_2` | 0.846 | 0.439 | Weka much better |
 
 Weka beats a threshold on every field, and by a wide margin on `24h_2`. Note this
-is the *second* classifier — the first, trained before the border crop, only tied
+is the *second* classifier: the first, trained before the border crop, only tied
 with Otsu. Retraining on the cropped images roughly doubled the margin, which is
 itself worth mentioning: a pixel classifier is only as good as the framing it was
 trained on, and the feature scales are in pixels.
@@ -134,7 +134,7 @@ Dice cannot see the improvement at all.
 ### Solutions run headlessly
 
 `fiji/solutions/` (gitignored) has a runnable solution per exercise plus
-`run_all.sh`. Everything uses the same tool the exercise asks for — including
+`run_all.sh`. Everything uses the same tool the exercise asks for: including
 SIFT, which does run headless. The single exception is Weka *training*, which is
 irreducibly interactive; E4 parts 2-3 are automated.
 
@@ -151,29 +151,29 @@ All three channels are built from one source image so the answer is well defined
 
 **Spot the artifact.** A = Gaussian blur sigma 4. B = intensity x2.6, clipped
 (8933 pixels pinned at 255, against 67 in the original). C = salt-and-pepper at
-4% (4059 pixels at 255). Note the pepper is *not* obvious in the histogram —
-about a third of the image is already near zero — so push students towards
+4% (4059 pixels at 255). Note the pepper is *not* obvious in the histogram: 
+about a third of the image is already near zero, so push students towards
 zooming in rather than the histogram for C. The answers are in a dropdown in the
 sheet itself.
 
 **How wide is a filament.** The intended realisation is that the measurement
 returns the point spread function, not the filament: an actin filament is ~7 nm
 and the diffraction limit is ~200-250 nm. `actin.tif` opens looking black
-(median value 1) — students need Auto contrast before they can see anything, and
+(median value 1): students need Auto contrast before they can see anything, and
 the sheet says so.
 
 ### E1 depends on these exact values
 
 `2h_1_nuclei`: 512x348, uncalibrated. Fiji `x=25, y=336` reads **255** (inside a
 nucleus); `x=472, y=190` reads **1** (background). Remember Fiji reports `x,y`
-and numpy indexes `[row, col]` — the sheet flags this because it confuses people
+and numpy indexes `[row, col]`: the sheet flags this because it confuses people
 all afternoon otherwise.
 
 **Every one of these numbers changes if the data is rebuilt at a different crop
 or scale.** `fiji/solutions/run_all.sh` and the notebooks recompute them, but the
-prose in the sheets does not — re-derive rather than assume.
+prose in the sheets does not: re-derive rather than assume.
 
-### Detective game — the numbers, and the point
+### Detective game: the numbers, and the point
 
 Classifying a whole well as dead or alive, from `data/bbbc010/` (12 wells each):
 
@@ -183,8 +183,8 @@ Classifying a whole well as dead or alive, from `data/bbbc010/` (12 wells each):
 | a whole well (median solidity) | solidity | **1.00** |
 | a whole well, leave-one-out | solidity | **0.96** |
 
-The arc is the lesson. Individual worms overlap heavily — some treated worms die
-anyway — so no per-worm rule does well. Summarising each well by its median
+The arc is the lesson. Individual worms overlap heavily: some treated worms die
+anyway, so no per-worm rule does well. Summarising each well by its median
 averages that away and the wells separate perfectly. But that 100% was measured
 on the same 24 wells used to pick the cut-off; leave-one-out gives 23/24, missing
 `C07`, an alive well that sits exactly on the boundary.
@@ -201,18 +201,18 @@ course keeps making.
   `plate01_summary.csv`. If you reuse it, note two real bugs: `saveAs` sits
   outside both loops using a stale `filename`, and it saves `"Results"` when
   `Analyze Particles` was called with `summarize`, so the numbers actually live
-  in the **Summary** window. No corrected version is shipped — students write
+  in the **Summary** window. No corrected version is shipped: students write
   their own segmentation for the challenge.
 - `size=0-409` in that macro is in **calibrated units** and is silently
   meaningless on uncalibrated or differently-binned images. Say so out loud.
 - Two traps students reliably hit: the acquisition **snake pattern** (odd rows
   left-to-right, even rows right-to-left) when reshaping 40 series into a 4×10
   plate, and forgetting to scale the 10,240 cells/well expectation by the
-  **field-of-view-to-well-area ratio** — the FOV does not cover the whole well.
+  **field-of-view-to-well-area ratio**: the FOV does not cover the whole well.
 
 ## Timing
 
 To be filled in during the M7 dress rehearsal. Record actual minutes per session.
 
-- `pixi install` cold, per OS: **TODO** — this is the day-0 bottleneck. The
+- `pixi install` cold, per OS: **TODO**: this is the day-0 bottleneck. The
   environment is ~3.5 GB and cellpose's torch dependency dominates it.

@@ -7,7 +7,7 @@
 Your homework will use images you acquire yourselves on a microscope you built
 yourselves. On that setup you change the filter by hand between channels, and the
 sample moves a little every time. So the DAPI, GFP and Cy3 images of the *same
-cells* will not overlap — and if they do not overlap, you cannot ask "how bright
+cells* will not overlap, and if they do not overlap, you cannot ask "how bright
 is the GFP inside this nucleus?", because the nucleus is not where the mask says
 it is.
 
@@ -25,14 +25,14 @@ Open all three images in `data/fiji/registration/`:
 - `channel3.tif`
 
 These are three views of the same field, processed to look like different
-channels — one dimmer and blurrier, one brighter and noisier. **Two of them have
+channels: one dimmer and blurrier, one brighter and noisier. **Two of them have
 been deliberately shifted.** Your job is to put them back.
 
 ## Practical
 
 1. Merge the three channels into a composite
    (`Image ▸ Color ▸ Merge Channels…`, tick *Create composite*).
-   **Can you see the misalignment?** Zoom in on a single nucleus — you should see
+   **Can you see the misalignment?** Zoom in on a single nucleus: you should see
    it appear three times in three colours, slightly apart.
 
 2. Estimate the shift by hand first. Pick one clearly isolated nucleus, hover
@@ -42,7 +42,7 @@ been deliberately shifted.** Your job is to put them back.
 3. Now let Fiji do it. Convert the composite to a stack
    (`Image ▸ Hyperstacks ▸ Hyperstack to Stack`) and run
    `Plugins ▸ Registration ▸ Linear Stack Alignment with SIFT`.
-   Leave the defaults, but set *Transformation* to **Translation** — we know the
+   Leave the defaults, but set *Transformation* to **Translation**: we know the
    sample only shifted, it did not rotate or scale, and allowing a transform more
    flexible than the physics permits is a good way to get a confidently wrong
    answer.
@@ -66,14 +66,14 @@ different, look at whether it was allowed to rotate and scale.
 
 6. SIFT works by finding distinctive little patches in each image and matching
    them up. **What would happen if you gave it two channels that stain completely
-   different structures** — say, nuclei in one and the cytoskeleton in the other?
+   different structures**: say, nuclei in one and the cytoskeleton in the other?
 
 7. In your homework you will have exactly that problem: DAPI marks nuclei, Cy3
    marks actin, and they genuinely do not look alike. **Which of your three
    channels would you use as the reference, and why?**
 
    *There is no single right answer, but there is a good argument to be made.
-   Hold onto it — the homework asks you this directly.*
+   Hold onto it: the homework asks you this directly.*
 
 ```{note}
 In Python you will use `iaf.reg.multi_image_alignment()`, which does the same job

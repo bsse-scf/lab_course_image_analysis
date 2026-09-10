@@ -29,7 +29,7 @@ each time. **The three channels do not overlap.** Until they are aligned, a
 nucleus outline taken from DAPI does not correspond to the same pixels in GFP,
 and the measured intensity mixes the nucleus with its surroundings.
 
-Registration is therefore the first step — the task rehearsed in
+Registration is therefore the first step: the task rehearsed in
 [Fiji E2](fiji/e2_registration.md).
 
 ```{figure} illustrations/alignment.png
@@ -41,7 +41,7 @@ Three channels before and after alignment with `iaf.reg.multi_image_alignment()`
 
 ## Your data
 
-The pooled set of image triplets — approximately ten `{DAPI, GFP, Cy3}` sets —
+The pooled set of image triplets, approximately ten `{DAPI, GFP, Cy3}` sets, 
 collected by the whole group during the microscopy course.
 
 ## Tasks
@@ -110,7 +110,7 @@ collected by the whole group during the microscopy course.
   uneven and left uncorrected, nuclei near the edge appear dimmer, and some
   positive ones may fall below the cut-off.
 - **Nuclei within one image are not independent observations.** They share a
-  preparation, a focus setting and an illumination — the point made in section 5
+  preparation, a focus setting and an illumination: the point made in section 5
   of [`05_features`](../notebooks/05_features.ipynb).
 - **The data was pooled across a group**, acquired on different self-built
   microscopes. Whether the between-set variation exceeds the within-set

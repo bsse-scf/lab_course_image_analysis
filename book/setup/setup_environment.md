@@ -24,7 +24,7 @@ This opens JupyterLab in your browser, already using the course environment. Ope
 
 ```{tip}
 `pixi run <something>` always runs inside the environment. You never need to
-"activate" anything, and you should not `pip install` into it — if a package is
+"activate" anything, and you should not `pip install` into it: if a package is
 missing, it belongs in `pixi.toml`.
 ```
 
@@ -38,7 +38,7 @@ This imports everything the course uses and verifies that the data files are
 present and intact. It takes a minute or so. You want to see a line ending in
 **`passed`**.
 
-If it reports missing data files, your clone is incomplete — check that
+If it reports missing data files, your clone is incomplete: check that
 `git clone` finished without errors.
 
 ## If something goes wrong
@@ -46,7 +46,7 @@ If it reports missing data files, your clone is incomplete — check that
 | symptom | fix |
 |---|---|
 | `pixi: command not found` | Close the terminal and open a new one. If it persists, the installer did not update your PATH. |
-| `pixi install` fails partway | Run it again — it resumes. Repeated failures usually mean a proxy or VPN interfering. |
+| `pixi install` fails partway | Run it again: it resumes. Repeated failures usually mean a proxy or VPN interfering. |
 | JupyterLab opens but a notebook cannot find `course` | You started it from the wrong folder. `cd` into the repository first. |
 | A notebook cannot find its data | Run `pixi run fetch-data --verify` to see which files are missing. |
 

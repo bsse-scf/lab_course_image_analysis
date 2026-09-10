@@ -54,9 +54,9 @@ duplicate first.
 
 `Analyze Particles…` counts **connected** runs of foreground pixels, so two
 objects that touch are counted once. Separating them is a Python topic in this
-course — see `02_image_processing`.
+course: see `02_image_processing`.
 
-**Redirect to:** in `Set Measurements…` is the one to remember — it measures your
+**Redirect to:** in `Set Measurements…` is the one to remember: it measures your
 mask's shapes against a *different* image's intensities. That is how you ask "how
 bright is the GFP inside each nucleus?".
 
@@ -68,6 +68,6 @@ classic way to lose an afternoon.
 
 - `Edit ▸ Undo` (Ctrl+Z) undoes exactly one step, and not every step.
   Re-duplicating from the original is usually faster.
-- `Plugins ▸ Macros ▸ Record…` shows the command for whatever you just clicked —
+- `Plugins ▸ Macros ▸ Record…` shows the command for whatever you just clicked: 
   the quickest way to find out what something is called.
 - The Fiji search bar (press `L`) finds any command by name.

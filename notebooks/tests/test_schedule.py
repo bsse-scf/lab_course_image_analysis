@@ -2,7 +2,7 @@
 
 The schedule is the single source of truth for what is taught where. If a
 notebook heading changes without the schedule changing (or vice versa), this
-fails — which is the whole point of having a source of truth.
+fails, which is the whole point of having a source of truth.
 """
 
 import subprocess

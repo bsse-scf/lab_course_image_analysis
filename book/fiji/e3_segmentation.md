@@ -6,16 +6,16 @@
 
 Open `data/bbbc020/images/2h_1_nuclei.tif`.
 
-Keep the original open and unmodified throughout — work on duplicates
+Keep the original open and unmodified throughout. Work on duplicates
 (`Image ▸ Duplicate…`, Ctrl/Cmd+Shift+D). You will want to compare.
 
-## Part 1 — thresholding
+## Part 1: thresholding
 
 1. Open `Image ▸ Adjust ▸ Threshold…` (Ctrl/Cmd+Shift+T). Drag the sliders and
    watch the red overlay. **Find a setting by eye that captures the nuclei and
    little else. What value did you land on?**
 
-2. Now press **Auto**, and try the dropdown of methods — *Default*, *Otsu*,
+2. Now press **Auto**, and try the dropdown of methods: *Default*, *Otsu*,
    *Li*, *Triangle*. **Do they agree with each other? Do they agree with you?**
 
 3. Pick Otsu and press **Apply** to get a binary mask.
@@ -26,7 +26,7 @@ Applying a threshold *replaces* the intensities with 0 and 255. The original
 values are gone. This is why you duplicated first.
 ```
 
-## Part 2 — cleaning up
+## Part 2: cleaning up
 
 4. Look closely at the mask. **Can you see small specks that are not nuclei? Are
    there nuclei with holes in them?**
@@ -36,7 +36,7 @@ values are gone. This is why you duplicated first.
 6. Remove the specks with `Process ▸ Binary ▸ Open`. **What does "open" do?** Try
    `Erode` on its own and then `Dilate` on its own to find out.
 
-## Part 3 — measuring
+## Part 3: measuring
 
 7. Set up what you want measured: `Analyze ▸ Set Measurements…`. Tick **Area**,
    **Mean gray value**, **Min & max gray value** and **Shape descriptors**.
@@ -51,23 +51,23 @@ values are gone. This is why you duplicated first.
     **How close did you get? Where does your result disagree?**
 
 11. Look closely at the outlines Fiji drew. **Find a place where two nuclei are
-    touching.** What did `Analyze Particles` do there — did it count one object
+    touching.** What did `Analyze Particles` do there: did it count one object
     or two?
 
 ```{note}
 `Analyze Particles` decides what counts as "an object" by following connected
 runs of foreground pixels. Two nuclei that touch share a border, so they form one
 connected region and are counted once. There is a way to separate them, and it is
-the first thing you will meet this afternoon — but it is worth seeing the problem
+the first thing you will meet this afternoon, but it is worth seeing the problem
 before seeing the fix.
 ```
 
-## Part 4 — measuring the *other* channel
+## Part 4: measuring the *other* channel
 
 Here is the step that makes this a real workflow rather than an exercise.
 
 You have masks of the nuclei, made from the DAPI channel. But the interesting
-question is usually about a *different* channel — how much CD11b is there, in
+question is usually about a *different* channel: how much CD11b is there, in
 each cell?
 
 12. Re-run `Analyze ▸ Set Measurements…` and set **Redirect to:** to
@@ -76,16 +76,16 @@ each cell?
 13. Run `Analyze ▸ Analyze Particles…` again on your mask.
 
 14. **The areas are the same as before, but the mean gray values have changed.
-    Why?** Make sure you can explain this to your neighbour — "redirect" is the
+    Why?** Make sure you can explain this to your neighbour: "redirect" is the
     single most useful checkbox in this dialog, and it is the thing you will do
     in your homework to measure GFP inside DAPI-defined nuclei.
 
-## Part 5 — the hard channel
+## Part 5: the hard channel
 
 15. Now try the whole pipeline again, from step 1, on
     `data/bbbc020/images/2h_1_cells.tif`. The annotation says **33** cells.
 
-16. **How did it go?** Note that the object *count* may land near 33 — do not let
+16. **How did it go?** Note that the object *count* may land near 33: do not let
     that reassure you. Look at the outlines. Some honest questions:
     - Is there a threshold value that captures the cells without merging them?
     - Do the cells have edges that a threshold can find at all?

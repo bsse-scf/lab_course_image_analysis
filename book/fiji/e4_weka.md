@@ -10,7 +10,7 @@ in. Do part 3 even if you are running short of time.
 ## Why
 
 In [E3](e3_segmentation.md) the nuclei thresholded well and the cells did not.
-That is not because you chose badly — it is because a threshold can only ask one
+That is not because you chose badly: it is because a threshold can only ask one
 question, *is this pixel brighter than X?*, and for the CD11b channel the answer
 simply does not separate cell from background.
 
@@ -20,7 +20,7 @@ varies. **Trainable Weka Segmentation** lets you supply those extra questions.
 You paint a few examples of "this is cell" and "this is background", and it fits
 a classifier that labels every remaining pixel.
 
-## Part 1 — train a classifier
+## Part 1: train a classifier
 
 1. Open `data/bbbc020/images/15min_3_cells.tif`.
 
@@ -34,14 +34,14 @@ a classifier that labels every remaining pixel.
 5. Click **Train classifier**. After a moment you get an overlay of the result.
 
 6. Now iterate, and be strategic about it. Do not add more examples of things it
-   already gets right — **find a place where it is wrong and correct that**.
+   already gets right: **find a place where it is wrong and correct that**.
    Cell edges, the gaps between touching cells, and any dim cells are where the
    information is.
 
 7. **How many strokes did it take before the result stopped obviously improving?**
 
 ```{tip}
-Under **Settings** you can see the *features* it computes — Gaussian blur,
+Under **Settings** you can see the *features* it computes: Gaussian blur,
 Hessian, membrane projections and so on, each at several scales. That list is the
 set of questions it is allowed to ask about each pixel. Turning on more features
 makes training slower and can make it overfit your handful of strokes.
@@ -53,7 +53,7 @@ makes training slower and can make it overfit your handful of strokes.
 
 9. Save your work: **Save classifier** as `my_classifier.model`.
 
-## Part 2 — apply a classifier you did not train
+## Part 2: apply a classifier you did not train
 
 Training on every image is not a workflow. The point of saving a classifier is to
 reuse it.
@@ -62,7 +62,7 @@ reuse it.
     `data/bbbc020/images/15min_1_cells.tif`.
 
 11. Click **Load classifier** and choose
-    `data/bbbc020/weka/bbbc020_cells.model` — a classifier trained in advance on
+    `data/bbbc020/weka/bbbc020_cells.model`: a classifier trained in advance on
     a different field.
 
 12. Click **Apply classifier** *without adding any training strokes of your own.*
@@ -76,12 +76,12 @@ reuse it.
 ```{admonition} The question worth arguing about
 :class: note
 A classifier trained on one field and applied to twenty others is exactly what
-you want — it is reproducible, and it is fast. But it has now seen the data it
+you want: it is reproducible, and it is fast. But it has now seen the data it
 was trained on and nothing else. What could change about your imaging between
 Monday and Friday that would silently break it?
 ```
 
-## Part 3 — export for tomorrow
+## Part 3: export for tomorrow
 
 Tomorrow morning you will load these results into Python and compare them against
 a deep-learning method, so they need to be on disk.
@@ -103,7 +103,7 @@ You should end up with six files.
 ```{note}
 If you run out of time or something goes wrong, tomorrow's notebook falls back to
 a reference copy in `data/bbbc020/weka/`. You will get more out of it using your
-own, though — comparing *your* classifier against a deep-learning model is more
+own, though: comparing *your* classifier against a deep-learning model is more
 interesting than comparing someone else's.
 ```
 

@@ -4,11 +4,11 @@
 
 ## Preparation
 
-Open `data/misc/actin.tif` — actin filaments, 200×200 pixels.
+Open `data/misc/actin.tif`: actin filaments, 200×200 pixels.
 
 It will look almost black when it opens: half the pixels have a value of 1 or
 less, and only about 5% are bright. Press Ctrl/Cmd+Shift+C and click **Auto** to
-see anything. That is a display change only — the values you measure are
+see anything. That is a display change only: the values you measure are
 unaffected.
 
 ## The task
@@ -26,18 +26,18 @@ Now the real question: **what do you mean by "wide"?**
 
 4. Try each of these and write down the number you get:
    - the width at the very bottom of the peak, where it meets the background
-   - the width at **half** the peak's height above background — this is the
+   - the width at **half** the peak's height above background: this is the
      *full width at half maximum*, or FWHM, and it is what people usually quote
    - the width at 10% of the peak height
 
 5. **How much do they differ?** Which would you put in a paper?
 
-6. Measure the same filament again with a slightly different line — a bit more
+6. Measure the same filament again with a slightly different line: a bit more
    angled, or a bit further along. **How reproducible is your answer?**
 
 ## The catch
 
-7. Draw a line across the *background* — no filament. **Is the profile flat?**
+7. Draw a line across the *background*: no filament. **Is the profile flat?**
    Whatever wobble you see there is the noise floor, and it sets a limit on how
    precisely any of the above can be measured.
 
@@ -49,7 +49,7 @@ Now the real question: **what do you mean by "wide"?**
 ```{admonition} What you measured
 :class: dropdown
 The **point spread function** of the microscope, near enough. Anything smaller
-than roughly half the wavelength of light — about 200-250 nm for visible light —
+than roughly half the wavelength of light, about 200-250 nm for visible light, 
 is imaged as a blur of that size regardless of how small it really is.
 
 A single actin filament is fifty times finer than that. What you measured was the

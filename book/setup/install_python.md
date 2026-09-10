@@ -7,13 +7,13 @@ on every machine.
 
 ## 1. Install pixi
 
-**macOS / Linux** — in a terminal:
+**macOS / Linux**: in a terminal:
 
 ```bash
 curl -fsSL https://pixi.sh/install.sh | sh
 ```
 
-**Windows** — in PowerShell:
+**Windows**: in PowerShell:
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"
@@ -47,7 +47,7 @@ cd scu_lab_course_ia
 Use a plain `git clone`, **not** `git clone --recurse-submodules`. The repository
 references a `solutions/` submodule that only instructors can read. If you clone
 with `--recurse-submodules` you will see an error about *"Could not read from
-remote repository"* — **your clone is still fine**: the notebooks and data are
+remote repository"*: **your clone is still fine**: the notebooks and data are
 all there, and `solutions/` is simply left empty. Nothing in the course needs it.
 ```
 

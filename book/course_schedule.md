@@ -9,18 +9,18 @@ Everything in [Setup](setup/index.md), and the
 so it can be done anywhere; the environment install cannot, so do not leave it
 to the morning.
 
-## Day 1 — Image analysis basics
+## Day 1: Image analysis basics
 
 | | |
 |---|---|
 | morning | Lecture, then [Fiji](fiji/index.md): intensities, channels, thresholding, cleaning up a mask, measuring objects, and pixel classification with Weka |
-| afternoon | The same analysis in Python — [image handling](../notebooks/01_image_handling.ipynb) and [image processing](../notebooks/02_image_processing.ipynb) |
+| afternoon | The same analysis in Python: [image handling](../notebooks/01_image_handling.ipynb) and [image processing](../notebooks/02_image_processing.ipynb) |
 
 The afternoon deliberately repeats the morning on the same images. Fiji is faster
 to start; Python is what you reach for when there are four hundred images, or
 when you need to say exactly what you did six months later.
 
-## Day 2 — Workflows and analysis
+## Day 2: Workflows and analysis
 
 | | |
 |---|---|
@@ -35,7 +35,7 @@ the microscopy module.
 ## How the material is written
 
 Each topic has a **walkthrough** to work through together, and an **exercise**
-to do yourself. The exercises have laddered hints — take the first one before
+to do yourself. The exercises have laddered hints: take the first one before
 the second.
 
 Several of them end with a result that is *wrong*, deliberately: a count that

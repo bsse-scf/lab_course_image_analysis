@@ -5,7 +5,7 @@ installed. It is the most widely used tool in bioimage analysis, and for good
 reason: you can open an image and have a measurement thirty seconds later,
 without writing anything.
 
-This morning you will do a complete analysis by clicking — open images, look at
+This morning you will do a complete analysis by clicking: open images, look at
 their intensities, threshold them, separate touching objects and measure the
 result. This afternoon you will do the *same* analysis in Python, and the
 comparison is the point. Fiji is faster to start; Python is what you reach for
@@ -27,7 +27,7 @@ Two shorter ones to try if you are ahead:
 [spot the artifact](fun/spot_the_artifact.md).
 
 **E4 produces files that you will use again tomorrow**, so do not skip it. E5 is
-genuinely optional — macros are useful, but batch processing is the thing Python
+genuinely optional: macros are useful, but batch processing is the thing Python
 does better, and that is where we are heading.
 
 ## The data
@@ -35,8 +35,8 @@ does better, and that is where we are heading.
 Everything is in the repository you cloned, under `data/`. The main set is
 `data/bbbc020/`: mouse bone-marrow macrophages with two channels.
 
-- `*_nuclei.tif` — DAPI, staining the nuclei
-- `*_cells.tif` — CD11b, staining the cell surface
+- `*_nuclei.tif`: DAPI, staining the nuclei
+- `*_cells.tif`: CD11b, staining the cell surface
 
 Open one of each now and look at them side by side. You will spend two days on
 these images, and most of what happens will make sense if you remember one thing
@@ -44,7 +44,7 @@ about them: **the nuclei are compact and clearly brighter than the background;
 the cells are patchy, they touch each other, and their edges fade out.**
 
 ```{note}
-These images are uncalibrated — Fiji does not know how large a pixel is in
+These images are uncalibrated: Fiji does not know how large a pixel is in
 microns, so every measurement it reports will be in pixels. E1 asks you to check
 this, and it matters more than it sounds.
 ```

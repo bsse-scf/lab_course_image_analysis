@@ -9,7 +9,7 @@ Cite the dataset page when you use it. `pixi run test` verifies
 each checksum, so a corrupt or missing file fails CI instead of failing in class.
 
 
-## BBBC020 — Murine bone-marrow derived macrophages
+## BBBC020: Murine bone-marrow derived macrophages
 
 - Source: <https://bbbc.broadinstitute.org/BBBC020>
 - Licence: CC BY 3.0 - Broad Bioimage Benchmark Collection
@@ -72,7 +72,7 @@ each checksum, so a corrupt or missing file fails CI instead of failing in class
 | `data/bbbc020/weka/24h_2_cells_classified.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 953d7566ef1e548286699439ba9f87819dfb1dfbe06636a67d0264dbf07eae54 |
 | `data/bbbc020/weka/24h_2_cells_probability.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | ae302c99b7aaed2d29d58ffb148e7fb51a23cb559d7bfc59303641fb304e591a |
 
-## BBBC010 — C. elegans live/dead assay
+## BBBC010: C. elegans live/dead assay
 
 - Source: <https://bbbc.broadinstitute.org/BBBC010>
 - Licence: CC BY 3.0 - Broad Bioimage Benchmark Collection
@@ -153,7 +153,7 @@ each checksum, so a corrupt or missing file fails CI instead of failing in class
 | `data/bbbc010/images/D24_brightfield.tif` | https://bbbc.broadinstitute.org/BBBC010 | BBBC010 | CC BY 3.0 | intensity image, anti-aliased downscaled | d25ecd06b4029590a09a347adb0cc0c41e39424ef6cc97f56727f1fbf4480c8f |
 | `data/bbbc010/images/D24_gfp.tif` | https://bbbc.broadinstitute.org/BBBC010 | BBBC010 | CC BY 3.0 | intensity image, anti-aliased downscaled | 3c293dc6c8e0dbae5a71b30fe1a176db935d3b2b50e131c7a756c69e977a1930 |
 
-## BBBC030 — Chinese hamster ovary cells (DIC)
+## BBBC030: Chinese hamster ovary cells (DIC)
 
 - Source: <https://bbbc.broadinstitute.org/BBBC030>
 - Licence: CC BY 3.0 - Broad Bioimage Benchmark Collection

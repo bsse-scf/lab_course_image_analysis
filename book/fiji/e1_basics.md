@@ -9,7 +9,7 @@ Open `data/bbbc020/images/2h_1_nuclei.tif` and
 `data/bbbc020/images/2h_1_cells.tif` in Fiji
 (`File ▸ Open…`, or drag the file onto the Fiji toolbar).
 
-## Part 1 — what is in this image?
+## Part 1: what is in this image?
 
 Answer each of these using Fiji. The answer matters less than knowing where to
 look.
@@ -25,7 +25,7 @@ look.
 
 4. **What is the value of the pixel at x=25, y=336? And at x=472, y=190?**
    *Hint: hover the mouse over the image and read the status bar in the main Fiji
-   window. Note Fiji reports `x,y` — column first — which is the opposite order
+   window. Note Fiji reports `x,y`, column first, which is the opposite order
    from the `(row, column)` you will use in Python this afternoon.*
 
 5. One of those two pixels is inside a nucleus and one is background.
@@ -37,12 +37,12 @@ look.
 7. Now draw a small rectangle inside a single nucleus and measure again.
    **How does the mean compare?** This is the difference a threshold has to find.
 
-## Part 2 — how big is a pixel?
+## Part 2: how big is a pixel?
 
 8. Open `Image ▸ Properties…` (Ctrl/Cmd+Shift+P). **What does Fiji think the
    pixel width and height are, and in what unit?**
 
-You should find `1 pixel × 1 pixel` — the file carries no calibration, so Fiji
+You should find `1 pixel × 1 pixel`: the file carries no calibration, so Fiji
 has no idea what physical size these pixels represent.
 
 9. **Why is that dangerous?** Consider: you measure a nucleus and Fiji reports an
@@ -51,7 +51,7 @@ has no idea what physical size these pixels represent.
 
 ```{warning}
 An uncalibrated image will still give you numbers. They just will not mean what
-you think they mean. This is not hypothetical — the macro used for the day-2
+you think they mean. This is not hypothetical: the macro used for the day-2
 challenge filters objects by `size=0-409` in **calibrated** units, and quietly
 does something completely different if the calibration is missing or wrong.
 ```
@@ -60,11 +60,11 @@ does something completely different if the calibration is missing or wrong.
     and height to `0.5` and the unit to `micron`. Measure a nucleus again.
     **What changed, and what did not?**
 
-    *(0.5 µm is invented for this exercise — these images were downscaled from
+    *(0.5 µm is invented for this exercise: these images were downscaled from
     the originals, so the true value no longer applies. That is itself worth
     noticing: resizing an image invalidates its calibration.)*
 
-## Part 3 — two channels
+## Part 3: two channels
 
 11. With both channels open, run `Image ▸ Color ▸ Merge Channels…`. Put the
     nuclei in **blue** (C3) and the cells in **green** (C2), and tick *Create
@@ -80,7 +80,7 @@ does something completely different if the calibration is missing or wrong.
     *Hint: check the histogram before and after. This is the single most common
     misunderstanding in image analysis.*
 
-## Part 4 — save something presentable
+## Part 4: save something presentable
 
 14. Adjust the contrast of the composite so both channels are visible.
 15. Add a scale bar with `Analyze ▸ Tools ▸ Scale Bar…`. (You will need the

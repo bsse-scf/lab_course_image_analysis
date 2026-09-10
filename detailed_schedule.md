@@ -17,7 +17,7 @@ and are deliberately not listed.
 
 ---
 
-## Day 0 — preparation
+## Day 0: preparation
 
 Done at home, before the course. Covered by `book/setup/`.
 
@@ -57,17 +57,17 @@ downloaded.
 
 | Task | Practises |
 |---|---|
-| Task 1 — variables and f-strings | formatted output |
-| Task 2 — lists | `len`/`min`/`max`/`sum`, slicing |
-| Task 3 — loops and decisions | loop with branching, counting |
-| Task 4 — zip | walking two lists together |
-| Task 5 — a function | `def` with a default argument |
-| Task 6 — build an array and describe it | array creation, `shape`, `dtype` |
-| Task 7 — indexing and cropping | pixel, row, column, rectangle |
-| Task 8 — masks | boolean masks, selection, `.copy()` |
-| Task 9 — three panels | `subplots`, `imshow`, `hist` |
-| Task 10 — a table | DataFrame, filtering, `groupby` |
-| Task 11 — put it together | applying a function across a column |
+| Task 1: variables and f-strings | formatted output |
+| Task 2: lists | `len`/`min`/`max`/`sum`, slicing |
+| Task 3: loops and decisions | loop with branching, counting |
+| Task 4: zip | walking two lists together |
+| Task 5: a function | `def` with a default argument |
+| Task 6: build an array and describe it | array creation, `shape`, `dtype` |
+| Task 7: indexing and cropping | pixel, row, column, rectangle |
+| Task 8: masks | boolean masks, selection, `.copy()` |
+| Task 9: three panels | `subplots`, `imshow`, `hist` |
+| Task 10: a table | DataFrame, filtering, `groupby` |
+| Task 11: put it together | applying a function across a column |
 
 ---
 
@@ -82,10 +82,10 @@ notebooks use, so the two halves of the day are literally the same images.
 
 | Section | Introduces |
 |---|---|
-| Part 1 — what is in this image? | image dimensions, bit depth, pixel values, histogram, `x,y` vs `[row, col]` |
-| Part 2 — how big is a pixel? | calibration, why uncalibrated measurements mislead |
-| Part 3 — two channels | channel merge, composite, LUTs, display vs data |
-| Part 4 — save something presentable | scale bar, export |
+| Part 1: what is in this image? | image dimensions, bit depth, pixel values, histogram, `x,y` vs `[row, col]` |
+| Part 2: how big is a pixel? | calibration, why uncalibrated measurements mislead |
+| Part 3: two channels | channel merge, composite, LUTs, display vs data |
+| Part 4: save something presentable | scale bar, export |
 
 ### `book/fiji/e2_registration.md`
 
@@ -99,24 +99,24 @@ notebooks use, so the two halves of the day are literally the same images.
 
 | Section | Introduces |
 |---|---|
-| Part 1 — thresholding | manual threshold, auto-threshold methods, Otsu |
-| Part 2 — cleaning up | fill holes, binary open, erode/dilate |
-| Part 3 — measuring | Set Measurements, Analyze Particles, object counts |
-| Part 4 — measuring the *other* channel | **redirect** — masks from one channel, intensities from another |
-| Part 5 — the hard channel | where thresholding fails, and why |
+| Part 1: thresholding | manual threshold, auto-threshold methods, Otsu |
+| Part 2: cleaning up | fill holes, binary open, erode/dilate |
+| Part 3: measuring | Set Measurements, Analyze Particles, object counts |
+| Part 4: measuring the *other* channel | **redirect**: masks from one channel, intensities from another |
+| Part 5: the hard channel | where thresholding fails, and why |
 
 Fiji deliberately stops at `Analyze Particles`, which separates objects
 *implicitly*. Watershed, and the semantic/instance distinction that motivates it,
-belong to the Python track — see `01` §7 and `02` §6.
+belong to the Python track: see `01` §7 and `02` §6.
 
 ### `book/fiji/e4_weka.md`
 
 | Section | Introduces |
 |---|---|
 | Why | what a threshold cannot express |
-| Part 1 — train a classifier | Trainable Weka, classes, features, iterative correction |
-| Part 2 — apply a classifier you did not train | reuse, generalisation, distribution shift |
-| Part 3 — export for tomorrow | probability map vs hard classification |
+| Part 1: train a classifier | Trainable Weka, classes, features, iterative correction |
+| Part 2: apply a classifier you did not train | reuse, generalisation, distribution shift |
+| Part 3: export for tomorrow | probability map vs hard classification |
 | Think about it | reproducibility of a hand-trained model |
 
 ### `book/fiji/e5_macros.md` *(optional)*
@@ -132,7 +132,7 @@ belong to the Python track — see `01` §7 and `02` §6.
 | Section | Introduces |
 |---|---|
 | The task | line profile, FWHM vs other width definitions, reproducibility |
-| The catch | the diffraction limit — the measurement returns the PSF, not the object |
+| The catch | the diffraction limit: the measurement returns the PSF, not the object |
 
 ### `book/fiji/fun/spot_the_artifact.md` *(short, optional)*
 
@@ -143,7 +143,7 @@ belong to the Python track — see `01` §7 and `02` §6.
 
 ---
 
-## Workflows in Python — day 1 afternoon
+## Workflows in Python: day 1 afternoon
 
 The same workflow as the morning, in code. Same field, `2h_1`.
 
@@ -164,12 +164,12 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 
 | Task | Practises |
 |---|---|
-| Task 1 — load an image and describe it | imread, shape, dtype, range |
-| Task 2 — crop and display | computed centre crop |
-| Task 3 — the histogram | `.ravel()`, bins, log scale, choosing a threshold by eye |
-| Task 4 — threshold and count | `threshold_otsu`, `label` |
-| Task 5 — check it against the truth | comparing a count with an annotation |
-| Task 6 — build a composite | RGB channel assignment |
+| Task 1: load an image and describe it | imread, shape, dtype, range |
+| Task 2: crop and display | computed centre crop |
+| Task 3: the histogram | `.ravel()`, bins, log scale, choosing a threshold by eye |
+| Task 4: threshold and count | `threshold_otsu`, `label` |
+| Task 5: check it against the truth | comparing a count with an annotation |
+| Task 6: build a composite | RGB channel assignment |
 
 ### `notebooks/02_image_processing.ipynb`
 
@@ -186,15 +186,15 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 
 | Task | Practises |
 |---|---|
-| Task 1 — measure the vignetting | quantifying uneven illumination |
-| Task 2 — flatten the illumination | multiplicative correction by division; correction ≠ better segmentation |
-| Task 3 — which filter for which noise? | Gaussian vs median, chosen deliberately |
-| Task 4 — a full pipeline on the hard channel | assembling the steps; count vs quality |
-| Task 5 — split the merged cells with a watershed | all three seeding strategies; when watershed does not fit |
+| Task 1: measure the vignetting | quantifying uneven illumination |
+| Task 2: flatten the illumination | multiplicative correction by division; correction ≠ better segmentation |
+| Task 3: which filter for which noise? | Gaussian vs median, chosen deliberately |
+| Task 4: a full pipeline on the hard channel | assembling the steps; count vs quality |
+| Task 5: split the merged cells with a watershed | all three seeding strategies; when watershed does not fit |
 
 ---
 
-## Workflows in Python — day 2 morning
+## Workflows in Python: day 2 morning
 
 Uses **`24h_2`** for the machine-learning walkthrough and **`15min_3`** wherever
 a segmentation is scored, because `15min_3` has the most complete annotation.
@@ -207,18 +207,18 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 | 2. Semantic and instance segmentation | why a pixel classifier under-counts; watershed as the bridge |
 | 3. Cellpose | a pretrained deep model that outputs instances |
 | 4. The one parameter that matters | `diameter`, and how to sanity-check it |
-| 5. Three methods, side by side | qualitative comparison only — **no scoring yet, by design** |
+| 5. Three methods, side by side | qualitative comparison only: **no scoring yet, by design** |
 | 6. Does the hard channel need all this? | easy vs hard problems; reach for the simple thing first |
 
 ### `notebooks/03_ml_segmentation_ex.ipynb`
 
 | Task | Practises |
 |---|---|
-| Task 1 — load the classifier output and find the cell class | identifying the class without using ground truth |
-| Task 2 — semantic to instance | naming the failure |
-| Task 3 — split them with a watershed | re-applying day-1 tooling to a new mask |
-| Task 4 — Cellpose, and the diameter | running the model; parameter sensitivity |
-| Task 5 — put the three side by side | forming a judgement, and noticing you cannot yet justify it |
+| Task 1: load the classifier output and find the cell class | identifying the class without using ground truth |
+| Task 2: semantic to instance | naming the failure |
+| Task 3: split them with a watershed | re-applying day-1 tooling to a new mask |
+| Task 4: Cellpose, and the diameter | running the model; parameter sensitivity |
+| Task 5: put the three side by side | forming a judgement, and noticing you cannot yet justify it |
 
 ### `notebooks/04_segmentation_metrics.ipynb`
 
@@ -234,11 +234,11 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 
 | Task | Practises |
 |---|---|
-| Task 1 — implement IoU and Dice | writing the metrics, tested on hand-checkable shapes |
-| Task 2 — build two segmentations to compare | assembling classical and deep pipelines |
-| Task 3 — score them on pixels | applying IoU and Dice |
-| Task 4 — score them on objects | implementing per-object matching |
-| Task 5 — how strict should the matching be? | threshold sweeps, reading the curves |
+| Task 1: implement IoU and Dice | writing the metrics, tested on hand-checkable shapes |
+| Task 2: build two segmentations to compare | assembling classical and deep pipelines |
+| Task 3: score them on pixels | applying IoU and Dice |
+| Task 4: score them on objects | implementing per-object matching |
+| Task 5: how strict should the matching be? | threshold sweeps, reading the curves |
 
 ### `notebooks/05_features.ipynb`
 
@@ -246,7 +246,7 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 |---|---|
 | 1. From labels to a table | `regionprops_table`, one row per object |
 | 2. Morphology features | area, perimeter, eccentricity, solidity, extent; dimensionless ratios travel |
-| 3. Intensity features | `intensity_image` — measuring one channel through another's mask |
+| 3. Intensity features | `intensity_image`: measuring one channel through another's mask |
 | 4. Measuring across a whole experiment | pooling fields; keeping `field` and `condition` columns |
 | 5. Comparing conditions | grouped summaries, box plots, the unit of replication |
 | 6. Which features actually distinguish anything? | effect size; the danger of picking a feature after seeing the result |
@@ -255,12 +255,12 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 
 | Task | Practises |
 |---|---|
-| Task 1 — look before you measure | forming a hypothesis before measuring |
-| Task 2 — measure every worm in every well | pooling 24 wells; keeping `well` and `kind` |
-| Task 3 — can you classify a single worm? | scoring a single-threshold rule; individual objects overlap |
-| Task 4 — but you do not have to classify a single worm | aggregating per image averages the noise away |
-| Task 5 — score the well-level rule | the same features now separate perfectly |
-| Task 6 — do not believe your own 100% | **leave-one-out cross-validation**; accuracy on the data you tuned on is optimistic |
+| Task 1: look before you measure | forming a hypothesis before measuring |
+| Task 2: measure every worm in every well | pooling 24 wells; keeping `well` and `kind` |
+| Task 3: can you classify a single worm? | scoring a single-threshold rule; individual objects overlap |
+| Task 4: but you do not have to classify a single worm | aggregating per image averages the noise away |
+| Task 5: score the well-level rule | the same features now separate perfectly |
+| Task 6: do not believe your own 100% | **leave-one-out cross-validation**; accuracy on the data you tuned on is optimistic |
 
 ### `notebooks/06_curve_fitting.ipynb`
 
@@ -271,19 +271,19 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 | 3. Seeing the landscape | the SSE surface; why `p0` matters |
 | 4. Doing it properly | `curve_fit`, covariance, parameter uncertainties |
 | 5. From parameters to something meaningful | doubling time; propagating an uncertainty |
-| 6. Is the model right? | **residuals** — structure means the wrong model |
+| 6. Is the model right? | **residuals**: structure means the wrong model |
 
 ### `notebooks/06_curve_fitting_ex.ipynb`
 
 | Task | Practises |
 |---|---|
-| Task 1 — why the usual threshold will not work | phase contrast defeats Otsu |
-| Task 2 — segment on deviation instead | thresholding \|image − background\| |
-| Task 3 — check the parameter is not doing the work | robustness of a result to an arbitrary cut-off |
-| Task 4 — fit the growth curve | segment → count → fit, end to end |
-| Task 5 — check the residuals | reading residual structure on real data |
-| Task 6 — the same model, fitted two ways | linear-space vs log-space fitting give different answers |
-| Task 7 — a model that fits | logistic vs exponential; more parameters always fit better |
+| Task 1: why the usual threshold will not work | phase contrast defeats Otsu |
+| Task 2: segment on deviation instead | thresholding \|image − background\| |
+| Task 3: check the parameter is not doing the work | robustness of a result to an arbitrary cut-off |
+| Task 4: fit the growth curve | segment → count → fit, end to end |
+| Task 5: check the residuals | reading residual structure on real data |
+| Task 6: the same model, fitted two ways | linear-space vs log-space fitting give different answers |
+| Task 7: a model that fits | logistic vs exponential; more parameters always fit better |
 
 ---
 
@@ -342,17 +342,17 @@ it that relies on it has to move too.
 | thresholding, Otsu | Fiji E3 part 1; Python `01` §6 |
 | kinds of mask (boolean, label, probability) | Python `01` §6 |
 | morphological cleanup | Fiji E3 part 2; Python `02` §4 |
-| connected components / labelling | Python `01` §7 — the first semantic→instance route |
+| connected components / labelling | Python `01` §7: the first semantic→instance route |
 | measuring a second channel through a mask | Fiji E3 part 4 |
 | ground truth as a reference | Python `01` §7 |
 | uneven illumination, background subtraction | Python `02` §2 |
 | denoising | Python `02` §3 |
-| distance transform and watershed | Python `02` §6 — the second semantic→instance route |
+| distance transform and watershed | Python `02` §6: the second semantic→instance route |
 | seeding strategies | Python `02` §6 |
 | semantic vs instance segmentation | Python `01` §6-7, revisited in `02` §6 and `03` §2 |
 | pixel classification (Weka) | Fiji E4 |
 | shallow vs deep learning | Python `03` §2 |
 | Cellpose | Python `03` §3 |
-| IoU, Dice | Python `04` §1 — **deliberately not before** |
+| IoU, Dice | Python `04` §1: **deliberately not before** |
 | per-object matching, precision/recall/F1 | Python `04` §3 |
 | limitations of ground truth | Python `04` §4 |

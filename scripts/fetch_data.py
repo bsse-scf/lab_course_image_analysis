@@ -435,7 +435,7 @@ def write_manifest(entries: dict[str, list[Path]]) -> None:
     lines = [HEADER]
     for key, paths in entries.items():
         ds = DATASETS[key]
-        lines.append(f"## {ds.name.upper()} — {ds.title}\n")
+        lines.append(f"## {ds.name.upper()}: {ds.title}\n")
         lines.append(f"- Source: <{ds.page}>")
         lines.append(f"- Licence: {ds.licence}")
         if ds.notes:

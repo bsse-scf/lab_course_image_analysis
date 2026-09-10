@@ -57,9 +57,9 @@ if the image is calibrated and 40 *square pixels* if it is not. The same macro o
 the same sample imaged at a different magnification silently filters differently.
 
 **Save inside the loop.** A `saveAs` after the loop closes only sees the last
-image — and if the last entry was skipped, whatever variable you used is stale.
+image, and if the last entry was skipped, whatever variable you used is stale.
 
 ## When to stop
 
 If you find yourself wanting a plot, a conditional, a table join, or a second
-opinion from a library — stop, and use Python. That is what the afternoon is for.
+opinion from a library: stop, and use Python. That is what the afternoon is for.

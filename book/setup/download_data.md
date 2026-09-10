@@ -1,6 +1,6 @@
 # Download the example data
 
-Most of the course data comes with the repository — when you cloned it, you got
+Most of the course data comes with the repository, when you cloned it, you got
 the images too, and nothing further is needed for day 1 or the day 2 morning.
 
 ## The challenge dataset
@@ -15,7 +15,7 @@ plate, in Nikon ND2 format).
 **The download link for this dataset is not yet published.** It will be added
 here before the course, and announced in the Day 0 session.
 
-Please do not leave this download until the morning of day 2 — on a shared
+Please do not leave this download until the morning of day 2: on a shared
 lecture-room network it will not finish in time.
 ```
 
@@ -31,7 +31,7 @@ That path is gitignored, so the file will not be committed by accident.
 
 The challenge is designed so you can do the analysis without it. A summary table
 of per-well object counts is included in the repository, so the reshaping,
-fitting and IC50 work can all be done from that alone — you would be skipping the
+fitting and IC50 work can all be done from that alone: you would be skipping the
 segmentation half, not the analysis.
 
 Details are in the challenge instructions.

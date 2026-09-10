@@ -47,18 +47,18 @@ the two requires the field-of-view area and the well area.
 
 The dataset is large. Both routes lead to a dose-response curve.
 
-### Track A — starting from the images
+### Track A: starting from the images
 
 Segment the cells in each of the 40 fields, export the counts, and analyse them.
 Either tool works:
 
-- a **Fiji macro** — there is a starting point among the hints below;
+- a **Fiji macro**: there is a starting point among the hints below;
 - a **Jupyter notebook**, using the methods from day 1. In Python,
   `iaf.io.readers.NikonND2Reader` opens an ND2 file series by series.
 
 The data is `plate01.nd2`; see [Download the example data](setup/download_data.md).
 
-### Track B — starting from the counts
+### Track B: starting from the counts
 
 If the download is unavailable, the per-field counts are already in the
 repository:
@@ -78,9 +78,9 @@ Both properties described above still apply on this track, as does the fitting.
 A complete analysis involves:
 
 1. **the counts per well**, from either track;
-2. **the plate arranged correctly** — 4 replicates × 10 concentrations, with the
+2. **the plate arranged correctly**: 4 replicates × 10 concentrations, with the
    snake pattern accounted for;
-3. **a dose-response plot** — cells per well against concentration, showing the
+3. **a dose-response plot**: cells per well against concentration, showing the
    replicates rather than only their average;
 4. **a fitted curve** and the **IC50** derived from it;
 5. **an assessment of how reliable that number is.**
@@ -124,13 +124,13 @@ Two details that matter:
 - **Series are numbered from 1**, so `series_1` is the first field, not
   `series_0`.
 - **`Analyze Particles...` with `summarize` writes to the Summary window**, not
-  to Results. Save that one — `Table.save(outputPath, "Summary")` — or the file
+  to Results. Save that one, `Table.save(outputPath, "Summary")`, or the file
   will contain one row per object rather than one row per field.
 ::::
 
 ::::{dropdown} Arranging 40 rows into a 4×10 plate
 The rows are in acquisition order. Reshape to `(4, 10)`, then reverse every
-second row — `array[1::2] = array[1::2, ::-1]`.
+second row: `array[1::2] = array[1::2, ::-1]`.
 
 A check before continuing: column 0 is the untreated control, so those four wells
 should hold the highest counts on the plate. If they do not, the arrangement is
@@ -144,7 +144,7 @@ Scaling by the area ratio relates them:
 $$\text{cells per well} = \text{counted} \times \frac{\text{well area}}{\text{field area}}$$
 
 The well area is 0.32 cm². The field area follows from the image dimensions and
-the pixel size in the file metadata — the calibration point from
+the pixel size in the file metadata: the calibration point from
 [Fiji E1](fiji/e1_basics.md). An error here scales every number by a constant
 factor.
 ::::
