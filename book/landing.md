@@ -35,6 +35,9 @@ Clone the repository with a plain `git clone`, not `--recurse-submodules`:
 see the README for why.
 ```
 
+If a term is unfamiliar, the [vocabulary](vocabulary.md) page defines the ones
+this course uses and says where each is introduced.
+
 ## A note on how this is written
 
 Several notebooks end with a result that is *wrong*, on purpose: a count that

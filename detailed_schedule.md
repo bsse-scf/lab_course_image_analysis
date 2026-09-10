@@ -340,7 +340,7 @@ it that relies on it has to move too.
 | registration | Fiji E2 |
 | histogram | Fiji E1 part 1; Python `01` §5 |
 | thresholding, Otsu | Fiji E3 part 1; Python `01` §6 |
-| kinds of mask (boolean, label, probability) | Python `01` §6 |
+| kinds of image (intensity, binary, label, probability) | Python `01` §6 |
 | morphological cleanup | Fiji E3 part 2; Python `02` §4 |
 | connected component labeling / labeling | Python `01` §7: the first semantic→instance route |
 | measuring a second channel through a binary image | Fiji E3 part 4 |

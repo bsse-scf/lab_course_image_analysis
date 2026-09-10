@@ -63,5 +63,6 @@ parts:
 
   - caption: Further information
     chapters:
+      - file: book/vocabulary.md
       - file: book/further_reading.md
       - file: book/acknowledgements.md
