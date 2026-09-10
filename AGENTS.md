@@ -46,10 +46,10 @@ split.
 
 ### Exercises are generated, never hand-written
 
-Author the *solution* in `notebooks/NN_topic_ex_solution.ipynb` (gitignored) using these
+Author the *solution* in `solutions/python/NN_topic_ex_solution.ipynb` using these
 markers, then run `pixi run make-exercises` to emit `notebooks/NN_topic_ex.ipynb`.
-Solutions sit beside the exercises, not in a subdirectory, so both resolve
-`from course import DATA` and any relative data path identically:
+`from course import DATA` resolves there because pixi puts `notebooks/` on
+`PYTHONPATH` — see `[activation.env]` in `pixi.toml`:
 
 ```python
 # --- your turn ---
@@ -98,6 +98,48 @@ directive text inside JupyterLab — which is where students actually sit for tw
 Weka is trained *and* applied in Fiji on day 1. Day 2 reads the exported probability maps
 and label images back in with `tifffile`. Do not add `pyimagej`, `openjdk` or `maven` to the
 environment, and do not call Fiji from a notebook.
+
+### Where things live
+
+```
+notebooks/    student-facing: walkthroughs and generated exercises
+book/         the jupyter-book site, including the Fiji exercise sheets
+solutions/    instructor-only: python/ and fiji/  (see solutions/README.md)
+data/         course data, committed as plain git blobs
+scripts/      instructor tooling: fetch-data, make-exercises, check-schedule
+macros/       Fiji macros distributed to students
+```
+
+`solutions/` is a **git submodule** pointing at a separate GitLab repository.
+The course repo records only which commit of it to use.
+
+**Cloning as an instructor:**
+
+```bash
+git clone ...
+cd scu_lab_course_ia
+git submodule update --init      # needs access to the solutions repo
+```
+
+**Editing a solution takes commits in two repos, in this order:**
+
+```bash
+# 1. edit solutions/python/03_..._ex_solution.ipynb, then:
+pixi run sync-solutions          # regenerates the exercises and shows what to commit
+git -C solutions commit -am "..." && git -C solutions push
+git commit -am "..."             # picks up BOTH the regenerated exercises
+                                 # and the moved submodule pointer
+```
+
+Forgetting the last step is the classic submodule mistake: the solutions are
+pushed, but the course repo still points at the previous commit.
+
+```{warning}
+Because students cannot read the submodule, CI running on the course repo alone
+**cannot verify that the generated exercises match the solutions**. The check
+skips with a warning rather than failing. Run `pixi run sync-solutions` locally
+before pushing; nothing else will catch drift.
+```
 
 ### Never delete `data/*/weka/`
 

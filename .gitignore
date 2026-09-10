@@ -15,12 +15,10 @@ __pycache__/
 # --- os cruft ---
 .DS_Store
 
-# --- solutions are distributed on request, never committed ---
-# (see AGENTS.md: exercises are generated from these by scripts/make_exercises.py)
-# They sit alongside the exercises rather than in a subdirectory, so that both
-# resolve `from course import DATA` and `../data/...` identically.
-notebooks/*_solution.ipynb
-fiji/solutions/
+# --- solutions ---
+# `solutions/` is a git SUBMODULE (see AGENTS.md). Do not add ignore rules for
+# paths inside it - the parent repo cannot ignore a submodule's contents, and
+# solutions/.gitignore handles them instead.
 
 # --- data too large to track ---
 # The 3.3 GB challenge dataset is distributed via polybox; see

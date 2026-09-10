@@ -7,6 +7,7 @@ solution it came from because someone hand-edited it.
 
 import subprocess
 import sys
+import warnings
 from pathlib import Path
 
 import nbformat
@@ -45,18 +46,36 @@ def test_no_stored_outputs(path):
 @pytest.mark.parametrize("path", EXERCISES, ids=_ids(EXERCISES))
 def test_has_a_solution_source(path):
     """Every exercise must be generated, not hand-written."""
-    source = path.with_name(path.name.replace("_ex.ipynb", "_ex_solution.ipynb"))
+    source = (REPO / "solutions" / "python" /
+              path.name.replace("_ex.ipynb", "_ex_solution.ipynb"))
     if not source.exists():
         pytest.skip(f"{source.name} not present (solutions are gitignored)")
     assert source.exists()
 
 
-@pytest.mark.skipif(
-    not list(NOTEBOOKS.glob("*_ex_solution.ipynb")),
-    reason="solutions not present in this checkout",
-)
-def test_generated_exercises_are_current():
-    """Regenerating must be a no-op - otherwise someone edited a generated file."""
+SOLUTIONS = REPO / "solutions" / "python"
+HAVE_SOLUTIONS = SOLUTIONS.is_dir() and any(SOLUTIONS.glob("*_ex_solution.ipynb"))
+
+
+def test_generated_exercises_are_current(recwarn):
+    """Regenerating must be a no-op - otherwise someone edited a generated file.
+
+    `solutions/` is a submodule that most checkouts cannot read, so this check
+    can only run for instructors. It warns rather than fails when the submodule
+    is absent, because a silent skip would let the exercises drift out of sync
+    with the solutions and nobody would notice.
+    """
+    if not HAVE_SOLUTIONS:
+        warnings.warn(
+            "solutions/ submodule is not checked out, so the generated exercises "
+            "CANNOT be verified against their solutions. Run "
+            "`git submodule update --init` and `pixi run sync-solutions` before "
+            "trusting notebooks/*_ex.ipynb.",
+            UserWarning,
+            stacklevel=2,
+        )
+        pytest.skip("solutions submodule not available - see the warning above")
+
     result = subprocess.run(
         [sys.executable, str(REPO / "scripts" / "make_exercises.py"), "--check"],
         capture_output=True,

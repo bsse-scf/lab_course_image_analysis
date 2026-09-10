@@ -1,7 +1,8 @@
 """Generate student exercise notebooks from the instructor solutions.
 
-Solutions live beside the exercises as `notebooks/<name>_ex_solution.ipynb`
-(gitignored) and are the single source of truth. This script strips the solution blocks and emits the blank notebooks
+Solutions live in `solutions/python/<name>_ex_solution.ipynb` and are the single
+source of truth. `course.py` is importable from there because pixi puts
+`notebooks/` on PYTHONPATH. This script strips the solution blocks and emits the blank notebooks
 that students actually open.
 
     pixi run make-exercises            # regenerate all
@@ -31,8 +32,7 @@ import nbformat
 
 REPO = Path(__file__).resolve().parents[1]
 NOTEBOOKS = REPO / "notebooks"
-# Solutions live beside the exercises they generate, suffixed `_solution`, so
-# both resolve imports and relative data paths identically. They are gitignored.
+SOLUTIONS = REPO / "solutions" / "python"
 SOLUTION_GLOB = "*_ex_solution.ipynb"
 
 BEGIN_SOLUTION = "### BEGIN SOLUTION"
@@ -130,9 +130,13 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    sources = sorted(NOTEBOOKS.glob(SOLUTION_GLOB))
+    if not SOLUTIONS.is_dir():
+        print(f"No solutions directory at {SOLUTIONS} - nothing to do.")
+        return 0
+
+    sources = sorted(SOLUTIONS.glob(SOLUTION_GLOB))
     if not sources:
-        print(f"No {SOLUTION_GLOB} files in {NOTEBOOKS} - nothing to do.")
+        print(f"No {SOLUTION_GLOB} files in {SOLUTIONS} - nothing to do.")
         return 0
 
     stale = []
