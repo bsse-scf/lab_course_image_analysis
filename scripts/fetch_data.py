@@ -451,8 +451,11 @@ def write_manifest(entries: dict[str, list[Path]]) -> None:
                 f"| `{rel}` | {ds.page} | {ds.name.upper()} | CC BY 3.0 | {kind} | {sha256_of(path)} |"
             )
         lines.append("")
+    # Skip dotfiles: .DS_Store and friends are gitignored, so listing them in the
+    # manifest would reference files that no clone contains.
     local = sorted(
-        p for d in ("misc", "fiji") for p in (DATA / d).rglob("*") if p.is_file()
+        p for d in ("misc", "fiji") for p in (DATA / d).rglob("*")
+        if p.is_file() and not p.name.startswith(".")
     )
     if local:
         lines.append("## Supporting images (not downloaded)\n")

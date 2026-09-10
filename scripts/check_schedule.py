@@ -70,7 +70,9 @@ def material() -> dict[str, list[str]]:
     for path in sorted((REPO / "book" / "fiji").rglob("*.md")):
         if path.name in {"index.md"} or path.name.startswith("cheat_sheet"):
             continue
-        found[str(path.relative_to(REPO))] = markdown_sections(path)
+        # as_posix(): on Windows str(Path) gives backslashes, which never
+        # match the forward slashes used in detailed_schedule.md.
+        found[path.relative_to(REPO).as_posix()] = markdown_sections(path)
 
     # Top-level book pages that carry teaching content. Navigation and
     # reference pages - landing, schedule, setup, further reading,

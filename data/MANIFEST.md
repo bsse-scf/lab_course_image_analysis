@@ -65,12 +65,6 @@ each checksum, so a corrupt or missing file fails CI instead of failing in class
 | `data/bbbc020/images/Kontrolle2_nuclei.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 23076d11cd630f2a901832f062b3c484349a99e09f8bae8805a01c25d0e151b6 |
 | `data/bbbc020/images/Kontrolle3_cells.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 032f4633a6b8c9db6b496c8a0cd707c62740f773685d0966fb723bfb95f1c39d |
 | `data/bbbc020/images/Kontrolle3_nuclei.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 165289081f0fd4ea43ab6b9f39b23a11e6ee09ac44f17c01dce0548a60fd0419 |
-| `data/bbbc020/weka/15min_1_cells_classified.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 94a0b146dd10a7cd81606281711423a8f21520a04c509f121f81355091b078b8 |
-| `data/bbbc020/weka/15min_1_cells_probability.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 469594e602e84bf54da6fbe94ab4d90872f936e6a9e579685edfa4d6e20a1522 |
-| `data/bbbc020/weka/15min_2_cells_classified.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | fede657b3f6a63f07ab84a3f8f8efde438b687cc43d27225ad2d3235126b3df6 |
-| `data/bbbc020/weka/15min_2_cells_probability.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 6e1faa5ce0b95a7ee142fc6e9f9b0d6fb1d121e1e19d977d10ad198813c23c72 |
-| `data/bbbc020/weka/24h_2_cells_classified.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | 953d7566ef1e548286699439ba9f87819dfb1dfbe06636a67d0264dbf07eae54 |
-| `data/bbbc020/weka/24h_2_cells_probability.tif` | https://bbbc.broadinstitute.org/BBBC020 | BBBC020 | CC BY 3.0 | intensity image, anti-aliased downscaled | ae302c99b7aaed2d29d58ffb148e7fb51a23cb559d7bfc59303641fb304e591a |
 
 ## BBBC010: C. elegans live/dead assay
 
@@ -187,7 +181,6 @@ Carried over from earlier editions of this course, or derived from the datasets 
 | `data/fiji/registration/channel1_reference.tif` | derived: BBBC020 15min_3 with two channels deliberately shifted (scripts/make_derived_data.py) | - | see source | downscaled to <=512 px | 517f5e5d6d1ad51f71f965e5edcbe36644fe5801891e0e4f39a319268e1131e6 |
 | `data/fiji/registration/channel2.tif` | derived: BBBC020 15min_3 with two channels deliberately shifted (scripts/make_derived_data.py) | - | see source | downscaled to <=512 px | d9bd363548d8c1fad633ce75d20c44ec2d72ec860d9f49aa0f360f8383f17f93 |
 | `data/fiji/registration/channel3.tif` | derived: BBBC020 15min_3 with two channels deliberately shifted (scripts/make_derived_data.py) | - | see source | downscaled to <=512 px | 3e40c8c9410a63186520e9d9d39d9b9dab719e56cbe85bbd2fc2e27352f3eed3 |
-| `data/misc/.DS_Store` | previous course edition | - | see source | downscaled to <=512 px | eefca2659e91b96128c3058b3acc433de7c05047ee48773906d1350fabc25b67 |
 | `data/misc/actin.tif` | actin filaments; previous course edition | - | see source | downscaled to <=512 px | e2ea3b674c903a90227ad289825c8e258bfba0a778358dda237a40646a64ce3d |
 | `data/misc/artifacts/sample_a.tif` | derived: BBBC020 Kontrolle2 with one processing artifact each (scripts/make_derived_data.py) | - | see source | downscaled to <=512 px | 8758e72db778280af7bdb6acf0dec4d6ea0281d3a515ba557c4487c15ccb5fb0 |
 | `data/misc/artifacts/sample_b.tif` | derived: BBBC020 Kontrolle2 with one processing artifact each (scripts/make_derived_data.py) | - | see source | downscaled to <=512 px | 636b860ef85b09a199dc32697d3abef9e6ef6608125782555265415664f7caaf |
