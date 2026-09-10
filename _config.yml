@@ -1,0 +1,62 @@
+# Book settings
+title: "Methods in Cell Analysis and Laboratory Automation: Image Analysis"
+author: Marvin Albert and Andreas Cuny. Large parts of the content were adapted with permission from teaching material developed by Aaron Ponti.
+copyright: "2026 ETH Zurich"
+logo: '.logo.svg'
+
+# Only build files that are actually in the table of contents, so stray drafts
+# and instructor material never leak onto the published site.
+only_build_toc_files: true
+
+exclude_patterns:
+  - _build
+  - .pixi
+  - .venv
+  - .git
+  - .pytest_cache
+  - .ipynb_checkpoints
+  # Instructor-side material, never published.
+  - notebooks/*_solution.ipynb
+  - notebooks/tests/*
+  - instructor_notes.md
+  - AGENTS.md
+  # Course data is distributed by clone (git-lfs) and polybox, not served by the
+  # site. Sphinx matches these against html_static_path entries too.
+  - data
+  - scripts
+  - macros
+
+execute:
+  # Walkthrough notebooks are executed at build time so a broken one fails the
+  # deploy instead of failing in front of the class. The previous edition used
+  # "off", which is exactly why a walkthrough pointing at a missing data
+  # directory sat unnoticed in the repo.
+  execute_notebooks: cache
+  timeout: 600
+  allow_errors: false
+  exclude_patterns:
+    # Exercises ship blank; they are non-runnable by construction.
+    - "notebooks/*_ex.ipynb"
+    # Heavy or interactive: committed with outputs, checked by nbmake separately.
+    - "notebooks/03_ml_segmentation.ipynb"
+    - "notebooks/challenge_starter.ipynb"
+    - "notebooks/homework_starter.ipynb"
+
+parse:
+  myst_enable_extensions:
+    - html_image
+    - colon_fence
+    - dollarmath   # needed for $...$ and $$...$$
+    - amsmath      # needed for \begin{equation}...\end{equation}
+
+sphinx:
+  recursive_update: true  # merge instead of overwriting defaults
+  config:
+    html_theme_options:
+      show_toc_level: 2
+    nb_merge_streams: true
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    mathjax3_config:
+      tex:
+        inlineMath: [["$", "$"], ["\\(", "\\)"]]
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
