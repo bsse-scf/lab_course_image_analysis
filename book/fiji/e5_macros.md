@@ -20,7 +20,7 @@ can do, not as a language to learn.
 2. With the recorder open, do the E3 pipeline by hand on
    `data/bbbc020/images/Kontrolle1_nuclei.tif`: duplicate, Gaussian blur
    (`Process ▸ Filters ▸ Gaussian Blur…`, sigma 1), Otsu threshold, Convert to
-   Mask, Fill Holes, Watershed, Analyze Particles with *Summarize* ticked.
+   Mask, Fill Holes, Analyze Particles with *Summarize* ticked.
 
 3. **Look at what the recorder captured.** Every click is a line.
 

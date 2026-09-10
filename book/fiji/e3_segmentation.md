@@ -36,27 +36,33 @@ values are gone. This is why you duplicated first.
 6. Remove the specks with `Process ▸ Binary ▸ Open`. **What does "open" do?** Try
    `Erode` on its own and then `Dilate` on its own to find out.
 
-## Part 3 — separating what touches
+## Part 3 — measuring
 
-7. Some nuclei are touching and have become a single blob. Run
-   `Process ▸ Binary ▸ Watershed`. **Look at where it drew the dividing lines.
-   Did it split anything it should not have?**
-
-## Part 4 — measuring
-
-8. Set up what you want measured: `Analyze ▸ Set Measurements…`. Tick **Area**,
+7. Set up what you want measured: `Analyze ▸ Set Measurements…`. Tick **Area**,
    **Mean gray value**, **Min & max gray value** and **Shape descriptors**.
 
-9. Run `Analyze ▸ Analyze Particles…` with *Size* `0-Infinity`, *Show* set to
+8. Run `Analyze ▸ Analyze Particles…` with *Size* `0-Infinity`, *Show* set to
    **Outlines**, and both *Display results* and *Summarize* ticked.
 
-10. **How many nuclei did it find?**
+9. **How many nuclei did it find?**
 
-11. The expert annotation for this field says **39**. Open
+10. The expert annotation for this field says **39**. Open
     `data/bbbc020/gt/2h_1_nuclei_labels.tif` to see them.
     **How close did you get? Where does your result disagree?**
 
-## Part 5 — measuring the *other* channel
+11. Look closely at the outlines Fiji drew. **Find a place where two nuclei are
+    touching.** What did `Analyze Particles` do there — did it count one object
+    or two?
+
+```{note}
+`Analyze Particles` decides what counts as "an object" by following connected
+runs of foreground pixels. Two nuclei that touch share a border, so they form one
+connected region and are counted once. There is a way to separate them, and it is
+the first thing you will meet this afternoon — but it is worth seeing the problem
+before seeing the fix.
+```
+
+## Part 4 — measuring the *other* channel
 
 Here is the step that makes this a real workflow rather than an exercise.
 
@@ -74,7 +80,7 @@ each cell?
     single most useful checkbox in this dialog, and it is the thing you will do
     in your homework to measure GFP inside DAPI-defined nuclei.
 
-## Part 6 — the hard channel
+## Part 5 — the hard channel
 
 15. Now try the whole pipeline again, from step 1, on
     `data/bbbc020/images/2h_1_cells.tif`. The annotation says **33** cells.

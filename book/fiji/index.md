@@ -18,7 +18,7 @@ to say exactly what you did six months later.
 |---|---|---|
 | [E1](e1_basics.md) | Fiji basics | intensities, channels, histogram, data types |
 | [E2](e2_registration.md) | Registration | aligning channels that do not overlap |
-| [E3](e3_segmentation.md) | Segmentation | filter, threshold, watershed, measure |
+| [E3](e3_segmentation.md) | Segmentation | filter, threshold, clean up, measure |
 | [E4](e4_weka.md) | Machine learning | Trainable Weka Segmentation |
 | [E5](e5_macros.md) | Macros *(optional)* | recording and batching |
 

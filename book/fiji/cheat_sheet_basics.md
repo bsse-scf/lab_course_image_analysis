@@ -41,7 +41,6 @@ duplicate first.
 | Threshold | `Image ▸ Adjust ▸ Threshold…` (Ctrl+Shift+T) |
 | Fill holes | `Process ▸ Binary ▸ Fill Holes` |
 | Remove specks | `Process ▸ Binary ▸ Open` |
-| Split touching objects | `Process ▸ Binary ▸ Watershed` |
 
 ## Measuring
 
@@ -52,6 +51,10 @@ duplicate first.
 | Count and measure objects | `Analyze ▸ Analyze Particles…` |
 | Manage regions of interest | `Analyze ▸ Tools ▸ ROI Manager…` (T to add) |
 | Scale bar | `Analyze ▸ Tools ▸ Scale Bar…` |
+
+`Analyze Particles…` counts **connected** runs of foreground pixels, so two
+objects that touch are counted once. Separating them is a Python topic in this
+course — see `02_image_processing`.
 
 **Redirect to:** in `Set Measurements…` is the one to remember — it measures your
 mask's shapes against a *different* image's intensities. That is how you ask "how

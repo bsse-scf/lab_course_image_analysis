@@ -40,7 +40,6 @@ setBatchMode(false);
 | Blur | `run("Gaussian Blur...", "sigma=1");` |
 | Auto-threshold | `setAutoThreshold("Otsu dark");` |
 | Binarise | `run("Convert to Mask");` |
-| Watershed | `run("Watershed");` |
 | Measurements | `run("Set Measurements...", "area mean redirect=None decimal=2");` |
 | Count objects | `run("Analyze Particles...", "size=40-Infinity display summarize");` |
 | Print to the Log | `print("text " + variable);` |

@@ -55,10 +55,13 @@ notebooks use, so the two halves of the day are literally the same images.
 |---|---|
 | Part 1 — thresholding | manual threshold, auto-threshold methods, Otsu |
 | Part 2 — cleaning up | fill holes, binary open, erode/dilate |
-| Part 3 — separating what touches | watershed *(Fiji's one-click version)* |
-| Part 4 — measuring | Set Measurements, Analyze Particles, object counts |
-| Part 5 — measuring the *other* channel | **redirect** — masks from one channel, intensities from another |
-| Part 6 — the hard channel | where thresholding fails, and why |
+| Part 3 — measuring | Set Measurements, Analyze Particles, object counts |
+| Part 4 — measuring the *other* channel | **redirect** — masks from one channel, intensities from another |
+| Part 5 — the hard channel | where thresholding fails, and why |
+
+Fiji deliberately stops at `Analyze Particles`, which separates objects
+*implicitly*. Watershed, and the semantic/instance distinction that motivates it,
+belong to the Python track — see `01` §7 and `02` §6.
 
 ### `book/fiji/e4_weka.md`
 
@@ -107,8 +110,8 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 | 3. Cropping is just indexing | slicing, 1D profiles |
 | 4. Two channels | channel arrays, building an RGB composite |
 | 5. The histogram | `plt.hist`, log scale, background peak vs object tail |
-| 6. From image to mask | comparison operators, boolean masks, `threshold_otsu` |
-| 7. From mask to objects | `label`, mask vs label image, comparing against ground truth |
+| 6. From image to mask: semantic segmentation | comparison operators, boolean masks, `threshold_otsu`; **semantic segmentation named**; the kinds of mask (boolean, label, probability) |
+| 7. From mask to objects: connected components | **instance segmentation named**; `label` as the first route from semantic to instance, and where it fails |
 | 8. Viewing images interactively | `stackview`, `napari` |
 
 ### `notebooks/01_image_handling_ex.ipynb`
@@ -131,8 +134,7 @@ The same workflow as the morning, in code. Same field, `2h_1`.
 | 3. Denoising: Gaussian vs median | which filter suits which noise |
 | 4. Morphology: cleaning up a mask | erosion, dilation, `opening`, `closing`, `binary_fill_holes` |
 | 5. Putting it together | a full pipeline; `remove_small_objects`; steps that earn nothing |
-| 6. Watershed: separating objects that touch | distance transform; **raw peaks → distance threshold → smoothed distance**; seeding is the failure mode |
-| 7. Semantic vs instance segmentation | the vocabulary, and why it matters downstream |
+| 6. Watershed: a second route from semantic to instance | distance transform; **raw peaks → distance threshold → smoothed distance**; seeding is the failure mode; when connected components is not enough |
 
 ### `notebooks/02_image_processing_ex.ipynb`
 
@@ -192,14 +194,50 @@ a segmentation is scored, because `15min_3` has the most complete annotation.
 | Task 4 — score them on objects | implementing per-object matching |
 | Task 5 — how strict should the matching be? | threshold sweeps, reading the curves |
 
-### Still to be written
+### `notebooks/05_features.ipynb`
 
-| planned | covers |
+| Section | Introduces |
 |---|---|
-| `notebooks/05_features.ipynb` | `regionprops_table`, intensity vs morphology features, pandas |
-| `notebooks/05_detective_game_ex.ipynb` | separating worms from cells on morphology alone |
-| `notebooks/06_curve_fitting.ipynb` | SSE, `curve_fit`, exponential models |
-| `notebooks/06_curve_fitting_ex.ipynb` | growth curve on the phase-contrast timelapse |
+| 1. From labels to a table | `regionprops_table`, one row per object |
+| 2. Morphology features | area, perimeter, eccentricity, solidity, extent; dimensionless ratios travel |
+| 3. Intensity features | `intensity_image` — measuring one channel through another's mask |
+| 4. Measuring across a whole experiment | pooling fields; keeping `field` and `condition` columns |
+| 5. Comparing conditions | grouped summaries, box plots, the unit of replication |
+| 6. Which features actually distinguish anything? | effect size; the danger of picking a feature after seeing the result |
+
+### `notebooks/05_detective_game_ex.ipynb`
+
+| Task | Practises |
+|---|---|
+| Task 1 — look at what you are dealing with | forming a hypothesis before measuring |
+| Task 2 — build the pooled table | measuring two datasets into one table; keeping an answer key |
+| Task 3 — add a ratio of your own | deriving a magnification-independent feature |
+| Task 4 — which feature separates them? | overlaid distributions |
+| Task 5 — put a number on it | scoring a single-threshold classifier |
+| Task 6 — the honest check | confusion matrix; asymmetric errors |
+
+### `notebooks/06_curve_fitting.ipynb`
+
+| Section | Introduces |
+|---|---|
+| 1. A measurement with a known answer | simulated data, so the fit can be checked against truth |
+| 2. What does 'best fit' mean? | model, misfit measure, SSE |
+| 3. Seeing the landscape | the SSE surface; why `p0` matters |
+| 4. Doing it properly | `curve_fit`, covariance, parameter uncertainties |
+| 5. From parameters to something meaningful | doubling time; propagating an uncertainty |
+| 6. Is the model right? | **residuals** — structure means the wrong model |
+
+### `notebooks/06_curve_fitting_ex.ipynb`
+
+| Task | Practises |
+|---|---|
+| Task 1 — why the usual threshold will not work | phase contrast defeats Otsu |
+| Task 2 — segment on deviation instead | thresholding \|image − background\| |
+| Task 3 — check the parameter is not doing the work | robustness of a result to an arbitrary cut-off |
+| Task 4 — fit the growth curve | segment → count → fit, end to end |
+| Task 5 — check the residuals | reading residual structure on real data |
+| Task 6 — the same model, fitted two ways | linear-space vs log-space fitting give different answers |
+| Task 7 — a model that fits | logistic vs exponential; more parameters always fit better |
 
 ---
 
@@ -233,15 +271,16 @@ it that relies on it has to move too.
 | registration | Fiji E2 |
 | histogram | Fiji E1 part 1; Python `01` §5 |
 | thresholding, Otsu | Fiji E3 part 1; Python `01` §6 |
+| kinds of mask (boolean, label, probability) | Python `01` §6 |
 | morphological cleanup | Fiji E3 part 2; Python `02` §4 |
-| connected components / labelling | Fiji E3 part 4; Python `01` §7 |
-| measuring a second channel through a mask | Fiji E3 part 5 |
+| connected components / labelling | Python `01` §7 — the first semantic→instance route |
+| measuring a second channel through a mask | Fiji E3 part 4 |
 | ground truth as a reference | Python `01` §7 |
 | uneven illumination, background subtraction | Python `02` §2 |
 | denoising | Python `02` §3 |
-| distance transform and watershed | Fiji E3 part 3 (one click); Python `02` §6 (mechanism) |
+| distance transform and watershed | Python `02` §6 — the second semantic→instance route |
 | seeding strategies | Python `02` §6 |
-| semantic vs instance segmentation | Python `02` §7, named again in `03` §2 |
+| semantic vs instance segmentation | Python `01` §6-7, revisited in `02` §6 and `03` §2 |
 | pixel classification (Weka) | Fiji E4 |
 | shallow vs deep learning | Python `03` §2 |
 | Cellpose | Python `03` §3 |

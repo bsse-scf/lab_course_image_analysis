@@ -3,6 +3,9 @@
 // Companion to book/fiji/e5_macros.md. The processing here is exactly the E3
 // pipeline; everything else is the loop around it.
 //
+// Note there is no watershed step: Analyze Particles counts connected regions,
+// so touching objects are counted once. Separating them is covered in Python.
+//
 // Run with Plugins > Macros > Run..., or open in the script editor and press Run.
 
 // Work without showing every intermediate image - much faster.
@@ -32,7 +35,6 @@ for (i = 0; i < list.length; i++) {
     setAutoThreshold("Otsu dark");
     run("Convert to Mask");
     run("Fill Holes");
-    run("Watershed");
     run("Analyze Particles...", "size=40-Infinity display summarize");
     // ---------------------------------------------------------------------
 
