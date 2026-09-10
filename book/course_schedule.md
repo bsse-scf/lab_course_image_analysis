@@ -35,10 +35,5 @@ the microscopy module.
 ## How the material is written
 
 Each topic has a **walkthrough** to work through together, and an **exercise**
-to do yourself. The exercises have laddered hints: take the first one before
+to do afterwards. The exercises have laddered hints: take the first one before
 the second.
-
-Several of them end with a result that is *wrong*, deliberately: a count that
-does not match the annotation, a metric that flatters a useless segmentation, a
-model that fits well and means little. Those are the parts worth slowing down
-for.
