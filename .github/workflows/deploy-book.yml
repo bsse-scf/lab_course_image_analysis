@@ -2,7 +2,7 @@ name: deploy book
 
 on:
   push:
-    branches: [main]
+    branches: ["2026"]
   workflow_dispatch:
 
 permissions:
@@ -36,6 +36,8 @@ jobs:
       - name: build the JupyterLite pages
         run: pixi run -e docs lite || echo "no jupyterlite config yet - skipping"
 
+      # Publishes the built book to the gh-pages branch, which is what
+      # GitHub Pages serves. The SOURCE of the content is this branch, 2026.
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
