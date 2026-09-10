@@ -1,0 +1,30 @@
+# --- build output ---
+_build/
+.jupyterlite.doit.db
+
+# --- environments ---
+.pixi/
+.venv/
+
+# --- python / jupyter cruft ---
+*.pyc
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- os cruft ---
+.DS_Store
+
+# --- solutions are distributed on request, never committed ---
+# (see AGENTS.md: exercises are generated from these by scripts/make_exercises.py)
+# They sit alongside the exercises rather than in a subdirectory, so that both
+# resolve `from course import DATA` and `../data/...` identically.
+notebooks/*_solution.ipynb
+fiji/solutions/
+
+# --- data too large to track ---
+# The 3.3 GB challenge dataset is distributed via polybox; see
+# book/setup/download_data.md. Everything else in data/ IS tracked, as plain blobs.
+data/challenge/plate01.nd2
+data/challenge/plate01.zip
+data/_cache/

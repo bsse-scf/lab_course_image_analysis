@@ -1,0 +1,18 @@
+# --- line endings ---
+# Fiji macros are read on all three platforms; keep them LF.
+*.ijm text eol=lf
+*.py  text eol=lf
+*.md  text eol=lf
+*.yml text eol=lf
+
+# --- binary data ---
+# Course images are committed as ordinary git blobs (no git-lfs). Keeping them
+# downscaled to <=512x512 is what keeps the repository small - see AGENTS.md.
+*.tif  binary
+*.tiff binary
+*.png  binary
+*.gif  binary
+
+# --- notebooks ---
+# Never auto-merge notebook JSON; resolve by regenerating or by picking a side.
+*.ipynb -merge
