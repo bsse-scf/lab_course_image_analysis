@@ -1,0 +1,100 @@
+[workspace]
+name = "labcourse-ia-2026"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64", "linux-64", "win-64"]
+requires-pixi = ">=0.67"
+
+# Default environment: everything a student needs for the Python track.
+# Deliberately absent: pyimagej / openjdk / maven. Weka is trained *and* applied
+# in Fiji on day 1; day 2 reads the exported probability maps back in with
+# tifffile, so nothing in the Python track ever boots a JVM.
+[dependencies]
+python = "3.11.*"
+pip = "*"
+
+# --- notebook stack ---
+jupyterlab = "*"
+jupyter_server = "*"
+notebook = ">=7.2.1,<8"
+ipykernel = "*"
+ipython = ">=8.26.0,<10"
+ipympl = "*"
+
+# --- scientific stack ---
+numpy = "*"
+scipy = ">=1.14.0,<2"
+scikit-image = ">=0.25.0,<1"
+scikit-learn = ">=1.5.1,<2"
+pandas = ">=2.2.2,<3"
+matplotlib = ">=3.9.2,<4"
+seaborn = "*"
+
+# --- image i/o ---
+tifffile = ">=2024.7.24"
+imagecodecs = "*"
+pillow = ">=10.4.0"
+nd2 = "*"
+h5py = ">=3.11.0,<4"
+
+# --- viewers ---
+# stackview is the inline viewer used throughout the notebooks; napari is a
+# required dependency for the interactive multi-channel sections.
+stackview = "*"
+napari = "*"
+pyqt = "*"
+
+# --- misc ---
+natsort = ">=8.4.0,<9"
+tqdm = "*"
+requests = ">=2.32.3,<3"
+pooch = "*"
+
+# --- segmentation ---
+# Every student needs cellpose on day 2, so it lives in the default environment
+# rather than behind an opt-in feature. It is the heaviest item here (it pulls
+# torch), so it dominates the day-0 install time - measure it in the M7 rehearsal.
+cellpose = "<4"
+
+# --- testing ---
+pytest = "*"
+nbmake = "*"
+
+[pypi-dependencies]
+# iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
+iaf = ">=1.5.3"
+
+[tasks]
+lab = "jupyter lab"
+test = "pytest notebooks/tests"
+test-nb = "pytest --nbmake --nbmake-timeout=600 notebooks/0*.ipynb"
+test-nb-heavy = "pytest --nbmake --nbmake-timeout=1800 notebooks/03_ml_segmentation.ipynb"
+fetch-data = "python scripts/fetch_data.py"
+make-exercises = "python scripts/make_exercises.py"
+make-derived = "python scripts/make_derived_data.py"
+check-schedule = "python scripts/check_schedule.py"
+
+# --- notebook-intelligence: ETH-network only, degrades to plain JupyterLab ---
+[feature.nbi.pypi-dependencies]
+notebook-intelligence = "==4.8.0"
+
+[feature.nbi.tasks]
+lab-nbi = "python tools/launch_lab.py"
+
+# --- docs: builds the book without the heavy scientific stack ---
+[feature.docs.dependencies]
+python = "3.11.*"
+jupyter-book = "<2"
+jupyter_server = "*"
+jupyterlite-xeus = ">=4.5,<5"
+
+[feature.docs.tasks]
+book-clean = "jupyter-book clean . --all"
+book = "jupyter-book build . --config _config.yml --toc _toc.yml --all"
+lite = "jupyter lite build --force --config jupyter_lite_config.json --XeusAddon.environment_file=jupyterlite-xeus-environment.yml"
+
+[environments]
+default = { solve-group = "main" }
+# `nbi` shares a solve group with the default env so adding the assistant does
+# not re-solve (or drift from) the stack the students are already running.
+nbi = { features = ["nbi"], solve-group = "main" }
+docs = { features = ["docs"], no-default-feature = true }
