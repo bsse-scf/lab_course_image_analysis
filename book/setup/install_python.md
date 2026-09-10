@@ -39,8 +39,8 @@ Or let pixi do it: `pixi global install git`.
 ## 3. Get the course material
 
 ```bash
-git clone git@gitlab.ethz.ch:scu_courses/scu_lab_course_ia.git
-cd scu_lab_course_ia
+git clone https://github.com/m-albert/scu_lab_course_ia_test.git
+cd scu_lab_course_ia_test
 ```
 
 ```{warning}

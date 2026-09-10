@@ -117,7 +117,7 @@ The course repo records only which commit of it to use.
 
 ```bash
 git clone ...
-cd scu_lab_course_ia
+cd scu_lab_course_ia_test
 git submodule update --init      # needs access to the solutions repo
 ```
 
