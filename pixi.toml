@@ -45,7 +45,6 @@ h5py = ">=3.11.0,<4"
 # stackview is the inline viewer used throughout the notebooks; napari is a
 # required dependency for the interactive multi-channel sections.
 stackview = "*"
-napari = "*"
 pyqt = "*"
 
 # --- misc ---
@@ -67,6 +66,12 @@ nbmake = "*"
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
 iaf = ">=1.5.3"
+jupyterlab-git = ">=0.54.1, <0.55"
+jupyterlab-latex = ">=4.4.0, <5"
+jupyter-ai = ">=3.1.3, <4"
+jupyter-app-launcher = ">=0.3.2"
+jupyter-ai-tutor = ">=0.3.1"
+napari = { version = ">=0.6.5, <0.7", extras = ["all"] }
 
 [tasks]
 lab = "jupyter lab"

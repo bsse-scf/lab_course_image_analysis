@@ -1,0 +1,4 @@
+server-url: "local.openbis.ch"
+destinations:
+  "data": 
+     - "20260819080658667-36"

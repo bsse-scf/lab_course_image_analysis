@@ -1,0 +1,62 @@
+curl
+wget
+nano
+unzip
+build-essential
+libgl1-mesa-glx
+libglib2.0-0
+falkon
+firefox
+htop
+
+# Version control
+git-all
+
+# DBus / X11 basics
+dbus-x11
+
+# XFCE desktop
+xfce4
+xfce4-panel
+xfce4-session
+xfce4-goodies
+xfce4-settings
+xfce4-terminal
+xubuntu-icon-theme
+
+# X server & remote desktop
+xorg
+xrdp
+xvfb
+tigervnc-standalone-server
+tigervnc-xorg-extension
+tigervnc-tools
+x11vnc
+novnc
+
+# XCB / X11 libs for GUI apps
+libxcb-xinerama0
+libxcb-cursor0
+libxcb-icccm4
+libxcb-image0
+libxcb-keysyms1
+libxcb-render-util0
+libxkbcommon-x11-0
+
+# Qt5 runtime 
+libqt5core5a
+libqt5gui5
+libqt5widgets5
+
+# ZeroMQ
+libzmq3-dev
+
+# NSS / NSPR
+libnss3
+libnspr4
+
+# Audio
+libasound2
+
+# PDF
+mupdf
