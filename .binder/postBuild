@@ -1,0 +1,205 @@
+#!/bin/bash
+set -eux
+
+cd "${REPO_DIR}"
+
+# Choose an install location writable by the build user
+PIXI_INSTALL_DIR="${HOME}/.local"
+PIXI_BIN_DIR="${PIXI_INSTALL_DIR}/bin"
+PIXI_ROOT="${HOME}/pixi-env"
+
+
+if ! command -v pixi >/dev/null 2>&1; then
+    mkdir -p "${PIXI_BIN_DIR}"
+
+    TMP_DIR="$(mktemp -d)"
+
+    curl -fsSL \
+        "https://github.com/prefix-dev/pixi/releases/latest/download/pixi-x86_64-unknown-linux-musl.tar.gz" \
+        | tar xz -C "${TMP_DIR}"
+
+    mv "${TMP_DIR}/pixi" "${PIXI_BIN_DIR}/pixi"
+    chmod +x "${PIXI_BIN_DIR}/pixi"
+
+    rm -rf "${TMP_DIR}"
+fi
+
+# Ensure pixi is on PATH for the rest of this script and for the runtime
+export PATH="${PIXI_BIN_DIR}:${PATH}"
+
+# Verify installation
+pixi --version
+
+# ---------------------------------------------------------------------------
+# Install the environment defined in pixi.toml (we use pixi.lock for reproducibility) 
+# independently of REPO_DIR.
+#
+# REPO_DIR is /home/jovyan/build during the repo2docker build, but the
+# repository is /home/jovyan at runtime in RRP. Therefore the Pixi environment
+# must not live below REPO_DIR.
+# ---------------------------------------------------------------------------
+rm -rf "${PIXI_ROOT}"
+mkdir -p "${PIXI_ROOT}"
+
+cp "${REPO_DIR}/pixi.toml" "${PIXI_ROOT}/pixi.toml"
+cp "${REPO_DIR}/pixi.lock" "${PIXI_ROOT}/pixi.lock"
+
+cd "${PIXI_ROOT}"
+
+pixi install --locked
+
+# Make the default pixi env the one used in the notebook
+# This depends on how you want to expose the environment to Jupyter.
+# We register the pixi env as a Jupyter kernel.
+PIXI_ENV="${PIXI_ROOT}/.pixi/envs/default"
+
+test -x "${PIXI_ENV}/bin/python"
+test -x "${PIXI_ENV}/bin/jupyter"
+
+#"${PIXI_ENV}/bin/python" --version
+#"${PIXI_ENV}/bin/jupyter" lab --version
+
+# ---------------------------------------------------------------------------
+# Fiji / ImageJ. We on purpose do not depend on Pixi's JVM
+# ---------------------------------------------------------------------------
+
+FIJI_ROOT="${HOME}/Fiji"
+FIJI_URL="https://downloads.imagej.net/fiji/latest/fiji-latest-linux64-jdk.zip"
+
+rm -rf "${FIJI_ROOT}"
+
+FIJI_TMP="$(mktemp -d)"
+trap 'rm -rf "${FIJI_TMP}"' EXIT
+
+curl --fail --show-error --location --retry 3 \
+    "${FIJI_URL}" \
+    -o "${FIJI_TMP}/fiji.zip"
+
+# This archive contains Fiji together with its own JDK.
+unzip -q "${FIJI_TMP}/fiji.zip" -d "${HOME}"
+
+test -x "${FIJI_ROOT}/fiji-linux-x64"
+
+FIJI_JAVA_HOME="${FIJI_ROOT}/java/linux64/zulu21.42.19-ca-jdk21.0.7-linux_x64"
+
+if [ ! -x "${FIJI_JAVA_HOME}/bin/java" ]; then
+    echo "ERROR: Fiji JDK was not found at ${FIJI_JAVA_HOME}" >&2
+    echo "The downloaded archive may not be the JDK-bundled Fiji archive." >&2
+    exit 1
+fi
+
+export JAVA_HOME="${FIJI_JAVA_HOME}"
+export PATH="${FIJI_JAVA_HOME}/bin:${PIXI_ENV}/bin:${FIJI_ROOT}:${HOME}/.local/bin:${PATH}"
+
+# Verify that the Java being used is the one bundled with Fiji.
+JAVA_BIN="$(command -v java)"
+
+if [ "${JAVA_BIN}" != "${FIJI_JAVA_HOME}/bin/java" ]; then
+    echo "ERROR: Fiji is not using its bundled Java." >&2
+    echo "Expected: ${FIJI_JAVA_HOME}/bin/java" >&2
+    echo "Found:    ${JAVA_BIN}" >&2
+    exit 1
+fi
+
+# echo "Fiji Java: ${JAVA_BIN}"
+# java -version
+
+"${FIJI_ROOT}/fiji-linux-x64" --version || true
+
+mkdir -p "${HOME}/.local/bin"
+
+ln -sf "${FIJI_ROOT}/fiji-linux-x64" "${HOME}/.local/bin/fiji"
+ln -sf "${FIJI_ROOT}/fiji-linux-x64" "${HOME}/.local/bin/imagej"
+
+# ---------------------------------------------------------------------------
+# XFCE desktop launcher for Fiji
+# ---------------------------------------------------------------------------
+
+mkdir -p "${HOME}/Desktop"
+
+cat << EOF > "${HOME}/Desktop/Fiji.desktop"
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Fiji
+Comment=Fiji Is Just ImageJ
+Exec=${FIJI_ROOT}/fiji-linux-x64
+Icon=${FIJI_ROOT}/images/icon.png
+Terminal=false
+Categories=Science;Education;
+StartupNotify=true
+EOF
+
+chmod +x "${HOME}/Desktop/Fiji.desktop"
+
+# ---------------------------------------------------------------------------
+# XFCE desktop launcher for Napari
+# ---------------------------------------------------------------------------
+
+NAPARI_ICON="${PIXI_ENV}/lib/python3.11/site-packages/napari/resources/logo.png"
+
+mkdir -p "${HOME}/Desktop"
+
+cat << EOF > "${HOME}/Desktop/Napari.desktop"
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=napari
+Comment=Multi-dimensional image viewer
+Exec=napari
+Icon=${NAPARI_ICON}
+Terminal=true
+Categories=Science;Education;Graphics;
+StartupNotify=true
+EOF
+
+chmod +x "${HOME}/Desktop/Napari.desktop"
+
+# ---------------------------------------------------------------------------
+# Configure Desktop
+# ---------------------------------------------------------------------------
+
+mkdir -p /home/jovyan/Pictures
+
+cp \
+    "${REPO_DIR}/.binder/xfce_rrp-background.png" \
+    /home/jovyan/Pictures/
+
+mkdir -p /home/jovyan/.config/autostart
+
+cat << 'EOF' > /home/jovyan/set-wallpaper.sh
+#!/bin/bash
+until p=$(pidof xfsettingsd); do sleep 1; done
+sleep 1
+WALLPAPER="/home/jovyan/Pictures/xfce_rrp-background.png"
+for MONITOR in $(xfconf-query -c xfce4-desktop -l | grep '/backdrop/screen0/' | awk -F'/' '{print $4}' | sort | uniq); do
+  for WORKSPACE in $(xfconf-query -c xfce4-desktop -l | grep "/backdrop/screen0/$MONITOR/" | awk -F'/' '{print $5}' | sort | uniq); do
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/$MONITOR/$WORKSPACE/last-image -n -t string -s "$WALLPAPER"
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/$MONITOR/$WORKSPACE/image-style -n -t int -s 3
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/$MONITOR/$WORKSPACE/color-style -n -t int -s 0
+    xfconf-query -c xfce4-desktop -p /backdrop/screen0/$MONITOR/$WORKSPACE/color1 -n -t string -s "#000000"
+  done
+done
+xfdesktop --reload
+EOF
+
+chmod +x /home/jovyan/set-wallpaper.sh
+
+cat << 'EOF' > /home/jovyan/.config/autostart/set-wallpaper.desktop
+[Desktop Entry]
+Type=Application
+Exec=/home/jovyan/set-wallpaper.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Set RRP Wallpaper
+EOF
+
+echo "Done installing Pixi Jupyter environment"
+
+# Explicit cleanup before exit
+find /tmp -maxdepth 1 -name 'tmp.*' -type d -exec rm -rf {} + 2>/dev/null || true
+find /tmp -maxdepth 1 -name 'uv-*.lock' -type f -exec rm -f {} + 2>/dev/null || true
+sync  # Force filesystem sync before exit
+
+exit 0 
