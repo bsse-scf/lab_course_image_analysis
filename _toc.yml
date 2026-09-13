@@ -17,9 +17,9 @@ parts:
           - file: book/setup/install_python.md
           - file: book/setup/setup_environment.md
           - file: book/setup/download_data.md
-      - file: notebooks/00_python_basics.ipynb
+      - file: book/python_basics.md
         sections:
-          - file: notebooks/00_python_basics_ex.ipynb
+          - file: book/python_basics_ex.md
 
   - caption: Image Analysis Basics with Fiji
     chapters:

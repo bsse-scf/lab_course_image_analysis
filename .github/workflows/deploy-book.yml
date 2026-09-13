@@ -34,7 +34,7 @@ jobs:
           pixi run -e docs book
 
       - name: build the JupyterLite pages
-        run: pixi run -e docs lite || echo "no jupyterlite config yet - skipping"
+        run: pixi run -e docs lite
 
       # Publishes the built book to the gh-pages branch, which is what
       # GitHub Pages serves. The SOURCE of the content is this branch, 2026.

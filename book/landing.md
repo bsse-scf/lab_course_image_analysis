@@ -13,14 +13,9 @@ on real screening data.
 
 1. **[Setup](setup/index.md)**, before the first day. The environment download is
    large and the lecture-room network is shared.
-2. **[Python primer](../notebooks/00_python_basics.ipynb)**, if Python is new or
+2. **[Python primer](python_basics.md)**, if Python is new or
    rusty. It needs no data, so it can be done anywhere.
 3. **[Schedule](course_schedule.md)**, for how the two days run.
 
 The **[vocabulary](vocabulary.md)** page defines the terms used here and says
 where each one is introduced.
-
-```{note}
-Clone the repository with a plain `git clone`, not `--recurse-submodules`. See
-the README for why.
-```

@@ -109,12 +109,17 @@ sync-solutions = "bash scripts/sync_solutions.sh"
 python = "3.11.*"
 jupyter-book = "<2"
 jupyter_server = "*"
-jupyterlite-xeus = ">=4.5,<5"
+jupyterlite-pyodide-kernel = "*"
 
 [feature.docs.tasks]
 book-clean = "jupyter-book clean . --all"
 book = "jupyter-book build . --config _config.yml --toc _toc.yml --all"
-lite = "jupyter lite build --force --config jupyter_lite_config.json --XeusAddon.environment_file=jupyterlite-xeus-environment.yml"
+# JupyterLite site with the python basics notebooks, served at <site>/lite/.
+# Run after `book`; the two book/python_basics*.md pages iframe it.
+lite = """jupyter lite build \
+  --contents notebooks/00_python_basics.ipynb \
+  --contents notebooks/00_python_basics_ex.ipynb \
+  --output-dir _build/html/lite"""
 
 [environments]
 default = { solve-group = "main" }
