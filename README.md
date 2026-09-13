@@ -41,3 +41,14 @@ Path(base / 'openbis/data/20260819080658667-36/original/plate01.nd2')
 ```
 
 For exercises with `ImageJ/Fiji` or `napari` in JupyterLab click top right onto `File` -> `New Launcher` -> `Desktop`. This will start a Linux Desktop in a new Tab of your browser. Then for example click onto the `Fiji` icon on the Desktop to start the application.
+### AI course tutor
+
+JupyterLab ships with a chat (the speech-bubble icon in the left sidebar,
+or `File -> New -> Chat`). Its **Course Tutor** answers questions about the
+notebooks the way a teaching assistant would: with hints, questions and
+explanations rather than finished solutions. Every message you send also
+carries the notebook cell you currently have selected - including its output
+or error - so click the cell you are stuck on and ask, e.g. "why does this
+fail?". Quicker still: the **🎓** button - on each cell and in the notebook
+toolbar - asks the tutor to explain the selected cell. The tutor can read your notebook but cannot
+change or run it.
