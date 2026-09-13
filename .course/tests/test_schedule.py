@@ -9,15 +9,16 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 REPO = Path(__file__).resolve().parents[2]
 SCHEDULE = REPO / ".course" / "solutions" / "detailed_schedule.md"
 
 
 def test_schedule_matches_material():
-    if not SCHEDULE.exists():
-        pytest.skip("detailed_schedule.md lives in the solutions submodule, which is not checked out")
+    # The schedule lives in the private solutions submodule; CI checks it out,
+    # so a missing file is an error rather than a skip.
+    assert SCHEDULE.exists(), (
+        f"{SCHEDULE.relative_to(REPO).as_posix()} is missing - run `git submodule update --init`"
+    )
     result = subprocess.run(
         [sys.executable, str(REPO / ".course" / "scripts" / "check_schedule.py")],
         capture_output=True,

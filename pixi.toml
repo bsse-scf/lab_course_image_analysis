@@ -88,7 +88,7 @@ napari = { version = ">=0.6.5, <0.7", extras = ["all"] }
 
 [tasks]
 lab = "jupyter lab"
-test = "pytest notebooks/tests"
+test = "pytest .course/tests"
 # Execute the walkthrough notebooks. Named explicitly rather than globbed: the
 # generated *_ex.ipynb are blank by construction and MUST fail if executed, and
 # 03 is slow because it runs cellpose.

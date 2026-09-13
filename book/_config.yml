@@ -19,7 +19,6 @@ exclude_patterns:
   # and the solutions submodule.
   - .course
   - notebooks/*_solution.ipynb
-  - notebooks/tests/*
   - AGENTS.md
   # Course data is distributed by clone (git-lfs) and polybox, not served by the
   # site. Sphinx matches these against html_static_path entries too.

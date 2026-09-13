@@ -21,8 +21,7 @@ from pathlib import Path
 import nbformat
 
 REPO = Path(__file__).resolve().parents[2]
-# The schedule lives in the private solutions submodule, so most checkouts
-# (students, CI) do not have it; the check then warns and passes.
+# The schedule lives in the private solutions submodule.
 SCHEDULE = REPO / ".course" / "solutions" / "detailed_schedule.md"
 
 HEADING = re.compile(r"^(#{1,3})\s+(.*?)\s*$")
@@ -133,11 +132,11 @@ def main() -> int:
 
     if not SCHEDULE.exists():
         print(
-            f"warning: {SCHEDULE.relative_to(REPO).as_posix()} not found "
-            "(solutions submodule not checked out) - schedule NOT checked",
+            f"error: {SCHEDULE.relative_to(REPO).as_posix()} not found - "
+            "run `git submodule update --init` (needs access to the solutions repository)",
             file=sys.stderr,
         )
-        return 0
+        return 1
 
     claimed = scheduled()
     if not claimed:
