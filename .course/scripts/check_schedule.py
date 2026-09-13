@@ -50,7 +50,7 @@ def notebook_sections(path: Path) -> list[str]:
 def markdown_sections(path: Path) -> list[str]:
     """Level-2 headings of a markdown page, in order."""
     out = []
-    for line in path.read_text().split("\n"):
+    for line in path.read_text(encoding="utf-8").split("\n"):
         match = HEADING.match(line.strip())
         if match and len(match.group(1)) == 2:
             title = match.group(2)
@@ -96,7 +96,7 @@ def scheduled() -> dict[str, list[str]]:
 
     claimed: dict[str, list[str]] = {}
     current: str | None = None
-    for line in SCHEDULE.read_text().split("\n"):
+    for line in SCHEDULE.read_text(encoding="utf-8").split("\n"):
         if line.startswith("#"):
             # A heading that names a file opens a block; any other heading
             # closes the previous one, so later tables are not misattributed.

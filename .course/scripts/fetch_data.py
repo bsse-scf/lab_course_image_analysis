@@ -475,7 +475,7 @@ def write_manifest(entries: dict[str, list[Path]]) -> None:
             )
         lines.append("")
 
-    MANIFEST.write_text("\n".join(lines))
+    MANIFEST.write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print(f"\nwrote {MANIFEST.relative_to(REPO)}")
 
 
@@ -486,7 +486,7 @@ def verify() -> int:
     row = re.compile(r"^\|\s*`([^`]+)`\s*\|.*\|\s*([0-9a-f]{64})\s*\|\s*$")
     bad = 0
     checked = 0
-    for line in MANIFEST.read_text().splitlines():
+    for line in MANIFEST.read_text(encoding="utf-8").splitlines():
         match = row.match(line.strip())
         if not match:
             continue

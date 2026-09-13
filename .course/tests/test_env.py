@@ -69,7 +69,7 @@ def _manifest_rows():
     if not MANIFEST.exists():
         return []
     rows = []
-    for line in MANIFEST.read_text().splitlines():
+    for line in MANIFEST.read_text(encoding="utf-8").splitlines():
         match = _ROW.match(line.strip())
         if match:
             rows.append((match["path"], match["sha"]))

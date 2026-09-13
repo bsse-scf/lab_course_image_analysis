@@ -156,12 +156,12 @@ def main() -> int:
         rendered = nbformat.writes(exercise, version=4).rstrip() + "\n"
 
         if args.check:
-            current = target.read_text() if target.exists() else ""
+            current = target.read_text(encoding="utf-8") if target.exists() else ""
             if current.rstrip() + "\n" != rendered:
                 stale.append(target.name)
             continue
 
-        target.write_text(rendered)
+        target.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"wrote {target.relative_to(REPO)}")
 
     if args.check:
