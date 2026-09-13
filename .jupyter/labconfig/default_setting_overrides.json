@@ -1,0 +1,37 @@
+{
+  "jupyterlab-chat-extension:factory": {
+    "defaultDirectory": ".chat"
+  },
+  "@jupyterlab/cell-toolbar-extension:plugin": {
+    "toolbar": [
+      {
+        "name": "ask-course-tutor",
+        "label": "🎓",
+        "caption": "Ask the Course Tutor to explain this cell",
+        "command": "jupyterlab-chat:openWithMessage",
+        "args": {
+          "inSidePanel": true,
+          "input": "Can you explain what this cell does?",
+          "autoSend": true
+        },
+        "rank": 0
+      }
+    ]
+  },
+  "@jupyterlab/notebook-extension:panel": {
+    "toolbar": [
+      {
+        "name": "ask-course-tutor",
+        "label": "🎓",
+        "caption": "Ask the Course Tutor to explain the selected cell",
+        "command": "jupyterlab-chat:openWithMessage",
+        "args": {
+          "inSidePanel": true,
+          "input": "Can you explain what this cell does?",
+          "autoSend": true
+        },
+        "rank": 45
+      }
+    ]
+  }
+}

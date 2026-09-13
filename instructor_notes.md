@@ -216,3 +216,39 @@ To be filled in during the M7 dress rehearsal. Record actual minutes per session
 
 - `pixi install` cold, per OS: **TODO**: this is the day-0 bottleneck. The
   environment is ~3.5 GB and cellpose's torch dependency dominates it.
+
+## AI course tutor
+
+The chat's Course Tutor is a Jupyter AI persona defined in
+`.jupyter/personas/course_tutor_persona.py`; Jupyter AI picks up any
+`*persona*.py` in that directory when a chat is opened somewhere below the
+project root, no packaging involved. It subclasses the stock Jupyternaut
+persona (`jupyter-ai[jupyternaut]` in `pixi.toml`) and only changes three
+things: the system prompt, a per-message lookup of the student's selected cell,
+and a read-only tool set.
+
+- **Prompt:** `.jupyter/personas/course_tutor_prompt.md`. Re-read on every
+  message, so edits apply without a restart.
+- **Model and API key:** `.jupyter/jupyter_server_config.py` (loaded via
+  `JUPYTER_CONFIG_PATH` from pixi's activation env) presets the Swiss AI
+  Initiative's `Qwen3.5-27B` at `api.swissai.svc.cscs.ch` for everyone; the
+  key goes into `OPENAI_API_KEY` (environment or a `.env` file in the server's
+  working directory). Students can still pick another model in "AI settings".
+- **The "🎓" buttons** (one in each cell's toolbar, one in the notebook
+  toolbar) are toolbar items in the same `default_setting_overrides.json`; both run jupyterlab-chat's
+  `openWithMessage` command, which creates a new untitled chat in the sidebar
+  (`.chat/untitledN.chat`) and sends "Can you explain what this cell does?"
+  to the default persona. The tutor picks up the cell itself, since the
+  clicked cell is the active one. Change the wording there; add
+  `"name": "tutor"` to the args to reuse one chat instead.
+- **Where chats go:** `.jupyter/labconfig/default_setting_overrides.json`
+  sets jupyterlab-chat's `defaultDirectory` to `.chat/` (git-ignored), so the
+  chat sidebar creates and lists transcripts there instead of next to the
+  notebooks. The tutor's own context is Jupyternaut's in-memory store: it
+  lasts while a chat is open and is gone about a minute after the panel is
+  closed, or on server restart - the transcript remains, the tutor's memory of
+  it does not. Ask students to start a new chat for a new topic.
+- **Only the tutor is offered.** The same config file installs a
+  `PersonaManager` subclass that drops every persona registered by installed
+  packages - Jupyternaut (whose tools edit and run cells) and the ACP agents
+  (Copilot, Claude Code, ...) that appear when their CLI is on PATH.

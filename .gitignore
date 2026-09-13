@@ -11,6 +11,9 @@ _build/
 __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
+# Jupyter AI chats: created in .chat/ (see .jupyter/labconfig/), one per student
+.chat/
+*.chat
 
 # --- os cruft ---
 .DS_Store
@@ -26,3 +29,6 @@ __pycache__/
 data/challenge/plate01.nd2
 data/challenge/plate01.zip
 data/_cache/
+
+# Ignore secrets in '.env'
+.env
