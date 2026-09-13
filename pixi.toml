@@ -71,6 +71,7 @@ nbmake = "*"
 # litellm (pulled in by jupyter-ai[jupyternaut]) requires importlib-metadata<9,
 # but the conda solve would otherwise pick 9.x and the pypi solve then fails.
 importlib-metadata = "<9"
+dask = ">=2024.6"
 
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
