@@ -45,10 +45,10 @@ cd scu_lab_course_ia_test
 
 ```{warning}
 Use a plain `git clone`, **not** `git clone --recurse-submodules`. The repository
-references a `solutions/` submodule that only instructors can read. If you clone
+references a `.course/solutions/` submodule that only instructors can read. If you clone
 with `--recurse-submodules` you will see an error about *"Could not read from
 remote repository"*: **your clone is still fine**: the notebooks and data are
-all there, and `solutions/` is simply left empty. Nothing in the course needs it.
+all there, and `.course/solutions/` is simply left empty. Nothing in the course needs it.
 ```
 
 Next: [set up the environment](setup_environment.md).

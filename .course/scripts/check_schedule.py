@@ -20,8 +20,10 @@ from pathlib import Path
 
 import nbformat
 
-REPO = Path(__file__).resolve().parents[1]
-SCHEDULE = REPO / "detailed_schedule.md"
+REPO = Path(__file__).resolve().parents[2]
+# The schedule lives in the private solutions submodule, so most checkouts
+# (students, CI) do not have it; the check then warns and passes.
+SCHEDULE = REPO / ".course" / "solutions" / "detailed_schedule.md"
 
 HEADING = re.compile(r"^(#{1,3})\s+(.*?)\s*$")
 
@@ -129,9 +131,17 @@ def main() -> int:
                 print(f"  - {s}")
         return 0
 
+    if not SCHEDULE.exists():
+        print(
+            f"warning: {SCHEDULE.relative_to(REPO).as_posix()} not found "
+            "(solutions submodule not checked out) - schedule NOT checked",
+            file=sys.stderr,
+        )
+        return 0
+
     claimed = scheduled()
     if not claimed:
-        print(f"error: {SCHEDULE.name} not found or lists no files", file=sys.stderr)
+        print(f"error: {SCHEDULE.name} lists no files", file=sys.stderr)
         return 1
 
     problems = []

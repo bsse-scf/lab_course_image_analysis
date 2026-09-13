@@ -30,7 +30,7 @@ A copy lives outside the repository at `../.weka_classifier_backup/`.
 The three pairs of TIFFs *can* be scripted, given the model:
 
 ```bash
-fiji --headless --run fiji/solutions/e4_weka_solution.groovy
+fiji --headless --run .course/solutions/fiji/e4_weka_solution.groovy
 ```
 
 That applies the classifier to the three fields and writes both outputs for each.

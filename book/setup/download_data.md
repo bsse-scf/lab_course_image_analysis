@@ -29,8 +29,8 @@ That path is gitignored, so the file will not be committed by accident.
 
 ## If the download does not work on the day
 
-The challenge is designed so you can do the analysis without it. A summary table
-of per-well object counts is included in the repository, so the reshaping,
+The challenge is designed so you can do the analysis without it. The instructors
+can hand out a summary table of per-well object counts, so the reshaping,
 fitting and IC50 work can all be done from that alone: you would be skipping the
 segmentation half, not the analysis.
 

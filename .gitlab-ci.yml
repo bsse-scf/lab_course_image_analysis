@@ -4,7 +4,7 @@
 # copy of the repository.
 
 variables:
-  # `solutions/` is a private submodule. CI must NOT try to fetch it: the job
+  # `.course/solutions/` is a private submodule. CI must NOT try to fetch it: the job
   # would fail for any runner without access to that repository, and nothing
   # the CI does needs it. The exercise-sync check warns loudly when it is
   # absent - see AGENTS.md.

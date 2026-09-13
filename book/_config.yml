@@ -2,7 +2,7 @@
 title: "Methods in Cell Analysis and Laboratory Automation: Image Analysis"
 author: Marvin Albert and Andreas Cuny. Large parts of the content were adapted with permission from teaching material developed by Aaron Ponti.
 copyright: "2026 ETH Zurich"
-logo: '.logo.svg'
+logo: 'book/illustrations/logo.svg'
 
 # Only build files that are actually in the table of contents, so stray drafts
 # and instructor material never leak onto the published site.
@@ -15,15 +15,15 @@ exclude_patterns:
   - .git
   - .pytest_cache
   - .ipynb_checkpoints
-  # Instructor-side material, never published.
+  # Instructor-side material, never published: `.course/` holds the scripts
+  # and the solutions submodule.
+  - .course
   - notebooks/*_solution.ipynb
   - notebooks/tests/*
-  - instructor_notes.md
   - AGENTS.md
   # Course data is distributed by clone (git-lfs) and polybox, not served by the
   # site. Sphinx matches these against html_static_path entries too.
   - data
-  - scripts
   - macros
 
 execute:

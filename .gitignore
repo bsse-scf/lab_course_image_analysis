@@ -19,13 +19,15 @@ __pycache__/
 .DS_Store
 
 # --- solutions ---
-# `solutions/` is a git SUBMODULE (see AGENTS.md). Do not add ignore rules for
-# paths inside it - the parent repo cannot ignore a submodule's contents, and
-# solutions/.gitignore handles them instead.
+# `.course/solutions/` is a git SUBMODULE (see AGENTS.md). Do not add ignore
+# rules for paths inside it - the parent repo cannot ignore a submodule's
+# contents, and .course/solutions/.gitignore handles them instead.
 
 # --- data too large to track ---
-# The 3.3 GB challenge dataset is distributed via polybox; see
-# book/setup/download_data.md. Everything else in data/ IS tracked, as plain blobs.
+# The 3.3 GB challenge dataset is distributed via polybox and placed here by the
+# student; see book/setup/download_data.md. Everything else in data/ IS tracked,
+# as plain blobs. (The per-well summary counts are instructor material, in
+# .course/solutions/challenge/.)
 data/challenge/plate01.nd2
 data/challenge/plate01.zip
 data/_cache/

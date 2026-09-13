@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Never fetch the private solutions submodule; and _config.yml
+          # Never fetch the private solutions submodule; and book/_config.yml
           # excludes it from the site in any case.
           submodules: false
 

@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # `solutions/` is a private submodule. CI must not try to fetch it -
+          # `.course/solutions/` is a private submodule. CI must not try to fetch it -
           # the checkout would fail for anyone without access. The exercise
           # sync check warns loudly when it is missing; see AGENTS.md.
           submodules: false
