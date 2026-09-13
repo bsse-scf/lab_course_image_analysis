@@ -19,8 +19,3 @@ on real screening data.
 
 The **[vocabulary](vocabulary.md)** page defines the terms used here and says
 where each one is introduced.
-
-```{note}
-Clone the repository with a plain `git clone`, not `--recurse-submodules`. See
-the README for why.
-```
