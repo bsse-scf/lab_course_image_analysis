@@ -5,7 +5,7 @@ Two days, in *Room BSS E 21*, 9:00–17:30 with a break from 12:30 to 14:00.
 ## Before the course
 
 Everything in [Setup](setup/index.md), and the
-[Python primer](../notebooks/00_python_basics.ipynb). The primer needs no data,
+[Python primer](python_basics.md). The primer needs no data,
 so it can be done anywhere; the environment install cannot, so do not leave it
 to the first day.
 

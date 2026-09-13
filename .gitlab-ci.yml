@@ -82,7 +82,7 @@ pages:
   script:
     - pixi run -e docs book-clean
     - pixi run -e docs book
-    - pixi run -e docs lite || echo "no jupyterlite config yet - skipping"
+    - pixi run -e docs lite
     - mv _build/html public
   artifacts:
     paths:
