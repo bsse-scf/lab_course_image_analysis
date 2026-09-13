@@ -234,8 +234,8 @@ and a read-only tool set.
   Initiative's `Qwen3.5-27B` at `api.swissai.svc.cscs.ch` for everyone; the
   key goes into `OPENAI_API_KEY` (environment or a `.env` file in the server's
   working directory). Students can still pick another model in "AI settings".
-- **The "?" cell button** is a cell-toolbar item in the same
-  `default_setting_overrides.json`: it runs jupyterlab-chat's
+- **The "🎓" buttons** (one in each cell's toolbar, one in the notebook
+  toolbar) are toolbar items in the same `default_setting_overrides.json`; both run jupyterlab-chat's
   `openWithMessage` command, which creates a new untitled chat in the sidebar
   (`.chat/untitledN.chat`) and sends "Can you explain what this cell does?"
   to the default persona. The tutor picks up the cell itself, since the

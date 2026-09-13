@@ -49,6 +49,6 @@ notebooks the way a teaching assistant would: with hints, questions and
 explanations rather than finished solutions. Every message you send also
 carries the notebook cell you currently have selected - including its output
 or error - so click the cell you are stuck on and ask, e.g. "why does this
-fail?". Quicker still: every cell has a **?** button in its toolbar that asks
-the tutor to explain that cell. The tutor can read your notebook but cannot
+fail?". Quicker still: the **🎓** button - on each cell and in the notebook
+toolbar - asks the tutor to explain the selected cell. The tutor can read your notebook but cannot
 change or run it.

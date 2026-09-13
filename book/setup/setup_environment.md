@@ -28,26 +28,28 @@ This opens JupyterLab in your browser, already using the course environment. Ope
 missing, it belongs in `pixi.toml`.
 ```
 
-## Check it works
+## Set up the Jupyter AI course tutor
 
-```bash
-pixi run test
-```
+The jupyter lab environment configured in this course includes a "Course Tutor" chat persona. It is a teaching assistant that can help you understand and debug the code in your notebooks, while preserving the learning value of the exercises. It gives hints and explanations, but never provides complete solutions. It knows context about the course and can therefore in many cases be more helpful than a generic AI assistant.
 
-This imports everything the course uses and verifies that the data files are
-present and intact. It takes a minute or so. You want to see a line ending in
-**`passed`**.
+The Course Tutor uses a large language model (LLM) to generate its responses. For this course, we'll use a model hosted by the Swiss AI Research Platform. In order to be able to use it, you need to
 
-If it reports missing data files, your clone is incomplete: check that
-`git clone` finished without errors.
+### 1) Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)
 
-## If something goes wrong
+For this, sign in to the Swiss AI Research Platform with your ETH Zurich account. After logging in, go to the "API Keys" section and find your API key. Copy the key to your clipboard (it should look like `sk-...`).
 
-| symptom | fix |
-|---|---|
-| `pixi: command not found` | Close the terminal and open a new one. If it persists, the installer did not update your PATH. |
-| `pixi install` fails partway | Run it again: it resumes. Repeated failures usually mean a proxy or VPN interfering. |
-| JupyterLab opens but a notebook cannot find `course` | You started it from the wrong folder. `cd` into the repository first. |
-| A notebook cannot find its data | Run `pixi run fetch-data --verify` to see which files are missing. |
+### 2) Set the API key in your environment
 
-Bring anything unresolved to the Day 0 session.
+In the opened Jupyter Lab environment:
+1. Press Settings -> Jupyternaut settings
+1. Press "Add secret": 
+   - Name: `OPENAI_API_KEY`
+   - Value: paste the API key you copied from the Swiss AI Research Platform
+1. Close the Jupyternaut settings tab.
+1. Verify the Course Tutor works:
+   1. Open a chat on the left side of the Jupyter Lab interface and ask a question. Make sure the Course Tutor responds. If it does not, check that you have set the API key correctly.
+   1. Open a notebook and identify a code cell. Select the cell (by clicking on it) and press the 🎓 button in the top menu bar of the notebook. Make sure the Course Tutor responds with a hint or explanation.
+
+## Stop JupyterLab
+
+When you are done, close the browser tab and press `Ctrl-C` in the terminal where you started JupyterLab. It will ask you to confirm that you want to stop the server; type `y` and press Enter.
