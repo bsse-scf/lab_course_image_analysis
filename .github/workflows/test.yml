@@ -23,10 +23,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # `solutions/` is a private submodule. CI must not try to fetch it -
-          # the checkout would fail for anyone without access. The exercise
-          # sync check warns loudly when it is missing; see AGENTS.md.
-          submodules: false
+          # `.course/solutions/` is a private submodule that the exercise-sync
+          # and schedule tests REQUIRE (they fail, not skip, without it).
+          # GITHUB_TOKEN cannot read other repositories, so SOLUTIONS_TOKEN is
+          # a fine-grained PAT with read access to both this repository and
+          # the solutions repository, stored as a repository secret.
+          submodules: true
+          token: ${{ secrets.SOLUTIONS_TOKEN }}
 
       # napari and Qt need these on a headless Linux runner, or `import napari`
       # fails with a libGL error.

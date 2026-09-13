@@ -26,7 +26,7 @@ PAGES = sorted(BOOK.rglob("*.md"))
 def _refs(pattern):
     out = []
     for page in PAGES:
-        for match in pattern.findall(page.read_text()):
+        for match in pattern.findall(page.read_text(encoding="utf-8")):
             out.append((page, match))
     return out
 

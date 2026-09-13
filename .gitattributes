@@ -4,6 +4,9 @@
 *.py  text eol=lf
 *.md  text eol=lf
 *.yml text eol=lf
+# Notebooks are compared byte-for-byte against regenerated output by
+# make_exercises.py --check, so keep them LF on Windows checkouts too.
+*.ipynb text eol=lf
 
 # --- binary data ---
 # Course images are committed as ordinary git blobs (no git-lfs). Keeping them

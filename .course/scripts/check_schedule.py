@@ -20,8 +20,9 @@ from pathlib import Path
 
 import nbformat
 
-REPO = Path(__file__).resolve().parents[1]
-SCHEDULE = REPO / "detailed_schedule.md"
+REPO = Path(__file__).resolve().parents[2]
+# The schedule lives in the private solutions submodule.
+SCHEDULE = REPO / ".course" / "solutions" / "detailed_schedule.md"
 
 HEADING = re.compile(r"^(#{1,3})\s+(.*?)\s*$")
 
@@ -49,7 +50,7 @@ def notebook_sections(path: Path) -> list[str]:
 def markdown_sections(path: Path) -> list[str]:
     """Level-2 headings of a markdown page, in order."""
     out = []
-    for line in path.read_text().split("\n"):
+    for line in path.read_text(encoding="utf-8").split("\n"):
         match = HEADING.match(line.strip())
         if match and len(match.group(1)) == 2:
             title = match.group(2)
@@ -95,7 +96,7 @@ def scheduled() -> dict[str, list[str]]:
 
     claimed: dict[str, list[str]] = {}
     current: str | None = None
-    for line in SCHEDULE.read_text().split("\n"):
+    for line in SCHEDULE.read_text(encoding="utf-8").split("\n"):
         if line.startswith("#"):
             # A heading that names a file opens a block; any other heading
             # closes the previous one, so later tables are not misattributed.
@@ -129,9 +130,17 @@ def main() -> int:
                 print(f"  - {s}")
         return 0
 
+    if not SCHEDULE.exists():
+        print(
+            f"error: {SCHEDULE.relative_to(REPO).as_posix()} not found - "
+            "run `git submodule update --init` (needs access to the solutions repository)",
+            file=sys.stderr,
+        )
+        return 1
+
     claimed = scheduled()
     if not claimed:
-        print(f"error: {SCHEDULE.name} not found or lists no files", file=sys.stderr)
+        print(f"error: {SCHEDULE.name} lists no files", file=sys.stderr)
         return 1
 
     problems = []

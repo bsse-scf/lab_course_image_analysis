@@ -63,9 +63,8 @@ def download_challenge_data():
         "The challenge dataset (plate01, ~3.3 GB) is not in the repository.\n"
         f"\n  1. Download it from: {CHALLENGE_URL}"
         f"\n  2. Extract it and place plate01.nd2 at:\n     {target}\n"
-        "\nYou do not need it to complete the analysis half of the challenge - "
-        "data/challenge/plate01_summary.csv holds the per-well counts, and "
-        "data/challenge/plate01_preview.tif holds downsampled frames you can "
-        "prototype segmentation on."
+        "\nYou do not need it to complete the analysis half of the challenge: "
+        "ask the instructors for plate01_summary.csv, which holds the per-field "
+        "counts (see book/challenge.md, Track B)."
     )
     return None

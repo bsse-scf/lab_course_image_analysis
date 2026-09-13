@@ -1,6 +1,6 @@
 """Generate student exercise notebooks from the instructor solutions.
 
-Solutions live in `solutions/python/<name>_ex_solution.ipynb` and are the single
+Solutions live in `.course/solutions/python/<name>_ex_solution.ipynb` and are the single
 source of truth. `course.py` is importable from there because pixi puts
 `notebooks/` on PYTHONPATH. This script strips the solution blocks and emits the blank notebooks
 that students actually open.
@@ -30,9 +30,9 @@ from pathlib import Path
 
 import nbformat
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 NOTEBOOKS = REPO / "notebooks"
-SOLUTIONS = REPO / "solutions" / "python"
+SOLUTIONS = REPO / ".course" / "solutions" / "python"
 SOLUTION_GLOB = "*_ex_solution.ipynb"
 
 BEGIN_SOLUTION = "### BEGIN SOLUTION"
@@ -156,12 +156,12 @@ def main() -> int:
         rendered = nbformat.writes(exercise, version=4).rstrip() + "\n"
 
         if args.check:
-            current = target.read_text() if target.exists() else ""
+            current = target.read_text(encoding="utf-8") if target.exists() else ""
             if current.rstrip() + "\n" != rendered:
                 stale.append(target.name)
             continue
 
-        target.write_text(rendered)
+        target.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"wrote {target.relative_to(REPO)}")
 
     if args.check:

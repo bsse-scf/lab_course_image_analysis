@@ -4,10 +4,9 @@
 # copy of the repository.
 
 variables:
-  # `solutions/` is a private submodule. CI must NOT try to fetch it: the job
-  # would fail for any runner without access to that repository, and nothing
-  # the CI does needs it. The exercise-sync check warns loudly when it is
-  # absent - see AGENTS.md.
+  # `.course/solutions/` is a private submodule hosted on GitHub. Only the
+  # unit-test job needs it, and it fetches it explicitly (see `.solutions`
+  # below) because the runner has no GitHub credentials of its own.
   GIT_SUBMODULE_STRATEGY: none
   # pixi caches its package downloads here so the cache below can pick them up.
   PIXI_CACHE_DIR: "$CI_PROJECT_DIR/.pixi-cache"
@@ -39,11 +38,22 @@ stages:
     libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0
     libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-cursor0
 
+# --- the private solutions submodule, required by the exercise-sync and ---
+# --- schedule tests (they fail, not skip, without it) ---------------------
+# SOLUTIONS_TOKEN is a masked CI/CD variable holding a GitHub fine-grained
+# PAT with read access to the solutions repository.
+.solutions: &solutions
+  - test -n "$SOLUTIONS_TOKEN" || { echo "SOLUTIONS_TOKEN is not set" >&2; exit 1; }
+  - git config --global url."https://x-access-token:${SOLUTIONS_TOKEN}@github.com/".insteadOf "https://github.com/"
+  - git submodule update --init .course/solutions
+
 unit tests:
   stage: test
-  before_script: *qt_deps
+  before_script:
+    - *qt_deps
+    - *solutions
   script:
-    - pixi run test
+    - pixi run test --junitxml=report.xml
     - pixi run check-schedule
   artifacts:
     when: always

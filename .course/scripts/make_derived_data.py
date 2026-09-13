@@ -19,7 +19,7 @@ from scipy.ndimage import shift as ndshift
 from skimage.filters import gaussian
 from skimage.util import random_noise
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 DATA = REPO / "data"
 
 #: Offsets applied to build the registration exercise, in (row, col) pixels.
@@ -70,7 +70,7 @@ def build_artifacts() -> list[Path]:
     """Three processed copies of one image, for 'spot the artifact'.
 
     Each has had exactly one thing done to it. The answer key lives in
-    instructor_notes.md, not here.
+    .course/solutions/instructor_notes.md, not here.
     """
     out = DATA / "misc" / "artifacts"
     out.mkdir(parents=True, exist_ok=True)

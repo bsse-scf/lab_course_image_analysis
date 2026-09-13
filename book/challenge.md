@@ -43,11 +43,7 @@ fraction of each well, while the 10,240 figure refers to the whole well. Relatin
 the two requires the field-of-view area and the well area.
 ```
 
-## Two ways to approach it
-
-The dataset is large. Both routes lead to a dose-response curve.
-
-### Track A: starting from the images
+## Challenge details
 
 Segment the cells in each of the 40 fields, export the counts, and analyse them.
 Either tool works:
@@ -58,26 +54,9 @@ Either tool works:
 
 The data is `plate01.nd2`; see [Download the example data](setup/download_data.md).
 
-### Track B: starting from the counts
-
-If the download is unavailable, the per-field counts are already in the
-repository:
-
-```
-data/challenge/plate01_summary.csv
-```
-
-This is the result of running a segmentation over all 40 fields: one row per
-field, in acquisition order, with a `Count` column. The analysis after
-segmentation can be done entirely from it.
-
-Both properties described above still apply on this track, as does the fitting.
-
-## Working through it
-
 A complete analysis involves:
 
-1. **the counts per well**, from either track;
+1. **the counts per well**;
 2. **the plate arranged correctly**: 4 replicates × 10 concentrations, with the
    snake pattern accounted for;
 3. **a dose-response plot**: cells per well against concentration, showing the

@@ -9,7 +9,8 @@ requires-pixi = ">=0.67"
 # in Fiji on day 1; day 2 reads the exported probability maps back in with
 # tifffile, so nothing in the Python track ever boots a JVM.
 # Make `from course import DATA, show` work from anywhere in the project -
-# notebooks/, solutions/python/, or scripts/ - rather than only from notebooks/.
+# notebooks/, .course/solutions/python/, or .course/scripts/ - rather than only
+# from notebooks/.
 [activation.env]
 PYTHONPATH = "$PIXI_PROJECT_ROOT/notebooks"
 # Jupyter Server reads `.jupyter/jupyter_server_config.py` (Course Tutor
@@ -70,6 +71,7 @@ nbmake = "*"
 # litellm (pulled in by jupyter-ai[jupyternaut]) requires importlib-metadata<9,
 # but the conda solve would otherwise pick 9.x and the pypi solve then fails.
 importlib-metadata = "<9"
+dask = ">=2024.6"
 
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
@@ -86,7 +88,7 @@ napari = { version = ">=0.6.5, <0.7", extras = ["all"] }
 
 [tasks]
 lab = "jupyter lab"
-test = "pytest notebooks/tests"
+test = "pytest .course/tests"
 # Execute the walkthrough notebooks. Named explicitly rather than globbed: the
 # generated *_ex.ipynb are blank by construction and MUST fail if executed, and
 # 03 is slow because it runs cellpose.
@@ -98,11 +100,11 @@ test-nb = """pytest --nbmake --nbmake-timeout=900 \
   notebooks/05_features.ipynb \
   notebooks/06_curve_fitting.ipynb"""
 test-nb-heavy = "pytest --nbmake --nbmake-timeout=1800 notebooks/03_ml_segmentation.ipynb"
-fetch-data = "python scripts/fetch_data.py"
-make-exercises = "python scripts/make_exercises.py"
-make-derived = "python scripts/make_derived_data.py"
-check-schedule = "python scripts/check_schedule.py"
-sync-solutions = "bash scripts/sync_solutions.sh"
+fetch-data = "python .course/scripts/fetch_data.py"
+make-exercises = "python .course/scripts/make_exercises.py"
+make-derived = "python .course/scripts/make_derived_data.py"
+check-schedule = "python .course/scripts/check_schedule.py"
+sync-solutions = "bash .course/scripts/sync_solutions.sh"
 
 # --- docs: builds the book without the heavy scientific stack ---
 [feature.docs.dependencies]
@@ -113,7 +115,7 @@ jupyterlite-pyodide-kernel = "*"
 
 [feature.docs.tasks]
 book-clean = "jupyter-book clean . --all"
-book = "jupyter-book build . --config _config.yml --toc _toc.yml --all"
+book = "jupyter-book build . --config book/_config.yml --toc book/_toc.yml --all"
 # JupyterLite site with the python basics notebooks, served at <site>/lite/.
 # Run after `book`; the two book/python_basics*.md pages iframe it.
 lite = """jupyter lite build \
