@@ -12,6 +12,9 @@ requires-pixi = ">=0.67"
 # notebooks/, solutions/python/, or scripts/ - rather than only from notebooks/.
 [activation.env]
 PYTHONPATH = "$PIXI_PROJECT_ROOT/notebooks"
+# Jupyter Server reads `.jupyter/jupyter_server_config.py` (Course Tutor
+# defaults, see there) from the project instead of a user-level config dir.
+JUPYTER_CONFIG_PATH = "$PIXI_PROJECT_ROOT/.jupyter"
 
 [dependencies]
 python = "3.11.*"
@@ -63,14 +66,22 @@ cellpose = "<4"
 pytest = "*"
 nbmake = "*"
 
+# --- pins ---
+# litellm (pulled in by jupyter-ai[jupyternaut]) requires importlib-metadata<9,
+# but the conda solve would otherwise pick 9.x and the pypi solve then fails.
+importlib-metadata = "<9"
+
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
 iaf = ">=1.5.3"
 jupyterlab-git = ">=0.54.1, <0.55"
 jupyterlab-latex = ">=4.4.0, <5"
-jupyter-ai = ">=3.1.3, <4"
+# `jupyternaut` is the LiteLLM chat backend the Course Tutor persona in
+# `.jupyter/personas/` builds on. Its only release so far is a pre-release,
+# which the resolver refuses unless a requirement names it explicitly.
+jupyter-ai = { version = ">=3.2.0, <4", extras = ["jupyternaut"] }
+jupyter-ai-jupyternaut = ">=0.1.0rc0"
 jupyter-app-launcher = ">=0.3.2"
-jupyter-ai-tutor = ">=0.3.1"
 napari = { version = ">=0.6.5, <0.7", extras = ["all"] }
 
 [tasks]
@@ -93,13 +104,6 @@ make-derived = "python scripts/make_derived_data.py"
 check-schedule = "python scripts/check_schedule.py"
 sync-solutions = "bash scripts/sync_solutions.sh"
 
-# --- notebook-intelligence: ETH-network only, degrades to plain JupyterLab ---
-[feature.nbi.pypi-dependencies]
-notebook-intelligence = "==4.8.0"
-
-[feature.nbi.tasks]
-lab-nbi = "python tools/launch_lab.py"
-
 # --- docs: builds the book without the heavy scientific stack ---
 [feature.docs.dependencies]
 python = "3.11.*"
@@ -114,7 +118,4 @@ lite = "jupyter lite build --force --config jupyter_lite_config.json --XeusAddon
 
 [environments]
 default = { solve-group = "main" }
-# `nbi` shares a solve group with the default env so adding the assistant does
-# not re-solve (or drift from) the stack the students are already running.
-nbi = { features = ["nbi"], solve-group = "main" }
 docs = { features = ["docs"], no-default-feature = true }
