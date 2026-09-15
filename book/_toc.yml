@@ -51,7 +51,7 @@ parts:
           - file: notebooks/04_segmentation_metrics_ex.ipynb
       - file: notebooks/05_features.ipynb
         sections:
-          - file: notebooks/05_detective_game_ex.ipynb
+          - file: notebooks/05_features_ex.ipynb
       - file: notebooks/06_curve_fitting.ipynb
         sections:
           - file: notebooks/06_curve_fitting_ex.ipynb
