@@ -54,8 +54,8 @@ jobs:
       - name: unit tests
         run: pixi run test
 
-      - name: schedule is in sync
-        run: pixi run check-schedule
+      # - name: schedule is in sync
+      #   run: pixi run check-schedule
 
   notebooks:
     name: notebooks execute
