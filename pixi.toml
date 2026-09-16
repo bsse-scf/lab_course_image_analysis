@@ -117,6 +117,9 @@ test-nb = """pytest --nbmake --nbmake-timeout=900 \
   notebooks/06_curve_fitting.ipynb"""
 test-nb-heavy = "pytest --nbmake --nbmake-timeout=1800 notebooks/03_ml_segmentation.ipynb"
 fetch-data = "python .course/scripts/fetch_data.py"
+# Students run this once during setup, so day 2 does not start with everyone
+# downloading cellpose weights over the lecture-room network.
+fetch-models = "python .course/scripts/fetch_models.py"
 make-exercises = "python .course/scripts/make_exercises.py"
 make-derived = "python .course/scripts/make_derived_data.py"
 check-schedule = "python .course/scripts/check_schedule.py"
