@@ -3,11 +3,15 @@
 # Loaded because pixi sets JUPYTER_CONFIG_PATH to this directory (see
 # `[activation.env]` in pixi.toml). When JupyterLab is started without pixi,
 # pass `--config=.jupyter/jupyter_server_config.py` or set that variable.
+import os
+
 from jupyter_ai_persona_manager import PersonaManager
 
 c = get_config()  # noqa: F821
 
 TUTOR_ID = "jupyter-ai-personas::course_tutor_persona::CourseTutorPersona"
+# The directory of this file, i.e. the project's `.jupyter/`.
+DOTJUPYTER_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class CoursePersonaManager(PersonaManager):
@@ -23,6 +27,17 @@ class CoursePersonaManager(PersonaManager):
 
     def _init_ep_persona_classes(self) -> None:
         PersonaManager._ep_persona_classes = []
+
+    def get_dotjupyter_dir(self) -> str:
+        # Jupyter AI looks for `.jupyter/personas/` by walking up from the
+        # chat file, never above the server root. That only reaches this
+        # directory when the project is the root, as with `pixi run lab`. On
+        # RRP the root is /home/jovyan (so students see `openbis`, `results`
+        # etc.), the chat lands in /home/jovyan/.chat and the walk stops at
+        # the user's own ~/.jupyter, which has no personas - the tutor is then
+        # missing. Point Jupyter AI at the project's `.jupyter/` regardless of
+        # where the chat file lives.
+        return DOTJUPYTER_DIR
 
 
 c.PersonaManagerExtension.persona_manager_class = CoursePersonaManager
