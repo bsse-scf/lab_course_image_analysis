@@ -554,6 +554,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/1b/33/543627f323ff3c73091f51d6a20db28a1a33531af30873ea90c5ac95a9b5/ormsgpack-1.12.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/1b/d3/74650a91bfc2164d7971f75a3811616f703eabbc9631659be22144e6c8b7/jupyterlab_chat-0.25.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1c/76/e087de4ea74635a790e2d8e65870409eae872a3d2dc9773a65b9d0559a35/litellm-1.100.1-cp310-abi3-manylinux_2_28_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/21/3f/9ac19d2883f58ba3ce14d34afcb993a6274154935b0bff4d75189b973d67/jupyterlab_mathjax3-4.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/24/65/8c5dddd7cb67f6571d154a58d7c6e2f07da54bf84c49b6a1839965b7c35e/tiktoken-0.14.0-cp311-cp311-manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/27/1b/16ab7f2cf2041da2f60d156ba64c2484eadf9168075b4ff43c3ef60045af/propcache-0.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/27/83/859ecdd180cacc13b1f7e857abf8582a64552ea7a061057a6c716e790fce/sphinxcontrib_qthelp-2.0.0-py3-none-any.whl
@@ -589,6 +590,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/56/bb/5ba264d3ccc13294e74c48c3ef0c2e96b8b13765562628515654012cc47e/magicgui-0.10.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/57/f0/e24f3e5d5d539abeb783087b87c26cfb99c259f1126700569e000243745a/cachey-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5c/1e/af88bdb15b20a690b3d5409fc89fbdbb79095a593abb8a37094a42428760/vispy-0.15.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/5d/6b/ccc3f8d9940719b1d6c0c12aab9417d4008ff6aa419c8d103aa4c29ee3d1/jupyterlab_rise-0.43.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/85/9ebeae2f76e9e77b952f4b274c27238156eae7979c5421fba91a28f4970d/sphinxcontrib_applehelp-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/ec/49cd331e359af93e9641ad95746b1782c754c05795632708bb5ebd9e4757/jupyter_server_mcp-0.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5f/ff/1d1aad9292aeccf01f94ca150ce621737cbe7b9fabbb0bfef32b8da70e58/napari_console-0.1.3-py3-none-any.whl
@@ -1158,6 +1160,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/19/97/56608b2249fe206a67cd573bc93cd9896e1efb9e98bce9c163bcdc704b88/truststore-0.10.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/a4/4abff98ef81080ebecabe47d913413799a10afc3b3c1de2a8e91a3ebdf6a/iaf-1.5.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/d3/74650a91bfc2164d7971f75a3811616f703eabbc9631659be22144e6c8b7/jupyterlab_chat-0.25.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/21/3f/9ac19d2883f58ba3ce14d34afcb993a6274154935b0bff4d75189b973d67/jupyterlab_mathjax3-4.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/27/83/859ecdd180cacc13b1f7e857abf8582a64552ea7a061057a6c716e790fce/sphinxcontrib_qthelp-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/28/67/317a6b20e94008e79f2043d85e6bed01e32bad333931688c44b8c4136e53/jupyter_ai_litellm-0.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2a/68/1fc93dd759605b5d00fc98b50200739e41ed32bd22d6ba35ca6c3932371b/rich_rst-2.1.0-py3-none-any.whl
@@ -1192,6 +1195,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/53/f7/ee8f5124d3d58016c562c1f3adf53812ad417c81bfe3a55f7c330d2ed6dc/jupyter_ai_router-0.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/56/bb/5ba264d3ccc13294e74c48c3ef0c2e96b8b13765562628515654012cc47e/magicgui-0.10.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/57/f0/e24f3e5d5d539abeb783087b87c26cfb99c259f1126700569e000243745a/cachey-0.2.1-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/5d/6b/ccc3f8d9940719b1d6c0c12aab9417d4008ff6aa419c8d103aa4c29ee3d1/jupyterlab_rise-0.43.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/85/9ebeae2f76e9e77b952f4b274c27238156eae7979c5421fba91a28f4970d/sphinxcontrib_applehelp-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/ec/49cd331e359af93e9641ad95746b1782c754c05795632708bb5ebd9e4757/jupyter_server_mcp-0.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5f/ff/1d1aad9292aeccf01f94ca150ce621737cbe7b9fabbb0bfef32b8da70e58/napari_console-0.1.3-py3-none-any.whl
@@ -1763,6 +1767,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/19/97/56608b2249fe206a67cd573bc93cd9896e1efb9e98bce9c163bcdc704b88/truststore-0.10.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/a4/4abff98ef81080ebecabe47d913413799a10afc3b3c1de2a8e91a3ebdf6a/iaf-1.5.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/d3/74650a91bfc2164d7971f75a3811616f703eabbc9631659be22144e6c8b7/jupyterlab_chat-0.25.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/21/3f/9ac19d2883f58ba3ce14d34afcb993a6274154935b0bff4d75189b973d67/jupyterlab_mathjax3-4.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/27/83/859ecdd180cacc13b1f7e857abf8582a64552ea7a061057a6c716e790fce/sphinxcontrib_qthelp-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/28/67/317a6b20e94008e79f2043d85e6bed01e32bad333931688c44b8c4136e53/jupyter_ai_litellm-0.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2a/68/1fc93dd759605b5d00fc98b50200739e41ed32bd22d6ba35ca6c3932371b/rich_rst-2.1.0-py3-none-any.whl
@@ -1798,6 +1803,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/56/bb/5ba264d3ccc13294e74c48c3ef0c2e96b8b13765562628515654012cc47e/magicgui-0.10.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/57/f0/e24f3e5d5d539abeb783087b87c26cfb99c259f1126700569e000243745a/cachey-0.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5c/91/83167e3d0cd1912b46e61a2b3485bf9886e49b48cea4daa59e8de4058a1a/triangle-20250106-cp311-cp311-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/5d/6b/ccc3f8d9940719b1d6c0c12aab9417d4008ff6aa419c8d103aa4c29ee3d1/jupyterlab_rise-0.43.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/85/9ebeae2f76e9e77b952f4b274c27238156eae7979c5421fba91a28f4970d/sphinxcontrib_applehelp-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/ef/21ccfaab3d5078d41efe8612e0ed0bfc9ce22475de074162a91a25f7980d/google_crc32c-1.8.0-cp311-cp311-macosx_12_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/5e/ec/49cd331e359af93e9641ad95746b1782c754c05795632708bb5ebd9e4757/jupyter_server_mcp-0.3.0-py3-none-any.whl
@@ -2339,6 +2345,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/19/97/56608b2249fe206a67cd573bc93cd9896e1efb9e98bce9c163bcdc704b88/truststore-0.10.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/a4/4abff98ef81080ebecabe47d913413799a10afc3b3c1de2a8e91a3ebdf6a/iaf-1.5.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/d3/74650a91bfc2164d7971f75a3811616f703eabbc9631659be22144e6c8b7/jupyterlab_chat-0.25.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/21/3f/9ac19d2883f58ba3ce14d34afcb993a6274154935b0bff4d75189b973d67/jupyterlab_mathjax3-4.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/22/a6/858897256d0deac81a172289110f31629fc4cee19b6f01283303e18c8db3/ptyprocess-0.7.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/24/7f/fff1217240343c0c11b5938b98aeae0e3a266cacfac25f86f91cdcd748f0/tiktoken-0.14.0-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/27/83/859ecdd180cacc13b1f7e857abf8582a64552ea7a061057a6c716e790fce/sphinxcontrib_qthelp-2.0.0-py3-none-any.whl
@@ -2371,6 +2378,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/53/f7/ee8f5124d3d58016c562c1f3adf53812ad417c81bfe3a55f7c330d2ed6dc/jupyter_ai_router-0.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/56/bb/5ba264d3ccc13294e74c48c3ef0c2e96b8b13765562628515654012cc47e/magicgui-0.10.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/57/f0/e24f3e5d5d539abeb783087b87c26cfb99c259f1126700569e000243745a/cachey-0.2.1-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/5d/6b/ccc3f8d9940719b1d6c0c12aab9417d4008ff6aa419c8d103aa4c29ee3d1/jupyterlab_rise-0.43.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/85/9ebeae2f76e9e77b952f4b274c27238156eae7979c5421fba91a28f4970d/sphinxcontrib_applehelp-2.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/ec/49cd331e359af93e9641ad95746b1782c754c05795632708bb5ebd9e4757/jupyter_server_mcp-0.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5f/ff/1d1aad9292aeccf01f94ca150ce621737cbe7b9fabbb0bfef32b8da70e58/napari_console-0.1.3-py3-none-any.whl
@@ -25942,6 +25950,11 @@ packages:
   - llm-sandbox>=0.3.39,<1.0 ; extra == 'proxy-runtime'
   - detect-secrets>=1.5.0,<2.0 ; extra == 'proxy-runtime'
   requires_python: '>=3.10,<3.15'
+- pypi: https://files.pythonhosted.org/packages/21/3f/9ac19d2883f58ba3ce14d34afcb993a6274154935b0bff4d75189b973d67/jupyterlab_mathjax3-4.3.0-py3-none-any.whl
+  name: jupyterlab-mathjax3
+  version: 4.3.0
+  sha256: 07d2a40cea9293bb56210b87620088e6aa5bb45c05aac86d3e917d6c1aded711
+  requires_python: '>=3.6'
 - pypi: https://files.pythonhosted.org/packages/22/a6/858897256d0deac81a172289110f31629fc4cee19b6f01283303e18c8db3/ptyprocess-0.7.0-py2.py3-none-any.whl
   name: ptyprocess
   version: 0.7.0
@@ -26708,6 +26721,20 @@ packages:
   - numpy
   - pytest ; extra == 'test'
   requires_python: '>=3.7'
+- pypi: https://files.pythonhosted.org/packages/5d/6b/ccc3f8d9940719b1d6c0c12aab9417d4008ff6aa419c8d103aa4c29ee3d1/jupyterlab_rise-0.43.1-py3-none-any.whl
+  name: jupyterlab-rise
+  version: 0.43.1
+  sha256: 62ba6d8c07a80dff293589512d57901029800a23a860904b14eb96d597cb8573
+  requires_dist:
+  - jupyter-server>=2.0.1,<3
+  - jupyterlab-mathjax3
+  - jupyterlab>=4.1.0,<5
+  - coverage ; extra == 'test'
+  - pytest ; extra == 'test'
+  - pytest-asyncio ; extra == 'test'
+  - pytest-cov ; extra == 'test'
+  - pytest-jupyter[server]>=0.6.0 ; extra == 'test'
+  requires_python: '>=3.9'
 - pypi: https://files.pythonhosted.org/packages/5d/85/9ebeae2f76e9e77b952f4b274c27238156eae7979c5421fba91a28f4970d/sphinxcontrib_applehelp-2.0.0-py3-none-any.whl
   name: sphinxcontrib-applehelp
   version: 2.0.0

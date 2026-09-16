@@ -85,6 +85,7 @@ jupyter-ai = { version = ">=3.2.0, <4", extras = ["jupyternaut"] }
 jupyter-ai-jupyternaut = ">=0.1.0rc0"
 jupyter-app-launcher = ">=0.3.2"
 napari = { version = ">=0.6.5, <0.7", extras = ["all"] }
+jupyterlab-rise = ">=0.43.1, <0.44"
 
 [tasks]
 lab = "jupyter lab"
