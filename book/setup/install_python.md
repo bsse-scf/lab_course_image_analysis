@@ -26,6 +26,9 @@ effect, and check:
 pixi --version
 ```
 
+If you already had pixi installed from before, bring it up to date with
+`pixi self-update`: the course needs a recent version.
+
 ## 2. Install git
 
 Check whether you already have it with `git --version`. If not:
@@ -41,6 +44,14 @@ Or let pixi do it: `pixi global install git`.
 ```bash
 git clone https://github.com/m-albert/scu_lab_course_ia_test.git
 cd scu_lab_course_ia_test
+```
+
+```{warning}
+Clone into a folder that is **not synced to the cloud**: not `Documents` or
+`Desktop` if those live in OneDrive or iCloud, and not a Dropbox folder. The
+environment is several gigabytes in many thousands of files, and a sync client
+will slow the installation to a crawl or break it. Your home folder itself is a
+good choice.
 ```
 
 ```{warning}
