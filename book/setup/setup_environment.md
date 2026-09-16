@@ -8,10 +8,17 @@ pixi install
 
 That reads `pixi.toml` and `pixi.lock` and builds the environment. It downloads
 around **3.5 GB** and takes anywhere from a few minutes to half an hour depending
-on your connection, so start it and go and do something else.
+on your connection.
 
-You only ever run this once. If the environment description changes later,
-`pixi install` again and it will bring you up to date.
+
+## Download the segmentation models
+
+```bash
+pixi run fetch-models
+```
+
+The day 2 notebooks use pretrained cellpose models, which cellpose downloads
+(about 50 MB) the first time they are used. Using the command above we pre-download the models now.
 
 ## Start JupyterLab
 
