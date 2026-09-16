@@ -13,9 +13,9 @@ requires-pixi = ">=0.67"
 # from notebooks/.
 [activation.env]
 PYTHONPATH = "$PIXI_PROJECT_ROOT/notebooks"
-# Jupyter Server reads `.jupyter/jupyter_server_config.py` (Course Tutor
-# defaults, see there) from the project instead of a user-level config dir.
 JUPYTER_CONFIG_PATH = "$PIXI_PROJECT_ROOT/.jupyter"
+# jupyter-app-launcher reads jp_app_launcher*.y[a]ml from this directory.
+JUPYTER_APP_LAUNCHER_PATH = "$PIXI_PROJECT_ROOT/.jupyter"
 
 [dependencies]
 python = "3.11.*"
@@ -62,6 +62,10 @@ pooch = "*"
 # rather than behind an opt-in feature. It is the heaviest item here (it pulls
 # torch), so it dominates the day-0 install time - measure it in the M7 rehearsal.
 cellpose = "<4"
+
+# --- app launcher ---
+# Required by jupyter-app-launcher's `local-server` entry type (Course Book).
+jupyter-server-proxy = "*"
 
 # --- testing ---
 pytest = "*"
