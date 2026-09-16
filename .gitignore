@@ -11,6 +11,7 @@ _build/
 __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
 # Jupyter AI chats: created in .chat/ (see .jupyter/labconfig/), one per student
 .chat/
 *.chat
