@@ -1,24 +1,3 @@
 #!/bin/bash
-set -e
 
-PIXI_ENV="/home/jovyan/pixi-env/.pixi/envs/default"
-
-if [ ! -x "${PIXI_ENV}/bin/jupyter" ]; then
-    echo "ERROR: Pixi Jupyter environment not found at:" >&2
-    echo "       ${PIXI_ENV}/bin/jupyter" >&2
-    exit 1
-fi
-
-# Make Pixi's Jupyter the Jupyter found by RRP's existing launch command (def: launch.properties):
-#
-#     jupyter lab --ip 0.0.0.0 ...
-#
-export PATH="${PIXI_ENV}/bin:${PATH}"
-
-echo "Using Pixi environment:"
-echo "  ${PIXI_ENV}"
-
-echo "Jupyter executable:"
-command -v jupyter
-
-exec "$@"
+exec pixi run --manifest-path /home/jovyan/project/pixi.toml "$@"
