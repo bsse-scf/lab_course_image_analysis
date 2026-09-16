@@ -1,3 +1,11 @@
 #!/bin/bash
 
-exec pixi run --manifest-path /home/jovyan/project/pixi.toml "$@"
+# Run JupyterLab from the project so that it becomes the server root, as it is
+# locally with `pixi run lab`. Jupyter AI resolves the chat directory
+# (`.chat`, see .jupyter/labconfig/) against the root and looks for
+# `.jupyter/personas/` by walking up from there, never above the root - with
+# the RRP home as root the chat lands in /home/jovyan/.chat, which does not
+# exist, and the Course Tutor is never found. `pixi run` keeps the cwd.
+cd /home/jovyan/project
+
+exec pixi run "$@"
