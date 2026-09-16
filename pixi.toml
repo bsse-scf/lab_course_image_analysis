@@ -17,6 +17,16 @@ JUPYTER_CONFIG_PATH = "$PIXI_PROJECT_ROOT/.jupyter"
 # jupyter-app-launcher reads jp_app_launcher*.y[a]ml from this directory.
 JUPYTER_APP_LAUNCHER_PATH = "$PIXI_PROJECT_ROOT/.jupyter"
 
+# Pixi evaluates activation.env in the system shell: bash on Unix, cmd.exe on
+# Windows. cmd.exe leaves `$PIXI_PROJECT_ROOT` unexpanded, so without this
+# block Windows gets literal `$PIXI_PROJECT_ROOT/...` values - JupyterLab then
+# finds neither the tutor config nor the 🎓 toolbar button, and `import course`
+# fails. Keep the two blocks in sync.
+[target.win-64.activation.env]
+PYTHONPATH = "%PIXI_PROJECT_ROOT%\\notebooks"
+JUPYTER_CONFIG_PATH = "%PIXI_PROJECT_ROOT%\\.jupyter"
+JUPYTER_APP_LAUNCHER_PATH = "%PIXI_PROJECT_ROOT%\\.jupyter"
+
 [dependencies]
 python = "3.11.*"
 pip = "*"
