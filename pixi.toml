@@ -86,6 +86,13 @@ nbmake = "*"
 # but the conda solve would otherwise pick 9.x and the pypi solve then fails.
 importlib-metadata = "<9"
 dask = ">=2024.6"
+# Both are PyPI dependencies (pystackreg via iaf, cryptography via jupyter-ai)
+# that ship no osx-64 wheel, so on Intel Macs pixi would build them from
+# source - a C++ compiler for pystackreg and a Rust toolchain for cryptography,
+# which students do not have. Taking them from conda-forge instead gives
+# prebuilt binaries on every platform.
+pystackreg = "*"
+cryptography = "*"
 
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
