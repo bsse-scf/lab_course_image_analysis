@@ -15,19 +15,13 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
-__all__ = ["REPO", "DATA", "show", "CHALLENGE_URL", "download_challenge_data"]
+__all__ = ["REPO", "DATA", "show"]
 
 #: Repository root.
 REPO = Path(__file__).resolve().parents[1]
 
 #: Course data directory.
 DATA = REPO / "data"
-
-#: Polybox share holding the day-2 challenge dataset (plate01, ~3.3 GB).
-#: Carried over from the previous edition - re-check it still resolves before
-#: the course starts; the weekly link check in CI covers it during the year.
-CHALLENGE_URL = "https://polybox.ethz.ch/index.php/s/opKPgFNikwfg8AL"
-
 
 def show(image, title=None, cmap="gray", ax=None, **kwargs):
     """Display a 2D image without axis ticks.
