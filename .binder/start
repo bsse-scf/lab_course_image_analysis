@@ -9,4 +9,12 @@
 # `.jupyter/personas/` instead of walking up from the chat file.
 cd /home/jovyan/project
 
+# postBuild installs the environment into ~/pixi-env (REPO_DIR is a different
+# path at build time than at runtime, so it cannot live in the project). Pixi
+# keys environments to the project directory, so without this link it would
+# treat the project as uninstalled and rebuild the whole environment on every
+# start. The manifest was copied verbatim, so the install marker still matches.
+mkdir -p .pixi/envs
+ln -sfn /home/jovyan/pixi-env/.pixi/envs/default .pixi/envs/default
+
 exec pixi run "$@"
