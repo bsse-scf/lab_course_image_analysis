@@ -50,7 +50,9 @@ c.CoursePersonaManager.default_persona_id = TUTOR_ID
 # the `openai/` LiteLLM prefix). These are merged into each user's Jupyternaut
 # config at startup, so students can still pick another model in "AI settings".
 # The API key must be provided as OPENAI_API_KEY - in the environment or in a
-# `.env` file in the server's working directory - or entered in "AI settings".
+# `.env` file at the server root - or entered in "AI settings" (which writes
+# that `.env`). On RRP the root is /home/jovyan, whose `.env` .binder/start
+# links into the project so the key survives a restart.
 MODEL_ID = "openai/SwissAI-Research/Qwen/Qwen3.5-27B"
 c.JupyternautExtension.initial_language_model = MODEL_ID
 c.JupyternautExtension.model_parameters = {

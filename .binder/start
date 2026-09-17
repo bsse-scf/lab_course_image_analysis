@@ -25,4 +25,15 @@ export OPENBLAS_NUM_THREADS=2
 mkdir -p .pixi/envs
 ln -sfn /home/jovyan/pixi-env/.pixi/envs/default .pixi/envs/default
 
+# Jupyternaut saves the secrets entered in "AI settings" (the OPENAI_API_KEY
+# for the tutor) to `.env` at the server root, which on RRP is /home/jovyan.
+# The home directory is part of the image and reset on every start, so the key
+# would have to be re-entered each time. Keep it in the project instead, which
+# is a persistent volume (and already gitignores `.env`). Jupyter resolves the
+# link before writing, so the settings UI writes straight to project/.env. The
+# target must exist: Jupyter answers 400 rather than 404 for a dangling link,
+# which crashes Jupyternaut's `.env` watcher and fails the save.
+touch .env
+ln -sfn project/.env /home/jovyan/.env
+
 exec pixi run "$@"
