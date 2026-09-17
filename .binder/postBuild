@@ -108,6 +108,36 @@ fi
 
 mkdir -p "${HOME}/.local/bin"
 
+# ---------------------------------------------------------------------------
+# Fiji launcher
+#
+# Keep Fiji's bundled JDK, but limit the JVM heap so that Fiji does not
+# consume the entire Kubernetes memory limit.
+#
+# Example:
+#   Kubernetes memory limit = 8 GiB
+#   MaxRAMPercentage = 65%
+#   Java heap ~= 5.2 GiB
+#
+# The remaining memory is available for native JVM memory, ImageJ buffers,
+# plugins, GUI, etc.
+# ---------------------------------------------------------------------------
+
+cat > "${HOME}/.local/bin/fiji" << EOF
+#!/bin/bash
+set -e
+
+export JAVA_HOME="${FIJI_JAVA_HOME}"
+export PATH="${FIJI_JAVA_HOME}/bin:\${PATH}"
+
+# Limit Java heap to 65% of the memory visible to the container.
+# Preserve any JAVA_TOOL_OPTIONS supplied by the environment.
+export JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=65 \${JAVA_TOOL_OPTIONS:-}"
+
+exec "${FIJI_ROOT}/fiji-linux-x64" "\$@"
+EOF
+
+
 ln -sf "${FIJI_ROOT}/fiji-linux-x64" "${HOME}/.local/bin/fiji"
 ln -sf "${FIJI_ROOT}/fiji-linux-x64" "${HOME}/.local/bin/imagej"
 
@@ -123,7 +153,7 @@ Version=1.0
 Type=Application
 Name=Fiji
 Comment=Fiji Is Just ImageJ
-Exec=${FIJI_ROOT}/fiji-linux-x64
+Exec=/home/jovyan/.local/bin/fiji
 Icon=${FIJI_ROOT}/images/icon.png
 Terminal=false
 Categories=Science;Education;
