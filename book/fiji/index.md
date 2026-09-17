@@ -1,16 +1,9 @@
 # Fiji practical
 
-[Fiji](https://fiji.sc) is ImageJ with a large collection of plugins already
-installed. It is the most widely used tool in bioimage analysis, and for good
-reason: you can open an image and have a measurement thirty seconds later,
-without writing anything.
-
-This practical is a complete analysis done by clicking: open images, look at
-their intensities, threshold them, separate touching objects and measure the
-result. The Python notebooks then repeat the *same* analysis, and the comparison
-is the point. Fiji is faster to start; Python is what you reach for
-when you have four hundred images instead of four, or when you need to be able
-to say exactly what you did six months later.
+[Fiji](https://fiji.sc) is ImageJ bundled with plugins for bioimage analysis.
+In this practical you will inspect image intensities, apply a threshold, clean
+up a mask and measure objects through the graphical interface. The Python
+notebooks introduce how to make these steps reproducible and automate them for many images.
 
 ## The exercises
 
@@ -26,9 +19,8 @@ Two shorter ones to try if you are ahead:
 [how wide is a filament?](fun/how_wide_is_a_filament.md) and
 [spot the artifact](fun/spot_the_artifact.md).
 
-**E4 produces files that are used again on day 2**, so do not skip it. E5 is
-genuinely optional: macros are useful, but batch processing is the thing Python
-does better, and that is where we are heading.
+**Complete E4:** its exported files are used in the day 2 notebooks. E5 is
+optional; it introduces Fiji macros for batch processing.
 
 ## The data
 
@@ -38,10 +30,10 @@ Everything is in the repository you cloned, under `data/`. The main set is
 - `*_nuclei.tif`: DAPI, staining the nuclei
 - `*_cells.tif`: CD11b, staining the cell surface
 
-Open one of each now and look at them side by side. You will spend two days on
-these images, and most of what happens will make sense if you remember one thing
-about them: **the nuclei are compact and clearly brighter than the background;
-the cells are patchy, they touch each other, and their edges fade out.**
+Open one image from each channel and compare them. **The nuclei are compact and
+bright against the background. The cell signal is patchier, neighbouring cells
+touch, and some edges are faint.** These differences affect which segmentation
+methods work well.
 
 ```{note}
 These images are uncalibrated: Fiji does not know how large a pixel is in

@@ -1,13 +1,9 @@
 # Image Analysis
 
-Course material for the Image Analysis module of the Lab Course of the Single
-Cell Facility, D-BSSE, ETH Zurich.
-
-Two days, hands-on, assuming no prior experience with image analysis or
-programming. The course covers the path from a microscope image to a number that
-can be defended: segmenting objects, measuring them, and judging how much to
-trust the result. It starts in Fiji, moves to Python, and ends with a challenge
-on real screening data.
+This two-day module is taught by the Single Cell Facility as part of the D-BSSE
+Lab Course at ETH Zurich. You will use Fiji and Python to segment cells in
+microscopy images, measure their properties and assess how reliable the results
+are. No prior experience with image analysis or programming is required.
 
 ## Start here
 

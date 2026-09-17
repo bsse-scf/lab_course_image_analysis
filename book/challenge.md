@@ -1,72 +1,36 @@
-# Challenge: a drug dose-response curve
+# Challenge
 
-**Day 2.** Work in pairs.
+## Measure the dose-response curve of an anti-proliferative drug candidate
 
-This exercise applies the whole course to one experiment: images in, a
-biological quantity out.
+In your lab, you are studying the effects of a novel drug that apparently inhibits cell division; from preliminary experiments, this compound appears to be a potential treatment against metastasis in cancer patients. In an experiment, you seeded a constant number of cells (in four replicates) across consecutive wells in a plate and let them proliferate over 48h. In the lab automation facility, you calculated that the **final** cell density after 48h of culture should correspond to **10,240** cells per well (well area is 0.32 cm²) if the proliferation is **not** hampered by the drug.
 
-## The experiment
-
-A compound appears to inhibit cell division, and is being considered as a
-treatment against metastasis. A constant number of cells was seeded into
-consecutive wells of a plate and left to grow for 48 hours.
-
-Without any drug, each well is expected to reach **10,240 cells** after 48 hours.
-The well area is 0.32 cm².
-
-Increasing concentrations of the compound were applied at the start. The plate
-has four rows **A**–**D**, which are four replicates, and ten columns, one per
-concentration:
+At the onset of the experiment, you applied increasing concentrations of the drug and let the cells proliferate in the presence of the compound. Following table shows the drug application protocol: four rows ***A*** through ***D*** with each 10 columns ***0*** through ***9*** representing **four replicates**.
 
 | C [µg/µl] | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| **A** | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-| **B** | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-| **C** | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-| **D** | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|-------|---|---|---|---|---|---|---|---|---|---|
+| A     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+| B     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+| C     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+| D     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 
-The goal is to **measure the dose-response curve** and determine the **IC50**,
-the concentration at which proliferation is inhibited by half.
 
-## Two properties of the data to account for
+You collected the data on a Nikon Widefield microscope that stored all 40 images for one plate into an individual ND2 file. Please note that the sequential acquisition performed by the microscope followed a snake pattern with **odd rows being scanned left to right and even rows being scanned right to left**. Also, notice that the field of view of your microscope **does not cover the whole well**.
 
-Both of these affect the result, and neither is visible in the images
-themselves.
+Now that the experimental part is concluded and you have your data, you want to **measure the dose-response curve of your anti-proliferative drug candidate**.
 
-```{note}
-**The microscope scanned in a snake pattern.** Odd rows were scanned left to
-right, even rows right to left. The 40 images are stored in acquisition order,
-so reshaping them directly into a 4×10 grid places every second row in reverse.
+The dataset is the file `plate01.zip` which you downloaded [earlier](./setup/download_data.md). It is in the Nikon ND2 file format.
 
-**The field of view does not cover the whole well.** The counts come from a
-fraction of each well, while the 10,240 figure refers to the whole well. Relating
-the two requires the field-of-view area and the well area.
-```
+## Your task
 
-## Challenge details
+1. Segment the cells in each image and export the results to a csv file. For this, you can use either write a **Fiji macro** or a **Jupyter notebook**.
 
-Segment the cells in each of the 40 fields, export the counts, and analyse them.
-Either tool works:
-
-- a **Fiji macro**: there is a starting point among the hints below;
-- a **Jupyter notebook**, using the methods from day 1. In Python,
-  `iaf.io.readers.NikonND2Reader` opens an ND2 file series by series.
-
-The data is `plate01.nd2`; see [Download the example data](setup/download_data.md).
-
-A complete analysis involves:
-
-1. **the counts per well**;
-2. **the plate arranged correctly**: 4 replicates × 10 concentrations, with the
-   snake pattern accounted for;
-3. **a dose-response plot**: cells per well against concentration, showing the
-   replicates rather than only their average;
-4. **a fitted curve** and the **IC50** derived from it;
-5. **an assessment of how reliable that number is.**
+1. In a **Jupyter Notebook**, load the csv file and calculate the **dose-response curve** (i.e. number of cells per well vs drug concentration). Create a plot of the dose-response curve and determine the **IC50** (the concentration at which the drug inhibits cell proliferation by 50%).
 
 ## Hints
 
 ::::{dropdown} A Fiji macro starting point
+In case you decide to segment the images using Fiji, here is a starting point for a macro.
+
 An ND2 file holds all 40 fields as separate **series**. Bio-Formats opens one
 series at a time, so the macro is a loop over series numbers with the processing
 inside it.
@@ -98,56 +62,12 @@ for (i = 1; i <= nSeries; i++) {
 setBatchMode(false);
 ```
 
-Two details that matter:
 
-- **Series are numbered from 1**, so `series_1` is the first field, not
-  `series_0`.
-- **`Analyze Particles...` with `summarize` writes to the Summary window**, not
-  to Results. Save that one, `Table.save(outputPath, "Summary")`, or the file
-  will contain one row per object rather than one row per field.
-::::
+::::{dropdown} Well ordering
 
-::::{dropdown} Arranging 40 rows into a 4×10 plate
-The rows are in acquisition order. Reshape to `(4, 10)`, then reverse every
-second row: `array[1::2] = array[1::2, ::-1]`.
+From looking at the different wells (called "series" in the ND2 file), how do you think the wells are ordered? Taking into account this order will be important when you calculate the dose-response curve, as you will need to know which series corresponds to which well.
 
-A check before continuing: column 0 is the untreated control, so those four wells
-should hold the highest counts on the plate. If they do not, the arrangement is
-not yet correct.
-::::
 
-::::{dropdown} Relating the counts to 10,240
-The count comes from one field of view; the 10,240 refers to the whole well.
-Scaling by the area ratio relates them:
+::::{dropdown} Total cell numbers
 
-$$\text{cells per well} = \text{counted} \times \frac{\text{well area}}{\text{field area}}$$
-
-The well area is 0.32 cm². The field area follows from the image dimensions and
-the pixel size in the file metadata: the calibration point from
-[Fiji E1](fiji/e1_basics.md). An error here scales every number by a constant
-factor.
-::::
-
-::::{dropdown} Choosing a model
-Growth inhibition that increases with dose can be described by exponential decay:
-
-$$N(c) = N_0 e^{-kc}$$
-
-giving $\text{IC50} = \ln(2)/k$, in the same way the doubling time was obtained
-in [`06_curve_fitting`](../notebooks/06_curve_fitting.ipynb).
-
-The four-parameter logistic used conventionally in pharmacology is also an
-option. Either way, the residuals are worth checking.
-::::
-
-::::{dropdown} Checking the result
-Several things are worth verifying:
-
-- whether the four replicates at each concentration agree, and if one row differs
-  systematically, what its images look like;
-- whether the untreated control matches the expected 10,240;
-- whether the residuals show structure;
-- how much the IC50 changes if the segmentation threshold is varied.
-
-The last of these is often the largest contribution to the uncertainty.
-::::
+How many cells do you count after 48h of culture in the control wells (i.e. those without drug)? How does this compare to the expected number of cells (10240)?

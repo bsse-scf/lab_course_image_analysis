@@ -1,128 +1,52 @@
-# Homework: quantifying transfection efficiency
+# Homework
 
-**After the course.** Work in pairs. Submit Jupyter notebooks.
+# Quantitative determination of transfection efficiency
 
-## The question
+The primary objective of our course project is to characterize a new cell line (U2OS) that expresses a nuclear fluorescence marker: Green Fluorescent Protein (GFP). This fluorophore allows us to visualize cell nuclei in live cells during microscopy and flow cytometry experiments. However, the transfection methods used to introduce the gene for GFP expression in the cellular DNA are not entirely efficient;  some cells may fail to express GFP (or may express it in the wrong cell compartment).
 
-The project characterises a U2OS cell line engineered to express **GFP** in the
-nucleus. Transfection is not fully efficient: some cells fail to express GFP, or
-express it in the wrong compartment. The quantity of interest is what fraction of
-them worked.
+In the microscopy practical session, you acquired images of three distinct fluorophores using the fluorescence microscope you built yourselves. DAPI (blue in the image below) marks all nuclei, regardless of whether cells have been successfully transfected or not. GFP (green), our channel of interest, indicates successfully transfected cells. Finally, Cy3 (red) stains the actin cytoskeleton, making the whole cell visible.
 
-Three channels were acquired in the microscopy module, on the fluorescence
-microscope you built:
+To quantify the transfection efficiency, we can segment all nuclei in the DAPI channel and analyze their intensity in the GFP channel. By calculating the ratio of GFP-positive nuclei to the total number of nuclei, we can estimate the transfection efficiency. Unfortunately, due to the limitations of the manual fluorescence microscope, the resulting channels are not perfectly aligned and therefore cannot be directly used to quantify the co-localization of the green and blue channels.
 
-| channel | stains | provides |
-|---|---|---|
-| **DAPI** (blue) | all nuclei | the position of every cell, transfected or not |
-| **GFP** (green) | the transfected construct | which cells express it |
-| **Cy3** (red) | actin | the extent of the whole cell |
-
-The approach follows from this: segment the nuclei in DAPI, measure the GFP
-intensity within each one, and determine how many are positive. The
-**transfection efficiency** is the fraction of nuclei that are GFP-positive.
-
-## The complication
-
-The filter was changed by hand between channels, so the sample shifted slightly
-each time. **The three channels do not overlap.** Until they are aligned, a
-nucleus outline taken from DAPI does not correspond to the same pixels in GFP,
-and the measured intensity mixes the nucleus with its surroundings.
-
-Registration is therefore the first step: the task rehearsed in
-[Fiji E2](fiji/e2_registration.md).
+The `iaf` library offers the [`iaf.reg.multi_image_alignment()`](https://ia-res.ethz.ch/docs/iaf/reg/index.html#iaf.reg.multi_image_alignment) function to align any number of channels that can be used to correct for this misalignment. As an example, it can be used to successfully register the three channels shown below.
 
 ```{figure} illustrations/alignment.png
 :width: 90%
 :align: center
 
-Three channels before and after alignment with `iaf.reg.multi_image_alignment()`.
+Example result of `iaf.reg.multi_image_alignment()`
 ```
 
-## Your data
+## Data you will use 
 
-The pooled set of image triplets, approximately ten `{DAPI, GFP, Cy3}` sets, 
-collected by the whole group during the microscopy course.
+As dataset you will use the pooled set of (approximately 10) image triplets (for DAPI, GFP and Cy3) that your entire group collected during the microscopy course.
 
-## Tasks
+## Your tasks
 
-1. **Register** each `{DAPI, GFP, Cy3}` set so that the channels overlap. Use
-   [`iaf.reg.multi_image_alignment()`](https://iaf.readthedocs.io/en/latest/generated/iaf.reg.html#iaf.reg.multi_image_alignment),
-   which aligns any number of channels and can return before/after composites.
+Please mind that you are expected to work **in pairs** and that all the code you will submit should be in one or more **Jupyter notebooks**. In your solution, please perform the following tasks:
 
-   Choose a template channel and give the reasoning for it: which channel
-   provides the most reliable alignment, and why. Display the result of the
-   registrations rather than assuming they succeeded.
+1. Register all `{DAPI, GFP, Cy3}` sets to get aligned images that can be processed for the purpose of quantifying the transfection efficiency. Pick the best template channel that gives you the best alignment. Which one is it? Why? Make sure to display the result of the registrations in you notebook.
 
-2. **Assess whether the images need correcting before measurement.** A
-   hand-built microscope rarely illuminates the field evenly, and a fluorescence
-   image usually sits on a non-zero background. Both affect intensity
-   measurements directly, and both were covered in
-   [`02_image_processing`](../notebooks/02_image_processing.ipynb).
+2. For each image triplet `{DAPI, GFP, Cy3}` , segment the nuclei and extract the corresponding (mean or median) GFP intensities. Which channel should you use for extracting nuclei and which for the GFP signal? Why?
 
-   Look at your images and decide:
+3. Pool all individual intensity results from each of the sets in a global list or array.
 
-   - Is the illumination uneven across the field? A useful check is to compare
-     the mean intensity of the centre with the edges, or to blur an image
-     heavily and see whether the result is flat.
-   - Is there a background offset, and does it differ between images?
-   - If either is present, which correction is appropriate? Uneven illumination
-     is multiplicative and is corrected by division; an additive background is
-     corrected by subtraction.
+4. Find a good approach to separate the positive from the negative nuclei and count the positive ones. You should expect to find an intensity distribution similar to this one (the function [iaf.stats.prepare_histogram()](https://ia-res.ethz.ch/docs/iaf/stats/index.html#iaf.stats.prepare_histogram) can be used to calculate an histogram with optimal bin size):
 
-   Apply what you judge to be needed, and note what you decided and why. Note
-   also that a correction changes the intensities you go on to measure, so the
-   same correction should be applied to every image.
+```{figure} illustrations/populations.png
+:width: 400px
+:align: center
 
-3. **Segment the nuclei** in each triplet and extract the **mean or median GFP
-   intensity** within each one.
+Histogram of GFP intensities in the nuclei
+```
 
-   State which channel is used for segmentation and which for measurement, and
-   why. Section 3 of [`05_features`](../notebooks/05_features.ipynb) covers this
-   pattern.
 
-4. **Pool** the per-nucleus intensities from all sets into a single array.
+5. Return the **transfection efficiency** as the ratio of positive nuclei to the total number of extracted nuclei.
 
-5. **Separate positive from negative nuclei** and count the positives. The
-   distribution will resemble the one below;
-   [`iaf.stats.prepare_histogram()`](https://iaf.readthedocs.io/en/latest/generated/iaf.stats.html#iaf.stats.prepare_histogram)
-   computes a histogram with an appropriate bin width.
+## Your submission
 
-   ```{figure} illustrations/populations.png
-   :width: 400px
-   :align: center
+Please upload a **zip archive** with your **family names as part of the file name** to [https://u.ethz.ch/ZiBOJ](https://u.ethz.ch/ZiBOJ) containing the **Jupyter notebook(s)** with the code that implements all requested tasks and the corresponding results. You don't need to submit any of the acquired images.
 
-   GFP intensity per nucleus: two overlapping populations.
-   ```
+**Deadline** for submission is **Sunday of the second week following the microscopy block**. You may be required to resubmit your work for corrections or completion.
 
-   Give the reasoning for the cut-off you choose, and report how the result
-   changes if it is moved.
-
-6. **Report the transfection efficiency**: positive nuclei divided by total
-   nuclei.
-
-## Points to consider
-
-- **The two populations overlap**, so no cut-off classifies every cell
-  correctly. The efficiency therefore carries an uncertainty that can be
-  estimated.
-- **Corrections applied in step 2 affect step 5.** If the illumination was
-  uneven and left uncorrected, nuclei near the edge appear dimmer, and some
-  positive ones may fall below the cut-off.
-- **Nuclei within one image are not independent observations.** They share a
-  preparation, a focus setting and an illumination: the point made in section 5
-  of [`05_features`](../notebooks/05_features.ipynb).
-- **The data was pooled across a group**, acquired on different self-built
-  microscopes. Whether the between-set variation exceeds the within-set
-  variation is worth checking.
-- **Segmentation errors propagate.** A dim nucleus that is missed is more likely
-  to be a negative one, which biases the efficiency upwards.
-
-## Submission
-
-Upload a **zip archive with your family names in the filename** to
-[https://u.ethz.ch/ZiBOJ](https://u.ethz.ch/ZiBOJ), containing the Jupyter
-notebook(s) with your code and results. The images do not need to be included.
-
-**Deadline: the Sunday of the second week following the microscopy block.**
-Resubmission may be requested for corrections or completion.
+**Have fun!**

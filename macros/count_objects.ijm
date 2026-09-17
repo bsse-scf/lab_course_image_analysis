@@ -45,8 +45,8 @@ for (i = 0; i < list.length; i++) {
 
 print("Done: " + processed + " images.");
 
-// The per-image counts land in the Summary window, NOT in Results - a
-// distinction that has cost people a lot of time. Save that one.
+// Per-image counts are in Summary; Results contains per-object measurements.
+// Save the Summary table here.
 if (isOpen("Summary")) {
     Table.save(dir + "counts.csv", "Summary");
     print("Wrote " + dir + "counts.csv");

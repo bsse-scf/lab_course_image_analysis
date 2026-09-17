@@ -1,6 +1,6 @@
 # Python Basics: Exercises
 
-These are exercises to practice the Python basics introduced previously. To complete the exercises, fill in the missing code where indicated by `...` and run the cells. For each exercise, you will find useful hints in the markdown cells (you can uncollapse them by clicking on the small triangle).
+These exercises practise the topics from the Python primer. Fill in the missing code indicated with `...`, then run the cell. Each task has hints you can expand if you need them.
 
 Again, the notebook below runs entirely in your browser (no installation needed). It may take a moment to start.
 

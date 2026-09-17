@@ -86,6 +86,13 @@ nbmake = "*"
 # but the conda solve would otherwise pick 9.x and the pypi solve then fails.
 importlib-metadata = "<9"
 dask = ">=2024.6"
+# Both are PyPI dependencies (pystackreg via iaf, cryptography via jupyter-ai)
+# that ship no osx-64 wheel, so on Intel Macs pixi would build them from
+# source - a C++ compiler for pystackreg and a Rust toolchain for cryptography,
+# which students do not have. Taking them from conda-forge instead gives
+# prebuilt binaries on every platform.
+pystackreg = "*"
+cryptography = "*"
 
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
@@ -118,6 +125,13 @@ test-nb = """pytest --nbmake --nbmake-timeout=900 \
   notebooks/06_curve_fitting.ipynb"""
 test-nb-heavy = "pytest --nbmake --nbmake-timeout=1800 notebooks/03_ml_segmentation.ipynb"
 fetch-data = "python .course/scripts/fetch_data.py"
+# Students run this once during setup, so day 2 does not start with everyone
+# downloading cellpose weights over the lecture-room network.
+fetch-models = "python .course/scripts/fetch_models.py"
+# The day 2 challenge dataset (~2.2 GB) is too large for the repository; this
+# fetches it from polybox into data/challenge/. Resumable, so a dropped
+# connection just means running it again.
+download-challenge-data = "python .course/scripts/download_challenge_data.py"
 make-exercises = "python .course/scripts/make_exercises.py"
 make-derived = "python .course/scripts/make_derived_data.py"
 check-schedule = "python .course/scripts/check_schedule.py"

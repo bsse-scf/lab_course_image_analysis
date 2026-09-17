@@ -2,19 +2,16 @@
 
 **~25 min.** Making channels line up.
 
-## Why this is here
+## Context
 
-Your homework will use images you acquire yourselves on a microscope you built
-yourselves. On that setup you change the filter by hand between channels, and the
-sample moves a little every time. So the DAPI, GFP and Cy3 images of the *same
-cells* will not overlap, and if they do not overlap, you cannot ask "how bright
-is the GFP inside this nucleus?", because the nucleus is not where the binary image says
-it is.
+In the microscopy module, you will acquire DAPI, GFP and Cy3 images with
+manual filter changes. The sample may shift between channels. If the channels
+are misaligned, a mask drawn on DAPI may select the wrong pixels in GFP.
 
 Fixing that is called **registration**: finding the transform that brings one
 image onto another.
 
-This exercise is a rehearsal with a known answer.
+This exercise uses images with known shifts, so you can check your result.
 
 ## Preparation
 
@@ -68,8 +65,8 @@ different, look at whether it was allowed to rotate and scale.
    them up. **What would happen if you gave it two channels that stain completely
    different structures**: say, nuclei in one and the cytoskeleton in the other?
 
-7. In your homework you will have exactly that problem: DAPI marks nuclei, Cy3
-   marks actin, and they genuinely do not look alike. **Which of your three
+7. In the homework, DAPI marks nuclei and Cy3 marks actin. These channels show
+   different structures. **Which of your three
    channels would you use as the reference, and why?**
 
    *There is no single right answer, but there is a good argument to be made.

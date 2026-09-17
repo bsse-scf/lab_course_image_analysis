@@ -1,7 +1,6 @@
 # E1: Fiji basics
 
-**~40 min.** Getting comfortable with what an image *is* before doing anything
-clever with it.
+**~40 min.** Inspect pixel values, image types, calibration and channels.
 
 ## Preparation
 
@@ -11,8 +10,7 @@ Open `data/bbbc020/images/2h_1_nuclei.tif` and
 
 ## Part 1: what is in this image?
 
-Answer each of these using Fiji. The answer matters less than knowing where to
-look.
+Use Fiji to find each answer. Note which command or window provides it.
 
 1. **What are the dimensions of the image, in pixels?**
    *Hint: the title bar of the image window shows them, along with the data type.*
@@ -50,10 +48,9 @@ has no idea what physical size these pixels represent.
    your analysis on images from a different objective?
 
 ```{warning}
-An uncalibrated image will still give you numbers. They just will not mean what
-you think they mean. This is not hypothetical: the macro used for the day-2
-challenge filters objects by `size=0-409` in **calibrated** units, and quietly
-does something completely different if the calibration is missing or wrong.
+Fiji can measure an uncalibrated image, but lengths and areas will be reported
+in pixels and square pixels. Check the units before interpreting a measurement.
+A size filter in a macro also changes meaning when the calibration changes.
 ```
 
 10. Set the calibration yourself: in `Image ▸ Properties…`, set the pixel width

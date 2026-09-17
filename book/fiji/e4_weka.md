@@ -1,6 +1,6 @@
 # E4: Segmentation using machine learning
 
-**~50 min.** When you cannot write down the rule, show examples instead.
+**~50 min.** Train and apply a pixel classifier in Fiji.
 
 ```{important}
 This exercise produces files that the day 2 notebooks read back
@@ -10,15 +10,11 @@ in. Do part 3 even if you are running short of time.
 ## Why
 
 In [E3](e3_segmentation.md) the nuclei thresholded well and the cells did not.
-That is not because you chose badly: it is because a threshold can only ask one
-question, *is this pixel brighter than X?*, and for the CD11b channel the answer
-simply does not separate cell from background.
-
-A human looking at the same image does much better, using things a threshold has
-no access to: texture, whether a pixel sits near an edge, how the neighbourhood
-varies. **Trainable Weka Segmentation** lets you supply those extra questions.
-You paint a few examples of "this is cell" and "this is background", and it fits
-a classifier that labels every remaining pixel.
+The CD11b signal varies within cells and some cell edges are faint, so one
+intensity threshold does not separate cells from background well. **Trainable
+Weka Segmentation** uses image features such as texture and local edges. You
+mark example pixels as cell or background, then train a classifier to label the
+rest of the image.
 
 ## Part 1: train a classifier
 
@@ -55,8 +51,7 @@ makes training slower and can make it overfit your handful of strokes.
 
 ## Part 2: apply a classifier you did not train
 
-Training on every image is not a workflow. The point of saving a classifier is to
-reuse it.
+Save the trained classifier so you can apply it to other images.
 
 10. Close the plugin and reopen it on a *different* image:
     `data/bbbc020/images/15min_1_cells.tif`.
@@ -73,12 +68,11 @@ reuse it.
 14. **Does it do equally well on all three?** If not, what is different about the
     images where it struggles?
 
-```{admonition} The question worth arguing about
+```{admonition} Applying a classifier to new images
 :class: note
-A classifier trained on one field and applied to twenty others is exactly what
-you want: it is reproducible, and it is fast. But it has now seen the data it
-was trained on and nothing else. What could change about your imaging between
-Monday and Friday that would silently break it?
+A saved classifier applies the same learned rule to each image. Its performance
+may change if the illumination, staining or imaging settings change. Which of
+these could differ between two acquisition days?
 ```
 
 ## Part 3: export for day 2
@@ -102,9 +96,8 @@ You should end up with six files.
 
 ```{note}
 If you run out of time or something goes wrong, the day 2 notebook falls back to
-a reference copy in `data/bbbc020/weka/`. You will get more out of it using your
-own, though: comparing *your* classifier against a deep-learning model is more
-interesting than comparing someone else's.
+a reference copy in `data/bbbc020/weka/`. Using your own exports lets you compare the classifier you trained with the
+other methods on day 2.
 ```
 
 ## Think about it

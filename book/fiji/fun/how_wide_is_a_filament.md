@@ -1,6 +1,6 @@
 # How wide is a filament?
 
-**~15 min.** A small exercise with a surprisingly deep answer.
+**~15 min.** Measure a filament profile and consider the resolution limit.
 
 ## Preparation
 
@@ -22,7 +22,7 @@ unaffected.
 3. **How wide is that peak?** Click **List** in the plot window to see the
    numbers.
 
-Now the real question: **what do you mean by "wide"?**
+A width depends on where you place the boundaries of the peak.
 
 4. Try each of these and write down the number you get:
    - the width at the very bottom of the peak, where it meets the background
@@ -41,7 +41,7 @@ Now the real question: **what do you mean by "wide"?**
    Whatever wobble you see there is the noise floor, and it sets a limit on how
    precisely any of the above can be measured.
 
-8. Finally, the uncomfortable one. This image is uncalibrated, so your answer is
+8. Finally, consider the resolution limit. This image is uncalibrated, so your answer is
    in pixels. Suppose a pixel is 100 nm, and your filament measures 4 pixels
    FWHM: 400 nm. **An actin filament is about 7 nm across.** So what did you
    actually measure?
@@ -55,8 +55,7 @@ is imaged as a blur of that size regardless of how small it really is.
 A single actin filament is fifty times finer than that. What you measured was the
 optics, not the filament.
 
-This is why "how wide is it?" is a question you should be suspicious of whenever
-the answer comes out near the resolution limit. Counting filaments, comparing
-intensities, measuring things much larger than the PSF: all fine. Measuring the
-width of something you cannot resolve: not fine.
+When the measured width is close to the resolution limit, it mainly reflects
+the microscope's response rather than the filament's physical width. State that
+limit when reporting the measurement.
 ```

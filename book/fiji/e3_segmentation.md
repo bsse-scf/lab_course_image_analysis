@@ -64,11 +64,9 @@ before seeing the fix.
 
 ## Part 4: measuring the *other* channel
 
-Here is the step that makes this a real workflow rather than an exercise.
-
-You have masks of the nuclei, made from the DAPI channel. But the interesting
-question is usually about a *different* channel: how much CD11b is there, in
-each cell?
+You have masks of nuclei from the DAPI channel. Fiji can use those masks to
+measure intensities in another channel. Here you will measure CD11b signal
+within the nuclear regions; that differs from measuring the whole cell.
 
 12. Re-run `Analyze ▸ Set Measurements…` and set **Redirect to:** to
     `2h_1_cells.tif` (it must be open).
@@ -76,9 +74,8 @@ each cell?
 13. Run `Analyze ▸ Analyze Particles…` again on your mask.
 
 14. **The areas are the same as before, but the mean gray values have changed.
-    Why?** Make sure you can explain this to your neighbour: "redirect" is the
-    single most useful checkbox in this dialog, and it is the thing you will do
-    in your homework to measure GFP inside DAPI-defined nuclei.
+    Why?** Explain what **Redirect to** changes. You will use the same approach
+    in the homework to measure GFP within DAPI-defined nuclei.
 
 ## Part 5: the hard channel
 
@@ -91,4 +88,4 @@ each cell?
     - Do the cells have edges that a threshold can find at all?
     - What would you have to know about the image to do better?
 
-If that felt unsatisfying, good. That is what [E4](e4_weka.md) is for.
+In [E4](e4_weka.md), you will train a pixel classifier for this channel.

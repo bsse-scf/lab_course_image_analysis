@@ -1,6 +1,6 @@
 # Spot the artifact
 
-**~15 min.** Three images. Each has had exactly one thing done to it.
+**~15 min.** Compare three processed images with an unmodified reference.
 
 ## Preparation
 
@@ -13,7 +13,7 @@ Open all four images in `data/misc/artifacts/`:
 
 For each of A, B and C, work out **what was done and how you can tell**.
 
-Some things worth trying:
+Use these checks:
 
 - Look at the histogram of each (Ctrl/Cmd+H) and compare with the original.
   A histogram often shows what your eye does not.
@@ -35,10 +35,10 @@ nuclei can be merged into one by it.
 
 **B: saturated.** The brightness was pushed up until the bright nuclei clipped.
 The giveaway is a **spike at 255** in the histogram: many pixels stacked at the
-maximum value, which does not happen naturally. Counting still works. Any
+maximum value. Counting may still work, depending on the threshold. Any
 intensity measurement is now meaningless for the bright objects, because you
-cannot tell "bright" from "brighter" once they all read 255. This one is
-dangerous precisely because the image looks *better*.
+cannot tell "bright" from "brighter" once they all read 255. The display may look clearer even though the bright intensity values have been
+lost.
 
 **C: salt-and-pepper noise.** Isolated pure-black and pure-white pixels, as from
 a failing detector. The clearest histogram signature is the **spike at 255**;
@@ -53,11 +53,7 @@ filter removes it almost perfectly, as the Python notebooks show.
 
 ## Why this matters
 
-The reason to be able to spot these is that **you will be handed images someone
-else processed**, often without being told what they did. A saturated image and a
-well-exposed one look similar on screen; only the histogram gives it away.
-
-Adjusting the *display* of an image is fine and necessary. Adjusting the *data*
-and then measuring it is not. The rule of thumb: keep the raw file, do your
-processing in a script, and be able to say exactly what happened between the
-microscope and the number in your paper.
+Processed images may arrive without a complete record of the processing. Check
+the histogram and pixel values before measuring them, and keep the raw image so
+you can trace each result back to the data. Display adjustments leave pixel
+values unchanged; processing operations can change the measurements.

@@ -1,12 +1,6 @@
 # Vocabulary
 
-Bioimage analysis has a fairly settled vocabulary, and using it makes it much
-easier to search for help, read a methods section, or ask a question on the
-[image.sc forum](https://forum.image.sc/). The terms below are the ones this
-course uses, defined the way they are used in the wider field.
-
-The right-hand column says where each one first appears, so this page also works
-as an index.
+This page defines the terms used in the course.
 
 ## Images
 
@@ -84,7 +78,6 @@ as an index.
 | **Recall** | Of the real objects, the fraction you found. | [`04` §3](../notebooks/04_segmentation_metrics.ipynb) |
 | **F1 score** | The balance of precision and recall, in one number. | [`04` §3](../notebooks/04_segmentation_metrics.ipynb) |
 | **Matching threshold** | How much overlap is required before a predicted object counts as matching a real one. Conventionally an IoU of 0.5, and worth reporting. | [`04` §5](../notebooks/04_segmentation_metrics.ipynb) |
-| **Cross-validation** | Measuring accuracy on data that was not used to choose the model, so the number is not optimistic. | [Detective game](../notebooks/05_detective_game_ex.ipynb) |
 
 ## Fitting
 
@@ -95,13 +88,14 @@ as an index.
 | **Residual** | The difference between a data point and the fitted curve. Structure in the residuals means the model is the wrong shape. | [`06` §6](../notebooks/06_curve_fitting.ipynb) |
 | **IC50** | The concentration at which an effect is reduced by half. | [Challenge](challenge.md) |
 
-## A note on two pairs that are easy to confuse
+## Easy to confuse
 
 **Binary image and label image.** A binary image says *whether* a pixel is
-foreground. A label image says *which object* it belongs to. A binary image
-covering twenty nuclei and one covering a single large nucleus are
-indistinguishable as data.
+foreground (True) or background (False). A label image says *which object* it belongs to (e.g. 1, 2, 3 for object IDs 1, 2, 3). Where there's no object at all, the label image has a value of 0.
 
-**Feature, twice.** In pixel classification a feature is a property of a *pixel*,
+Binary image: "Semantic segmentation" (what category is this pixel?)
+Label image: "Instance segmentation" (which object is this pixel part of?)
+
+**Feature** In pixel classification a feature is a property of a *pixel*,
 computed from its neighbourhood. In measurement a feature is a property of an
 *object*. Both are standard, and the context makes clear which is meant.
