@@ -18,7 +18,7 @@ You collected the data on a Nikon Widefield microscope that stored all 40 images
 
 Now that the experimental part is concluded and you have your data, you want to **measure the dose-response curve of your anti-proliferative drug candidate**.
 
-The dataset is the file `plate01.zip` which you downloaded [earlier](./download_example_data.md). It is in the Nikon ND2 file format.
+The dataset is the file `plate01.zip` which you downloaded [earlier](./setup/download_data.md). It is in the Nikon ND2 file format.
 
 ## Your task
 
