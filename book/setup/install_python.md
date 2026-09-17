@@ -56,35 +56,4 @@ If not, type the following command in the terminal, which can take a minute:
 pixi global install git
 ```
 
-## 4. Get the course material
-
-Download (or "clone") the course repository (meaning "course folder") from GitHub. In a terminal, navigate to a folder where you want to put the course folder. You can use `cd` to change the current folder, for example `cd ~` to go to your home folder. Then run:
-
-```bash
-git clone https://github.com/bsse-scf/scu_lab_course_ia.git
-```
-
-Now you have a folder `scu_lab_course_ia` with the course material. Change into that folder: 
-
-```bash
-cd scu_lab_course_ia
-```
-
-
-```{warning}
-Clone into a folder that is **not synced to the cloud**: not `Documents` or
-`Desktop` if those live in OneDrive or iCloud, and not a Dropbox folder. The
-environment is several gigabytes in many thousands of files, and a sync client
-can interrupt installation or make it much slower. Your home folder is a suitable
-location.
-```
-
-```{warning}
-Use a plain `git clone`, **not** `git clone --recurse-submodules`. The repository
-references a `.course/solutions/` submodule that only instructors can read. If you clone
-with `--recurse-submodules` you will see an error about *"Could not read from
-remote repository"*: the student notebooks and data are still available. The instructor-only
-`.course/solutions/` folder may remain empty.
-```
-
-Next: [set up the environment](setup_environment.md).
+Next: [set up the course Python environment](setup_environment.md).
