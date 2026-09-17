@@ -9,6 +9,14 @@
 # `.jupyter/personas/` instead of walking up from the chat file.
 cd /home/jovyan/project
 
+# RRP-only resource limits. Both the Jupyter server and the XFCE desktop
+# (started by jupyter-remote-desktop-proxy as a child of the server) inherit
+# these, so they reach kernels, terminals and the Fiji/napari launchers alike.
+export JAVA_TOOL_OPTIONS="-Xmx5g"
+export OMP_NUM_THREADS=2
+export MKL_NUM_THREADS=2
+export OPENBLAS_NUM_THREADS=2
+
 # postBuild installs the environment into ~/pixi-env (REPO_DIR is a different
 # path at build time than at runtime, so it cannot live in the project). Pixi
 # keys environments to the project directory, so without this link it would
