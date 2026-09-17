@@ -17,6 +17,7 @@ cd scu_lab_course_ia
 
 ```{admonition} What is a repository?
 A repository is a folder that contains files and a history of changes to those files. It is usually hosted on a service like GitHub, and for this course, it contains the course material, including notebooks, scripts, and data. You can think of it as a "course folder" that you can download and update.
+```
 
 ```{warning}
 Clone into a folder that is **not synced to the cloud**: not `Documents` or
