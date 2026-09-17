@@ -40,6 +40,13 @@ base = Path.home()
 Path(base / 'openbis/data/20260819080658667-36/original/plate01.nd2')
 ```
 
+To download the dataset manually for your local installation type:
+
+```Python
+pixi run python data/download_challenge_data.py USERNAME
+```
+it will the prompt you for the password and download the `plate.01.nd` dataset to `data/challenge_data` for you to use.
+
 For exercises with `ImageJ/Fiji` or `napari` in JupyterLab click top right onto `File` -> `New Launcher` -> `Desktop`. This will start a Linux Desktop in a new Tab of your browser. Then for example click onto the `Fiji` icon on the Desktop to start the application.
 ### AI course tutor
 
