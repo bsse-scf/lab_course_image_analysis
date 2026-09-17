@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quality control: Segmentation metrics &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04_segmentation_metrics';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise: measuring a segmentation" href="04_segmentation_metrics_ex.html" />
+    <link rel="prev" title="Exercise: machine learning for segmentation" href="03_ml_segmentation_ex.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../book/landing.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Methods in Cell Analysis and Laboratory Automation: Image Analysis - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Methods in Cell Analysis and Laboratory Automation: Image Analysis - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../book/landing.html">
+                    Image Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/course_schedule.html">Schedule</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../book/setup/index.html">Setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../book/setup/install_fiji.html">Install Fiji</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/setup/install_python.html">Install Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/setup/setup_environment.html">Set up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/setup/download_data.html">Download the example data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../book/python_basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../book/python_basics_ex.html">Python Basics: Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Analysis Basics with Fiji</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../book/fiji/index.html">Fiji practical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/e1_basics.html">E1: Fiji basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/e2_registration.html">E2: Registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/e3_segmentation.html">E3: Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/e4_weka.html">E4: Segmentation using machine learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/e5_macros.html">E5: Macros <em>(optional)</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../book/fiji/fun/spot_the_artifact.html">Spot the artifact</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/fiji/cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/fiji/cheat_sheet_macros.html">Cheat sheet: Fiji macros</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflows in Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_image_handling.html">Basic image handling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_image_handling_ex.html">Exercise: image handling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_image_processing.html">Image processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_image_processing_ex.html">Exercise: image processing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_ml_segmentation.html">Machine learning for segmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_ml_segmentation_ex.html">Exercise: machine learning for segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Quality control: Segmentation metrics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_segmentation_metrics_ex.html">Exercise: measuring a segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_features.html">Feature extraction and measurements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_features_ex.html">Exercise: Disaster at the Microscope</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="06_curve_fitting.html">Data Analysis: curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="06_curve_fitting_ex.html">Exercise: a growth curve from real images</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Independent work</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/challenge.html">Challenge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/homework.html">Homework</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/further_reading.html">Further reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/04_segmentation_metrics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Quality control: Segmentation metrics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-ground-truth">1. What is a ground truth?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-methods">3. Scoring the three methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">3. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-two-weka-rows-against-each-other">Read the two Weka rows against each other</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-ground-truth-is-wrong">4. When the ground truth is wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-matching-threshold">5. Choosing the matching threshold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="quality-control-segmentation-metrics">
+<h1>Quality control: Segmentation metrics<a class="headerlink" href="#quality-control-segmentation-metrics" title="Link to this heading">#</a></h1>
+<p><strong>Duration</strong> ~40 min  ·  <strong>Session</strong> Day 2, Python notebooks</p>
+<p>So far every judgement has been “look at the picture, does it seem right?”.
+That works until two results look similarly plausible, or until a reviewer asks
+how that judgement was reached.</p>
+<p>This notebook replaces squinting with numbers, and shows that the obvious
+number is not enough.</p>
+<p><strong>This notebook covers</strong></p>
+<ul class="simple">
+<li><p>computing IoU and Dice, and how they differ</p></li>
+<li><p>why pixel-level scores can be badly misleading</p></li>
+<li><p>matching objects between a result and a ground truth</p></li>
+<li><p>reporting precision, recall and F1 for a segmentation</p></li>
+</ul>
+<p><strong>Data</strong>: <code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code>, plus the Weka export from the Fiji practical.</p>
+<section id="what-is-a-ground-truth">
+<h2>1. What is a ground truth?<a class="headerlink" href="#what-is-a-ground-truth" title="Link to this heading">#</a></h2>
+<p>A <strong>ground truth</strong> is a reference segmentation against which we compare a computed segmentation.</p>
+<p>For a teaching example, we can make a tiny ground truth ourselves. This makes the metric formulas easier to understand before we work with real microscopy images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tifffile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">label2rgb</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">course</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA</span><span class="p">,</span> <span class="n">show</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">iaf.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">show_labels</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">iou</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Intersection over union of two masks (or label images)."""</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">union</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">union</span> <span class="k">if</span> <span class="n">union</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dice</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Dice coefficient of two masks."""</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total</span> <span class="k">if</span> <span class="n">total</span> <span class="k">else</span> <span class="mf">0.0</span>
+    
+
+<span class="c1"># A small synthetic ground-truth object</span>
+<span class="n">gt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">gt</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># A slightly different prediction</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
+<span class="n">prediction</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">35</span><span class="p">:</span><span class="mi">75</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">show_labels</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Ground truth"</span><span class="p">)</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Prediction"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b1be8103279ea516fe9990a230ad46adef84ed65914897fe70141c42c2f344c8.png" src="../_images/b1be8103279ea516fe9990a230ad46adef84ed65914897fe70141c42c2f344c8.png" />
+</div>
+</div>
+</section>
+<section id="the-two-pixel-scores">
+<h2>2. The two pixel scores<a class="headerlink" href="#the-two-pixel-scores" title="Link to this heading">#</a></h2>
+<p>Both compare a predicted mask with a reference, and both are built from the same
+two quantities: the pixels they <strong>share</strong>, and the pixels either one covers.</p>
+<div class="math notranslate nohighlight">
+\[\text{IoU} = \frac{|A \cap B|}{|A \cup B|}
+\qquad
+\text{Dice} = \frac{2|A \cap B|}{|A| + |B|}\]</div>
+<p>IoU is also called the <strong>Jaccard index</strong>: same formula, different name,
+depending on the field.</p>
+<p>They always agree on ordering (if one says a result is better, so does the
+other), but Dice is always the larger number for an imperfect overlap. Quoting
+Dice therefore flatters a result slightly, which is worth knowing when reading
+someone else’s paper.</p>
+<p>Now lets implement the two metrics and test it on <em>in silico</em> data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A quick sanity check on shapes we can reason about by hand.</span>
+<span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="nb">bool</span><span class="p">)</span>
+<span class="n">square</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>          <span class="c1"># 40 x 40 = 1600 px</span>
+
+<span class="n">shifted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="nb">bool</span><span class="p">)</span>
+<span class="n">shifted</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>         <span class="c1"># same size, moved down by 20</span>
+<span class="n">empty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">show_labels</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Square"</span><span class="p">)</span>
+<span class="n">show_labels</span><span class="p">(</span><span class="n">shifted</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Square shifted by 20 pixel"</span><span class="p">)</span>
+<span class="n">show_labels</span><span class="p">(</span><span class="n">empty</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Empty"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"identical      : IoU </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">square</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Dice </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">square</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"half-overlapping: IoU </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">shifted</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Dice </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">shifted</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no overlap     : IoU </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">empty</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Dice </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">empty</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>identical      : IoU 1.000  Dice 1.000
+half-overlapping: IoU 0.333  Dice 0.500
+no overlap     : IoU 0.000  Dice 0.000
+</pre></div>
+</div>
+<img alt="../_images/8a0ca63e382467a7e15326a2a4e92159d662c3751bf573986b848a69a4bf834b.png" src="../_images/8a0ca63e382467a7e15326a2a4e92159d662c3751bf573986b848a69a4bf834b.png" />
+</div>
+</div>
+<p>The half-overlapping case is the one to remember: the two squares share exactly
+half their area, and IoU says 0.33 while Dice says 0.50. Same picture, two
+different numbers, so the one used should always be stated.</p>
+</section>
+<section id="scoring-the-three-methods">
+<h2>3. Scoring the three methods<a class="headerlink" href="#scoring-the-three-methods" title="Link to this heading">#</a></h2>
+<p>To test how “good” our segmentation algorithms and efforts were so far we can compare it to a ground truth using the metrics we just learned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_otsu</span><span class="p">,</span> <span class="n">gaussian</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.morphology</span><span class="w"> </span><span class="kn">import</span> <span class="n">remove_small_objects</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">binary_fill_holes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">rgb2gray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cellpose</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+
+<span class="n">FIELD</span> <span class="o">=</span> <span class="s2">"24h_2"</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"jw-24h 2_c1.tif"</span><span class="p">))</span>
+<span class="n">truth</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"gt"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"jw-24h 2_c1 [1].tif"</span><span class="p">)</span>
+
+<span class="c1"># 1. yesterday's threshold pipeline</span>
+<span class="n">smoothed</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">preserve_range</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">binary_fill_holes</span><span class="p">(</span><span class="n">smoothed</span> <span class="o">&gt;</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">smoothed</span><span class="p">))</span>
+<span class="n">threshold_labels</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">remove_small_objects</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># 2. yesterday's Weka classifier (class 1 is 'cell'; checked in notebook 03),</span>
+<span class="c1">#    both as it comes (semantic) and after the watershed from notebook 03.</span>
+<span class="n">weka_mask</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"weka"</span> <span class="o">/</span> <span class="s2">"jw-24 2_c1_classified.tif"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">weka_labels</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">weka_mask</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance_transform_edt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">watershed</span>
+
+<span class="n">weka_distance</span> <span class="o">=</span> <span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">weka_mask</span><span class="p">)</span>
+<span class="n">weka_instances</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">weka_distance</span><span class="p">,</span> <span class="n">label</span><span class="p">(</span><span class="n">weka_distance</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="n">weka_mask</span><span class="p">)</span>
+
+<span class="c1"># 3. Cellpose</span>
+<span class="n">cellpose_labels</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">"cyto"</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"threshold"</span><span class="p">:</span> <span class="n">threshold_labels</span><span class="p">,</span>
+    <span class="s2">"Weka"</span><span class="p">:</span> <span class="n">weka_labels</span><span class="p">,</span>
+    <span class="s2">"Weka+watershed"</span><span class="p">:</span> <span class="n">weka_instances</span><span class="p">,</span>
+    <span class="s2">"Cellpose"</span><span class="p">:</span> <span class="n">cellpose_labels</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'IoU'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Dice'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'objects'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2">   (truth: </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">44</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">9d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method               IoU    Dice   objects   (truth: 38)
+--------------------------------------------
+threshold          0.509   0.675        89
+Weka               0.878   0.935       307
+Weka+watershed     0.880   0.936       162
+Cellpose           0.909   0.953        52
+</pre></div>
+</div>
+</div>
+</div>
+<p>By pixel score the ranking is clear: Cellpose, then Weka, then the threshold.</p>
+<p>Now look at the object counts beside those scores. <strong>Weka scores a Dice of 0.94
+, within a whisker of Cellpose, while producing 307 objects for
+38 cells.</strong> For an experiment that counts cells, those two methods are
+not remotely comparable. The pixel score cannot see the difference, because
+it never asks how the pixels are grouped.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Raw image"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">),</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"GT (</span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> obj)"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> obj (IoU: </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="p">[</span><span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span> <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axs</span><span class="p">[</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">):]]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/37468a2ba2767ed2080898990e4a4f7a306aed6981151af071baa74da30239fe.png" src="../_images/37468a2ba2767ed2080898990e4a4f7a306aed6981151af071baa74da30239fe.png" />
+</div>
+</div>
+</section>
+<section id="matching-objects-instead-of-pixels">
+<h2>3. Matching objects instead of pixels<a class="headerlink" href="#matching-objects-instead-of-pixels" title="Link to this heading">#</a></h2>
+<p>To ask object-level questions we have to decide when a predicted object <em>is</em> a
+particular real object. The standard rule: pair each prediction with the
+reference object it overlaps most, and accept the pairing if their IoU clears a
+threshold: conventionally <strong>0.5</strong>.</p>
+<p>Every prediction and every reference object then falls into one of three groups:</p>
+<ul class="simple">
+<li><p><strong>true positive</strong>: a prediction matched to a reference object</p></li>
+<li><p><strong>false positive</strong>: a prediction matched to nothing (invented)</p></li>
+<li><p><strong>false negative</strong>: a reference object nothing matched (missed)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">match_objects</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">min_iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Greedily pair predicted objects with ground-truth objects by IoU.</span>
+
+<span class="sd">    Returns (true positives, false positives, false negatives).</span>
+<span class="sd">    """</span>
+    <span class="n">matched_truth</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">true_positives</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">prediction</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">predicted</span> <span class="o">=</span> <span class="n">prediction</span> <span class="o">==</span> <span class="n">p</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">predicted</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Only ground-truth objects that actually touch this prediction can win.</span>
+        <span class="n">best_score</span><span class="p">,</span> <span class="n">best_id</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">truth</span><span class="p">[</span><span class="n">predicted</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">iou</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">truth</span> <span class="o">==</span> <span class="n">t</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span><span class="p">,</span> <span class="n">best_id</span> <span class="o">=</span> <span class="n">score</span><span class="p">,</span> <span class="n">t</span>
+
+        <span class="k">if</span> <span class="n">best_score</span> <span class="o">&gt;=</span> <span class="n">min_iou</span> <span class="ow">and</span> <span class="n">best_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">matched_truth</span><span class="p">:</span>
+            <span class="n">true_positives</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">matched_truth</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">best_id</span><span class="p">)</span>
+
+    <span class="n">false_positives</span> <span class="o">=</span> <span class="n">prediction</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">true_positives</span>
+    <span class="n">false_negatives</span> <span class="o">=</span> <span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">true_positives</span>
+    <span class="k">return</span> <span class="n">true_positives</span><span class="p">,</span> <span class="n">false_positives</span><span class="p">,</span> <span class="n">false_negatives</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">scores</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="k">if</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="n">recall</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span> <span class="k">if</span> <span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1</span>
+
+
+<span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'IoU'</span><span class="si">:</span><span class="s2">&gt;6s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Dice'</span><span class="si">:</span><span class="s2">&gt;6s</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'TP'</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'FP'</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'FN'</span><span class="si">:</span><span class="s2">&gt;4s</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'prec'</span><span class="si">:</span><span class="s2">&gt;6s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'recall'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'F1'</span><span class="si">:</span><span class="s2">&gt;6s</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">match_objects</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">truth</span><span class="p">)</span>
+    <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">scores</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> | "</span>
+          <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">tp</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">fp</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">fn</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method              IoU   Dice |   TP   FP   FN |   prec  recall     F1
+-----------------------------------------------------------------------
+threshold         0.509  0.675 |   13   76   25 |  0.146   0.342  0.205
+Weka              0.878  0.935 |   10  297   28 |  0.033   0.263  0.058
+Weka+watershed    0.880  0.936 |   29  133    9 |  0.179   0.763  0.290
+Cellpose          0.909  0.953 |   34   18    4 |  0.654   0.895  0.756
+</pre></div>
+</div>
+</div>
+</div>
+<section id="read-the-two-weka-rows-against-each-other">
+<h3>Read the two Weka rows against each other<a class="headerlink" href="#read-the-two-weka-rows-against-each-other" title="Link to this heading">#</a></h3>
+<p>This is the pair to study.</p>
+<p><strong>Their pixel scores are almost identical</strong>: IoU 0.878 and 0.80, Dice 0.935 and 0.936. That
+is not a coincidence: a watershed only redraws boundaries <em>inside</em> a binary image it was
+handed, so essentially the same pixels are called “cell” either way.</p>
+<p><strong>Their object scores are not close at all.</strong> F1 goes from 0.058 to 0.290, and true
+positives from 10 to 29. Splitting the merged blobs turned nine cells that no
+metric could credit into nine correctly identified ones.</p>
+<p>So the same segmentation, by one family of measure, did not change at all.
+<strong>The two families are answering different questions</strong>,
+and a paper reporting only Dice would show no improvement whatsoever here.</p>
+<p>The single point to take from this notebook: <strong>the metric has to match the
+question being asked.</strong> For total stained area, a pixel score is right. For
+counting cells, or measuring anything per cell, object-level matching is
+required, and a good Dice will quietly mislead.</p>
+<p>The other rows are worth reading too:</p>
+<ul class="simple">
+<li><p><strong>Threshold</strong>: precision 0.146, recall 0.342: it both invents and misses, which
+is what “89 objects for 38 cells, only 13 of them right” looks like.</p></li>
+<li><p><strong>Cellpose</strong>: recall 0.895 with precision 0.654. It found 34 of the 38 annotated
+cells and missed one.</p></li>
+</ul>
+</section>
+</section>
+<section id="when-the-ground-truth-is-wrong">
+<h2>4. When the ground truth is wrong<a class="headerlink" href="#when-the-ground-truth-is-wrong" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cellpose's false positives: are they mistakes, or unannotated cells?</span>
+<span class="n">nuclei_truth</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"gt"</span> <span class="o">/</span> <span class="s2">"jw-24h 2_c5 [1].tif"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"annotated nuclei :"</span><span class="p">,</span> <span class="n">nuclei_truth</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"annotated cells  :"</span><span class="p">,</span> <span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cellpose objects :"</span><span class="p">,</span> <span class="n">cellpose_labels</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>annotated nuclei : 36
+annotated cells  : 38
+Cellpose objects : 52
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are less annotated <strong>nuclei</strong> than annotated <strong>cells</strong>.</p>
+<p>The dataset it is not perfect, and a handful of Cellpose’s false positives
+are real cells that were split. Its precision of 0.65 is
+therefore a <em>floor</em>, not an estimate: the metric has no way to credit a correct
+detection of an unlabelled cell.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ground truth is not truth. It is one person’s annotation, made with finite time
+and a particular purpose. Before trusting any score, look at what was annotated:
+here, <code class="docutils literal notranslate"><span class="pre">jw-24h</span> <span class="pre">2_c*</span></code> is the only field in which every cell was outlined, which is why
+the exercise below uses it.</p>
+</div>
+<p>This cuts both ways in practice. A published benchmark number is only meaningful
+relative to the annotations it was computed against, and a model that scores
+worse than another on one dataset may simply disagree with that dataset’s
+conventions.</p>
+</section>
+<section id="choosing-the-matching-threshold">
+<h2>5. Choosing the matching threshold<a class="headerlink" href="#choosing-the-matching-threshold" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">&gt;10.1f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="p">(</span><span class="mi">16</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
+        <span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">match_objects</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">min_iou</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scores</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">fn</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">10.3f</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">(F1 at each matching IoU threshold)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method                 0.3       0.5       0.7       0.9
+--------------------------------------------------------
+threshold            0.283     0.205     0.110     0.016
+Weka                 0.070     0.058     0.052     0.029
+Weka+watershed       0.330     0.290     0.200     0.020
+Cellpose             0.800     0.756     0.600     0.333
+
+(F1 at each matching IoU threshold)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The 0.5 convention is exactly that: a convention. A stricter threshold demands
+better-fitting outlines and every score falls.</p>
+<p>Notice how differently they fall. Cellpose still manages 0.6 at a demanding 0.7,
+whereas plain Weka is flat at 0.052 until it collapses to zero: its handful of
+matches are blobs that happen to contain one dominant cell, and nothing about
+tightening the criterion can create matches for the cells that were merged away.</p>
+<p>When an F1 is reported, <strong>the matching threshold should be stated with it</strong>. It is
+not comparable otherwise, and papers do vary.</p>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>metric</p></th>
+<th class="head"><p>measures</p></th>
+<th class="head"><p>use it when</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IoU / Jaccard</p></td>
+<td><p>pixel overlap</p></td>
+<td><p>area or extent is what matters</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dice</p></td>
+<td><p>pixel overlap, weighted to intersection</p></td>
+<td><p>as above; always reads higher than IoU</p></td>
+</tr>
+<tr class="row-even"><td><p>precision</p></td>
+<td><p>how many of the detected objects are real</p></td>
+<td><p>false positives are costly</p></td>
+</tr>
+<tr class="row-odd"><td><p>recall</p></td>
+<td><p>how many real objects were found</p></td>
+<td><p>misses are costly</p></td>
+</tr>
+<tr class="row-even"><td><p>F1</p></td>
+<td><p>the balance of the two</p></td>
+<td><p>general-purpose object-level score</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>And the three habits worth keeping:</p>
+<ol class="arabic simple">
+<li><p>Report a pixel score <strong>and</strong> an object score. They can disagree completely.</p></li>
+<li><p>State which metric and which matching threshold were used.</p></li>
+<li><p>Look at what the ground truth actually contains before believing any of it.</p></li>
+</ol>
+<p>Next: <code class="docutils literal notranslate"><span class="pre">05_features</span></code>, where the segmentation stops being the goal and becomes the
+starting point for measuring the objects that were found.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_ml_segmentation_ex.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise: machine learning for segmentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_segmentation_metrics_ex.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise: measuring a segmentation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-ground-truth">1. What is a ground truth?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-methods">3. Scoring the three methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">3. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-two-weka-rows-against-each-other">Read the two Weka rows against each other</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-ground-truth-is-wrong">4. When the ground truth is wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-matching-threshold">5. Choosing the matching threshold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marvin Albert and Andreas Cuny. Large parts of the content were adapted with permission from teaching material developed by Aaron Ponti.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026 ETH Zurich.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Vocabulary &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/vocabulary';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Further reading" href="further_reading.html" />
+    <link rel="prev" title="Homework" href="homework.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="landing.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Methods in Cell Analysis and Laboratory Automation: Image Analysis - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Methods in Cell Analysis and Laboratory Automation: Image Analysis - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="landing.html">
+                    Image Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="course_schedule.html">Schedule</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="setup/index.html">Setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup/install_fiji.html">Install Fiji</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup/install_python.html">Install Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup/setup_environment.html">Set up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup/download_data.html">Download the example data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="python_basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_basics_ex.html">Python Basics: Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Analysis Basics with Fiji</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="fiji/index.html">Fiji practical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e1_basics.html">E1: Fiji basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e2_registration.html">E2: Registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e3_segmentation.html">E3: Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e4_weka.html">E4: Segmentation using machine learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e5_macros.html">E5: Macros <em>(optional)</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/fun/spot_the_artifact.html">Spot the artifact</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="fiji/cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fiji/cheat_sheet_macros.html">Cheat sheet: Fiji macros</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflows in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/01_image_handling.html">Basic image handling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/01_image_handling_ex.html">Exercise: image handling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/02_image_processing.html">Image processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/02_image_processing_ex.html">Exercise: image processing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/03_ml_segmentation.html">Machine learning for segmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/03_ml_segmentation_ex.html">Exercise: machine learning for segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/04_segmentation_metrics.html">Quality control: Segmentation metrics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/04_segmentation_metrics_ex.html">Exercise: measuring a segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/05_features.html">Feature extraction and measurements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/05_features_ex.html">Exercise: Disaster at the Microscope</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/06_curve_fitting.html">Data Analysis: curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/06_curve_fitting_ex.html">Exercise: a growth curve from real images</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Independent work</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="challenge.html">Challenge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework.html">Homework</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="further_reading.html">Further reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/vocabulary.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vocabulary</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images">Images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation">Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing">Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring">Measuring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation">Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting">Fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#easy-to-confuse">Easy to confuse</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="vocabulary">
+<h1>Vocabulary<a class="headerlink" href="#vocabulary" title="Link to this heading">#</a></h1>
+<p>This page defines the terms used in the course.</p>
+<section id="images">
+<h2>Images<a class="headerlink" href="#images" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Pixel</strong></p></td>
+<td><p>One element of the image. It holds a number, not a colour.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Intensity image</strong></p></td>
+<td><p>An image whose pixel values are measured brightness, as it comes off the microscope.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Bit depth</strong></p></td>
+<td><p>How large a pixel value may be. An 8-bit image holds 0 to 255, a 16-bit image 0 to 65535.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Calibration</strong></p></td>
+<td><p>The physical size of a pixel. Without it, every area and length is in pixels rather than microns.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Channel</strong></p></td>
+<td><p>One image of a set acquired of the same field through different filters, for example DAPI and GFP.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LUT</strong> (lookup table)</p></td>
+<td><p>The mapping from pixel value to displayed colour. Changing it changes the picture, never the data. Called a <em>colormap</em> in matplotlib.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Histogram</strong></p></td>
+<td><p>A count of how many pixels hold each value.</p></td>
+<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Saturation</strong></p></td>
+<td><p>Pixels pinned at the maximum value. Their true brightness has been lost and cannot be recovered.</p></td>
+<td><p><a class="reference internal" href="fiji/fun/spot_the_artifact.html"><span class="std std-doc">Spot the artifact</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Registration</strong></p></td>
+<td><p>Finding the transform that brings one image into alignment with another.</p></td>
+<td><p><a class="reference internal" href="fiji/e2_registration.html"><span class="std std-doc">E2</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="segmentation">
+<h2>Segmentation<a class="headerlink" href="#segmentation" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Segmentation</strong></p></td>
+<td><p>Deciding which pixels belong to the objects of interest.</p></td>
+<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Threshold</strong></p></td>
+<td><p>A value separating foreground from background. Applying one produces a binary image.</p></td>
+<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Otsu’s method</strong></p></td>
+<td><p>A rule for choosing a threshold automatically from the histogram.</p></td>
+<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Foreground / background</strong></p></td>
+<td><p>The pixels belonging to objects, and everything else.</p></td>
+<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Binary image</strong></p></td>
+<td><p>An image with only two values, foreground and background. What a threshold produces.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §6</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Mask</strong></p></td>
+<td><p>A binary image used to <em>select</em> pixels from another image. The same array as a binary image, in a different role.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §6</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Label image</strong></p></td>
+<td><p>An image whose pixel values are object numbers: 1 for the first object, 2 for the second, and so on. Its maximum value is the number of objects.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Semantic segmentation</strong></p></td>
+<td><p>Answers <em>what kind of thing is this pixel?</em> Every pixel gets a class, and nothing distinguishes one object from another.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §6</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Instance segmentation</strong></p></td>
+<td><p>Answers <em>which object is this pixel part of?</em> Required for anything measured per object.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Connected component labeling</strong></p></td>
+<td><p>Turning a binary image into a label image by giving every connected group of foreground pixels its own number. Cannot separate objects that touch.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Morphological operations</strong></p></td>
+<td><p>Operations on the shape of a binary image: erosion, dilation, opening, closing, hole filling.</p></td>
+<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §4</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Distance transform</strong></p></td>
+<td><p>An image in which each foreground pixel holds its distance to the nearest background pixel.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §6</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Watershed</strong></p></td>
+<td><p>Splitting touching objects by treating the distance transform as a landscape and flooding it from seed points.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §6</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Seed</strong></p></td>
+<td><p>A starting point inside an object, from which the watershed grows that object.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §6</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="processing">
+<h2>Processing<a class="headerlink" href="#processing" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Filter</strong></p></td>
+<td><p>An operation replacing each pixel by a function of its neighbourhood, such as a Gaussian blur or a median filter.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §3</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Background subtraction</strong></p></td>
+<td><p>Removing a slowly varying offset so that a single threshold works across the whole field.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Uneven illumination</strong></p></td>
+<td><p>Brightness varying across the field because of the optics rather than the sample. Multiplicative, so corrected by division.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Denoising</strong></p></td>
+<td><p>Reducing noise before segmentation. A Gaussian filter suits general graininess, a median filter suits isolated extreme pixels.</p></td>
+<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §3</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="machine-learning">
+<h2>Machine learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Pixel classification</strong></p></td>
+<td><p>Training a model to label each pixel by class, using features computed around it. What Trainable Weka does.</p></td>
+<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Feature (for a classifier)</strong></p></td>
+<td><p>One measured property of a pixel and its surroundings, such as local blur or edge strength. Not the same as a feature measured per object.</p></td>
+<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Probability map</strong></p></td>
+<td><p>An image holding, for each pixel, the classifier’s confidence that it belongs to a class.</p></td>
+<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a>, <a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §1</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Classifier</strong></p></td>
+<td><p>The trained model itself, saved as a <code class="docutils literal notranslate"><span class="pre">.model</span></code> file and reusable on new images.</p></td>
+<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Shallow learning</strong></p></td>
+<td><p>You choose the features, the model learns how to weigh them.</p></td>
+<td><p><a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Deep learning</strong></p></td>
+<td><p>The model learns the features from data as well, which is why it needs a great deal of it.</p></td>
+<td><p><a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cellpose</strong></p></td>
+<td><p>A pretrained deep model that outputs instance segmentations directly.</p></td>
+<td><p><a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §3</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="measuring">
+<h2>Measuring<a class="headerlink" href="#measuring" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Feature (of an object)</strong></p></td>
+<td><p>One measured property of a segmented object.</p></td>
+<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code></span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Morphology feature</strong></p></td>
+<td><p>A feature computed from shape alone: area, perimeter, eccentricity, solidity, extent.</p></td>
+<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Intensity feature</strong></p></td>
+<td><p>A feature summarising pixel values inside an object, which needs a second image to measure.</p></td>
+<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code> §3</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Region properties</strong></p></td>
+<td><p>The standard set of per-object measurements. <code class="docutils literal notranslate"><span class="pre">regionprops</span></code> in scikit-image, <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles</span></code> in Fiji.</p></td>
+<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code></span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Effect size</strong></p></td>
+<td><p>The difference between two groups expressed in standard deviations, saying how large a difference is rather than only whether it is detectable.</p></td>
+<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code> §6</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Ground truth</strong></p></td>
+<td><p>A reference segmentation, usually drawn by an expert. A reference, not necessarily the truth.</p></td>
+<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a>, <a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §4</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>IoU</strong> (intersection over union)</p></td>
+<td><p>Shared pixels divided by pixels covered by either. Also called the <strong>Jaccard index</strong>.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Dice coefficient</strong></p></td>
+<td><p>Twice the shared pixels divided by the total of both. Always reads higher than IoU for an imperfect overlap.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §1</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>True positive, false positive, false negative</strong></p></td>
+<td><p>An object correctly found, invented, or missed.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Precision</strong></p></td>
+<td><p>Of the objects you found, the fraction that are real.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Recall</strong></p></td>
+<td><p>Of the real objects, the fraction you found.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>F1 score</strong></p></td>
+<td><p>The balance of precision and recall, in one number.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Matching threshold</strong></p></td>
+<td><p>How much overlap is required before a predicted object counts as matching a real one. Conventionally an IoU of 0.5, and worth reporting.</p></td>
+<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §5</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fitting">
+<h2>Fitting<a class="headerlink" href="#fitting" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>First used</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Model</strong></p></td>
+<td><p>A function with adjustable parameters, chosen to describe the process being measured.</p></td>
+<td><p><a class="reference internal" href="../notebooks/06_curve_fitting.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">06</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SSE</strong> (sum of squared errors)</p></td>
+<td><p>The usual measure of how badly a set of parameters describes the data.</p></td>
+<td><p><a class="reference internal" href="../notebooks/06_curve_fitting.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">06</span></code> §2</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Residual</strong></p></td>
+<td><p>The difference between a data point and the fitted curve. Structure in the residuals means the model is the wrong shape.</p></td>
+<td><p><a class="reference internal" href="../notebooks/06_curve_fitting.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">06</span></code> §6</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>IC50</strong></p></td>
+<td><p>The concentration at which an effect is reduced by half.</p></td>
+<td><p><a class="reference internal" href="challenge.html"><span class="std std-doc">Challenge</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="easy-to-confuse">
+<h2>Easy to confuse<a class="headerlink" href="#easy-to-confuse" title="Link to this heading">#</a></h2>
+<p><strong>Binary image and label image.</strong> A binary image says <em>whether</em> a pixel is
+foreground (True) or background (False). A label image says <em>which object</em> it belongs to (e.g. 1, 2, 3 for object IDs 1, 2, 3). Where there’s no object at all, the label image has a value of 0.</p>
+<p>Binary image: “Semantic segmentation” (what category is this pixel?)
+Label image: “Instance segmentation” (which object is this pixel part of?)</p>
+<p><strong>Feature</strong> In pixel classification a feature is a property of a <em>pixel</em>,
+computed from its neighbourhood. In measurement a feature is a property of an
+<em>object</em>. Both are standard, and the context makes clear which is meant.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="homework.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="further_reading.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Further reading</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images">Images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation">Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing">Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring">Measuring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation">Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting">Fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#easy-to-confuse">Easy to confuse</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marvin Albert and Andreas Cuny. Large parts of the content were adapted with permission from teaching material developed by Aaron Ponti.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026 ETH Zurich.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
