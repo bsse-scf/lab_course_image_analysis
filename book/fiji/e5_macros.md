@@ -5,13 +5,9 @@ ground more thoroughly.
 
 ## Why this is optional
 
-Fiji can record what you click and replay it. That is genuinely useful for
-repeating a fixed pipeline over a folder. But the macro language is peculiar to
-ImageJ, the tooling is thin, and once you want to plot the results or do anything
-conditional you will wish you were somewhere else.
-
-That somewhere else is the Python notebooks. Treat this as a look at what the recorder
-can do, not as a language to learn.
+Fiji's recorder can turn a sequence of menu commands into a macro. You can then
+run the same steps on a folder of images. This exercise introduces the recorder
+and a simple batch macro; the Python notebooks cover larger analysis workflows.
 
 ## Practical
 
@@ -40,5 +36,5 @@ can do, not as a language to learn.
    both `_nuclei` and `_cells` images. **Did it treat them the same? Should it
    have?**
 
-8. **What would you have to change to save a plot of the results?** This is the
-   point where a macro stops being the right tool.
+8. **What would you have to change to plot the results?** Consider which parts
+   of that task are easier to express in Python.

@@ -56,13 +56,12 @@ duplicate first.
 objects that touch are counted once. Separating them is a Python topic in this
 course: see `02_image_processing`.
 
-**Redirect to:** in `Set Measurements…` is the one to remember: it measures your
-mask's shapes against a *different* image's intensities. That is how you ask "how
-bright is the GFP inside each nucleus?".
+**Redirect to:** in `Set Measurements…` uses regions selected in one image to
+measure intensities in another image.
 
 **Summarize** in `Analyze Particles…` puts per-image counts in the **Summary**
-window, which is a different window from **Results**. Saving the wrong one is a
-classic way to lose a lot of time.
+window. **Results** contains per-object measurements; check which table you
+need before saving.
 
 ## Getting unstuck
 

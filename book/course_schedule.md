@@ -2,38 +2,35 @@
 
 Two days, in *Room BSS E 21*, 9:00–17:30 with a break from 12:30 to 14:00.
 
-## Before the course
+## Day 0: Theory introduction and computer setup
 
-Everything in [Setup](setup/index.md), and the
-[Python primer](python_basics.md). The primer needs no data,
-so it can be done anywhere; the environment install cannot, so do not leave it
-to the first day.
+*Friday, 18.9.2026*
+
+| | |
+|---|---|
+| Lecture | Lecture: Introduction to the fundamentals of biological image analysis. |
+| Setup | Guided setup of the software environment used in the course |
 
 ## Day 1: Image analysis basics
 
+*Monday, 21.9.2026*
+
 | | |
 |---|---|
-| Fiji practical | Lecture, then [Fiji](fiji/index.md): intensities, channels, thresholding, cleaning up a binary image, measuring objects, and pixel classification with Weka |
-| Python notebooks | The same analysis in Python: [image handling](../notebooks/01_image_handling.ipynb) and [image processing](../notebooks/02_image_processing.ipynb) |
+| Fiji practical | Recap of Day 0, then [Fiji](fiji/index.md): Getting famililar with scientific images and establishing a simple image analysis workflow. |
+| Python notebooks | Using Python for automating reproducible image analysis and Machine Learning tools.|
 
-The Python notebooks deliberately repeat the Fiji practical on the same images.
-Fiji is faster to start; Python is the tool of choice when there are four hundred
-images, or when the analysis has to be described exactly six months later.
+
 
 ## Day 2: Workflows and analysis
 
+*Tuesday, 22.9.2026*
+
 | | |
 |---|---|
-| Python notebooks | [Machine learning for segmentation](../notebooks/03_ml_segmentation.ipynb), [measuring how good a segmentation is](../notebooks/04_segmentation_metrics.ipynb), [features](../notebooks/05_features.ipynb) and [curve fitting](../notebooks/06_curve_fitting.ipynb) |
-| Challenge | A drug dose-response screen, start to finish |
+| Python notebooks | Measuring how good a segmentation is, extracting features from images and performing data analysis with curve fitting. |
+| Challenge | Independent work: Analysing a drug screening dataset. |
 
-## After the course
+## Homework (after the course)
 
-The homework, using images you acquire yourself on the microscope you build in
-the microscopy module.
-
-## How the material is written
-
-Each topic has a **walkthrough** to work through together, and an **exercise**
-to do afterwards. The exercises have laddered hints: take the first one before
-the second.
+See [homework](homework.md) for the details.

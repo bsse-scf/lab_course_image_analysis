@@ -37,26 +37,30 @@ missing, it belongs in `pixi.toml`.
 
 ## Set up the Jupyter AI course tutor
 
-The jupyter lab environment configured in this course includes a "Course Tutor" chat persona. It is a teaching assistant that can help you understand and debug the code in your notebooks, while preserving the learning value of the exercises. It gives hints and explanations, but never provides complete solutions. It knows context about the course and can therefore in many cases be more helpful than a generic AI assistant.
+The course environment includes an optional AI-based **Course Tutor** chat in
+JupyterLab. It can read the selected notebook cell and its output to help you
+understand an error or interactively explain details about the contained code. This chat might be more useful than a general-purpose AI chat, because it knows about the course material and computational environment.
 
-The Course Tutor uses a large language model (LLM) to generate its responses. For this course, we'll use a model hosted by the Swiss AI Research Platform. In order to be able to use it, you need to
+The tutor uses a model hosted by the Swiss AI Research Platform. To enable it, follow these steps:
 
 ### 1) Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)
 
-For this, sign in to the Swiss AI Research Platform with your ETH Zurich account. After logging in, go to the "API Keys" section and find your API key. Copy the key to your clipboard (it should look like `sk-...`).
+Sign in with your ETH Zurich account. Open **API Keys** and copy your key. It
+should start with `sk-`.
 
 ### 2) Set the API key in your environment
 
-In the opened Jupyter Lab environment:
-1. Press Settings -> Jupyternaut settings
-1. Press "Add secret": 
-   - Name: `OPENAI_API_KEY`
-   - Value: paste the API key you copied from the Swiss AI Research Platform
-1. Close the Jupyternaut settings tab.
-1. Verify the Course Tutor works:
-   1. Open a chat on the left side of the Jupyter Lab interface and ask a question. Make sure the Course Tutor responds. If it does not, check that you have set the API key correctly.
-   1. Open a notebook and identify a code cell. Select the cell (by clicking on it) and press the 🎓 button in the top menu bar of the notebook. Make sure the Course Tutor responds with a hint or explanation.
+In JupyterLab:
+
+1. Open **Settings → Jupyternaut settings**.
+2. Choose **Add secret**. Set the name to `OPENAI_API_KEY` and paste the key as
+   its value.
+3. Close the settings tab.
+4. Open the chat in the left sidebar and ask a question to check the connection.
+5. Select a code cell in a notebook and press **🎓** in the notebook toolbar.
+   Check that the tutor responds about the selected cell.
 
 ## Stop JupyterLab
 
-When you are done, close the browser tab and press `Ctrl-C` in the terminal where you started JupyterLab. It will ask you to confirm that you want to stop the server; type `y` and press Enter.
+When you are done, press `Ctrl-C` in the terminal where you started JupyterLab.
+Confirm with `y` and **Enter**, then close the browser tab.

@@ -4,9 +4,8 @@ Only needed for the optional [E5](e5_macros.md).
 
 ## Finding the command you want
 
-Open `Plugins ▸ Macros ▸ Record…` and click the thing. The recorder prints the
-macro line. This is faster than searching the documentation, and it is how most
-macros actually get written.
+Open `Plugins ▸ Macros ▸ Record…` and perform a command in Fiji. The recorder
+shows the corresponding macro line, including the command's options.
 
 ## The shape of a batch macro
 
@@ -45,12 +44,8 @@ setBatchMode(false);
 | Print to the Log | `print("text " + variable);` |
 | Save a table | `Table.save(path, "Summary");` |
 
-## Three things that bite
+## Notes
 
-**Results vs Summary.** `Analyze Particles…` with `display` fills **Results**
-(one row per object); with `summarize` it fills **Summary** (one row per image).
-They are different windows and `saveAs("Results", …)` saves the wrong one. Use
-`Table.save(path, "Summary")` when you want per-image counts.
 
 **Sizes are in calibrated units.** `size=40-Infinity` means 40 *square microns*
 if the image is calibrated and 40 *square pixels* if it is not. The same macro on
@@ -59,7 +54,6 @@ the same sample imaged at a different magnification silently filters differently
 **Save inside the loop.** A `saveAs` after the loop closes only sees the last
 image, and if the last entry was skipped, whatever variable you used is stale.
 
-## When to stop
+## Limits
 
-If you find yourself wanting a plot, a conditional, a table join, or a second
-opinion from a library: stop, and use Python. That is what the notebooks are for.
+While Fiji has powerful tools to automate image analysis, it is not a programming language. We recommend using Python for more complex workflows, especially for plotting, working with tables or more complex analysis.

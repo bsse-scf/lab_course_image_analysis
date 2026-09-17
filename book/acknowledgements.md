@@ -22,7 +22,7 @@ The collection as a whole should be cited as:
 > Ljosa V, Sokolnicki KL, Carpenter AE (2012). *Annotated high-throughput
 > microscopy image sets for validation.* Nature Methods 9(7):637.
 
-The individual sets used here, with the citations their pages ask for:
+The individual sets used here, with their source citations:
 
 **[BBBC020](https://bbbc.broadinstitute.org/BBBC020)**: murine bone-marrow
 derived macrophages, DAPI and CD11b. The guiding dataset for both days.
@@ -60,8 +60,7 @@ This course would not be possible without
 [matplotlib](https://matplotlib.org/), [pandas](https://pandas.pydata.org/),
 [SciPy](https://scipy.org/), [Fiji](https://fiji.sc/),
 [Cellpose](https://www.cellpose.org/), [napari](https://napari.org/) and
-[Jupyter](https://jupyter.org/): all of it free, and most of it maintained by
-people doing so alongside their actual jobs.
+[Jupyter](https://jupyter.org/).
 
-If you end up relying on one of these, cite it. It is the main currency the
-people who maintain them have.
+If you rely on one of these tools in your own work, cite it to credit its
+developers and maintainers.
