@@ -11,10 +11,12 @@ follow these steps. They are the same on your own computer and on the RRP.
 
 Navigate to the Swiss AI Research Platform: https://swissai.svc.cscs.ch
 
-Sign in with your ETH Zurich account. Open **API Keys** and copy your key. It
-should start with `sk-`.
+Sign in with your ETH Zurich account. Open **API Keys** and copy your key: it
+should look something like
 
-[text](swiss_ai.md)
+```
+sk-...
+```
 
 ## 2. Set the API key in your environment
 
