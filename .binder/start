@@ -13,7 +13,7 @@ rm -rf /home/jovyan/project/_build
 mkdir -p /home/jovyan/project/_build
 
 cp -r \
-  /home/jovyan/_build/ \
+  /home/jovyan/build/_build/ \
   /home/jovyan/project/_build/
 
 test -f /home/jovyan/project/_build/html/index.html
