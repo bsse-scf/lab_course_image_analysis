@@ -7,7 +7,7 @@ the browser. Nothing needs to be installed on the local computer.
 1. Open [rrp.ia-res.ethz.ch](https://rrp.ia-res.ethz.ch) and log in with your
    account. The credentials are handed out on Day 0.
 2. Click **[+]** next to **Your projects** and choose **Create new project from
-   Share identifier**. Enter the share identifier `TODO` and keep the username and password fields empty,
+   Share identifier**. Enter the share identifier `YzcxYmJmODItMGEyMC00YWU2LTgwNzAtOGQwMDA4ODYwMGUzIHJycC1kZW1vIDY0c2ppZW0gdmhuNzhjbDI=` and keep the username and password fields empty,
    then click **Clone**.
 3. Once the project is listed under **Your projects**, and the status is **not running**, click **▶** to start it,
    then **[↗]** to open JupyterLab.
