@@ -15,16 +15,16 @@ without having to activate it first.
 
 ## 1. Open a terminal
 
-** macOS**: open the Terminal app (in Applications → Utilities).
+**macOS**: open the Terminal app (in Applications → Utilities).
 
 **Linux**: open a terminal (Ctrl+Alt+T).
 
-**Windows**: open PowerShell (press Win+R, type `powershell`, and press Enter).
+**Windows**: open PowerShell (over the Start menu or press Win+R, type `powershell`, and press Enter).
 
 
 ## 2. Install pixi
 
-**macOS / Linux**: in a terminal:
+**macOS / Linux**: in the terminal:
 
 ```bash
 curl -fsSL https://pixi.sh/install.sh | sh
@@ -47,6 +47,12 @@ If you already had pixi installed from before, bring it up to date with
 `pixi self-update`: the course needs a recent version.
 
 ## 3. Install git
+
+```{admonition} What is git?
+Git is a version control system. It is used to download the course material from
+GitHub and to keep it up to date. You do not need to learn git for this course, but you will use it to download the course material and to update it.
+```
+
 
 Check whether you already have it with `git --version`.
 
