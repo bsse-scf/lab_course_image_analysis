@@ -31,13 +31,17 @@ export PATH="${PIXI_BIN_DIR}:${PATH}"
 pixi --version
 
 # ---------------------------------------------------------------------------
-# Install the environment defined in pixi.toml (we use pixi.lock for reproducibility) 
-# independently of REPO_DIR.
+# Install the Pixi environments defined in pixi.toml.
 #
-# REPO_DIR is /home/jovyan/build during the repo2docker build, but the
-# repository is /home/jovyan at runtime in RRP. Therefore the Pixi environment
-# must not live below REPO_DIR.
+# The default environment contains the student/Jupyter environment.
+# The docs environment is deliberately separate and contains Jupyter Book
+# without pulling in the heavy scientific stack.
+#
+# Pixi is installed outside REPO_DIR because repo2docker uses
+# /home/jovyan/build at image-build time, while RRP exposes the project at
+# /home/jovyan/project at runtime.
 # ---------------------------------------------------------------------------
+
 rm -rf "${PIXI_ROOT}"
 mkdir -p "${PIXI_ROOT}"
 
@@ -46,18 +50,34 @@ cp "${REPO_DIR}/pixi.lock" "${PIXI_ROOT}/pixi.lock"
 
 cd "${PIXI_ROOT}"
 
-pixi install --locked
+echo "Installing Pixi default environment..."
+pixi install --locked -e default
 
-# Make the default pixi env the one used in the notebook
-# This depends on how you want to expose the environment to Jupyter.
-# We register the pixi env as a Jupyter kernel.
+echo "Installing Pixi docs environment..."
+pixi install --locked -e docs
+
+# ---------------------------------------------------------------------------
+# Verify the environments we expect at runtime.
+# ---------------------------------------------------------------------------
+
 PIXI_ENV="${PIXI_ROOT}/.pixi/envs/default"
+DOCS_ENV="${PIXI_ROOT}/.pixi/envs/docs"
 
 test -x "${PIXI_ENV}/bin/python"
 test -x "${PIXI_ENV}/bin/jupyter"
 
-#"${PIXI_ENV}/bin/python" --version
-#"${PIXI_ENV}/bin/jupyter" lab --version
+test -x "${DOCS_ENV}/bin/python"
+test -x "${DOCS_ENV}/bin/jupyter-book"
+
+echo "Pixi default environment:"
+"${PIXI_ENV}/bin/python" --version
+"${PIXI_ENV}/bin/jupyter" --version
+
+echo "Pixi docs environment:"
+"${DOCS_ENV}/bin/python" --version
+"${DOCS_ENV}/bin/jupyter-book" --version
+
+echo "Pixi environments successfully installed."
 
 # ---------------------------------------------------------------------------
 # Pre-build the Jupyter Book
