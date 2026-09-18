@@ -120,6 +120,7 @@ test-nb = """pytest --nbmake --nbmake-timeout=900 \
   notebooks/00_python_basics.ipynb \
   notebooks/01_image_handling.ipynb \
   notebooks/02_image_processing.ipynb \
+  notebooks/03_ml_segmentation.ipynb \
   notebooks/04_segmentation_metrics.ipynb \
   notebooks/05_features.ipynb \
   notebooks/06_curve_fitting.ipynb"""

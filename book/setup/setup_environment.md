@@ -49,8 +49,18 @@ This builds the environment. It downloads around **3 GB** and takes some minutes
 If you already have Anaconda or Miniconda installed, leave it as is — pixi does not interact with it. Just make sure you run the course from a plain terminal, not from within an activated conda environment, and in JupyterLab always pick the **Python 3 (ipykernel)** kernel that appears by default rather than any other kernel you may have registered before.
 ```
 
+## 3. Run a test to verify the environment works
 
-## 3. Start Jupyter Lab
+From inside the repository folder, run:
+
+```bash
+pixi run test-nb
+```
+
+The output should be green and say "7 passed". If you see any errors, please let the tutors know.
+
+
+## 4. Start Jupyter Lab
 
 JupyterLab is the main interface for the course. From inside the repository folder, run:
 
@@ -63,17 +73,23 @@ pixi run jupyter lab
 "activate" anything, and you should not `pip install` into it: if a package is missing, it belongs in the pixi configuration.
 ```
 
-## 4. Stop Jupyter Lab
 
-When you are done, press `Ctrl-C` in the terminal where you started JupyterLab.
-Confirm with `y` and **Enter**, then close the browser tab.
+````{admonition} How to start and stop JupyterLab
+### Starting:
 
-## 5. Start Jupyter Lab again
-
-*On subsequent days*, you do not need to run `pixi install` again. Just open a terminal, change into the repository folder, and run:
+Run from inside the repository folder:
 
 ```bash
 pixi run jupyter lab
 ```
+
+### Stopping:
+
+- Close the browser tab
+- Press `Ctrl-C` in the terminal where you started JupyterLab
+- Confirm with `y` and **Enter**
+- If this doesn't work, hit `Ctrl-C` several times
+- Optionally close the terminal window
+````
 
 Next: [download the example data](download_data.md).
