@@ -13,10 +13,16 @@ parts:
       - file: book/course_schedule.md
       - file: book/setup/index.md
         sections:
-          - file: book/setup/install_fiji.md
-          - file: book/setup/install_python.md
-          - file: book/setup/setup_environment.md
-          - file: book/setup/download_data.md
+          - file: book/setup/software.md
+            sections:
+              - file: book/setup/local.md
+                sections:
+                  - file: book/setup/install_fiji.md
+                  - file: book/setup/install_python.md
+                  - file: book/setup/setup_environment.md
+                  - file: book/setup/download_data.md
+              - file: book/setup/rrp.md
+          - file: book/setup/swiss_ai.md
       - file: book/python_basics.md
         sections:
           - file: book/python_basics_ex.md

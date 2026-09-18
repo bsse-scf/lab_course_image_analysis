@@ -6,13 +6,13 @@
 Download (or "clone") the course repository (meaning "course folder") from GitHub. In a terminal, navigate to a folder where you want to put the course folder. You can use `cd` to change the current folder, for example `cd ~` to go to your home folder. Then run:
 
 ```bash
-git clone https://github.com/bsse-scf/scu_lab_course_ia.git
+git clone https://github.com/bsse-scf/lab_course_image_analysis.git
 ```
 
-Now you have a folder `scu_lab_course_ia` with the course material. Change into that folder: 
+Now you have a folder `lab_course_image_analysis` with the course material. Change into that folder: 
 
 ```bash
-cd scu_lab_course_ia
+cd lab_course_image_analysis
 ```
 
 ```{admonition} What is a repository?
@@ -56,40 +56,17 @@ pixi run jupyter lab
 "activate" anything, and you should not `pip install` into it: if a package is missing, it belongs in the pixi configuration.
 ```
 
-## 4. Set up the Jupyter AI course tutor
-
-The course environment includes an optional AI-based **Course Tutor** chat in
-JupyterLab. It can read the selected notebook cell and its output to help you
-understand an error or interactively explain details about the contained code. This chat might be more useful than a general-purpose AI chat, because it knows about the course material and computational environment.
-
-The tutor uses a model hosted by the Swiss AI Research Platform. To enable it, follow these steps:
-
-### 4.1 Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)
-
-Sign in with your ETH Zurich account. Open **API Keys** and copy your key. It
-should start with `sk-`.
-
-### 4.2 Set the API key in your environment
-
-In JupyterLab:
-
-1. Open **Settings → Jupyternaut settings**.
-2. Choose **Add secret**. Set the name to `OPENAI_API_KEY` and paste the key as
-   its value.
-3. Close the settings tab.
-4. Open the chat in the left sidebar and ask a question to check the connection.
-5. Select a code cell in a notebook and press **🎓** in the notebook toolbar.
-   Check that the tutor responds about the selected cell.
-
-## 5. Stop Jupyter Lab
+## 4. Stop Jupyter Lab
 
 When you are done, press `Ctrl-C` in the terminal where you started JupyterLab.
 Confirm with `y` and **Enter**, then close the browser tab.
 
-## 6. Start Jupyter Lab again
+## 5. Start Jupyter Lab again
 
 *On subsequent days*, you do not need to run `pixi install` again. Just open a terminal, change into the repository folder, and run:
 
 ```bash
 pixi run jupyter lab
 ```
+
+Next: [download the example data](download_data.md).
