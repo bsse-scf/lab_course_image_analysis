@@ -96,7 +96,6 @@ cryptography = "*"
 
 [pypi-dependencies]
 # iaf is on public PyPI as of 1.5.3 - no extra-index-url needed any more.
-pybis = ">=1.37.5"
 iaf = ">=1.5.3"
 jupyterlab-git = ">=0.54.1, <0.55"
 jupyterlab-latex = ">=4.4.0, <5"
