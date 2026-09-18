@@ -394,12 +394,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-ground-truth">1. What is a ground truth?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-methods">3. Scoring the three methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">3. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">4. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-two-weka-rows-against-each-other">Read the two Weka rows against each other</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-ground-truth-is-wrong">4. When the ground truth is wrong</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-matching-threshold">5. Choosing the matching threshold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-ground-truth-is-wrong">5. When the ground truth is wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-matching-threshold">6. Choosing the matching threshold</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
             </nav>
@@ -622,7 +622,7 @@ it never asks how the pixels are grouped.</p>
 </div>
 </section>
 <section id="matching-objects-instead-of-pixels">
-<h2>3. Matching objects instead of pixels<a class="headerlink" href="#matching-objects-instead-of-pixels" title="Link to this heading">#</a></h2>
+<h2>4. Matching objects instead of pixels<a class="headerlink" href="#matching-objects-instead-of-pixels" title="Link to this heading">#</a></h2>
 <p>To ask object-level questions we have to decide when a predicted object <em>is</em> a
 particular real object. The standard rule: pair each prediction with the
 reference object it overlaps most, and accept the pairing if their IoU clears a
@@ -725,7 +725,7 @@ cells and missed one.</p></li>
 </section>
 </section>
 <section id="when-the-ground-truth-is-wrong">
-<h2>4. When the ground truth is wrong<a class="headerlink" href="#when-the-ground-truth-is-wrong" title="Link to this heading">#</a></h2>
+<h2>5. When the ground truth is wrong<a class="headerlink" href="#when-the-ground-truth-is-wrong" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cellpose's false positives: are they mistakes, or unannotated cells?</span>
@@ -763,7 +763,7 @@ worse than another on one dataset may simply disagree with that dataset’s
 conventions.</p>
 </section>
 <section id="choosing-the-matching-threshold">
-<h2>5. Choosing the matching threshold<a class="headerlink" href="#choosing-the-matching-threshold" title="Link to this heading">#</a></h2>
+<h2>6. Choosing the matching threshold<a class="headerlink" href="#choosing-the-matching-threshold" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
@@ -916,12 +916,12 @@ starting point for measuring the objects that were found.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-ground-truth">1. What is a ground truth?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-methods">3. Scoring the three methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">3. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">4. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-two-weka-rows-against-each-other">Read the two Weka rows against each other</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-ground-truth-is-wrong">4. When the ground truth is wrong</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-matching-threshold">5. Choosing the matching threshold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-ground-truth-is-wrong">5. When the ground truth is wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-matching-threshold">6. Choosing the matching threshold</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>
