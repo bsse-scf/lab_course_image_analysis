@@ -33,6 +33,9 @@ ln -sfn /home/jovyan/pixi-env/.pixi/envs/default .pixi/envs/default
 # link before writing, so the settings UI writes straight to project/.env. The
 # target must exist: Jupyter answers 400 rather than 404 for a dangling link,
 # which crashes Jupyternaut's `.env` watcher and fails the save.
+cp /home/jovyan/openbis/data/20260918082954035-44/original/env /home/jovyan/project/.env
+chmod 755 /home/jovyan/project/.env
+
 touch .env
 ln -sfn project/.env /home/jovyan/.env
 
