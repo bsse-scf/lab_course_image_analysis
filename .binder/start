@@ -9,6 +9,18 @@
 # `.jupyter/personas/` instead of walking up from the chat file.
 cd /home/jovyan/project
 
+rm -rf /home/jovyan/project/_build
+mkdir -p /home/jovyan/project/_build
+
+cp -r \
+  /home/jovyan/_build/ \
+  /home/jovyan/project/_build/
+
+test -f /home/jovyan/project/_build/html/index.html
+
+echo "Runtime Course Book:"
+ls -lh /home/jovyan/project/_build/html/index.html
+
 # RRP-only resource limits. Both the Jupyter server and the XFCE desktop
 # (started by jupyter-remote-desktop-proxy as a child of the server) inherit
 # these, so they reach kernels, terminals and the Fiji/napari launchers alike.
