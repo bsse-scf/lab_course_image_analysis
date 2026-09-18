@@ -1,4 +1,4 @@
-# Install Python
+# 2. Install Python
 
 You do **not** need to install Python itself, and you should not install Anaconda
 for this course. We use [pixi](https://pixi.sh), which reads the environment

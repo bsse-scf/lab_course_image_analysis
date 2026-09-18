@@ -1,4 +1,4 @@
-# Install Fiji
+# 1. Install Fiji
 
 [Fiji](https://fiji.sc) is ImageJ with a large collection of scientific plugins
 already installed. You want Fiji, not plain ImageJ: the course uses plugins that
