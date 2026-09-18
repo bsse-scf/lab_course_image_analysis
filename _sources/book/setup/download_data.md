@@ -21,3 +21,5 @@ Alternatively, download `plate01.zip` by hand from https://u.ethz.ch/BgsSv+,
 unzip it, and place `plate01.nd2` in the `data/challenge/` folder of the
 repository.
 ```
+
+Next: [connect to the Swiss AI Research Platform](swiss_ai.md).

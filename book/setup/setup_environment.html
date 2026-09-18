@@ -172,10 +172,18 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../course_schedule.html">Schedule</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Setup</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="install_fiji.html">Install Fiji</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install_python.html">Install Python</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Set up the environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download_data.html">Download the example data</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="software.html">Software installation and data download</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="local.html">On your local computer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="install_fiji.html">Install Fiji</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install_python.html">Install Python</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="download_data.html">Download the example data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="rrp.html">Reproducible Research Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="swiss_ai.html">Connecting to the Swiss AI Research Platform</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../python_basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,13 +392,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-course-material">1. Get the course material</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-environment">2. Install the environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab">3. Start Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-jupyter-ai-course-tutor">4. Set up the Jupyter AI course tutor</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch">4.1 Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-api-key-in-your-environment">4.2 Set the API key in your environment</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-jupyter-lab">5. Stop Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab-again">6. Start Jupyter Lab again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-jupyter-lab">4. Stop Jupyter Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab-again">5. Start Jupyter Lab again</a></li>
 </ul>
             </nav>
         </div>
@@ -407,11 +410,11 @@
 <section id="get-the-course-material">
 <h2>1. Get the course material<a class="headerlink" href="#get-the-course-material" title="Link to this heading">#</a></h2>
 <p>Download (or “clone”) the course repository (meaning “course folder”) from GitHub. In a terminal, navigate to a folder where you want to put the course folder. You can use <code class="docutils literal notranslate"><span class="pre">cd</span></code> to change the current folder, for example <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code> to go to your home folder. Then run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/bsse-scf/scu_lab_course_ia.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/bsse-scf/lab_course_image_analysis.git
 </pre></div>
 </div>
-<p>Now you have a folder <code class="docutils literal notranslate"><span class="pre">scu_lab_course_ia</span></code> with the course material. Change into that folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>scu_lab_course_ia
+<p>Now you have a folder <code class="docutils literal notranslate"><span class="pre">lab_course_image_analysis</span></code> with the course material. Change into that folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>lab_course_image_analysis
 </pre></div>
 </div>
 <div class="admonition-what-is-a-repository admonition">
@@ -451,42 +454,18 @@ location.</p>
 “activate” anything, and you should not <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> into it: if a package is missing, it belongs in the pixi configuration.</p>
 </div>
 </section>
-<section id="set-up-the-jupyter-ai-course-tutor">
-<h2>4. Set up the Jupyter AI course tutor<a class="headerlink" href="#set-up-the-jupyter-ai-course-tutor" title="Link to this heading">#</a></h2>
-<p>The course environment includes an optional AI-based <strong>Course Tutor</strong> chat in
-JupyterLab. It can read the selected notebook cell and its output to help you
-understand an error or interactively explain details about the contained code. This chat might be more useful than a general-purpose AI chat, because it knows about the course material and computational environment.</p>
-<p>The tutor uses a model hosted by the Swiss AI Research Platform. To enable it, follow these steps:</p>
-<section id="obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch">
-<h3>4.1 Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)<a class="headerlink" href="#obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch" title="Link to this heading">#</a></h3>
-<p>Sign in with your ETH Zurich account. Open <strong>API Keys</strong> and copy your key. It
-should start with <code class="docutils literal notranslate"><span class="pre">sk-</span></code>.</p>
-</section>
-<section id="set-the-api-key-in-your-environment">
-<h3>4.2 Set the API key in your environment<a class="headerlink" href="#set-the-api-key-in-your-environment" title="Link to this heading">#</a></h3>
-<p>In JupyterLab:</p>
-<ol class="arabic simple">
-<li><p>Open <strong>Settings → Jupyternaut settings</strong>.</p></li>
-<li><p>Choose <strong>Add secret</strong>. Set the name to <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code> and paste the key as
-its value.</p></li>
-<li><p>Close the settings tab.</p></li>
-<li><p>Open the chat in the left sidebar and ask a question to check the connection.</p></li>
-<li><p>Select a code cell in a notebook and press <strong>🎓</strong> in the notebook toolbar.
-Check that the tutor responds about the selected cell.</p></li>
-</ol>
-</section>
-</section>
 <section id="stop-jupyter-lab">
-<h2>5. Stop Jupyter Lab<a class="headerlink" href="#stop-jupyter-lab" title="Link to this heading">#</a></h2>
+<h2>4. Stop Jupyter Lab<a class="headerlink" href="#stop-jupyter-lab" title="Link to this heading">#</a></h2>
 <p>When you are done, press <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> in the terminal where you started JupyterLab.
 Confirm with <code class="docutils literal notranslate"><span class="pre">y</span></code> and <strong>Enter</strong>, then close the browser tab.</p>
 </section>
 <section id="start-jupyter-lab-again">
-<h2>6. Start Jupyter Lab again<a class="headerlink" href="#start-jupyter-lab-again" title="Link to this heading">#</a></h2>
+<h2>5. Start Jupyter Lab again<a class="headerlink" href="#start-jupyter-lab-again" title="Link to this heading">#</a></h2>
 <p><em>On subsequent days</em>, you do not need to run <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> again. Just open a terminal, change into the repository folder, and run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>jupyter<span class="w"> </span>lab
 </pre></div>
 </div>
+<p>Next: <a class="reference internal" href="download_data.html"><span class="std std-doc">download the example data</span></a>.</p>
 </section>
 </section>
 
@@ -559,13 +538,8 @@ Confirm with <code class="docutils literal notranslate"><span class="pre">y</spa
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-course-material">1. Get the course material</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-environment">2. Install the environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab">3. Start Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-jupyter-ai-course-tutor">4. Set up the Jupyter AI course tutor</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch">4.1 Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-api-key-in-your-environment">4.2 Set the API key in your environment</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-jupyter-lab">5. Stop Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab-again">6. Start Jupyter Lab again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-jupyter-lab">4. Stop Jupyter Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab-again">5. Start Jupyter Lab again</a></li>
 </ul>
   </nav></div>
 
