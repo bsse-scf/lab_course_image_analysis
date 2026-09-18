@@ -65,7 +65,6 @@ DOCS_ENV="${PIXI_ROOT}/.pixi/envs/docs"
 
 test -x "${PIXI_ENV}/bin/python"
 test -x "${PIXI_ENV}/bin/jupyter"
-
 test -x "${DOCS_ENV}/bin/python"
 test -x "${DOCS_ENV}/bin/jupyter-book"
 
@@ -77,28 +76,29 @@ echo "Pixi docs environment:"
 "${DOCS_ENV}/bin/python" --version
 "${DOCS_ENV}/bin/jupyter-book" --version
 
-echo "Pixi environments successfully installed."
-
 # ---------------------------------------------------------------------------
-# Pre-build the Jupyter Book
+# Build the Course Book.
 #
-# Do NOT start serve_book.py here. postBuild runs while the Docker image is
-# being built, so a long-running HTTP server would block image creation.
+# IMPORTANT:
+# The repository root is the Jupyter Book source directory.
+# The _config.yml and _toc.yml live under book/, and they contain paths such
+# as book/landing and book/illustrations/logo.svg.
 #
-# Instead, build the static HTML now. At runtime the launcher only has to
-# serve the resulting files.
+# Therefore DO NOT use ${REPO_DIR}/book as the source directory.
 # ---------------------------------------------------------------------------
 
-echo "Building Course Book during image construction..."
+cd "${REPO_DIR}"
 
-"${PIXI_ROOT}/.pixi/envs/docs/bin/jupyter-book" \
+echo "Building Course Book..."
+
+pixi run -e docs jupyter-book \
     build \
-    "${REPO_DIR}/book" \
-    --config "${REPO_DIR}/book/_config.yml" \
-    --toc "${REPO_DIR}/book/_toc.yml" \
+    . \
+    --config book/_config.yml \
+    --toc book/_toc.yml \
     --all
 
-test -f "${REPO_DIR}/book/_build/html/index.html"
+test -f "${REPO_DIR}/_build/html/index.html"
 
 echo "Course Book successfully built."
 
