@@ -174,10 +174,10 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Computer Setup</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="software.html">Software installation and data download</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="local.html">On your local computer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="install_fiji.html">Install Fiji</a></li>
-<li class="toctree-l4"><a class="reference internal" href="install_python.html">Install Python</a></li>
-<li class="toctree-l4"><a class="reference internal" href="setup_environment.html">Set up the environment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="download_data.html">Download the example data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install_fiji.html">1. Install Fiji</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install_python.html">2. Install Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="setup_environment.html">3. Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="download_data.html">4. Download the example data</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="rrp.html">Reproducible Research Platform</a></li>
@@ -389,7 +389,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch">1. Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-an-api-key-from-the-swiss-ai-research-platform">1. Obtain an API key from the Swiss AI Research Platform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-api-key-in-your-environment">2. Set the API key in your environment</a></li>
 </ul>
             </nav>
@@ -409,18 +409,26 @@ JupyterLab. It can read the selected notebook cell and its output to help you
 understand an error or interactively explain details about the contained code. This chat might be more useful than a general-purpose AI chat, because it knows about the course material and computational environment.</p>
 <p>The tutor uses a model hosted by the Swiss AI Research Platform. To enable it,
 follow these steps. They are the same on your own computer and on the RRP.</p>
-<section id="obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch">
-<h2>1. Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)<a class="headerlink" href="#obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch" title="Link to this heading">#</a></h2>
+<section id="obtain-an-api-key-from-the-swiss-ai-research-platform">
+<h2>1. Obtain an API key from the Swiss AI Research Platform<a class="headerlink" href="#obtain-an-api-key-from-the-swiss-ai-research-platform" title="Link to this heading">#</a></h2>
+<p>Navigate to the Swiss AI Research Platform: https://swissai.svc.cscs.ch</p>
 <p>Sign in with your ETH Zurich account. Open <strong>API Keys</strong> and copy your key. It
 should start with <code class="docutils literal notranslate"><span class="pre">sk-</span></code>.</p>
+<p><a class="reference internal" href="#"><span class="std std-doc">text</span></a></p>
 </section>
 <section id="set-the-api-key-in-your-environment">
 <h2>2. Set the API key in your environment<a class="headerlink" href="#set-the-api-key-in-your-environment" title="Link to this heading">#</a></h2>
 <p>In JupyterLab:</p>
 <ol class="arabic simple">
 <li><p>Open <strong>Settings → Jupyternaut settings</strong>.</p></li>
+</ol>
+<p><img alt="alt text" src="../../_images/ai_key_open_settings.png" /></p>
+<ol class="arabic simple" start="2">
 <li><p>Choose <strong>Add secret</strong>. Set the name to <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code> and paste the key as
 its value.</p></li>
+</ol>
+<p><img alt="alt text" src="../../_images/ai_key_set.png" /></p>
+<ol class="arabic simple" start="3">
 <li><p>Close the settings tab.</p></li>
 <li><p>Open the chat in the left sidebar and ask a question to check the connection.</p></li>
 <li><p>Select a code cell in a notebook and press <strong>🎓</strong> in the notebook toolbar.
@@ -497,7 +505,7 @@ enter it once.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-an-api-key-from-the-swiss-ai-research-platform-https-swissai-svc-cscs-ch">1. Obtain an API key from the Swiss AI Research Platform (https://swissai.svc.cscs.ch/)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-an-api-key-from-the-swiss-ai-research-platform">1. Obtain an API key from the Swiss AI Research Platform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-api-key-in-your-environment">2. Set the API key in your environment</a></li>
 </ul>
   </nav></div>

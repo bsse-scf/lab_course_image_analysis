@@ -1,4 +1,4 @@
-# Download the example data
+# 4. Download the example data
 
 Most course images are included in the repository. No additional download is
 needed for the Fiji exercises or the day 2 notebooks.

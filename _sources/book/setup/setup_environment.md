@@ -1,4 +1,4 @@
-# Set up the environment
+# 3. Set up the environment
 
 
 ## 1. Get the course material
