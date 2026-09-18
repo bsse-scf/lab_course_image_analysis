@@ -25,6 +25,20 @@ export OPENBLAS_NUM_THREADS=2
 mkdir -p .pixi/envs
 ln -sfn /home/jovyan/pixi-env/.pixi/envs/default .pixi/envs/default
 
+# ---------------------------------------------------------------------------
+# Jupyter App Launcher
+#
+# The launcher does NOT recursively search .jupyter/.
+# Explicitly tell it where jp_app_launcher*.yml lives.
+# ---------------------------------------------------------------------------
+
+export JUPYTER_APP_LAUNCHER_PATH="/home/jovyan/project/.jupyter"
+
+# Optional but useful diagnostics.
+echo "RRP project: ${PWD}"
+echo "Pixi root: ${PIXI_ROOT}"
+echo "Launcher config: ${JUPYTER_APP_LAUNCHER_PATH}"
+
 # Jupyternaut saves the secrets entered in "AI settings" (the OPENAI_API_KEY
 # for the tutor) to `.env` at the server root, which on RRP is /home/jovyan.
 # The home directory is part of the image and reset on every start, so the key

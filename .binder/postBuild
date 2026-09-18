@@ -60,6 +60,29 @@ test -x "${PIXI_ENV}/bin/jupyter"
 #"${PIXI_ENV}/bin/jupyter" lab --version
 
 # ---------------------------------------------------------------------------
+# Pre-build the Jupyter Book
+#
+# Do NOT start serve_book.py here. postBuild runs while the Docker image is
+# being built, so a long-running HTTP server would block image creation.
+#
+# Instead, build the static HTML now. At runtime the launcher only has to
+# serve the resulting files.
+# ---------------------------------------------------------------------------
+
+echo "Building Course Book during image construction..."
+
+"${PIXI_ROOT}/.pixi/envs/docs/bin/jupyter-book" \
+    build \
+    "${REPO_DIR}/book" \
+    --config "${REPO_DIR}/book/_config.yml" \
+    --toc "${REPO_DIR}/book/_toc.yml" \
+    --all
+
+test -f "${REPO_DIR}/book/_build/html/index.html"
+
+echo "Course Book successfully built."
+
+# ---------------------------------------------------------------------------
 # Fiji / ImageJ. We on purpose do not depend on Pixi's JVM
 # ---------------------------------------------------------------------------
 
@@ -130,16 +153,14 @@ set -e
 export JAVA_HOME="${FIJI_JAVA_HOME}"
 export PATH="${FIJI_JAVA_HOME}/bin:\${PATH}"
 
-# Limit Java heap to 65% of the memory visible to the container.
-# Preserve any JAVA_TOOL_OPTIONS supplied by the environment.
 export JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=65 \${JAVA_TOOL_OPTIONS:-}"
 
 exec "${FIJI_ROOT}/fiji-linux-x64" "\$@"
 EOF
 
+chmod +x "${HOME}/.local/bin/fiji"
 
-ln -sf "${FIJI_ROOT}/fiji-linux-x64" "${HOME}/.local/bin/fiji"
-ln -sf "${FIJI_ROOT}/fiji-linux-x64" "${HOME}/.local/bin/imagej"
+ln -sf "${HOME}/.local/bin/fiji" "${HOME}/.local/bin/imagej"
 
 # ---------------------------------------------------------------------------
 # XFCE desktop launcher for Fiji

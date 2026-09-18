@@ -11,9 +11,9 @@
 - title: Course Book
   description: Build (if needed) and open the Course Book
   type: local-server
-  cwd: .
+  cwd: /home/jovyan/project
   source: http://localhost:$PORT/
   args:
     - python
-    - .course/scripts/serve_book.py
+    - /home/jovyan/project/.course/scripts/serve_book.py
   catalog: Course
