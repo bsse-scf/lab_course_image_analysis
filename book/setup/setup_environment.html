@@ -391,9 +391,8 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-course-material">1. Get the course material</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-environment">2. Install the environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab">3. Start Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-jupyter-lab">4. Stop Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab-again">5. Start Jupyter Lab again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-test-to-verify-the-environment-works">3. Run a test to verify the environment works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab">4. Start Jupyter Lab</a></li>
 </ul>
             </nav>
         </div>
@@ -447,8 +446,16 @@ location.</p>
 <p>If you already have Anaconda or Miniconda installed, leave it as is — pixi does not interact with it. Just make sure you run the course from a plain terminal, not from within an activated conda environment, and in JupyterLab always pick the <strong>Python 3 (ipykernel)</strong> kernel that appears by default rather than any other kernel you may have registered before.</p>
 </div>
 </section>
+<section id="run-a-test-to-verify-the-environment-works">
+<h2>3. Run a test to verify the environment works<a class="headerlink" href="#run-a-test-to-verify-the-environment-works" title="Link to this heading">#</a></h2>
+<p>From inside the repository folder, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>test-nb
+</pre></div>
+</div>
+<p>The output should be green and say “7 passed”. If you see any errors, please let the tutors know.</p>
+</section>
 <section id="start-jupyter-lab">
-<h2>3. Start Jupyter Lab<a class="headerlink" href="#start-jupyter-lab" title="Link to this heading">#</a></h2>
+<h2>4. Start Jupyter Lab<a class="headerlink" href="#start-jupyter-lab" title="Link to this heading">#</a></h2>
 <p>JupyterLab is the main interface for the course. From inside the repository folder, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>jupyter<span class="w"> </span>lab
 </pre></div>
@@ -458,17 +465,21 @@ location.</p>
 <p><code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">&lt;something&gt;</span></code> always runs the command inside the environment defined in the current directory. For those who are used to using conda, this is similar to running commands in an activated environment. You never need to
 “activate” anything, and you should not <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> into it: if a package is missing, it belongs in the pixi configuration.</p>
 </div>
-</section>
-<section id="stop-jupyter-lab">
-<h2>4. Stop Jupyter Lab<a class="headerlink" href="#stop-jupyter-lab" title="Link to this heading">#</a></h2>
-<p>When you are done, press <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> in the terminal where you started JupyterLab.
-Confirm with <code class="docutils literal notranslate"><span class="pre">y</span></code> and <strong>Enter</strong>, then close the browser tab.</p>
-</section>
-<section id="start-jupyter-lab-again">
-<h2>5. Start Jupyter Lab again<a class="headerlink" href="#start-jupyter-lab-again" title="Link to this heading">#</a></h2>
-<p><em>On subsequent days</em>, you do not need to run <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> again. Just open a terminal, change into the repository folder, and run:</p>
+<div class="admonition-how-to-start-and-stop-jupyterlab admonition">
+<p class="admonition-title">How to start and stop JupyterLab</p>
+<h3 class="rubric" id="starting">Starting:</h3>
+<p>Run from inside the repository folder:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>jupyter<span class="w"> </span>lab
 </pre></div>
+</div>
+<h3 class="rubric" id="stopping">Stopping:</h3>
+<ul class="simple">
+<li><p>Close the browser tab</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> in the terminal where you started JupyterLab</p></li>
+<li><p>Confirm with <code class="docutils literal notranslate"><span class="pre">y</span></code> and <strong>Enter</strong></p></li>
+<li><p>If this doesn’t work, hit <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> several times</p></li>
+<li><p>Optionally close the terminal window</p></li>
+</ul>
 </div>
 <p>Next: <a class="reference internal" href="download_data.html"><span class="std std-doc">download the example data</span></a>.</p>
 </section>
@@ -542,9 +553,8 @@ Confirm with <code class="docutils literal notranslate"><span class="pre">y</spa
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-course-material">1. Get the course material</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-environment">2. Install the environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab">3. Start Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-jupyter-lab">4. Stop Jupyter Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab-again">5. Start Jupyter Lab again</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-test-to-verify-the-environment-works">3. Run a test to verify the environment works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-jupyter-lab">4. Start Jupyter Lab</a></li>
 </ul>
   </nav></div>
 
