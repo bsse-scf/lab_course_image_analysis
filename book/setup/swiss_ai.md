@@ -9,7 +9,7 @@ follow these steps. They are the same on your own computer and on the RRP.
 
 ## 1. Obtain an API key from the Swiss AI Research Platform
 
-Navigate to the Swiss AI Research Platform: https://swissai.svc.cscs.ch
+Navigate to the Swiss AI Research Platform: [https://serving.swissai.svc.cscs.ch/](https://serving.swissai.svc.cscs.ch/)
 
 Sign in with your ETH Zurich account. Open **API Keys** and copy your key: it
 should look something like
