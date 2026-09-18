@@ -22,8 +22,3 @@ opened because the developer cannot be verified"*, right-click the app and choos
 
 1. Start Fiji. Its main window is a narrow toolbar.
 2. `File ▸ Open Samples ▸ Blobs` opens a test image.
-3. Check the plugins the course needs are present:
-   - `Plugins ▸ Segmentation ▸ Trainable Weka Segmentation`
-   - `Plugins ▸ Registration ▸ Linear Stack Alignment with SIFT`
-
-If either is missing, run `Help ▸ Update…` and let it finish.

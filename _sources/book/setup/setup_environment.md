@@ -3,7 +3,23 @@
 
 ## 1. Get the course material
 
-Download (or "clone") the course repository (meaning "course folder") from GitHub. In a terminal, navigate to a folder where you want to put the course folder. You can use `cd` to change the current folder, for example `cd ~` to go to your home folder. Then run:
+Download (or "clone") the course repository (meaning "course folder") from GitHub. In a terminal, navigate to a folder where you want to put the course folder. You can use `cd` to change the current folder, for example `cd ~` to go to your home folder.
+
+```{warning}
+Clone into a folder that is **not synced to the cloud**: not `Documents` or
+`Desktop` if those live in OneDrive or iCloud, and not a Dropbox folder. The
+environment is several gigabytes in many thousands of files, and a sync client
+can interrupt installation or make it much slower. Your home folder is a suitable
+location.
+```
+
+So, unless you choose a different directory than your home folder, run:
+
+```bash
+cd ~
+```
+
+Then run the following command to clone the repository:
 
 ```bash
 git clone https://github.com/bsse-scf/lab_course_image_analysis.git
@@ -17,15 +33,6 @@ cd lab_course_image_analysis
 
 ```{admonition} What is a repository?
 A repository is a folder that contains files and a history of changes to those files. It is usually hosted on a service like GitHub, and for this course, it contains the course material, including notebooks, scripts, and data. You can think of it as a "course folder" that you can download and update.
-```
-
-
-```{warning}
-Clone into a folder that is **not synced to the cloud**: not `Documents` or
-`Desktop` if those live in OneDrive or iCloud, and not a Dropbox folder. The
-environment is several gigabytes in many thousands of files, and a sync client
-can interrupt installation or make it much slower. Your home folder is a suitable
-location.
 ```
 
 ## 2. Install the environment

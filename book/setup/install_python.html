@@ -171,7 +171,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course information</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../course_schedule.html">Schedule</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Setup</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Computer Setup</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="software.html">Software installation and data download</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active has-children"><a class="reference internal" href="local.html">On your local computer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="install_fiji.html">Install Fiji</a></li>
@@ -418,13 +418,13 @@ without having to activate it first.</p>
 </div>
 <section id="open-a-terminal">
 <h2>1. Open a terminal<a class="headerlink" href="#open-a-terminal" title="Link to this heading">#</a></h2>
-<p>** macOS**: open the Terminal app (in Applications → Utilities).</p>
+<p><strong>macOS</strong>: open the Terminal app (in Applications → Utilities).</p>
 <p><strong>Linux</strong>: open a terminal (Ctrl+Alt+T).</p>
-<p><strong>Windows</strong>: open PowerShell (press Win+R, type <code class="docutils literal notranslate"><span class="pre">powershell</span></code>, and press Enter).</p>
+<p><strong>Windows</strong>: open PowerShell (over the Start menu or press Win+R, type <code class="docutils literal notranslate"><span class="pre">powershell</span></code>, and press Enter).</p>
 </section>
 <section id="install-pixi">
 <h2>2. Install pixi<a class="headerlink" href="#install-pixi" title="Link to this heading">#</a></h2>
-<p><strong>macOS / Linux</strong>: in a terminal:</p>
+<p><strong>macOS / Linux</strong>: in the terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pixi.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
 </pre></div>
 </div>
@@ -442,6 +442,11 @@ effect, and check that the following command works:</p>
 </section>
 <section id="install-git">
 <h2>3. Install git<a class="headerlink" href="#install-git" title="Link to this heading">#</a></h2>
+<div class="admonition-what-is-git admonition">
+<p class="admonition-title">What is git?</p>
+<p>Git is a version control system. It is used to download the course material from
+GitHub and to keep it up to date. You do not need to learn git for this course, but you will use it to download the course material and to update it.</p>
+</div>
 <p>Check whether you already have it with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code>.</p>
 <p>If not, type the following command in the terminal, which can take a minute:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>global<span class="w"> </span>install<span class="w"> </span>git
