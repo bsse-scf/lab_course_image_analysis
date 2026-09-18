@@ -2,7 +2,7 @@
 
 This repo hosts materials and a website for the Image Analysis module of the lab course held by the Single Cell Unit at the D-BSSE of ETH Zurich.
 
-It hosts a github pages website at https://github.com/m-albert/scu_lab_course_ia.
+It hosts a github pages website at https://bsse-scf.github.io/lab_course_image_analysis/book/landing.html.
 
 ### Course environment setup on RRP for the exercises
 
@@ -10,7 +10,7 @@ It hosts a github pages website at https://github.com/m-albert/scu_lab_course_ia
 
 1. Log in to the RRP server [https://rrp.ia-res.ethz.ch](https://rrp.ia-res.ethz.ch) with your user credentials (handed out).
 2. Click the **[+]** button next to **Your projects** and click **Create new project from Git repository**.
-3. Specify the repository URL [https://github.com/m-albert/scu_lab_course_ia.git](https://github.com/m-albert/scu_lab_course_ia.git), then click on **Clone**.
+3. Specify the repository URL [https://github.com/bsse-scf/lab_course_image_analysis.git](https://github.com/bsse-scf/lab_course_image_analysis.git), then click on **Clone**.
 4. Type `latest` to the field below **Branch / Tag / commit**, the project name you can leave unchanged. Next click on **Build**. This will build the Project image from the repository. This step will take several minutes to complete.
 
 #### Start the course RRP Project
@@ -40,6 +40,10 @@ base = Path.home()
 Path(base / 'openbis/data/20260819080658667-36/original/plate01.nd2')
 ```
 
+For exercises with `ImageJ/Fiji` or `napari` in JupyterLab click top right onto `File` -> `New Launcher` -> `Desktop`. This will start a Linux Desktop in a new Tab of your browser. Then for example click onto the `Fiji` icon on the Desktop to start the application.
+
+#### Local usage
+
 To download the dataset manually for your local installation type:
 
 ```Python
@@ -48,7 +52,6 @@ pixi run python data/download_challenge_data.py USERNAME
 it will the prompt you for the password and download the `plate.01.nd` dataset to `data/challenge_data` for you to use.
 
 
-For exercises with `ImageJ/Fiji` or `napari` in JupyterLab click top right onto `File` -> `New Launcher` -> `Desktop`. This will start a Linux Desktop in a new Tab of your browser. Then for example click onto the `Fiji` icon on the Desktop to start the application.
 ### AI course tutor
 
 JupyterLab ships with a chat (the speech-bubble icon in the left sidebar,
