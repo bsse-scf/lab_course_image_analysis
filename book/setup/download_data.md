@@ -1,4 +1,4 @@
-# Download the example data
+# 4. Download the example data
 
 Most course images are included in the repository. No additional download is
 needed for the Fiji exercises or the day 2 notebooks.
@@ -17,7 +17,7 @@ This downloads the archive (2.2 GB) and unpacks it to
 command again and it continues where it left off.
 
 ```{note}
-Alternatively, download `plate01.zip` by hand from https://u.ethz.ch/BgsSv+,
+Alternatively, download `plate01.zip` by hand from https://u.ethz.ch/BgsSv,
 unzip it, and place `plate01.nd2` in the `data/challenge/` folder of the
 repository.
 ```
