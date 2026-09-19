@@ -410,7 +410,11 @@ BUILDERS = {
 #: course. They are recorded in the manifest so their checksums are verified too.
 MISC_PROVENANCE = {
     "rice.png": "classic test image (uneven illumination); previous course edition",
-    "actin.tif": "actin filaments; previous course edition",
+    "microtubules.tif": (
+        "alpha-tubulin immunofluorescence (Alexa 647) in U373 cells, widefield 100x/1.45 NA, "
+        "106 nm/px; sample-3/widefield.png from https://zenodo.org/records/5501761 "
+        "(Manish Singh, Institut Pasteur; CC BY 4.0); upscaled 2x in Fiji and calibrated to 53 nm/px"
+    ),
     "cells_shaded.tif": "vignetted fluorescence field; previous course edition",
     "timelapse": "7-frame phase-contrast timelapse, 30 min interval; previous course edition",
     "registration": "derived: BBBC020 15min_3 with two channels deliberately shifted (.course/scripts/make_derived_data.py)",
