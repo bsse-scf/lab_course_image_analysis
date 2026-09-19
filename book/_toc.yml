@@ -11,6 +11,7 @@ parts:
   - caption: Course information
     chapters:
       - file: book/course_schedule.md
+      - file: book/lecture_slides.md
       - file: book/setup/index.md
         sections:
           - file: book/setup/software.md
