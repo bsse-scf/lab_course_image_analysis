@@ -34,12 +34,9 @@ parts:
       - file: book/fiji/index.md
         sections:
           - file: book/fiji/e1_basics.md
-          - file: book/fiji/e2_registration.md
-          - file: book/fiji/e3_segmentation.md
+          - file: book/fiji/e2_segmentation.md
+          - file: book/fiji/e3_macros.md
           - file: book/fiji/e4_weka.md
-          - file: book/fiji/e5_macros.md
-          - file: book/fiji/fun/how_wide_is_a_filament.md
-          - file: book/fiji/fun/spot_the_artifact.md
       - file: book/fiji/cheat_sheet_basics.md
       - file: book/fiji/cheat_sheet_macros.md
 
