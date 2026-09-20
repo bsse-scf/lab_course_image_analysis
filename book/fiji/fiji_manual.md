@@ -445,7 +445,7 @@ Filtering in the frequency domain consists of modifying the Fourier transform of
 
 There are many reasons why one might want to run a background subtraction before analysis. In microscopy acquisitions, it is common for images to display a reduced intensity away from the center of the image. This so called **shading** can make it more difficult to segment objects unless one uses a local thresholding strategy. For **ratiometric analyses**, where one locally calculates the ratio of the signal between two channels, any intensity offset due to unspecific light in the background must be removed; otherwise, especially for weak signals, the ratio of the background values dominates the overall ratio!
 
-Open the image `data/fiji/background/cell_shaded.tif`.
+Open the image `data/fiji/background/cells_shaded.tif`.
 
 ```{figure} ../../data/fiji/images_fiji_manual/background_cell_shaded.png
 :width: 400px
@@ -717,7 +717,7 @@ In the next sections, we will see a few examples of **image analysis** workflows
 
 ### Time series analysis from manual ROIs
 
-In this example we will analyze intensity spikes in a calcium flux experiment. Open the image `./data/fiji/measurements/manual_rois/Calcium Flux.tif`. 
+In this example we will analyze intensity spikes in a calcium flux experiment. Open the image `data/fiji/measurements/manual_rois/Calcium Flux.tif`. 
 
 ```{figure} ../../data/fiji/images_fiji_manual/calcium_flux.png
 :width: 300px
