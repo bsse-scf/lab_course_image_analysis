@@ -99,9 +99,16 @@ def test_data_file_matches_manifest(relpath, expected_sha):
 
 IMAGE_SUFFIXES = {".tif", ".tiff", ".png", ".gif"}
 
+#: `data/fiji/` holds the Fiji exercise images and the screenshots of the Fiji
+#: manual. Those are opened in Fiji or shown on the site at their native size,
+#: so the limit does not apply to them; it guards the Python-track data only.
+EXEMPT_DIRS = {"fiji", "_cache"}
+
 DATA_IMAGES = sorted(
     p for p in (REPO / "data").rglob("*")
-    if p.is_file() and p.suffix.lower() in IMAGE_SUFFIXES and "_cache" not in p.parts
+    if p.is_file()
+    and p.suffix.lower() in IMAGE_SUFFIXES
+    and not EXEMPT_DIRS & set(p.relative_to(REPO / "data").parts)
 )
 
 
@@ -109,7 +116,7 @@ DATA_IMAGES = sorted(
     "path", DATA_IMAGES, ids=[str(p.relative_to(REPO / "data")) for p in DATA_IMAGES]
 )
 def test_image_within_size_limit(path):
-    """No image in data/ may exceed 512 px on its longest edge.
+    """No Python-track image in data/ may exceed 512 px on its longest edge.
 
     The repository stores data as ordinary git blobs - there is no git-lfs - so
     this limit is the only thing keeping a clone small.

@@ -38,8 +38,8 @@ stages:
     libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0
     libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-cursor0
 
-# --- the private solutions submodule, required by the exercise-sync and ---
-# --- schedule tests (they fail, not skip, without it) ---------------------
+# --- the private solutions submodule, required by the exercise-sync tests ---
+# --- (they fail, not skip, without it) --------------------------------------
 # SOLUTIONS_TOKEN is a masked CI/CD variable holding a GitHub fine-grained
 # PAT with read access to the solutions repository.
 .solutions: &solutions
@@ -54,7 +54,6 @@ unit tests:
     - *solutions
   script:
     - pixi run test --junitxml=report.xml
-    # - pixi run check-schedule
   artifacts:
     when: always
     reports:
