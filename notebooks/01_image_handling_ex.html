@@ -390,11 +390,12 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-load-an-image-and-describe-it">Task 1: load an image and describe it</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-crop-and-display">Task 2: crop and display</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-the-histogram">Task 3: the histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-visualize-the-image-in-napari">Task 3: Visualize the image in Napari</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-threshold-and-count">Task 4: threshold and count</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-check-it-against-the-truth">Task 5: check it against the truth</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-build-a-composite">Task 6: build a composite</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-finish-early">If you finish early</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-visualize-the-channels-in-napari">Task 7: Visualize the channels in Napari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise">Bonus exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -452,8 +453,6 @@ intensity range.</p>
 <section id="task-2-crop-and-display">
 <h2>Task 2: crop and display<a class="headerlink" href="#task-2-crop-and-display" title="Link to this heading">#</a></h2>
 <p>Display the image, then display a 150×150 crop taken from its centre.</p>
-<p>You know the shape from task 1, so you can compute the centre rather than
-hardcoding numbers: that way the same code works on any image.</p>
 <details>
 <summary>Hint 1, where is the centre?</summary>
 <p>Half the number of rows and half the number of columns:
@@ -478,25 +477,15 @@ hardcoding numbers: that way the same code works on any image.</p>
 </div>
 </div>
 </section>
-<section id="task-3-the-histogram">
-<h2>Task 3: the histogram<a class="headerlink" href="#task-3-the-histogram" title="Link to this heading">#</a></h2>
-<p>Plot the histogram of the image with 256 bins. Use a log scale on the y-axis, or
-the background peak will hide everything else.</p>
-<p>Then answer, in the markdown cell below: roughly where would you put a threshold
-to separate the nuclei from the background?</p>
-<details>
-<summary>Hint</summary>
-<p><code class="docutils literal notranslate"><span class="pre">plt.hist(nuclei.ravel(),</span> <span class="pre">bins=256,</span> <span class="pre">range=(0,</span> <span class="pre">255))</span></code> and <code class="docutils literal notranslate"><span class="pre">plt.yscale(&quot;log&quot;)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">.ravel()</span></code> flattens the 2D image into the 1D list of values that <code class="docutils literal notranslate"><span class="pre">hist</span></code> wants.</p>
-</details><div class="cell docutils container">
+<section id="task-3-visualize-the-image-in-napari">
+<h2>Task 3: Visualize the image in Napari<a class="headerlink" href="#task-3-visualize-the-image-in-napari" title="Link to this heading">#</a></h2>
+<p>Make sure the nuclei are shown with a blue colormap.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>          <span class="c1"># TODO: 256 bins over the range 0-255</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>        <span class="c1"># TODO: log scale on y</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"intensity"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"pixel count"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -507,15 +496,7 @@ to separate the nuclei from the background?</p>
 <h2>Task 4: threshold and count<a class="headerlink" href="#task-4-threshold-and-count" title="Link to this heading">#</a></h2>
 <p>Threshold the image with Otsu’s method, label the connected objects, and print
 how many you found.</p>
-<details>
-<summary>Hint 1, which functions?</summary>
-<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">skimage.filters</span> <span class="pre">import</span> <span class="pre">threshold_otsu</span></code> and <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">skimage.measure</span> <span class="pre">import</span> <span class="pre">label</span></code>.</p>
-</details>
-<details>
-<summary>Hint 2: how do I count them?</summary>
-<p><code class="docutils literal notranslate"><span class="pre">label()</span></code> numbers the objects from 1 upwards, so the largest value in the label
-image <em>is</em> the count: <code class="docutils literal notranslate"><span class="pre">labels.max()</span></code>.</p>
-</details><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_otsu</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span>
@@ -525,8 +506,8 @@ image <em>is</em> the count: <code class="docutils literal notranslate"><span cl
 <span class="n">mask</span> <span class="o">=</span> <span class="o">...</span>     <span class="c1"># TODO: boolean mask of pixels above it</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: label the connected objects</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"threshold:"</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"objects  :"</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"threshold:"</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"objects  :"</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -534,7 +515,7 @@ image <em>is</em> the count: <code class="docutils literal notranslate"><span cl
 </section>
 <section id="task-5-check-it-against-the-truth">
 <h2>Task 5: check it against the truth<a class="headerlink" href="#task-5-check-it-against-the-truth" title="Link to this heading">#</a></h2>
-<p>This field is annotated too. Load <code class="docutils literal notranslate"><span class="pre">data/bbbc020/gt/1h_1_nuclei_labels.tif</span></code> and
+<p>We have a ground truth label image. Load <code class="docutils literal notranslate"><span class="pre">data/bbbc020/gt/1h_1_nuclei_labels.tif</span></code> and
 compare your object count with the number of annotated nuclei.</p>
 <p>Then answer below: are they the same? If not, look at your labeled image and
 say what you think went wrong.</p>
@@ -584,11 +565,30 @@ blue and the cell channel in green.</p>
 </div>
 </div>
 </section>
-<section id="if-you-finish-early">
-<h2>If you finish early<a class="headerlink" href="#if-you-finish-early" title="Link to this heading">#</a></h2>
-<p>Try the same threshold-and-count on <code class="docutils literal notranslate"><span class="pre">1h_1_cells.tif</span></code> instead of the nuclei, and
-compare against <code class="docutils literal notranslate"><span class="pre">1h_1_cells_labels.tif</span></code>. It goes much worse: that is the point,
-and it is what the day 2 notebooks are about.</p>
+<section id="task-7-visualize-the-channels-in-napari">
+<h2>Task 7: Visualize the channels in Napari<a class="headerlink" href="#task-7-visualize-the-channels-in-napari" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bonus-exercise">
+<h2>Bonus exercise<a class="headerlink" href="#bonus-exercise" title="Link to this heading">#</a></h2>
+<p>Create a small Napari widget that lets you adjust the threshold and see the labeled objects update in real time.</p>
+<p>As an example, the following code adds a function widget to the Napari viewer that takes two images and adds them together. You can adapt this to your thresholding and labeling function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">napari.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageData</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_layers</span><span class="p">(</span><span class="n">img1</span><span class="p">:</span> <span class="n">ImageData</span><span class="p">,</span> <span class="n">img2</span><span class="p">:</span> <span class="n">ImageData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImageData</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">img1</span> <span class="o">+</span> <span class="n">img2</span>
+
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">Viewer</span><span class="p">()</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_function_widget</span><span class="p">(</span><span class="n">add_layers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Hint: You can return a layer of type <code class="docutils literal notranslate"><span class="pre">LabelsData</span></code> from your function, and Napari will automatically display it as a label layer.</p>
 </section>
 </section>
 
@@ -660,11 +660,12 @@ and it is what the day 2 notebooks are about.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-load-an-image-and-describe-it">Task 1: load an image and describe it</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-crop-and-display">Task 2: crop and display</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-the-histogram">Task 3: the histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-visualize-the-image-in-napari">Task 3: Visualize the image in Napari</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-threshold-and-count">Task 4: threshold and count</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-check-it-against-the-truth">Task 5: check it against the truth</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-build-a-composite">Task 6: build a composite</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-finish-early">If you finish early</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-visualize-the-channels-in-napari">Task 7: Visualize the channels in Napari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise">Bonus exercise</a></li>
 </ul>
   </nav></div>
 
