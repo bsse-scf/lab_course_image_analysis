@@ -30,6 +30,7 @@ parts:
 
   - caption: Image Analysis Basics with Fiji
     chapters:
+      - file: book/fiji/fiji_manual.md
       - file: book/fiji/index.md
         sections:
           - file: book/fiji/e1_basics.md
