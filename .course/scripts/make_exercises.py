@@ -20,6 +20,9 @@ Markers, inside a code cell:
 
 The SOLUTION block is dropped and the PROMPT block is uncommented in its place.
 A cell tagged `solution-only` is removed from the exercise entirely.
+Lines that only exist to make `course.py` importable from the solutions folder
+(`import sys; sys.path.append("../../../notebooks")`) are dropped as well, since
+the student notebooks live in `notebooks/` where no path tweak is needed.
 """
 
 from __future__ import annotations
@@ -39,6 +42,9 @@ BEGIN_SOLUTION = "### BEGIN SOLUTION"
 END_SOLUTION = "### END SOLUTION"
 BEGIN_PROMPT = "### BEGIN PROMPT"
 END_PROMPT = "### END PROMPT"
+
+# Solution-folder-only lines that are never wanted in the student notebook.
+DROP_LINE_PREFIXES = ('import sys; sys.path.append("../../../notebooks")',)
 
 
 def _uncomment(line: str) -> str:
@@ -75,6 +81,8 @@ def strip_source(source: str) -> str:
             continue
 
         if mode == "solution":
+            continue
+        if marker.startswith(DROP_LINE_PREFIXES):
             continue
         if mode == "prompt":
             out.append(_uncomment(line))
