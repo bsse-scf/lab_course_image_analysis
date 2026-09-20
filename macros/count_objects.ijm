@@ -1,7 +1,7 @@
 // Count objects in every image in a folder.
 //
-// Companion to book/fiji/e5_macros.md. The processing here is exactly the E3
-// pipeline; everything else is the loop around it.
+// Companion to book/fiji/e3_macros.md. The processing here is a simple
+// blur + threshold pipeline; everything else is the loop around it.
 //
 // Note there is no watershed step: Analyze Particles counts connected regions,
 // so touching objects are counted once. Separating them is covered in Python.
