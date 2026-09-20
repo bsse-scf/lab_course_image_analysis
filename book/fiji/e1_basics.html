@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fiji/e1_basics';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="E2: Registration" href="e2_registration.html" />
+    <link rel="next" title="E2: Image segmentation workflow" href="e2_segmentation.html" />
     <link rel="prev" title="Fiji practical" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -197,12 +197,9 @@
 <li class="toctree-l1"><a class="reference internal" href="fiji_manual.html">Fiji overview</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Fiji practical</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">E1: Fiji basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e2_registration.html">E2: Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e3_segmentation.html">E3: Segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e5_macros.html">E5: Macros <em>(optional)</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/spot_the_artifact.html">Spot the artifact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e2_segmentation.html">E2: Image segmentation workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e3_macros.html">E3: Automation with Fiji macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning in Fiji</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
@@ -392,10 +389,8 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-what-is-in-this-image">Part 1: what is in this image?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-how-big-is-a-pixel">Part 2: how big is a pixel?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-two-channels">Part 3: two channels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-save-something-presentable">Part 4: save something presentable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-fiji">Getting started with Fiji</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-wide-is-the-filament">How wide is the filament?</a></li>
 </ul>
             </nav>
         </div>
@@ -409,94 +404,55 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="e1-fiji-basics">
 <h1>E1: Fiji basics<a class="headerlink" href="#e1-fiji-basics" title="Link to this heading">#</a></h1>
-<p><strong>~40 min.</strong> Inspect pixel values, image types, calibration and channels.</p>
 <section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">#</a></h2>
-<p>Open <code class="docutils literal notranslate"><span class="pre">data/bbbc020/images/2h_1_nuclei.tif</span></code> and
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/images/2h_1_cells.tif</span></code> in Fiji
-(<code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">▸</span> <span class="pre">Open…</span></code>, or drag the file onto the Fiji toolbar).</p>
-</section>
-<section id="part-1-what-is-in-this-image">
-<h2>Part 1: what is in this image?<a class="headerlink" href="#part-1-what-is-in-this-image" title="Link to this heading">#</a></h2>
-<p>Use Fiji to find each answer. Note which command or window provides it.</p>
 <ol class="arabic simple">
-<li><p><strong>What are the dimensions of the image, in pixels?</strong>
-<em>Hint: the title bar of the image window shows them, along with the data type.</em></p></li>
-<li><p><strong>What data type is it, and what range of values can a pixel hold?</strong>
-<em>Hint: <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Type</span></code> shows a tick beside the current type.</em></p></li>
-<li><p><strong>What are the darkest and brightest pixel values actually present?</strong>
-<em>Hint: <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Histogram</span></code> (Ctrl/Cmd+H) reports min, max and mean.</em></p></li>
-<li><p><strong>What is the value of the pixel at x=25, y=336? And at x=472, y=190?</strong>
-<em>Hint: hover the mouse over the image and read the status bar in the main Fiji
-window. Note Fiji reports <code class="docutils literal notranslate"><span class="pre">x,y</span></code>, column first, which is the opposite order
-from the <code class="docutils literal notranslate"><span class="pre">(row,</span> <span class="pre">column)</span></code> used in the Python notebooks.</em></p></li>
-<li><p>One of those two pixels is inside a nucleus and one is background.
-<strong>Which is which, and by how much do they differ?</strong></p></li>
-<li><p><strong>What is the mean intensity of the whole image?</strong> Select everything with
-Ctrl/Cmd+A, then <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Measure</span></code> (Ctrl/Cmd+M).</p></li>
-<li><p>Now draw a small rectangle inside a single nucleus and measure again.
-<strong>How does the mean compare?</strong> This is the difference a threshold has to find.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">data/fiji/segmentation/1894_G3_5.tif</span></code> in Fiji.</p></li>
 </ol>
 </section>
-<section id="part-2-how-big-is-a-pixel">
-<h2>Part 2: how big is a pixel?<a class="headerlink" href="#part-2-how-big-is-a-pixel" title="Link to this heading">#</a></h2>
-<ol class="arabic simple" start="8">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Properties…</span></code> (Ctrl/Cmd+Shift+P). <strong>What does Fiji think the
-pixel width and height are, and in what unit?</strong></p></li>
+<section id="getting-started-with-fiji">
+<h2>Getting started with Fiji<a class="headerlink" href="#getting-started-with-fiji" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Use Fiji to answer the following questions about the image:</p>
+<ol class="arabic simple">
+<li><p>What is the pixel size (the physical size of a pixel in the image) of the image in microns? Hint: Check the image properties (under “Image” -&gt; “Properties…”).</p></li>
+<li><p>What is the mean intensity of the image? Hint: Use “Analyze” -&gt; “Measure” after selecting the whole image with “Ctrl+A” (or “Cmd+A” on Mac). You can also select a region of interest with the rectangle tool and measure only that part of the image.</p></li>
+<li><p>What’s the intensity of the least and most bright pixel in the image? Hint: Use “Analyze” -&gt; “Histogram” to see the intensity distribution.</p></li>
+<li><p>What is the intensity of the pixel at position (100, 150)? Hint: Hover over the pixel with the mouse to see its coordinates and intensity in the status bar at the bottom of the window.</p></li>
+<li><p>What’s a good brightness/contrast setting for this image? Hint: Use “Image” -&gt; “Adjust” -&gt; “Brightness/Contrast…” to open the brightness/contrast adjustment window. You can use the “Auto” button to automatically adjust the brightness/contrast. You can also manually adjust the minimum and maximum intensity values to change the contrast.</p></li>
+<li><p>What is the width and height of the image in physical units? Hint: Use the pixel size and the number of pixels in each dimension (shown in the title bar of the image window) to calculate the physical size.</p></li>
 </ol>
-<p>You should find <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">pixel</span> <span class="pre">×</span> <span class="pre">1</span> <span class="pre">pixel</span></code>: the file carries no calibration, so Fiji
-has no idea what physical size these pixels represent.</p>
-<ol class="arabic simple" start="9">
-<li><p><strong>Why is that dangerous?</strong> Consider: you measure a nucleus and Fiji reports an
-area of 300. Three hundred <em>what</em>? And what happens if a colleague repeats
-your analysis on images from a different objective?</p></li>
+</li>
+<li><p>Working with multichannel images:</p>
+<ol class="arabic simple">
+<li><p>Explore different Color Modes in Fiji. Hint: Use “Image” -&gt; “Color” -&gt; “Color Mode” to switch between different color modes (e.g., RGB, Grayscale, Composite). How does it affect the appearance of the image?</p></li>
+<li><p>Split the image into its individual channels. Hint: Use “Image” -&gt; “Color” -&gt; “Split Channels”.</p></li>
+<li><p>Merge the channels back into a single image (“Image” -&gt; “Color” -&gt; “Merge Channels…”). Make sure that the resulting Composite image is displayed in the same color mode as the original image. If that’s already the case, try to play with the LUTs of the individual channels to see how it affects the appearance of the Composite image.</p></li>
 </ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Fiji can measure an uncalibrated image, but lengths and areas will be reported
-in pixels and square pixels. Check the units before interpreting a measurement.
-A size filter in a macro also changes meaning when the calibration changes.</p>
-</div>
-<ol class="arabic" start="10">
-<li><p>Set the calibration yourself: in <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Properties…</span></code>, set the pixel width
-and height to <code class="docutils literal notranslate"><span class="pre">0.5</span></code> and the unit to <code class="docutils literal notranslate"><span class="pre">micron</span></code>. Measure a nucleus again.
-<strong>What changed, and what did not?</strong></p>
-<p><em>(0.5 µm is invented for this exercise: these images were downscaled from
-the originals, so the true value no longer applies. That is itself worth
-noticing: resizing an image invalidates its calibration.)</em></p>
+</li>
+<li><p>Save a representation of the Composite image for a publication:</p>
+<ol class="arabic simple">
+<li><p>Adjust the brightness/contrast of the image to a good setting (for each channel).</p></li>
+<li><p>Add a scale bar to the image. Hint: Use “Analyze” -&gt; “Tools” -&gt; “Scale Bar…” to add a scale bar.</p></li>
+<li><p>Save the modified image as a PNG file. Make sure that the scale bar is visible in the saved image.</p></li>
+</ol>
 </li>
 </ol>
 </section>
-<section id="part-3-two-channels">
-<h2>Part 3: two channels<a class="headerlink" href="#part-3-two-channels" title="Link to this heading">#</a></h2>
-<ol class="arabic" start="11">
-<li><p>With both channels open, run <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Color</span> <span class="pre">▸</span> <span class="pre">Merge</span> <span class="pre">Channels…</span></code>. Put the
-nuclei in <strong>blue</strong> (C3) and the cells in <strong>green</strong> (C2), and tick <em>Create
-composite</em>. <strong>Do the two channels line up?</strong></p></li>
-<li><p>In the composite, use <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Color</span> <span class="pre">▸</span> <span class="pre">Channels</span> <span class="pre">Tool…</span></code> to turn each channel
-on and off. <strong>Does every nucleus sit inside a stained cell? Does every cell
-have a nucleus?</strong></p></li>
-<li><p>Adjust <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Adjust</span> <span class="pre">▸</span> <span class="pre">Brightness/Contrast…</span></code> (Ctrl/Cmd+Shift+C) and press
-<strong>Auto</strong>. <strong>Did the pixel values change?</strong></p>
-<p><em>Hint: check the histogram before and after. This is the single most common
-misunderstanding in image analysis.</em></p>
+<section id="how-wide-is-the-filament">
+<h2>How wide is the filament?<a class="headerlink" href="#how-wide-is-the-filament" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">data/misc/microtubules.tif</span></code> (microtubules labelled with a fluorescent antibody against tubulin). What is the pixel size of this image?</p></li>
+<li><p>Measure the width of a filament:</p>
+<ol class="arabic simple">
+<li><p>Select the straight line tool and draw a short line across one isolated filament (use the left half of the image), perpendicular to it.</p></li>
+<li><p>Plot the intensity profile along the line. Hint: Use “Analyze” -&gt; “Plot Profile” (Ctrl/Cmd+K). Are the distances shown in pixels or physical units?</p></li>
+<li><p>Suppose you want to determine the width of the filaments in the image. How would you do that methodically? Hint: One option is to consider the full width at half maximum (FWHM) of the intensity profile.</p></li>
+<li><p>Repeat the measurement on different filaments / parts of the image. Do you get the same width?</p></li>
+</ol>
 </li>
+<li><p>A microtubule is about 25 nm in diameter. How does this compare to the width you measured?</p></li>
 </ol>
-</section>
-<section id="part-4-save-something-presentable">
-<h2>Part 4: save something presentable<a class="headerlink" href="#part-4-save-something-presentable" title="Link to this heading">#</a></h2>
-<ol class="arabic simple" start="14">
-<li><p>Adjust the contrast of the composite so both channels are visible.</p></li>
-<li><p>Add a scale bar with <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Tools</span> <span class="pre">▸</span> <span class="pre">Scale</span> <span class="pre">Bar…</span></code>. (You will need the
-calibration you set in step 10 for this to show microns.)</p></li>
-<li><p>Save as PNG with <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">▸</span> <span class="pre">Save</span> <span class="pre">As</span> <span class="pre">▸</span> <span class="pre">PNG…</span></code>, with the scale bar visible.</p></li>
-</ol>
-<div class="tip admonition">
-<p class="admonition-title">Check yourself</p>
-<p>Before moving on, make sure you can answer: what is the difference between
-changing the <strong>brightness/contrast</strong> and changing the <strong>pixel values</strong>? If a
-figure in a paper has had its contrast adjusted, has the data been altered?</p>
-</div>
 </section>
 </section>
 
@@ -540,11 +496,11 @@ figure in a paper has had its contrast adjusted, has the data been altered?</p>
       </div>
     </a>
     <a class="right-next"
-       href="e2_registration.html"
+       href="e2_segmentation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">E2: Registration</p>
+        <p class="prev-next-title">E2: Image segmentation workflow</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -567,10 +523,8 @@ figure in a paper has had its contrast adjusted, has the data been altered?</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-what-is-in-this-image">Part 1: what is in this image?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-how-big-is-a-pixel">Part 2: how big is a pixel?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-two-channels">Part 3: two channels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-save-something-presentable">Part 4: save something presentable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-fiji">Getting started with Fiji</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-wide-is-the-filament">How wide is the filament?</a></li>
 </ul>
   </nav></div>
 

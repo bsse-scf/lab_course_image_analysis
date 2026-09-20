@@ -197,12 +197,9 @@
 <li class="toctree-l1"><a class="reference internal" href="fiji_manual.html">Fiji overview</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Fiji practical</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="e1_basics.html">E1: Fiji basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e2_registration.html">E2: Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e3_segmentation.html">E3: Segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e5_macros.html">E5: Macros <em>(optional)</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/spot_the_artifact.html">Spot the artifact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e2_segmentation.html">E2: Image segmentation workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e3_macros.html">E3: Automation with Fiji macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning in Fiji</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
@@ -410,6 +407,8 @@
 In this practical you will inspect image intensities, apply a threshold, clean
 up a mask and measure objects through the graphical interface. The Python
 notebooks introduce how to make these steps reproducible and automate them for many images.</p>
+<p>The <a class="reference internal" href="fiji_manual.html"><span class="std std-doc">Fiji manual</span></a> explains every tool the exercises use; keep
+it open alongside them. Also, the Fiji cheatsheets can be useful (linked in the menu on the left).</p>
 <section id="the-exercises">
 <h2>The exercises<a class="headerlink" href="#the-exercises" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -422,51 +421,28 @@ notebooks introduce how to make these steps reproducible and automate them for m
 <tbody>
 <tr class="row-even"><td><p><a class="reference internal" href="e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 <td><p>Fiji basics</p></td>
-<td><p>intensities, channels, histogram, data types</p></td>
+<td><p>pixel size, intensities, histogram, scale bar, measuring a filament</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="e2_registration.html"><span class="std std-doc">E2</span></a></p></td>
-<td><p>Registration</p></td>
-<td><p>aligning channels that do not overlap</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="e3_segmentation.html"><span class="std std-doc">E3</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="e2_segmentation.html"><span class="std std-doc">E2</span></a></p></td>
 <td><p>Segmentation</p></td>
 <td><p>filter, threshold, clean up, measure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="e3_macros.html"><span class="std std-doc">E3</span></a></p></td>
+<td><p>Macros</p></td>
+<td><p>recording and batch processing</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
 <td><p>Machine learning</p></td>
 <td><p>Trainable Weka Segmentation</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="e5_macros.html"><span class="std std-doc">E5</span></a></p></td>
-<td><p>Macros <em>(optional)</em></p></td>
-<td><p>recording and batching</p></td>
-</tr>
 </tbody>
 </table>
 </div>
-<p>Two shorter ones to try if you are ahead:
-<a class="reference internal" href="fun/how_wide_is_a_filament.html"><span class="std std-doc">how wide is a filament?</span></a> and
-<a class="reference internal" href="fun/spot_the_artifact.html"><span class="std std-doc">spot the artifact</span></a>.</p>
-<p><strong>Complete E4:</strong> its exported files are used in the day 2 notebooks. E5 is
-optional; it introduces Fiji macros for batch processing.</p>
 </section>
 <section id="the-data">
 <h2>The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
-<p>Everything is in the repository you cloned, under <code class="docutils literal notranslate"><span class="pre">data/</span></code>. The main set is
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code>: mouse bone-marrow macrophages with two channels.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">*_nuclei.tif</span></code>: DAPI, staining the nuclei</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">*_cells.tif</span></code>: CD11b, staining the cell surface</p></li>
-</ul>
-<p>Open one image from each channel and compare them. <strong>The nuclei are compact and
-bright against the background. The cell signal is patchier, neighbouring cells
-touch, and some edges are faint.</strong> These differences affect which segmentation
-methods work well.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>These images are uncalibrated: Fiji does not know how large a pixel is in
-microns, so every measurement it reports will be in pixels. E1 asks you to check
-this, and it matters more than it sounds.</p>
-</div>
+<p>Everything is in the repository you cloned, under <code class="docutils literal notranslate"><span class="pre">data/fiji/</span></code>. Each exercise
+names the file it uses; E1 and E2 work on the same image.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>

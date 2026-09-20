@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>E4: Segmentation using machine learning &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
+    <title>E4: Segmentation using machine learning in Fiji &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fiji/e4_weka';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="E5: Macros (optional)" href="e5_macros.html" />
-    <link rel="prev" title="E3: Segmentation" href="e3_segmentation.html" />
+    <link rel="next" title="Cheat sheet: Fiji basics" href="cheat_sheet_basics.html" />
+    <link rel="prev" title="E3: Automation with Fiji macros" href="e3_macros.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -197,12 +197,9 @@
 <li class="toctree-l1"><a class="reference internal" href="fiji_manual.html">Fiji overview</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Fiji practical</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="e1_basics.html">E1: Fiji basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e2_registration.html">E2: Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e3_segmentation.html">E3: Segmentation</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">E4: Segmentation using machine learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e5_macros.html">E5: Macros <em>(optional)</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/spot_the_artifact.html">Spot the artifact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e2_segmentation.html">E2: Image segmentation workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e3_macros.html">E3: Automation with Fiji macros</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">E4: Segmentation using machine learning in Fiji</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
@@ -381,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>E4: Segmentation using machine learning</h1>
+    <h1>E4: Segmentation using machine learning in Fiji</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -391,11 +388,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why">Why</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-train-a-classifier">Part 1: train a classifier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-apply-a-classifier-you-did-not-train">Part 2: apply a classifier you did not train</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-export-for-day-2">Part 3: export for day 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#think-about-it">Think about it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical">Practical</a></li>
 </ul>
             </nav>
         </div>
@@ -407,105 +401,20 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="e4-segmentation-using-machine-learning">
-<h1>E4: Segmentation using machine learning<a class="headerlink" href="#e4-segmentation-using-machine-learning" title="Link to this heading">#</a></h1>
-<p><strong>~50 min.</strong> Train and apply a pixel classifier in Fiji.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>This exercise produces files that the day 2 notebooks read back
-in. Do part 3 even if you are running short of time.</p>
-</div>
-<section id="why">
-<h2>Why<a class="headerlink" href="#why" title="Link to this heading">#</a></h2>
-<p>In <a class="reference internal" href="e3_segmentation.html"><span class="std std-doc">E3</span></a> the nuclei thresholded well and the cells did not.
-The CD11b signal varies within cells and some cell edges are faint, so one
-intensity threshold does not separate cells from background well. <strong>Trainable
-Weka Segmentation</strong> uses image features such as texture and local edges. You
-mark example pixels as cell or background, then train a classifier to label the
-rest of the image.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="e4-segmentation-using-machine-learning-in-fiji">
+<h1>E4: Segmentation using machine learning in Fiji<a class="headerlink" href="#e4-segmentation-using-machine-learning-in-fiji" title="Link to this heading">#</a></h1>
+<section id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">#</a></h2>
+<p>Use the image <code class="docutils literal notranslate"><span class="pre">data/fiji/segmentation/13901.tif</span></code>.</p>
 </section>
-<section id="part-1-train-a-classifier">
-<h2>Part 1: train a classifier<a class="headerlink" href="#part-1-train-a-classifier" title="Link to this heading">#</a></h2>
+<section id="practical">
+<h2>Practical<a class="headerlink" href="#practical" title="Link to this heading">#</a></h2>
+<p>Try to segment the cells in the image using two methods:</p>
 <ol class="arabic simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">data/bbbc020/images/15min_3_cells.tif</span></code>.</p></li>
-<li><p>Start <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">▸</span> <span class="pre">Segmentation</span> <span class="pre">▸</span> <span class="pre">Trainable</span> <span class="pre">Weka</span> <span class="pre">Segmentation</span></code>.</p></li>
-<li><p>You get two classes. Rename them (<strong>Settings</strong>) to <code class="docutils literal notranslate"><span class="pre">cell</span></code> and <code class="docutils literal notranslate"><span class="pre">background</span></code>.</p></li>
-<li><p>With the freehand or brush tool, draw a stroke <em>inside</em> a cell and click
-<strong>Add to class 1</strong>. Draw a stroke on empty background and <strong>Add to class 2</strong>.</p></li>
-<li><p>Click <strong>Train classifier</strong>. After a moment you get an overlay of the result.</p></li>
-<li><p>Now iterate, and be strategic about it. Do not add more examples of things it
-already gets right: <strong>find a place where it is wrong and correct that</strong>.
-Cell edges, the gaps between touching cells, and any dim cells are where the
-information is.</p></li>
-<li><p><strong>How many strokes did it take before the result stopped obviously improving?</strong></p></li>
+<li><p>Using filtering and thresholding.</p></li>
+<li><p>Using the Trainable Weka Segmentation plugin.</p></li>
 </ol>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Under <strong>Settings</strong> you can see the <em>features</em> it computes: Gaussian blur,
-Hessian, membrane projections and so on, each at several scales. That list is the
-set of questions it is allowed to ask about each pixel. Turning on more features
-makes training slower and can make it overfit your handful of strokes.</p>
-</div>
-<ol class="arabic simple" start="8">
-<li><p>Compare against the annotation in
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/gt/15min_3_cells_labels.tif</span></code>. <strong>Is it better than your best
-threshold from E3? Where is it still wrong?</strong></p></li>
-<li><p>Save your work: <strong>Save classifier</strong> as <code class="docutils literal notranslate"><span class="pre">my_classifier.model</span></code>.</p></li>
-</ol>
-</section>
-<section id="part-2-apply-a-classifier-you-did-not-train">
-<h2>Part 2: apply a classifier you did not train<a class="headerlink" href="#part-2-apply-a-classifier-you-did-not-train" title="Link to this heading">#</a></h2>
-<p>Save the trained classifier so you can apply it to other images.</p>
-<ol class="arabic simple" start="10">
-<li><p>Close the plugin and reopen it on a <em>different</em> image:
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/images/15min_1_cells.tif</span></code>.</p></li>
-<li><p>Click <strong>Load classifier</strong> and choose
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/weka/bbbc020_cells.model</span></code>: a classifier trained in advance on
-a different field.</p></li>
-<li><p>Click <strong>Apply classifier</strong> <em>without adding any training strokes of your own.</em></p></li>
-<li><p><strong>How well does someone else’s classifier do on your image?</strong> Then repeat on
-<code class="docutils literal notranslate"><span class="pre">15min_2_cells.tif</span></code> and <code class="docutils literal notranslate"><span class="pre">24h_2_cells.tif</span></code>.</p></li>
-<li><p><strong>Does it do equally well on all three?</strong> If not, what is different about the
-images where it struggles?</p></li>
-</ol>
-<div class="note admonition">
-<p class="admonition-title">Applying a classifier to new images</p>
-<p>A saved classifier applies the same learned rule to each image. Its performance
-may change if the illumination, staining or imaging settings change. Which of
-these could differ between two acquisition days?</p>
-</div>
-</section>
-<section id="part-3-export-for-day-2">
-<h2>Part 3: export for day 2<a class="headerlink" href="#part-3-export-for-day-2" title="Link to this heading">#</a></h2>
-<p>On day 2 these results are loaded into Python and compared against
-a deep-learning method, so they need to be on disk.</p>
-<p>For each of the three images <code class="docutils literal notranslate"><span class="pre">15min_1</span></code>, <code class="docutils literal notranslate"><span class="pre">15min_2</span></code> and <code class="docutils literal notranslate"><span class="pre">24h_2</span></code>:</p>
-<ol class="arabic simple" start="15">
-<li><p>With the classifier applied, click <strong>Get probability</strong> to produce the
-probability map.</p></li>
-<li><p>Save it as
-<code class="docutils literal notranslate"><span class="pre">results/weka/&lt;name&gt;_cells_probability.tif</span></code>
-(create the <code class="docutils literal notranslate"><span class="pre">results/weka/</span></code> folder in the repository root).</p></li>
-<li><p>Then click <strong>Create result</strong> to get the hard classification, and save it as
-<code class="docutils literal notranslate"><span class="pre">results/weka/&lt;name&gt;_cells_classified.tif</span></code>.</p></li>
-</ol>
-<p>You should end up with six files.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you run out of time or something goes wrong, the day 2 notebook falls back to
-a reference copy in <code class="docutils literal notranslate"><span class="pre">data/bbbc020/weka/</span></code>. Using your own exports lets you compare the classifier you trained with the
-other methods on day 2.</p>
-</div>
-</section>
-<section id="think-about-it">
-<h2>Think about it<a class="headerlink" href="#think-about-it" title="Link to this heading">#</a></h2>
-<ol class="arabic simple" start="18">
-<li><p>You have now segmented the same channel three ways: a threshold (E3), a
-hand-tuned pipeline, and a trained classifier. <strong>Which would you trust on a
-thousand images you have not looked at, and why?</strong></p></li>
-<li><p>Weka learned from <em>your</em> strokes. <strong>If a colleague trained it on the same
-image, would they get the same classifier?</strong> Does that matter?</p></li>
-</ol>
+<p>Which one works better and why?</p>
 </section>
 </section>
 
@@ -540,20 +449,20 @@ image, would they get the same classifier?</strong> Does that matter?</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="e3_segmentation.html"
+       href="e3_macros.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">E3: Segmentation</p>
+        <p class="prev-next-title">E3: Automation with Fiji macros</p>
       </div>
     </a>
     <a class="right-next"
-       href="e5_macros.html"
+       href="cheat_sheet_basics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">E5: Macros <em>(optional)</em></p>
+        <p class="prev-next-title">Cheat sheet: Fiji basics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -575,11 +484,8 @@ image, would they get the same classifier?</strong> Does that matter?</p></li>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why">Why</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-train-a-classifier">Part 1: train a classifier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-apply-a-classifier-you-did-not-train">Part 2: apply a classifier you did not train</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-export-for-day-2">Part 3: export for day 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#think-about-it">Think about it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical">Practical</a></li>
 </ul>
   </nav></div>
 

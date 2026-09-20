@@ -1,92 +1,39 @@
 # E1: Fiji basics
 
-**~40 min.** Inspect pixel values, image types, calibration and channels.
-
 ## Preparation
 
-Open `data/bbbc020/images/2h_1_nuclei.tif` and
-`data/bbbc020/images/2h_1_cells.tif` in Fiji
-(`File ▸ Open…`, or drag the file onto the Fiji toolbar).
+1. Open `data/fiji/segmentation/1894_G3_5.tif` in Fiji.
 
-## Part 1: what is in this image?
+## Getting started with Fiji
 
-Use Fiji to find each answer. Note which command or window provides it.
+1. Use Fiji to answer the following questions about the image:
 
-1. **What are the dimensions of the image, in pixels?**
-   *Hint: the title bar of the image window shows them, along with the data type.*
+    1. What is the pixel size (the physical size of a pixel in the image) of the image in microns? Hint: Check the image properties (under "Image" -> "Properties...").
+    2. What is the mean intensity of the image? Hint: Use "Analyze" -> "Measure" after selecting the whole image with "Ctrl+A" (or "Cmd+A" on Mac). You can also select a region of interest with the rectangle tool and measure only that part of the image.
+    3. What's the intensity of the least and most bright pixel in the image? Hint: Use "Analyze" -> "Histogram" to see the intensity distribution.
+    4. What is the intensity of the pixel at position (100, 150)? Hint: Hover over the pixel with the mouse to see its coordinates and intensity in the status bar at the bottom of the window.
+    5. What's a good brightness/contrast setting for this image? Hint: Use "Image" -> "Adjust" -> "Brightness/Contrast..." to open the brightness/contrast adjustment window. You can use the "Auto" button to automatically adjust the brightness/contrast. You can also manually adjust the minimum and maximum intensity values to change the contrast.
+    6. What is the width and height of the image in physical units? Hint: Use the pixel size and the number of pixels in each dimension (shown in the title bar of the image window) to calculate the physical size.
 
-2. **What data type is it, and what range of values can a pixel hold?**
-   *Hint: `Image ▸ Type` shows a tick beside the current type.*
+1. Working with multichannel images:
 
-3. **What are the darkest and brightest pixel values actually present?**
-   *Hint: `Analyze ▸ Histogram` (Ctrl/Cmd+H) reports min, max and mean.*
+    1. Explore different Color Modes in Fiji. Hint: Use "Image" -> "Color" -> "Color Mode" to switch between different color modes (e.g., RGB, Grayscale, Composite). How does it affect the appearance of the image?
+    1. Split the image into its individual channels. Hint: Use "Image" -> "Color" -> "Split Channels".
+    1. Merge the channels back into a single image ("Image" -> "Color" -> "Merge Channels..."). Make sure that the resulting Composite image is displayed in the same color mode as the original image. If that's already the case, try to play with the LUTs of the individual channels to see how it affects the appearance of the Composite image.
 
-4. **What is the value of the pixel at x=25, y=336? And at x=472, y=190?**
-   *Hint: hover the mouse over the image and read the status bar in the main Fiji
-   window. Note Fiji reports `x,y`, column first, which is the opposite order
-   from the `(row, column)` used in the Python notebooks.*
+1. Save a representation of the Composite image for a publication:
+    1. Adjust the brightness/contrast of the image to a good setting (for each channel).
+    2. Add a scale bar to the image. Hint: Use "Analyze" -> "Tools" -> "Scale Bar..." to add a scale bar.
+    3. Save the modified image as a PNG file. Make sure that the scale bar is visible in the saved image.
 
-5. One of those two pixels is inside a nucleus and one is background.
-   **Which is which, and by how much do they differ?**
+## How wide is the filament?
 
-6. **What is the mean intensity of the whole image?** Select everything with
-   Ctrl/Cmd+A, then `Analyze ▸ Measure` (Ctrl/Cmd+M).
+1. Open `data/misc/microtubules.tif` (microtubules labelled with a fluorescent antibody against tubulin). What is the pixel size of this image?
 
-7. Now draw a small rectangle inside a single nucleus and measure again.
-   **How does the mean compare?** This is the difference a threshold has to find.
+1. Measure the width of a filament:
+    1. Select the straight line tool and draw a short line across one isolated filament (use the left half of the image), perpendicular to it.
+    1. Plot the intensity profile along the line. Hint: Use "Analyze" -> "Plot Profile" (Ctrl/Cmd+K). Are the distances shown in pixels or physical units?
+    1. Suppose you want to determine the width of the filaments in the image. How would you do that methodically? Hint: One option is to consider the full width at half maximum (FWHM) of the intensity profile.
+    1. Repeat the measurement on different filaments / parts of the image. Do you get the same width?
 
-## Part 2: how big is a pixel?
-
-8. Open `Image ▸ Properties…` (Ctrl/Cmd+Shift+P). **What does Fiji think the
-   pixel width and height are, and in what unit?**
-
-You should find `1 pixel × 1 pixel`: the file carries no calibration, so Fiji
-has no idea what physical size these pixels represent.
-
-9. **Why is that dangerous?** Consider: you measure a nucleus and Fiji reports an
-   area of 300. Three hundred *what*? And what happens if a colleague repeats
-   your analysis on images from a different objective?
-
-```{warning}
-Fiji can measure an uncalibrated image, but lengths and areas will be reported
-in pixels and square pixels. Check the units before interpreting a measurement.
-A size filter in a macro also changes meaning when the calibration changes.
-```
-
-10. Set the calibration yourself: in `Image ▸ Properties…`, set the pixel width
-    and height to `0.5` and the unit to `micron`. Measure a nucleus again.
-    **What changed, and what did not?**
-
-    *(0.5 µm is invented for this exercise: these images were downscaled from
-    the originals, so the true value no longer applies. That is itself worth
-    noticing: resizing an image invalidates its calibration.)*
-
-## Part 3: two channels
-
-11. With both channels open, run `Image ▸ Color ▸ Merge Channels…`. Put the
-    nuclei in **blue** (C3) and the cells in **green** (C2), and tick *Create
-    composite*. **Do the two channels line up?**
-
-12. In the composite, use `Image ▸ Color ▸ Channels Tool…` to turn each channel
-    on and off. **Does every nucleus sit inside a stained cell? Does every cell
-    have a nucleus?**
-
-13. Adjust `Image ▸ Adjust ▸ Brightness/Contrast…` (Ctrl/Cmd+Shift+C) and press
-    **Auto**. **Did the pixel values change?**
-
-    *Hint: check the histogram before and after. This is the single most common
-    misunderstanding in image analysis.*
-
-## Part 4: save something presentable
-
-14. Adjust the contrast of the composite so both channels are visible.
-15. Add a scale bar with `Analyze ▸ Tools ▸ Scale Bar…`. (You will need the
-    calibration you set in step 10 for this to show microns.)
-16. Save as PNG with `File ▸ Save As ▸ PNG…`, with the scale bar visible.
-
-```{admonition} Check yourself
-:class: tip
-Before moving on, make sure you can answer: what is the difference between
-changing the **brightness/contrast** and changing the **pixel values**? If a
-figure in a paper has had its contrast adjusted, has the data been altered?
-```
+1. A microtubule is about 25 nm in diameter. How does this compare to the width you measured?

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>E3: Segmentation &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
+    <title>E2: Image segmentation workflow &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/fiji/e3_segmentation';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/fiji/e2_segmentation';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="E4: Segmentation using machine learning" href="e4_weka.html" />
-    <link rel="prev" title="E2: Registration" href="e2_registration.html" />
+    <link rel="next" title="E3: Automation with Fiji macros" href="e3_macros.html" />
+    <link rel="prev" title="E1: Fiji basics" href="e1_basics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -197,12 +197,9 @@
 <li class="toctree-l1"><a class="reference internal" href="fiji_manual.html">Fiji overview</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Fiji practical</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="e1_basics.html">E1: Fiji basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e2_registration.html">E2: Registration</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">E3: Segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="e5_macros.html">E5: Macros <em>(optional)</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fun/spot_the_artifact.html">Spot the artifact</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">E2: Image segmentation workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e3_macros.html">E3: Automation with Fiji macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning in Fiji</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
@@ -305,7 +302,7 @@
       
       
       
-      <li><a href="../../_sources/book/fiji/e3_segmentation.md" target="_blank"
+      <li><a href="../../_sources/book/fiji/e2_segmentation.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -381,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>E3: Segmentation</h1>
+    <h1>E2: Image segmentation workflow</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -392,11 +389,7 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-thresholding">Part 1: thresholding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-cleaning-up">Part 2: cleaning up</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-measuring">Part 3: measuring</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-measuring-the-other-channel">Part 4: measuring the <em>other</em> channel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-the-hard-channel">Part 5: the hard channel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a></li>
 </ul>
             </nav>
         </div>
@@ -408,94 +401,23 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="e3-segmentation">
-<h1>E3: Segmentation<a class="headerlink" href="#e3-segmentation" title="Link to this heading">#</a></h1>
-<p><strong>~50 min.</strong> From an image to counted, measured objects.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="e2-image-segmentation-workflow">
+<h1>E2: Image segmentation workflow<a class="headerlink" href="#e2-image-segmentation-workflow" title="Link to this heading">#</a></h1>
 <section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">#</a></h2>
-<p>Open <code class="docutils literal notranslate"><span class="pre">data/bbbc020/images/2h_1_nuclei.tif</span></code>.</p>
-<p>Keep the original open and unmodified throughout. Work on duplicates
-(<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Duplicate…</span></code>, Ctrl/Cmd+Shift+D). You will want to compare.</p>
-</section>
-<section id="part-1-thresholding">
-<h2>Part 1: thresholding<a class="headerlink" href="#part-1-thresholding" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Adjust</span> <span class="pre">▸</span> <span class="pre">Threshold…</span></code> (Ctrl/Cmd+Shift+T). Drag the sliders and
-watch the red overlay. <strong>Find a setting by eye that captures the nuclei and
-little else. What value did you land on?</strong></p></li>
-<li><p>Now press <strong>Auto</strong>, and try the dropdown of methods: <em>Default</em>, <em>Otsu</em>,
-<em>Li</em>, <em>Triangle</em>. <strong>Do they agree with each other? Do they agree with you?</strong></p></li>
-<li><p>Pick Otsu and press <strong>Apply</strong> to get a binary mask.</p></li>
-</ol>
-<div class="warning admonition">
-<p class="admonition-title">What just happened to your image</p>
-<p>Applying a threshold <em>replaces</em> the intensities with 0 and 255. The original
-values are gone. This is why you duplicated first.</p>
-</div>
-</section>
-<section id="part-2-cleaning-up">
-<h2>Part 2: cleaning up<a class="headerlink" href="#part-2-cleaning-up" title="Link to this heading">#</a></h2>
-<ol class="arabic simple" start="4">
-<li><p>Look closely at the binary image. <strong>Can you see small specks that are not nuclei? Are
-there nuclei with holes in them?</strong></p></li>
-<li><p>Fill the holes with <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Binary</span> <span class="pre">▸</span> <span class="pre">Fill</span> <span class="pre">Holes</span></code>.</p></li>
-<li><p>Remove the specks with <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Binary</span> <span class="pre">▸</span> <span class="pre">Open</span></code>. <strong>What does “open” do?</strong> Try
-<code class="docutils literal notranslate"><span class="pre">Erode</span></code> on its own and then <code class="docutils literal notranslate"><span class="pre">Dilate</span></code> on its own to find out.</p></li>
+<li><p>Open the same file as in E1 in Fiji.</p></li>
 </ol>
 </section>
-<section id="part-3-measuring">
-<h2>Part 3: measuring<a class="headerlink" href="#part-3-measuring" title="Link to this heading">#</a></h2>
-<ol class="arabic simple" start="7">
-<li><p>Set up what you want measured: <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Set</span> <span class="pre">Measurements…</span></code>. Tick <strong>Area</strong>,
-<strong>Mean gray value</strong>, <strong>Min &amp; max gray value</strong> and <strong>Shape descriptors</strong>.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Analyze</span> <span class="pre">Particles…</span></code> with <em>Size</em> <code class="docutils literal notranslate"><span class="pre">0-Infinity</span></code>, <em>Show</em> set to
-<strong>Outlines</strong>, and both <em>Display results</em> and <em>Summarize</em> ticked.</p></li>
-<li><p><strong>How many nuclei did it find?</strong></p></li>
-<li><p>The expert annotation for this field says <strong>39</strong>. Open
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/gt/2h_1_nuclei_labels.tif</span></code> to see them.
-<strong>How close did you get? Where does your result disagree?</strong></p></li>
-<li><p>Look closely at the outlines Fiji drew. <strong>Find a place where two nuclei are
-touching.</strong> What did <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles</span></code> do there: did it count one object
-or two?</p></li>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Segment the nuclei by thresholding the image. Is there a clear separation between foreground and background?</p></li>
+<li><p>Use an automatic method to find a threshold. Which one works best?</p></li>
+<li><p>Try to improve the segmentation result by applying a filter before thresholding. Can you find a filter that works well?</p></li>
+<li><p>From the binary mask of the segmented nuclei, extract a mask that only represents an outer ring of each nucleus (i.e. the nuclear envelope). Hint: Use “Process” -&gt; “Binary” -&gt; “Erode” to shrink the objects, then subtract the shrunken objects from the original mask using “Process” -&gt; “Image Calculator…”.</p></li>
+<li><p>Extract the mean fluorescence intensity of the green channel for each ring. Hint: Use “Analyze” -&gt; “Analyze Particles…” after thresholding and creating a mask.</p></li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles</span></code> decides what counts as “an object” by following connected
-runs of foreground pixels. Two nuclei that touch share a border, so they form one
-connected region and are counted once. There is a way to separate them, and it is
-the first thing covered in the Python notebooks, but it is worth seeing the problem
-before seeing the fix.</p>
-</div>
-</section>
-<section id="part-4-measuring-the-other-channel">
-<h2>Part 4: measuring the <em>other</em> channel<a class="headerlink" href="#part-4-measuring-the-other-channel" title="Link to this heading">#</a></h2>
-<p>You have masks of nuclei from the DAPI channel. Fiji can use those masks to
-measure intensities in another channel. Here you will measure CD11b signal
-within the nuclear regions; that differs from measuring the whole cell.</p>
-<ol class="arabic simple" start="12">
-<li><p>Re-run <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Set</span> <span class="pre">Measurements…</span></code> and set <strong>Redirect to:</strong> to
-<code class="docutils literal notranslate"><span class="pre">2h_1_cells.tif</span></code> (it must be open).</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Analyze</span> <span class="pre">Particles…</span></code> again on your mask.</p></li>
-<li><p><strong>The areas are the same as before, but the mean gray values have changed.
-Why?</strong> Explain what <strong>Redirect to</strong> changes. You will use the same approach
-in the homework to measure GFP within DAPI-defined nuclei.</p></li>
-</ol>
-</section>
-<section id="part-5-the-hard-channel">
-<h2>Part 5: the hard channel<a class="headerlink" href="#part-5-the-hard-channel" title="Link to this heading">#</a></h2>
-<ol class="arabic simple" start="15">
-<li><p>Now try the whole pipeline again, from step 1, on
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/images/2h_1_cells.tif</span></code>. The annotation says <strong>33</strong> cells.</p></li>
-<li><p><strong>How did it go?</strong> Note that the object <em>count</em> may land near 33: do not let
-that reassure you. Look at the outlines. Some honest questions:</p>
-<ul class="simple">
-<li><p>Is there a threshold value that captures the cells without merging them?</p></li>
-<li><p>Do the cells have edges that a threshold can find at all?</p></li>
-<li><p>What would you have to know about the image to do better?</p></li>
-</ul>
-</li>
-</ol>
-<p>In <a class="reference internal" href="e4_weka.html"><span class="std std-doc">E4</span></a>, you will train a pixel classifier for this channel.</p>
 </section>
 </section>
 
@@ -530,20 +452,20 @@ that reassure you. Look at the outlines. Some honest questions:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="e2_registration.html"
+       href="e1_basics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">E2: Registration</p>
+        <p class="prev-next-title">E1: Fiji basics</p>
       </div>
     </a>
     <a class="right-next"
-       href="e4_weka.html"
+       href="e3_macros.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">E4: Segmentation using machine learning</p>
+        <p class="prev-next-title">E3: Automation with Fiji macros</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -566,11 +488,7 @@ that reassure you. Look at the outlines. Some honest questions:</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-thresholding">Part 1: thresholding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-cleaning-up">Part 2: cleaning up</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-measuring">Part 3: measuring</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-measuring-the-other-channel">Part 4: measuring the <em>other</em> channel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-the-hard-channel">Part 5: the hard channel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a></li>
 </ul>
   </nav></div>
 

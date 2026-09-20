@@ -13,24 +13,24 @@ This page defines the terms used in the course.
 | **Channel** | One image of a set acquired of the same field through different filters, for example DAPI and GFP. | [E1](fiji/e1_basics.md) |
 | **LUT** (lookup table) | The mapping from pixel value to displayed colour. Changing it changes the picture, never the data. Called a *colormap* in matplotlib. | [E1](fiji/e1_basics.md) |
 | **Histogram** | A count of how many pixels hold each value. | [E1](fiji/e1_basics.md), [`01`](../notebooks/01_image_handling.ipynb) |
-| **Saturation** | Pixels pinned at the maximum value. Their true brightness has been lost and cannot be recovered. | [Spot the artifact](fiji/fun/spot_the_artifact.md) |
-| **Registration** | Finding the transform that brings one image into alignment with another. | [E2](fiji/e2_registration.md) |
+| **Saturation** | Pixels pinned at the maximum value. Their true brightness has been lost and cannot be recovered. | [Fiji manual](fiji/fiji_manual.md) |
+| **Registration** | Finding the transform that brings one image into alignment with another. | |
 
 ## Segmentation
 
 | Term | Meaning | First used |
 |---|---|---|
-| **Segmentation** | Deciding which pixels belong to the objects of interest. | [E3](fiji/e3_segmentation.md) |
-| **Threshold** | A value separating foreground from background. Applying one produces a binary image. | [E3](fiji/e3_segmentation.md), [`01`](../notebooks/01_image_handling.ipynb) |
-| **Otsu's method** | A rule for choosing a threshold automatically from the histogram. | [E3](fiji/e3_segmentation.md), [`01`](../notebooks/01_image_handling.ipynb) |
-| **Foreground / background** | The pixels belonging to objects, and everything else. | [E3](fiji/e3_segmentation.md) |
+| **Segmentation** | Deciding which pixels belong to the objects of interest. | [E2](fiji/e2_segmentation.md) |
+| **Threshold** | A value separating foreground from background. Applying one produces a binary image. | [E2](fiji/e2_segmentation.md), [`01`](../notebooks/01_image_handling.ipynb) |
+| **Otsu's method** | A rule for choosing a threshold automatically from the histogram. | [E2](fiji/e2_segmentation.md), [`01`](../notebooks/01_image_handling.ipynb) |
+| **Foreground / background** | The pixels belonging to objects, and everything else. | [E2](fiji/e2_segmentation.md) |
 | **Binary image** | An image with only two values, foreground and background. What a threshold produces. | [`01` §6](../notebooks/01_image_handling.ipynb) |
 | **Mask** | A binary image used to *select* pixels from another image. The same array as a binary image, in a different role. | [`01` §6](../notebooks/01_image_handling.ipynb) |
 | **Label image** | An image whose pixel values are object numbers: 1 for the first object, 2 for the second, and so on. Its maximum value is the number of objects. | [`01` §7](../notebooks/01_image_handling.ipynb) |
 | **Semantic segmentation** | Answers *what kind of thing is this pixel?* Every pixel gets a class, and nothing distinguishes one object from another. | [`01` §6](../notebooks/01_image_handling.ipynb) |
 | **Instance segmentation** | Answers *which object is this pixel part of?* Required for anything measured per object. | [`01` §7](../notebooks/01_image_handling.ipynb) |
 | **Connected component labeling** | Turning a binary image into a label image by giving every connected group of foreground pixels its own number. Cannot separate objects that touch. | [`01` §7](../notebooks/01_image_handling.ipynb) |
-| **Morphological operations** | Operations on the shape of a binary image: erosion, dilation, opening, closing, hole filling. | [E3](fiji/e3_segmentation.md), [`02` §4](../notebooks/02_image_processing.ipynb) |
+| **Morphological operations** | Operations on the shape of a binary image: erosion, dilation, opening, closing, hole filling. | [E2](fiji/e2_segmentation.md), [`02` §4](../notebooks/02_image_processing.ipynb) |
 | **Distance transform** | An image in which each foreground pixel holds its distance to the nearest background pixel. | [`02` §6](../notebooks/02_image_processing.ipynb) |
 | **Watershed** | Splitting touching objects by treating the distance transform as a landscape and flooding it from seed points. | [`02` §6](../notebooks/02_image_processing.ipynb) |
 | **Seed** | A starting point inside an object, from which the watershed grows that object. | [`02` §6](../notebooks/02_image_processing.ipynb) |
@@ -63,7 +63,7 @@ This page defines the terms used in the course.
 | **Feature (of an object)** | One measured property of a segmented object. | [`05`](../notebooks/05_features.ipynb) |
 | **Morphology feature** | A feature computed from shape alone: area, perimeter, eccentricity, solidity, extent. | [`05` §2](../notebooks/05_features.ipynb) |
 | **Intensity feature** | A feature summarising pixel values inside an object, which needs a second image to measure. | [`05` §3](../notebooks/05_features.ipynb) |
-| **Region properties** | The standard set of per-object measurements. `regionprops` in scikit-image, `Analyze Particles` in Fiji. | [E3](fiji/e3_segmentation.md), [`05`](../notebooks/05_features.ipynb) |
+| **Region properties** | The standard set of per-object measurements. `regionprops` in scikit-image, `Analyze Particles` in Fiji. | [E2](fiji/e2_segmentation.md), [`05`](../notebooks/05_features.ipynb) |
 | **Effect size** | The difference between two groups expressed in standard deviations, saying how large a difference is rather than only whether it is detectable. | [`05` §6](../notebooks/05_features.ipynb) |
 
 ## Validation

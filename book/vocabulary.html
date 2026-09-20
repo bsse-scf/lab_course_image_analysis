@@ -197,12 +197,9 @@
 <li class="toctree-l1"><a class="reference internal" href="fiji/fiji_manual.html">Fiji overview</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="fiji/index.html">Fiji practical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="fiji/e1_basics.html">E1: Fiji basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fiji/e2_registration.html">E2: Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fiji/e3_segmentation.html">E3: Segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fiji/e4_weka.html">E4: Segmentation using machine learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fiji/e5_macros.html">E5: Macros <em>(optional)</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="fiji/fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fiji/fun/spot_the_artifact.html">Spot the artifact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e2_segmentation.html">E2: Image segmentation workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e3_macros.html">E3: Automation with Fiji macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiji/e4_weka.html">E4: Segmentation using machine learning in Fiji</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="fiji/cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
@@ -453,11 +450,11 @@
 </tr>
 <tr class="row-odd"><td><p><strong>Saturation</strong></p></td>
 <td><p>Pixels pinned at the maximum value. Their true brightness has been lost and cannot be recovered.</p></td>
-<td><p><a class="reference internal" href="fiji/fun/spot_the_artifact.html"><span class="std std-doc">Spot the artifact</span></a></p></td>
+<td><p><a class="reference internal" href="fiji/fiji_manual.html"><span class="std std-doc">Fiji manual</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Registration</strong></p></td>
 <td><p>Finding the transform that brings one image into alignment with another.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_registration.html"><span class="std std-doc">E2</span></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -475,19 +472,19 @@
 <tbody>
 <tr class="row-even"><td><p><strong>Segmentation</strong></p></td>
 <td><p>Deciding which pixels belong to the objects of interest.</p></td>
-<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a></p></td>
+<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Threshold</strong></p></td>
 <td><p>A value separating foreground from background. Applying one produces a binary image.</p></td>
-<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
+<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Otsu’s method</strong></p></td>
 <td><p>A rule for choosing a threshold automatically from the histogram.</p></td>
-<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
+<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Foreground / background</strong></p></td>
 <td><p>The pixels belonging to objects, and everything else.</p></td>
-<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a></p></td>
+<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Binary image</strong></p></td>
 <td><p>An image with only two values, foreground and background. What a threshold produces.</p></td>
@@ -515,7 +512,7 @@
 </tr>
 <tr class="row-even"><td><p><strong>Morphological operations</strong></p></td>
 <td><p>Operations on the shape of a binary image: erosion, dilation, opening, closing, hole filling.</p></td>
-<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §4</span></a></p></td>
+<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §4</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Distance transform</strong></p></td>
 <td><p>An image in which each foreground pixel holds its distance to the nearest background pixel.</p></td>
@@ -629,7 +626,7 @@
 </tr>
 <tr class="row-odd"><td><p><strong>Region properties</strong></p></td>
 <td><p>The standard set of per-object measurements. <code class="docutils literal notranslate"><span class="pre">regionprops</span></code> in scikit-image, <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles</span></code> in Fiji.</p></td>
-<td><p><a class="reference internal" href="fiji/e3_segmentation.html"><span class="std std-doc">E3</span></a>, <a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code></span></a></p></td>
+<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code></span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Effect size</strong></p></td>
 <td><p>The difference between two groups expressed in standard deviations, saying how large a difference is rather than only whether it is detectable.</p></td>
