@@ -416,45 +416,35 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Pixel</strong></p></td>
 <td><p>One element of the image. It holds a number, not a colour.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Intensity image</strong></p></td>
 <td><p>An image whose pixel values are measured brightness, as it comes off the microscope.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Bit depth</strong></p></td>
 <td><p>How large a pixel value may be. An 8-bit image holds 0 to 255, a 16-bit image 0 to 65535.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Calibration</strong></p></td>
 <td><p>The physical size of a pixel. Without it, every area and length is in pixels rather than microns.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Channel</strong></p></td>
 <td><p>One image of a set acquired of the same field through different filters, for example DAPI and GFP.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>LUT</strong> (lookup table)</p></td>
 <td><p>The mapping from pixel value to displayed colour. Changing it changes the picture, never the data. Called a <em>colormap</em> in matplotlib.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Histogram</strong></p></td>
 <td><p>A count of how many pixels hold each value.</p></td>
-<td><p><a class="reference internal" href="fiji/e1_basics.html"><span class="std std-doc">E1</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Saturation</strong></p></td>
 <td><p>Pixels pinned at the maximum value. Their true brightness has been lost and cannot be recovered.</p></td>
-<td><p><a class="reference internal" href="fiji/fiji_manual.html"><span class="std std-doc">Fiji manual</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Registration</strong></p></td>
 <td><p>Finding the transform that brings one image into alignment with another.</p></td>
-<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -466,65 +456,50 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Segmentation</strong></p></td>
 <td><p>Deciding which pixels belong to the objects of interest.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Threshold</strong></p></td>
 <td><p>A value separating foreground from background. Applying one produces a binary image.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Otsu’s method</strong></p></td>
 <td><p>A rule for choosing a threshold automatically from the histogram.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code></span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Foreground / background</strong></p></td>
 <td><p>The pixels belonging to objects, and everything else.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Binary image</strong></p></td>
 <td><p>An image with only two values, foreground and background. What a threshold produces.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §6</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Mask</strong></p></td>
 <td><p>A binary image used to <em>select</em> pixels from another image. The same array as a binary image, in a different role.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §6</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Label image</strong></p></td>
 <td><p>An image whose pixel values are object numbers: 1 for the first object, 2 for the second, and so on. Its maximum value is the number of objects.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Semantic segmentation</strong></p></td>
 <td><p>Answers <em>what kind of thing is this pixel?</em> Every pixel gets a class, and nothing distinguishes one object from another.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §6</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Instance segmentation</strong></p></td>
 <td><p>Answers <em>which object is this pixel part of?</em> Required for anything measured per object.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Connected component labeling</strong></p></td>
 <td><p>Turning a binary image into a label image by giving every connected group of foreground pixels its own number. Cannot separate objects that touch.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Morphological operations</strong></p></td>
 <td><p>Operations on the shape of a binary image: erosion, dilation, opening, closing, hole filling.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §4</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Distance transform</strong></p></td>
 <td><p>An image in which each foreground pixel holds its distance to the nearest background pixel.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §6</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Watershed</strong></p></td>
 <td><p>Splitting touching objects by treating the distance transform as a landscape and flooding it from seed points.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §6</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Seed</strong></p></td>
 <td><p>A starting point inside an object, from which the watershed grows that object.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §6</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -536,25 +511,20 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Filter</strong></p></td>
 <td><p>An operation replacing each pixel by a function of its neighbourhood, such as a Gaussian blur or a median filter.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §3</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Background subtraction</strong></p></td>
 <td><p>Removing a slowly varying offset so that a single threshold works across the whole field.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Uneven illumination</strong></p></td>
 <td><p>Brightness varying across the field because of the optics rather than the sample. Multiplicative, so corrected by division.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Denoising</strong></p></td>
 <td><p>Reducing noise before segmentation. A Gaussian filter suits general graininess, a median filter suits isolated extreme pixels.</p></td>
-<td><p><a class="reference internal" href="../notebooks/02_image_processing.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">02</span></code> §3</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -566,37 +536,29 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Pixel classification</strong></p></td>
 <td><p>Training a model to label each pixel by class, using features computed around it. What Trainable Weka does.</p></td>
-<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Feature (for a classifier)</strong></p></td>
 <td><p>One measured property of a pixel and its surroundings, such as local blur or edge strength. Not the same as a feature measured per object.</p></td>
-<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Probability map</strong></p></td>
 <td><p>An image holding, for each pixel, the classifier’s confidence that it belongs to a class.</p></td>
-<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a>, <a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §1</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Classifier</strong></p></td>
 <td><p>The trained model itself, saved as a <code class="docutils literal notranslate"><span class="pre">.model</span></code> file and reusable on new images.</p></td>
-<td><p><a class="reference internal" href="fiji/e4_weka.html"><span class="std std-doc">E4</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Shallow learning</strong></p></td>
 <td><p>You choose the features, the model learns how to weigh them.</p></td>
-<td><p><a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Deep learning</strong></p></td>
 <td><p>The model learns the features from data as well, which is why it needs a great deal of it.</p></td>
-<td><p><a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Cellpose</strong></p></td>
 <td><p>A pretrained deep model that outputs instance segmentations directly.</p></td>
-<td><p><a class="reference internal" href="../notebooks/03_ml_segmentation.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">03</span></code> §3</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -608,29 +570,23 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Feature (of an object)</strong></p></td>
 <td><p>One measured property of a segmented object.</p></td>
-<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code></span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Morphology feature</strong></p></td>
 <td><p>A feature computed from shape alone: area, perimeter, eccentricity, solidity, extent.</p></td>
-<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Intensity feature</strong></p></td>
 <td><p>A feature summarising pixel values inside an object, which needs a second image to measure.</p></td>
-<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code> §3</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Region properties</strong></p></td>
 <td><p>The standard set of per-object measurements. <code class="docutils literal notranslate"><span class="pre">regionprops</span></code> in scikit-image, <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles</span></code> in Fiji.</p></td>
-<td><p><a class="reference internal" href="fiji/e2_segmentation.html"><span class="std std-doc">E2</span></a>, <a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code></span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Effect size</strong></p></td>
 <td><p>The difference between two groups expressed in standard deviations, saying how large a difference is rather than only whether it is detectable.</p></td>
-<td><p><a class="reference internal" href="../notebooks/05_features.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">05</span></code> §6</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -642,41 +598,32 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Ground truth</strong></p></td>
 <td><p>A reference segmentation, usually drawn by an expert. A reference, not necessarily the truth.</p></td>
-<td><p><a class="reference internal" href="../notebooks/01_image_handling.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">01</span></code> §7</span></a>, <a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §4</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>IoU</strong> (intersection over union)</p></td>
 <td><p>Shared pixels divided by pixels covered by either. Also called the <strong>Jaccard index</strong>.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §1</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Dice coefficient</strong></p></td>
 <td><p>Twice the shared pixels divided by the total of both. Always reads higher than IoU for an imperfect overlap.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §1</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>True positive, false positive, false negative</strong></p></td>
 <td><p>An object correctly found, invented, or missed.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Precision</strong></p></td>
 <td><p>Of the objects you found, the fraction that are real.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Recall</strong></p></td>
 <td><p>Of the real objects, the fraction you found.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>F1 score</strong></p></td>
 <td><p>The balance of precision and recall, in one number.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §3</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Matching threshold</strong></p></td>
 <td><p>How much overlap is required before a predicted object counts as matching a real one. Conventionally an IoU of 0.5, and worth reporting.</p></td>
-<td><p><a class="reference internal" href="../notebooks/04_segmentation_metrics.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">04</span></code> §5</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -688,25 +635,20 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>Term</p></th>
 <th class="head"><p>Meaning</p></th>
-<th class="head"><p>First used</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Model</strong></p></td>
 <td><p>A function with adjustable parameters, chosen to describe the process being measured.</p></td>
-<td><p><a class="reference internal" href="../notebooks/06_curve_fitting.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">06</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>SSE</strong> (sum of squared errors)</p></td>
 <td><p>The usual measure of how badly a set of parameters describes the data.</p></td>
-<td><p><a class="reference internal" href="../notebooks/06_curve_fitting.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">06</span></code> §2</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Residual</strong></p></td>
 <td><p>The difference between a data point and the fitted curve. Structure in the residuals means the model is the wrong shape.</p></td>
-<td><p><a class="reference internal" href="../notebooks/06_curve_fitting.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">06</span></code> §6</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>IC50</strong></p></td>
 <td><p>The concentration at which an effect is reduced by half.</p></td>
-<td><p><a class="reference internal" href="challenge.html"><span class="std std-doc">Challenge</span></a></p></td>
 </tr>
 </tbody>
 </table>
