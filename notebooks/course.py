@@ -26,13 +26,22 @@ DATA = REPO / "data"
 def show(image, title=None, cmap="gray", ax=None, **kwargs):
     """Display a 2D image without axis ticks.
 
-    This wrapper calls ``plt.imshow`` with a grayscale colour map by default.
+    This function calls ``plt.imshow`` with a grayscale colour map by default.
     Extra keyword arguments are passed to ``plt.imshow``.
     """
+
+    # if no axis is provided, create a new figure and axis
     if ax is None:
         _, ax = plt.subplots()
-    handle = ax.imshow(image, cmap=cmap, **kwargs)
+
+    # display the image with the specified colour map and any additional keyword arguments
+    imshow_output = ax.imshow(image, cmap=cmap, **kwargs)
+
+    # set title if provided
     if title is not None:
         ax.set_title(title)
+
+    # remove axis ticks and labels
     ax.set_axis_off()
-    return handle
+
+    return imshow_output
