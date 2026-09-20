@@ -1,0 +1,1884 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fiji overview &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/fiji/fiji_manual';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Fiji practical" href="index.html" />
+    <link rel="prev" title="Python Basics: Exercises" href="../python_basics_ex.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../landing.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="Methods in Cell Analysis and Laboratory Automation: Image Analysis - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Methods in Cell Analysis and Laboratory Automation: Image Analysis - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../landing.html">
+                    Image Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../course_schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture_slides.html">Lecture slides</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../setup/index.html">Computer Setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../setup/software.html">Software installation and data download</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../setup/local.html">On your local computer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../setup/install_fiji.html">1. Install Fiji</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../setup/install_python.html">2. Install Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../setup/setup_environment.html">3. Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../setup/download_data.html">4. Download the example data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup/rrp.html">Reproducible Research Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup/swiss_ai.html">Connecting to the Swiss AI Research Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python_basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python_basics_ex.html">Python Basics: Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Image Analysis Basics with Fiji</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fiji overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Fiji practical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="e1_basics.html">E1: Fiji basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e2_registration.html">E2: Registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e3_segmentation.html">E3: Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e4_weka.html">E4: Segmentation using machine learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e5_macros.html">E5: Macros <em>(optional)</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fun/how_wide_is_a_filament.html">How wide is a filament?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fun/spot_the_artifact.html">Spot the artifact</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat_sheet_basics.html">Cheat sheet: Fiji basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat_sheet_macros.html">Cheat sheet: Fiji macros</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflows in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks/01_image_handling.html">Basic image handling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/01_image_handling_ex.html">Exercise: image handling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks/02_image_processing.html">Image processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/02_image_processing_ex.html">Exercise: image processing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks/03_ml_segmentation.html">Machine learning for segmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/03_ml_segmentation_ex.html">Exercise: machine learning for segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks/04_segmentation_metrics.html">Quality control: Segmentation metrics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/04_segmentation_metrics_ex.html">Exercise: measuring a segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks/05_features.html">Feature extraction and measurements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/05_features_ex.html">Exercise: Disaster at the Microscope</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks/06_curve_fitting.html">Data Analysis: curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/06_curve_fitting_ex.html">Exercise: a growth curve from real images</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Independent work</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../challenge.html">Challenge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../homework.html">Homework</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vocabulary.html">Vocabulary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../further_reading.html">Further reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/fiji/fiji_manual.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fiji overview</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-fiji">About Fiji</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgments">Acknowledgments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-user-interface">The user interface</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menu">Menu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolbar">Toolbar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-commands">Finding commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-functionality">Basic functionality</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-files">Opening files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-files">Saving files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-images">Navigating images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-calibration">Image calibration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-of-interest-rois">Regions of interest (ROIs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roi-manager">ROI Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">Data types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#look-up-tables-luts">Look-up tables (LUTs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-histogram">Image histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusting-brightness-and-contrast">Adjusting brightness and contrast</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-stretch">Histogram stretch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-equalization">Histogram equalization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filters">Filters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-filters">Spatial filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-filters">Linear filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#average-filter">Average filter</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-filter">Gaussian filter</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#laplacian-filter">Laplacian filter</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#laplacian-of-gaussian-filter">Laplacian of Gaussian filter</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-filters">Non-linear filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#order-filters">Order filters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-filters">Frequency filters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-subtraction">Background subtraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation">Segmentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-threshold-based-segmentation">Simple threshold-based segmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing-for-segmentation">Pre-processing for segmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-of-segmentation-results">Post-processing of segmentation results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-based-segmentation">Machine-learning based segmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-maxima-detection">Local maxima detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphology">Morphology</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dilation">Dilation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hole-filling">Hole filling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erosion">Erosion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurements">Measurements</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-from-manual-rois">Time series analysis from manual ROIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-from-automatic-rois">Time series analysis from automatic ROIs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-arithmetics">Image arithmetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-fiji">Programming Fiji</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-programming">Macro programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-threshold">Apply threshold</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-watershed">Apply watershed</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-measurements">Perform measurements</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-macro-and-re-run-it">Save the macro and re-run it</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complex-example-with-some-coding">A more complex example with some coding</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-the-user-to-pick-an-image">Prompt the user to pick an image</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-the-images">Merge the images</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-processing">Batch processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fiji-overview">
+<h1>Fiji overview<a class="headerlink" href="#fiji-overview" title="Link to this heading">#</a></h1>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/fiji_logo.jpg"><img alt="../../_images/fiji_logo.jpg" src="../../_images/fiji_logo.jpg" style="width: 100px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Fiji</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Fiji</strong> is an image processing package—a “batteries-included” distribution of ImageJ, bundling a lot of plugins which facilitate scientific image analysis.</p>
+<section id="about-fiji">
+<h2>About Fiji<a class="headerlink" href="#about-fiji" title="Link to this heading">#</a></h2>
+<p>Initially, the core of Fiji was <strong>ImageJ</strong> (<a class="reference external" href="https://imagej.nih.gov/ij/">https://imagej.nih.gov/ij/</a>), an image analysis program extensively used in the biological sciences. ImageJ was originally developed by Wayne Rasband at the National Institutes of Health (NIH) and first released in 1997. Due to its ease of use and the plug-ins architecture, ImageJ has seen innumerable contributions over the years that have massively extended its functionality.</p>
+<p>A recent collaborative project, <strong>ImageJ2</strong> (<a class="reference external" href="https://imagej.net/software/imagej2/">https://imagej.net/software/imagej2/</a>), is redesigning the ImageJ foundations to allow for better separation between data model and user interface, support for N-dimensional datasets, strong focus on interoperability with other scientific tools, while still maintaining backwards compatibility with the original ImageJ software. ImageJ2 has recently replaced ImageJ at the core of Fiji.</p>
+<p>Fiji is released as open source under the GNU General Public License.</p>
+<p><strong>Project website</strong>: <a class="reference external" href="http://www.fiji.sc">http://www.fiji.sc</a></p>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Schindelin, J.; Arganda-Carreras, I. &amp; Frise, E. et al. (2012). <u>Fiji: an open-source platform for biological-image analysis</u>. Nature methods 9(7): 676-682.</p></li>
+<li><p>Schindelin J, Rueden CT, Hiner MC, Eliceiri KW. <u>The ImageJ ecosystem: An open platform for biomedical image analysis</u>. Mol Reprod Dev. 2015 Jul-Aug;82(7-8):518-29.</p></li>
+<li><p>Curtis T. Rueden, Johannes Schindelin, Mark C. Hiner, Barry E. DeZonia, Alison E. Walter, Ellen T. Arena, Kevin W. Eliceiri. <u>ImageJ2: ImageJ for the next generation of scientific image data</u>. (<a class="reference external" href="https://arxiv.org/abs/1701.05940">https://arxiv.org/abs/1701.05940</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Link to this heading">#</a></h2>
+<p>Many of the examples in this section are taken (with permission) or are heavily inspired by <strong>Cameron Nowell</strong>’s awesome <strong>Fiji Training Notes</strong> (Monash University, Melbourne).</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Getting started guide</strong>: <a class="reference external" href="https://imagej.net/Getting_Started">https://imagej.net/Getting_Started</a></p></li>
+<li><p><strong>User guides</strong>: <a class="reference external" href="https://imagej.net/User_Guides">https://imagej.net/User_Guides</a></p></li>
+<li><p><strong>Tutorials</strong>: <a class="reference external" href="https://imagej.net/Category:Tutorials">https://imagej.net/Category:Tutorials</a></p></li>
+</ul>
+</section>
+<section id="the-user-interface">
+<h2>The user interface<a class="headerlink" href="#the-user-interface" title="Link to this heading">#</a></h2>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../../_images/fiji.png"><img alt="../../_images/fiji.png" src="../../_images/fiji.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Fiji’s user interface</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The various operations in Fiji are accessible via the <strong>menu</strong> and the <strong>toolbar</strong>.</p>
+<section id="menu">
+<h3>Menu<a class="headerlink" href="#menu" title="Link to this heading">#</a></h3>
+<p>The menu structure is organized as follows:</p>
+<ul class="simple">
+<li><p><strong>File</strong>: Create, load, and save images.</p></li>
+<li><p><strong>Edit</strong>: Edit the images, drawing options, application options.</p></li>
+<li><p><strong>Image</strong>: Modify and adjust images, manage (hyper)stacks, apply transformations, manage colors and look-up tables.</p></li>
+<li><p><strong>Process</strong>: Point operations, image arithmetics, filters.</p></li>
+<li><p><strong>Analyze</strong>: Object measurements, statistics, histograms, plots.</p></li>
+<li><p><strong>Plugins</strong>: Install and run macros and plug-ins.</p></li>
+</ul>
+</section>
+<section id="toolbar">
+<h3>Toolbar<a class="headerlink" href="#toolbar" title="Link to this heading">#</a></h3>
+<p>The toolbar contains functionality for interactive work on the image. We will have a look at some of those tools when we move to specific topics in the course.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../../_images/toolbar.png"><img alt="../../_images/toolbar.png" src="../../_images/toolbar.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">The Fiji toolbar</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="finding-commands">
+<h3>Finding commands<a class="headerlink" href="#finding-commands" title="Link to this heading">#</a></h3>
+<p>Commands in Fiji are scattered all over the place: if you know what you need but cannot remember where it is, you can type some keyword in the search bar and the Quick Search tool will provide you with a list of commands in Fiji and even information from the ImageJ Wiki and Forum.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../../_images/command_finder.png"><img alt="../../_images/command_finder.png" src="../../_images/command_finder.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">The command finder</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="basic-functionality">
+<h2>Basic functionality<a class="headerlink" href="#basic-functionality" title="Link to this heading">#</a></h2>
+<section id="opening-files">
+<h3>Opening files<a class="headerlink" href="#opening-files" title="Link to this heading">#</a></h3>
+<p>You can open files from <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Open</span></code> or <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Import</span></code> or by dragging a file from the Windows Explorer onto the Fiji window. A series of example images can be accessed from <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Open</span> <span class="pre">Samples</span></code>.</p>
+</section>
+<section id="saving-files">
+<h3>Saving files<a class="headerlink" href="#saving-files" title="Link to this heading">#</a></h3>
+<p>Open images in Fiji can be saved to disk using <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Save</span> <span class="pre">as</span></code>: several formats are supported. Recommended for scientific images is the TIFF format.</p>
+</section>
+<section id="navigating-images">
+<h3>Navigating images<a class="headerlink" href="#navigating-images" title="Link to this heading">#</a></h3>
+<p>The navigation toolbar allows to zoom in and out and to move around in case the image is too large or you zoomed in too much.</p>
+<figure class="align-center" id="id5">
+<img alt="../../_images/navigation_toolbar.png" src="../../_images/navigation_toolbar.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The navigation tools</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="image-calibration">
+<h3>Image calibration<a class="headerlink" href="#image-calibration" title="Link to this heading">#</a></h3>
+<p>When loading an image into Fiji for <strong>measurements</strong>, it is essential that the image calibration is correct. You can open the image properties window from the <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Properties</span></code> menu. Make sure that the pixel width and height and the voxel depth (<em>i.e.</em>, the distance between planes in a 3D acquisition) have the correct size; in case of time acquisition, also make sure that the frame interval is correct.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../../_images/calibration.png"><img alt="../../_images/calibration.png" src="../../_images/calibration.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Image calibration</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="regions-of-interest-rois">
+<h3>Regions of interest (ROIs)<a class="headerlink" href="#regions-of-interest-rois" title="Link to this heading">#</a></h3>
+<p><strong>Regions of interest</strong> (<strong>ROIs</strong>) are used to select a portion of the image for analysis or for other activities. Fiji supports several different types of ROIs.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../../_images/rois_toolbar.png"><img alt="../../_images/rois_toolbar.png" src="../../_images/rois_toolbar.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">The ROI toolbar</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The ROIs are divided into a number of classes: <strong>rectangular</strong>, <strong>circular</strong>, <strong>polygon</strong>, <strong>freehand</strong>, <strong>line</strong>, <strong>angle</strong> and <strong>wand</strong> tools. The small triangle at the bottom of some of the tools indicate that there are several variations: for instance, the circular tool can be expanded (with a right-click) to reveal a choice of <strong>Oval selections</strong>, <strong>Elliptical selections</strong>, and the <strong>Selection Brush Tool</strong>. Double clicking on a tool opens its settings dialog.</p>
+<p>ROIs can be combined by holding the <code class="docutils literal notranslate"><span class="pre">SHIFT</span></code> key and subtracted from each other with the <code class="docutils literal notranslate"><span class="pre">ALT</span></code> key.</p>
+<section id="roi-manager">
+<h4>ROI Manager<a class="headerlink" href="#roi-manager" title="Link to this heading">#</a></h4>
+<p>Fiji allows one ROI to be added to the image at a time. To add and manage more ROIs, the ROI Manager may be used. You can access it from the <strong>Analyze &gt; Tools &gt; ROI Manager…</strong> menu.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../../_images/roi_manager.png"><img alt="../../_images/roi_manager.png" src="../../_images/roi_manager.png" style="height: 250px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">The ROI manager</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To add ROIs to the manager, you hit the <strong>Add</strong> button after drawing each ROI. Click on <strong>Show all</strong> to display all ROIs on current image.</p>
+</section>
+</section>
+</section>
+<section id="data-types">
+<h2>Data types<a class="headerlink" href="#data-types" title="Link to this heading">#</a></h2>
+<p>Fiji supports several data types. They can be accessed from <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Type</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Data type</p></th>
+<th class="head text-center"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>8 bit</p></td>
+<td class="text-center"><p>Unsigned integer 8 bit (0 .. 255)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>16 bit</p></td>
+<td class="text-center"><p>Unsigned integer 16 bit (0 .. 65535)</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>32 bit</p></td>
+<td class="text-center"><p>Single-precision floating point</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>8 bit Color</p></td>
+<td class="text-center"><p>Indexed 8 bit color image</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>RGB Color</p></td>
+<td class="text-center"><p>Full color image, 3 channels Red, Green, Blue</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>RGB Stack</p></td>
+<td class="text-center"><p>3 separate channels, for Red, Green and Blue components</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>HSB Stack</p></td>
+<td class="text-center"><p>Image in HSB color space (Hue, Saturation and Brightness)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Lab Stack</p></td>
+<td class="text-center"><p>Image in Lab color space (Luminance and 2 color channels)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Some data types are completely inter-convertible. Some may cause information loss.</p>
+</section>
+<section id="look-up-tables-luts">
+<h2>Look-up tables (LUTs)<a class="headerlink" href="#look-up-tables-luts" title="Link to this heading">#</a></h2>
+<p>In our course we will concentrate on single- or multi-channel intensity images, such as those obtained from a light microscope. The only information stored in such an image is the intensity of the original signal (<em>e.g.</em>, fluorescent light) at each pixel position. By default, then, intensity images are displayed as gray-scale images with black pixels mapped to the intensity 0 and white pixels mapped to 255 (for 8-bit images) or 65535 (for 16-bit images).</p>
+<p>Often, however, microscopy images were taken for more than one <em>channel</em>. Each channel collected the light from a different fluorophore. GFP emits light in the green range of wavelengths of visible light; DAPI in the blue; Rhodamine B in the red; YFP in the yellow, and so on.</p>
+<p>When displaying more than one channel at the same time in a <strong>composite image,</strong> we want to make use of their original colors to distinguish the different contributions and study possible colocalization of fluorescent proteins.</p>
+<p>A lookup-table is a mapping of intensity values to a given color in a table. You can access a series of predefined LUTs from the <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Lookup</span> <span class="pre">Tables</span></code> menu or from the toolbar (the <code class="docutils literal notranslate"><span class="pre">LUT</span></code> tool).</p>
+<p>LUTs can be monochromatic (as for instance <code class="docutils literal notranslate"><span class="pre">Grays</span></code>, <code class="docutils literal notranslate"><span class="pre">Red</span></code>, <code class="docutils literal notranslate"><span class="pre">Green</span></code>, or <code class="docutils literal notranslate"><span class="pre">Blue</span></code>) or multi-color.</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../../_images/LUTs.png"><img alt="../../_images/LUTs.png" src="../../_images/LUTs.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Lookup tables (for the Neuron sample image)</span><a class="headerlink" href="#id9" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="image-histogram">
+<h2>Image histogram<a class="headerlink" href="#image-histogram" title="Link to this heading">#</a></h2>
+<p>Let’s have a look at the histogram of an image. Open <code class="docutils literal notranslate"><span class="pre">data/fiji/histogram/FITC.tif</span></code> in Fiji.</p>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="../../_images/FITC.png"><img alt="../../_images/FITC.png" src="../../_images/FITC.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The FITC.tif image</span><a class="headerlink" href="#id10" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now have a look at its intensity distribution: <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Histogram</span></code>.</p>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../../_images/histogram.png"><img alt="../../_images/histogram.png" src="../../_images/histogram.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Histogram of FITC.tif</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Hit the <code class="docutils literal notranslate"><span class="pre">Log</span></code> button to superimpose the histogram in logarithmic scale (gray) on top of the one in linear scale (black). The black curve shows that most intensities are very dark, which is to be expected since the image is mostly background. The logarithmic scale shows us that there are still some pixels that cover all the range up to 65535; they are just very few.</p>
+</section>
+<section id="adjusting-brightness-and-contrast">
+<h2>Adjusting brightness and contrast<a class="headerlink" href="#adjusting-brightness-and-contrast" title="Link to this heading">#</a></h2>
+<section id="histogram-stretch">
+<h3>Histogram stretch<a class="headerlink" href="#histogram-stretch" title="Link to this heading">#</a></h3>
+<p>To adjust the contrast of the <code class="docutils literal notranslate"><span class="pre">FITC.tif</span></code> image, pick <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Brightness/Contrast</span></code>. Set the maximum at around 20000.</p>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="../../_images/histogram_stretch.png"><img alt="../../_images/histogram_stretch.png" src="../../_images/histogram_stretch.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Histogram stretch</span><a class="headerlink" href="#id12" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>While you move the sliders, the image contrast will update in real time. Be aware that the actual pixel intensities in the image are left untouched!</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="../../_images/FITC_stretched.png"><img alt="../../_images/FITC_stretched.png" src="../../_images/FITC_stretched.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">FITC image with maximum at 19987</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <code class="docutils literal notranslate"><span class="pre">Brightness</span> <span class="pre">&amp;</span> <span class="pre">Contrast</span></code> tool offers three options:</p>
+<ul class="simple">
+<li><p><strong>Auto</strong>: automatically set minimum and maximum intensity values to give an optimal contrast</p></li>
+<li><p><strong>Reset</strong>: reset the minimum value to 0 and the maximum to the maximum allowed value of the data type</p></li>
+<li><p><strong>Apply</strong>: change the pixel intensities in the image to fit the new range. <strong>Careful</strong>: this modifies your image!</p></li>
+</ul>
+<p>For this exercise, we will hit <code class="docutils literal notranslate"><span class="pre">Apply</span></code>. Then, apply the <code class="docutils literal notranslate"><span class="pre">HiLo</span></code> lookup table. All pixels appearing in blue are pixels at value 0, and all pixels appearing red are pixels at the maximum value for the data type. If you see too many red pixels, it means that you probably went too low with the maximum and <strong>saturated</strong> the pixels!</p>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="../../_images/FITC_saturated.png"><img alt="../../_images/FITC_saturated.png" src="../../_images/FITC_saturated.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">FITC image with maximum at 19987</span><a class="headerlink" href="#id14" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="histogram-equalization">
+<h3>Histogram equalization<a class="headerlink" href="#histogram-equalization" title="Link to this heading">#</a></h3>
+<p>Histogram equalization Fiji is launched via <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Enhance</span> <span class="pre">Contrast</span></code>.</p>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="../../_images/histogram_equalize.png"><img alt="../../_images/histogram_equalize.png" src="../../_images/histogram_equalize.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Parameters for histogram equalization</span><a class="headerlink" href="#id15" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Optionally, one can ignore the very dark and very light pixels by setting a fraction (in %) of saturated pixels that are left out from the equalization (they will be set to 0 and the max intensity value of the data type, respectively). Notice, that <code class="docutils literal notranslate"><span class="pre">Normalize</span></code> performs histogram stretch as we have seen in the <code class="docutils literal notranslate"><span class="pre">Brightness</span> <span class="pre">&amp;</span> <span class="pre">Contrast</span></code> tool. If one unchecks both options, the contrast is normalized only for display.</p>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="../../_images/FITC_histeq.png"><img alt="../../_images/FITC_histeq.png" src="../../_images/FITC_histeq.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">FITC.tif after histogram equalization</span><a class="headerlink" href="#id16" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Link to this heading">#</a></h2>
+<p>In this section, we will test several filters on the <code class="docutils literal notranslate"><span class="pre">data/fiji/filters/actin.tif</span></code> image.</p>
+<figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="../../_images/actin.png"><img alt="../../_images/actin.png" src="../../_images/actin.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">The actin.tif image</span><a class="headerlink" href="#id17" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">actin.tif</span></code> image has the following calibration: 1 pixel = 0.467 <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+<section id="spatial-filters">
+<h3>Spatial filters<a class="headerlink" href="#spatial-filters" title="Link to this heading">#</a></h3>
+<section id="linear-filters">
+<h4>Linear filters<a class="headerlink" href="#linear-filters" title="Link to this heading">#</a></h4>
+<p>Images are filtered in the spatial domain by the operation of <strong>convolution</strong> with a <strong>kernel</strong> whose weights are carefully selected to perform a specific transformation on the pixel of the image. Fiji implements a series of linear filters in the <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span></code> menu.</p>
+<section id="average-filter">
+<h5>Average filter<a class="headerlink" href="#average-filter" title="Link to this heading">#</a></h5>
+<p>We will start by running an <strong>average filter</strong> on the <code class="docutils literal notranslate"><span class="pre">actin.tif</span></code> image by defining our own <span class="math notranslate nohighlight">\(5x5\)</span> kernel in <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Convolve</span></code>. We need a filter with homogeneous weights that sum up to 1.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}h = \frac{1}{25}\cdot
+\begin{bmatrix}
+    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\
+    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\
+    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+\end{bmatrix}
+= 
+\begin{bmatrix}
+    \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25}\\
+    \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25}\\
+    \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25}\\
+    \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25}\\
+    \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25} &amp; \frac{1}{25}
+\end{bmatrix}\end{split}\]</div>
+<p>Luckily, Fiji can do the normalization for us, and we can just type the <span class="math notranslate nohighlight">\(5x5\)</span> ones in the dialog:</p>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="../../_images/convolver_average_filter.png"><img alt="../../_images/convolver_average_filter.png" src="../../_images/convolver_average_filter.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text"><span class="math notranslate nohighlight">\(5x5\)</span> average filter (to be normalized by Fiji)</span><a class="headerlink" href="#id18" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The convolution with our average filter gives us the following result:</p>
+<figure class="align-center" id="id19">
+<a class="reference internal image-reference" href="../../_images/actin_average_filter.png"><img alt="../../_images/actin_average_filter.png" src="../../_images/actin_average_filter.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Average filter</span><a class="headerlink" href="#id19" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Notice that Fiji also offers the <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filter</span> <span class="pre">&gt;</span> <span class="pre">Mean...</span></code> filter, that uses an average filter of approximately circular shape (by setting all weights farther away than one radius of the circle from the center of the kernel to zero).</p>
+</section>
+<section id="gaussian-filter">
+<h5>Gaussian filter<a class="headerlink" href="#gaussian-filter" title="Link to this heading">#</a></h5>
+<p>We could run a <strong>Gaussian filter</strong> on the <code class="docutils literal notranslate"><span class="pre">actin.tif</span></code> image by defining a <span class="math notranslate nohighlight">\(5x5\)</span> kernel in <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Convolve</span></code>, but it is much easier to use the <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filter</span> <span class="pre">Gaussian</span> <span class="pre">Blur...</span></code>. The only parameter to the Gaussian kernel is its <span class="math notranslate nohighlight">\(\sigma\)</span> value, but please notice the it can be specified either in pixels or in units.</p>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="../../_images/convolver_gaussian_filter.png"><img alt="../../_images/convolver_gaussian_filter.png" src="../../_images/convolver_gaussian_filter.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Options of the Gaussian filter</span><a class="headerlink" href="#id20" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The convolution with our Gaussian filter gives us the following result:</p>
+<figure class="align-center" id="id21">
+<a class="reference internal image-reference" href="../../_images/actin_gaussian_filter.png"><img alt="../../_images/actin_gaussian_filter.png" src="../../_images/actin_gaussian_filter.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Gaussian filter</span><a class="headerlink" href="#id21" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="laplacian-filter">
+<h5>Laplacian filter<a class="headerlink" href="#laplacian-filter" title="Link to this heading">#</a></h5>
+<p>To run a <strong>Laplacian filter</strong> on the <code class="docutils literal notranslate"><span class="pre">actin.tif</span></code> image, we first change the data type to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Type</span> <span class="pre">&gt;</span> <span class="pre">32-bit</span></code>, since the Laplacian creates negative values in the image that would be clipped if the image were 8 bit. Then we can define our kernel (without normalization!) in the Convolver window.</p>
+<figure class="align-center" id="id22">
+<a class="reference internal image-reference" href="../../_images/convolver_laplacian_filter.png"><img alt="../../_images/convolver_laplacian_filter.png" src="../../_images/convolver_laplacian_filter.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Options of the Laplacian filter</span><a class="headerlink" href="#id22" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The convolution with our Laplacian filter gives us the following result:</p>
+<figure class="align-center" id="id23">
+<a class="reference internal image-reference" href="../../_images/actin_laplacian_filter.png"><img alt="../../_images/actin_laplacian_filter.png" src="../../_images/actin_laplacian_filter.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Laplacian filter</span><a class="headerlink" href="#id23" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="laplacian-of-gaussian-filter">
+<h5>Laplacian of Gaussian filter<a class="headerlink" href="#laplacian-of-gaussian-filter" title="Link to this heading">#</a></h5>
+<p>In analogy to the previous filter, to run a <strong>Laplacian of Gaussian filter</strong> on the <code class="docutils literal notranslate"><span class="pre">actin.tif</span></code> image, we first change the data type to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Type</span> <span class="pre">&gt;</span> <span class="pre">32-bit</span></code>, since the Laplacian creates negative values in the image that would be clipped if the image were 8 bit. We could first filter with a Gaussian filter and then apply the Laplacian; instead, we use the <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">FeatureJ</span> <span class="pre">&gt;</span> <span class="pre">FeatureJ</span> <span class="pre">Laplacian</span></code> plug-in.</p>
+<figure class="align-center" id="id24">
+<a class="reference internal image-reference" href="../../_images/convolver_log_filter.png"><img alt="../../_images/convolver_log_filter.png" src="../../_images/convolver_log_filter.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Options of the Laplacian of Gaussian filter</span><a class="headerlink" href="#id24" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The smoothing scale is the <span class="math notranslate nohighlight">\(\sigma\)</span>  value of the Gaussian kernel.</p>
+<p>The convolution with our Laplacian of Gaussian filter gives us the following result:</p>
+<figure class="align-center" id="id25">
+<a class="reference internal image-reference" href="../../_images/actin_log_filter.png"><img alt="../../_images/actin_log_filter.png" src="../../_images/actin_log_filter.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Laplacian filter</span><a class="headerlink" href="#id25" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="non-linear-filters">
+<h4>Non-linear filters<a class="headerlink" href="#non-linear-filters" title="Link to this heading">#</a></h4>
+<p>Non-linear filters cannot be implemented by the convolution operator, since as their name implies, they do not perform any linear operation (<em>i.e.</em>, additions and multiplications) on the pixel neighborhood.</p>
+<section id="order-filters">
+<h5>Order filters<a class="headerlink" href="#order-filters" title="Link to this heading">#</a></h5>
+<p>The <strong>min</strong>, <strong>median</strong> and <strong>max</strong> filters can be run with the <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Minimum...</span></code>,  <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Median...</span></code>, and  <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Maximum...</span></code> commands, respectively. All filters take the radius as input argument:</p>
+<figure class="align-center" id="id26">
+<a class="reference internal image-reference" href="../../_images/median_filter.png"><img alt="../../_images/median_filter.png" src="../../_images/median_filter.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Median filter options</span><a class="headerlink" href="#id26" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The result of the order filter on the <code class="docutils literal notranslate"><span class="pre">actin.tif</span></code> image looks as follows:</p>
+<figure class="align-center" id="id27">
+<a class="reference internal image-reference" href="../../_images/actin_order_filters.png"><img alt="../../_images/actin_order_filters.png" src="../../_images/actin_order_filters.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Order filters</span><a class="headerlink" href="#id27" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="frequency-filters">
+<h3>Frequency filters<a class="headerlink" href="#frequency-filters" title="Link to this heading">#</a></h3>
+<p>Filtering in the frequency domain consists of modifying the Fourier transform of an image and then computing the inverse transform to obtain the processed result. We will not discuss frequency filters further in this course.</p>
+</section>
+</section>
+<section id="background-subtraction">
+<h2>Background subtraction<a class="headerlink" href="#background-subtraction" title="Link to this heading">#</a></h2>
+<p>There are many reasons why one might want to run a background subtraction before analysis. In microscopy acquisitions, it is common for images to display a reduced intensity away from the center of the image. This so called <strong>shading</strong> can make it more difficult to segment objects unless one uses a local thresholding strategy. For <strong>ratiometric analyses</strong>, where one locally calculates the ratio of the signal between two channels, any intensity offset due to unspecific light in the background must be removed; otherwise, especially for weak signals, the ratio of the background values dominates the overall ratio!</p>
+<p>Open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/background/cells_shaded.tif</span></code>.</p>
+<figure class="align-center" id="id28">
+<a class="reference internal image-reference" href="../../_images/background_cell_shaded.png"><img alt="../../_images/background_cell_shaded.png" src="../../_images/background_cell_shaded.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">The shaded image</span><a class="headerlink" href="#id28" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Open <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Subtract</span> <span class="pre">Background...</span></code>.</p>
+<figure class="align-center" id="id29">
+<a class="reference internal image-reference" href="../../_images/background_subractor.png"><img alt="../../_images/background_subractor.png" src="../../_images/background_subractor.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">The Subtract Background tool</span><a class="headerlink" href="#id29" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>You can <code class="docutils literal notranslate"><span class="pre">Preview</span></code> the changes  or even see the estimated background before subraction (<code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">background</span> <span class="pre">(don't</span> <span class="pre">subtract)</span></code>). Hit <code class="docutils literal notranslate"><span class="pre">OK</span></code> when you are done.</p>
+<figure class="align-center" id="id30">
+<a class="reference internal image-reference" href="../../_images/background_cell_shaded_corrected.png"><img alt="../../_images/background_cell_shaded_corrected.png" src="../../_images/background_cell_shaded_corrected.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">The background-subtracted image</span><a class="headerlink" href="#id30" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="segmentation">
+<h2>Segmentation<a class="headerlink" href="#segmentation" title="Link to this heading">#</a></h2>
+<section id="simple-threshold-based-segmentation">
+<h3>Simple threshold-based segmentation<a class="headerlink" href="#simple-threshold-based-segmentation" title="Link to this heading">#</a></h3>
+<p>Often we want to extract objects from images with the goal of measuring several features that we can use to test some hypothesis. It is important then, to preserve their shapes as much as possible. Ideally, the objects have a (more or less homogeneous) intensity that is clearly higher than the local background surrounding them.</p>
+<p>Open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/segmentation/Nuclei.tif</span></code>.</p>
+<figure class="align-center" id="id31">
+<a class="reference internal image-reference" href="../../_images/nuclei.png"><img alt="../../_images/nuclei.png" src="../../_images/nuclei.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Nuclei.tif image</span><a class="headerlink" href="#id31" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To segment, use <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Threshold...</span></code>. Choose the <code class="docutils literal notranslate"><span class="pre">Otsu</span></code> algorithm. A preview of the segmentation will be overlaid on top of the image.</p>
+<figure class="align-center" id="id32">
+<a class="reference internal image-reference" href="../../_images/nuclei_segmentation_otsu.png"><img alt="../../_images/nuclei_segmentation_otsu.png" src="../../_images/nuclei_segmentation_otsu.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Segmentation preview</span><a class="headerlink" href="#id32" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In this dataset, the Otsu algorithm performs satisfactorily. If the intensity of the objects tends to vary a lot, however, Otsu might perform sub-optimally.</p>
+<p>Compare the Otsu segmentation with the one obtained by the <code class="docutils literal notranslate"><span class="pre">Li</span></code> or the <code class="docutils literal notranslate"><span class="pre">Triangle</span></code> algorithms. These algorithms are particularly robust to segment objects that have a wide range of intensities.</p>
+<figure class="align-center" id="id33">
+<a class="reference internal image-reference" href="../../_images/nuclei_segmentation_li.png"><img alt="../../_images/nuclei_segmentation_li.png" src="../../_images/nuclei_segmentation_li.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Segmentation with the Li algorithm</span><a class="headerlink" href="#id33" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Hit <code class="docutils literal notranslate"><span class="pre">Apply</span></code> to create a black and white mask that we can later use for analysis (in a later section).</p>
+</section>
+<section id="pre-processing-for-segmentation">
+<h3>Pre-processing for segmentation<a class="headerlink" href="#pre-processing-for-segmentation" title="Link to this heading">#</a></h3>
+<p>In case the threshold-based segmentation does not perform well, one can try to pre-process the image with some of the filters we have seen before. For instance, a Gaussian filter can help reduce noise in the image and make the objects more homogeneous.</p>
+<p>Open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/segmentation/Nuclei_patchy.tif</span></code>.</p>
+<figure class="align-center" id="id34">
+<a class="reference internal image-reference" href="../../_images/Nuclei_patchy.png"><img alt="../../_images/Nuclei_patchy.png" src="../../_images/Nuclei_patchy.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Nuclei_patchy.tif image</span><a class="headerlink" href="#id34" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If you try to segment this image with a threshold, you will see that the segmentation is not very good.</p>
+<figure class="align-center" id="id35">
+<a class="reference internal image-reference" href="../../_images/Nuclei_patchy_thresh.png"><img alt="../../_images/Nuclei_patchy_thresh.png" src="../../_images/Nuclei_patchy_thresh.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Thresholded Nuclei_patchy.tif image</span><a class="headerlink" href="#id35" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>However, after filtering the image with a Gaussian filter with <span class="math notranslate nohighlight">\(\sigma = 2\)</span> pixels, the segmentation improves significantly.</p>
+<figure class="align-center" id="id36">
+<a class="reference internal image-reference" href="../../_images/Nuclei_patchy_gauss_thresh.png"><img alt="../../_images/Nuclei_patchy_gauss_thresh.png" src="../../_images/Nuclei_patchy_gauss_thresh.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Filtered and thresholded Nuclei_patchy.tif image</span><a class="headerlink" href="#id36" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="post-processing-of-segmentation-results">
+<h3>Post-processing of segmentation results<a class="headerlink" href="#post-processing-of-segmentation-results" title="Link to this heading">#</a></h3>
+<p>After thresholding, one can use morphological operations to clean up the segmentation. For instance, one can use <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Open</span></code> to remove small objects from the binary mask. An opening consists of an erosion followed by a dilation. The erosion removes small objects, and the dilation restores the shape of the remaining objects.
+One can also use <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Close</span></code> to close small holes in the objects. A closing consists of a dilation followed by an erosion. The dilation closes small holes, and the erosion restores the shape of the objects.</p>
+</section>
+<section id="machine-learning-based-segmentation">
+<h3>Machine-learning based segmentation<a class="headerlink" href="#machine-learning-based-segmentation" title="Link to this heading">#</a></h3>
+<p>For more complex segmentation tasks, or when finding the right filters to preprocess an image before segmentation becomes difficult, one can use machine-learning based approaches. Fiji offers the <strong>Trainable Weka Segmentation</strong> tool that allows one to train a classifier based on a few user-provided annotations.</p>
+<figure class="align-center" id="id37">
+<a class="reference internal image-reference" href="../../_images/weka.png"><img alt="../../_images/weka.png" src="../../_images/weka.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">The Trainable Weka Segmentation tool</span><a class="headerlink" href="#id37" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Load the image <code class="docutils literal notranslate"><span class="pre">data/fiji/machine_learning/er_01.tif</span></code> and open the Weka tool from <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Segmentation</span> <span class="pre">&gt;</span> <span class="pre">Trainable</span> <span class="pre">Weka</span> <span class="pre">Segmentation</span></code>.</p>
+<p>You can use any of the available tools to annotate a few pixels of the image as belonging to the <strong>background</strong> class (class 1) and a few pixels as belonging to the <strong>ER</strong> class (class 2).</p>
+<p>Press the <code class="docutils literal notranslate"><span class="pre">Train</span> <span class="pre">classifier</span></code> button to train a model based on your annotations. The result of the classification of the entire image will be shown, and you can toggle between the segmentation and the original image by pressing the “Toggle overlay” button. Segmentation results can be improved in an iterative process by adding more annotations and retraining the classifier. Once you are satisfied with the result, you can create a binary mask by pressing the <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">result</span></code> button.</p>
+<p>The trained model can be saved and reloaded later to segment other images of the same type. Sometimes it is useful to train a model based on a few images. This can be achieved by using the “Save data” and “Load data” buttons to include annotations from multiple images in the training set.</p>
+<figure class="align-center" id="id38">
+<a class="reference internal image-reference" href="../../_images/er_01_weka.png"><img alt="../../_images/er_01_weka.png" src="../../_images/er_01_weka.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Given the difficulty of the segmentation task, the Weka tool performs quite well! The result can be post-processed with morphological operations to clean it up a bit.</span><a class="headerlink" href="#id38" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="local-maxima-detection">
+<h3>Local maxima detection<a class="headerlink" href="#local-maxima-detection" title="Link to this heading">#</a></h3>
+<p>Sometimes, we only need to count objects in the image and do not need a precise segmentation of their boundaries.</p>
+<p>Open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/segmentation/Cell.tif</span></code>.</p>
+<figure class="align-center" id="id39">
+<a class="reference internal image-reference" href="../../_images/cell.png"><img alt="../../_images/cell.png" src="../../_images/cell.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Cell.tif image</span><a class="headerlink" href="#id39" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Segmenting the cells is tricky, since their cytoplasms are dim and the cells are very close to one another. An easier way to count the cells is to count their nuclei.</p>
+<p>Go to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Find</span> <span class="pre">Maxima...</span></code>.</p>
+<figure class="align-center" id="id40">
+<a class="reference internal image-reference" href="../../_images/cell_find_maxima_settings.png"><img alt="../../_images/cell_find_maxima_settings.png" src="../../_images/cell_find_maxima_settings.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Find Maxima settings</span><a class="headerlink" href="#id40" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Enable the preview and play with the <code class="docutils literal notranslate"><span class="pre">Noise</span> <span class="pre">tolerance</span></code> until you see one cross per nucleus.</p>
+<figure class="align-center" id="id41">
+<a class="reference internal image-reference" href="../../_images/cell_maxima_points.png"><img alt="../../_images/cell_maxima_points.png" src="../../_images/cell_maxima_points.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Find Maxima preview</span><a class="headerlink" href="#id41" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Once you are satisfied, hit <code class="docutils literal notranslate"><span class="pre">OK</span></code>.</p>
+<figure class="align-center" id="id42">
+<a class="reference internal image-reference" href="../../_images/cell_maxima_count.png"><img alt="../../_images/cell_maxima_count.png" src="../../_images/cell_maxima_count.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Find Maxima results</span><a class="headerlink" href="#id42" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="morphology">
+<h2>Morphology<a class="headerlink" href="#morphology" title="Link to this heading">#</a></h2>
+<p>We will look at some applications of morphology in Fiji by loading and badly segmenting the image <code class="docutils literal notranslate"><span class="pre">data/fiji/morphology/actin.tif</span></code>.</p>
+<figure class="align-center" id="id43">
+<a class="reference internal image-reference" href="../../_images/actin.png"><img alt="../../_images/actin.png" src="../../_images/actin.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Actin.tif</span><a class="headerlink" href="#id43" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;Threshold</span></code> tool to segment the image with the <code class="docutils literal notranslate"><span class="pre">Moments</span></code> algorithm. Hit <code class="docutils literal notranslate"><span class="pre">Apply</span></code> to create a binary mask.</p>
+<figure class="align-center" id="id44">
+<a class="reference internal image-reference" href="../../_images/actin_segmented_moments.png"><img alt="../../_images/actin_segmented_moments.png" src="../../_images/actin_segmented_moments.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">(Badly) segmented Actin.tif</span><a class="headerlink" href="#id44" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If you analyze the result of this segmentation (<code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Particles...</span></code>) you will see that there are 24 distinct objects in the binary mask (more on <strong>Measurements</strong> later in the course).</p>
+<figure class="align-center" id="id45">
+<a class="reference internal image-reference" href="../../_images/actin_thresholded_measurements.png"><img alt="../../_images/actin_thresholded_measurements.png" src="../../_images/actin_thresholded_measurements.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Initial analysis</span><a class="headerlink" href="#id45" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Obviously, there is only one cell in the image, and our segmentation failed to recognized that.</p>
+<section id="dilation">
+<h3>Dilation<a class="headerlink" href="#dilation" title="Link to this heading">#</a></h3>
+<p>We will start by running one <strong>dilation</strong> step on the image. Pick <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Dilate</span></code>.</p>
+<figure class="align-center" id="id46">
+<a class="reference internal image-reference" href="../../_images/actin_dilated.png"><img alt="../../_images/actin_dilated.png" src="../../_images/actin_dilated.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Dilated Actin.tif</span><a class="headerlink" href="#id46" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="hole-filling">
+<h3>Hole filling<a class="headerlink" href="#hole-filling" title="Link to this heading">#</a></h3>
+<p>Then, we fill the remaining holes with <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Fill</span> <span class="pre">Holes</span></code>.</p>
+<figure class="align-center" id="id47">
+<a class="reference internal image-reference" href="../../_images/actin_filled.png"><img alt="../../_images/actin_filled.png" src="../../_images/actin_filled.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Filled Actin.tif</span><a class="headerlink" href="#id47" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="erosion">
+<h3>Erosion<a class="headerlink" href="#erosion" title="Link to this heading">#</a></h3>
+<p>Since the dilation step extended the outline of the cell outward, we would overestimate the area of the cell if we were to measure it now. Therefore, we run an erosion step to bring the cell outline back to the original position. Use <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Erode</span></code>.</p>
+<figure class="align-center" id="id48">
+<a class="reference internal image-reference" href="../../_images/actin_eroded.png"><img alt="../../_images/actin_eroded.png" src="../../_images/actin_eroded.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Eroded Actin.tif</span><a class="headerlink" href="#id48" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now we get a better result from our analysis:</p>
+<figure class="align-center" id="id49">
+<a class="reference internal image-reference" href="../../_images/actin_corrected_measurements.png"><img alt="../../_images/actin_corrected_measurements.png" src="../../_images/actin_corrected_measurements.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Measurement on processed Actif.tif</span><a class="headerlink" href="#id49" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="measurements">
+<h2>Measurements<a class="headerlink" href="#measurements" title="Link to this heading">#</a></h2>
+<p>We have seen a few of the fundamental <strong>image processing</strong> concepts that we can use to manipulate our images for various types of applications. In this course, we are interested in extracting measurement data from our images. We are scientists after all!</p>
+<p>In the next sections, we will see a few examples of <strong>image analysis</strong> workflows.</p>
+<section id="time-series-analysis-from-manual-rois">
+<h3>Time series analysis from manual ROIs<a class="headerlink" href="#time-series-analysis-from-manual-rois" title="Link to this heading">#</a></h3>
+<p>In this example we will analyze intensity spikes in a calcium flux experiment. Open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/measurements/manual_rois/Calcium</span> <span class="pre">Flux.tif</span></code>.</p>
+<figure class="align-center" id="id50">
+<a class="reference internal image-reference" href="../../_images/calcium_flux.png"><img alt="../../_images/calcium_flux.png" src="../../_images/calcium_flux.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Calcium flux time series</span><a class="headerlink" href="#id50" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>It you scroll through time using the <strong>time slider</strong> at the bottom of the image, you will see that the signal intensity within the cellular cytoplasm flashes over time. How can we plot an intensity profile?</p>
+<p>Pick the <strong>oval</strong> ROI from the Fiji toolbar.</p>
+<figure class="align-center" id="id51">
+<img alt="../../_images/rois_toolbar_oval.png" src="../../_images/rois_toolbar_oval.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">ROIs in the Fiji toolbar</span><a class="headerlink" href="#id51" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Draw the ROI in one of the flashing regions.</p>
+<figure class="align-center" id="id52">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_roi.png"><img alt="../../_images/calcium_flux_roi.png" src="../../_images/calcium_flux_roi.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Our ROI</span><a class="headerlink" href="#id52" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Stacks</span> <span class="pre">&gt;</span> <span class="pre">Plot</span> <span class="pre">Z-axis</span> <span class="pre">Profile</span></code> command to get a line profile.</p>
+<figure class="align-center" id="id53">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_line_profile.png"><img alt="../../_images/calcium_flux_line_profile.png" src="../../_images/calcium_flux_line_profile.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Line profile</span><a class="headerlink" href="#id53" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Hit the <code class="docutils literal notranslate"><span class="pre">List</span></code> button to see the corresponding mean gray values in the <strong>Plot Values</strong> table.</p>
+<figure class="align-center" id="id54">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_plot_values.png"><img alt="../../_images/calcium_flux_plot_values.png" src="../../_images/calcium_flux_plot_values.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Line profile values</span><a class="headerlink" href="#id54" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>What if you want to measure more than one ROI at a time? You can use the <strong>ROI Manager</strong> (<code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Tools</span> <span class="pre">&gt;</span> <span class="pre">ROI</span> <span class="pre">Manager...</span></code>) to keep track of all the ROIs you add to an image.</p>
+<p>After drawing a ROI, hit the <code class="docutils literal notranslate"><span class="pre">t</span></code> key or push the <code class="docutils literal notranslate"><span class="pre">Add</span></code> button on the ROI manager to add current ROI to the list of ROIs on the image. If the original names are a bit confusing, you can hit the <code class="docutils literal notranslate"><span class="pre">Rename</span></code> button and give them more useful names.</p>
+<figure class="align-center" id="id55">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_roi_manager.png"><img alt="../../_images/calcium_flux_roi_manager.png" src="../../_images/calcium_flux_roi_manager.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">ROI Manager in action</span><a class="headerlink" href="#id55" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>By checking the <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">All</span></code> option, all ROIs are shown on the image at the same time; otherwise only the active one is shown.</p>
+<figure class="align-center" id="id56">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_multiple_rois.png"><img alt="../../_images/calcium_flux_multiple_rois.png" src="../../_images/calcium_flux_multiple_rois.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Multiple ROIs on the image</span><a class="headerlink" href="#id56" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Please notice that besides three flashing cells (<code class="docutils literal notranslate"><span class="pre">Cell1</span></code>, <code class="docutils literal notranslate"><span class="pre">Cell2</span></code>, and <code class="docutils literal notranslate"><span class="pre">Cell3</span></code>), we also added a <code class="docutils literal notranslate"><span class="pre">Background</span></code> ROI for the image background (to check how the global intensity in the scene changes over time), and an <code class="docutils literal notranslate"><span class="pre">InactiveCell</span></code> ROI to investigate what happens within a cell that does not seem to do much.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Set</span> <span class="pre">Measurements</span></code> check the <code class="docutils literal notranslate"><span class="pre">Mean</span> <span class="pre">gray</span> <span class="pre">value</span></code> measurement as follows:</p>
+<figure class="align-center" id="id57">
+<a class="reference internal image-reference" href="../../_images/manual_roi_set_measurements.png"><img alt="../../_images/manual_roi_set_measurements.png" src="../../_images/manual_roi_set_measurements.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Set measurements</span><a class="headerlink" href="#id57" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To measure over many ROIs at once, click on the <code class="docutils literal notranslate"><span class="pre">More</span> <span class="pre">&gt;&gt;</span></code> button in the ROI Manager and then pick <code class="docutils literal notranslate"><span class="pre">Multi</span> <span class="pre">Measure</span></code> (also, make sure to <code class="docutils literal notranslate"><span class="pre">Deselect</span></code> any ROIs you have selected in the ROI Manager) .</p>
+<figure class="align-center" id="id58">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_multi_measure_options.png"><img alt="../../_images/calcium_flux_multi_measure_options.png" src="../../_images/calcium_flux_multi_measure_options.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Multi Measure options</span><a class="headerlink" href="#id58" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>This time you get no plot, but 5 columns that you can then export into your favorite spreadsheet tool for plotting.</p>
+<figure class="align-center" id="id59">
+<a class="reference internal image-reference" href="../../_images/calcium_flux_multiple_rois_plot_values.png"><img alt="../../_images/calcium_flux_multiple_rois_plot_values.png" src="../../_images/calcium_flux_multiple_rois_plot_values.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Plot values for multiple ROIs</span><a class="headerlink" href="#id59" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To measure just the active ROI in the image, you can simply hit <code class="docutils literal notranslate"><span class="pre">Measure</span></code> in the ROI Manager.</p>
+</section>
+<section id="time-series-analysis-from-automatic-rois">
+<h3>Time series analysis from automatic ROIs<a class="headerlink" href="#time-series-analysis-from-automatic-rois" title="Link to this heading">#</a></h3>
+<p>Placing one or two ROIs in an image is an acceptable effort, but if one has to analyze hundred of cells, it quickly becomes tedious and error-prone.</p>
+<p>In the <strong>Segmentation</strong> section we saw how to extract a binary mask of all the cells in an image. Let’s do something similar here for the analysis of calcium spikes in many cells at once.</p>
+<p>Open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/measurements/auto_rois/Calcium</span> <span class="pre">Sensing.tif</span></code>.</p>
+<figure class="align-center" id="id60">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing.png"><img alt="../../_images/calcium_sensing.png" src="../../_images/calcium_sensing.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">The Calcium Sensing image</span><a class="headerlink" href="#id60" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Going through the time series, we see that the cells do not move. Our strategy, then, is to create a mask for each cell that we can use to extract measurements over time.</p>
+<p>Start by creating a <strong>maximum intensity projection</strong> of the data set via <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Stacks</span> <span class="pre">&gt;</span> <span class="pre">Z</span> <span class="pre">Project...</span></code> using the following parameters:</p>
+<figure class="align-center" id="id61">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_max_proj_settings.png"><img alt="../../_images/calcium_sensing_max_proj_settings.png" src="../../_images/calcium_sensing_max_proj_settings.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Max intensity projection parameters</span><a class="headerlink" href="#id61" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The max intensity projection algorithm creates a 2D image <span class="math notranslate nohighlight">\(I\)</span> from a 3D stack <span class="math notranslate nohighlight">\(S\)</span>, by storing at each position <span class="math notranslate nohighlight">\(I(x, y)\)</span> the maximum intensity <span class="math notranslate nohighlight">\(i_{max} = \max_{z=1}^{z=z_{max}}(S(x, y, z))\)</span>.</p>
+<figure class="align-center" id="id62">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_max_proj.png"><img alt="../../_images/calcium_sensing_max_proj.png" src="../../_images/calcium_sensing_max_proj.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">The maximum intensity projection</span><a class="headerlink" href="#id62" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To create the mask, we can run:</p>
+<ul class="simple">
+<li><p>a Gaussian filter (<code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Gaussian</span> <span class="pre">Blur...</span></code> with <span class="math notranslate nohighlight">\(\sigma=1 \mu m\)</span>)</p></li>
+<li><p>a  Li threshold (<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Threshold</span></code>)</p></li>
+<li><p>the Watershed algorithm (<code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Watershed</span></code>)</p></li>
+</ul>
+<p>This should be our current result:</p>
+<figure class="align-center" id="id63">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_mask.png"><img alt="../../_images/calcium_sensing_mask.png" src="../../_images/calcium_sensing_mask.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">The mask</span><a class="headerlink" href="#id63" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now, we can create a <em>particle</em> for each cell by running <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Particles...</span></code></p>
+<figure class="align-center" id="id64">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_analyze_particles.png"><img alt="../../_images/calcium_sensing_analyze_particles.png" src="../../_images/calcium_sensing_analyze_particles.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Analyze particles</span><a class="headerlink" href="#id64" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We set a filter on the size (<code class="docutils literal notranslate"><span class="pre">50-Infinity</span></code>) to remove small debris from the segmentation and tick the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">to</span> <span class="pre">Manager</span></code> check box to make sure to add all the generated ROIs to the ROI Manager.</p>
+<figure class="align-center" id="id65">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_roi_manager.png"><img alt="../../_images/calcium_sensing_roi_manager.png" src="../../_images/calcium_sensing_roi_manager.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">The ROI Manager with the extracted masks</span><a class="headerlink" href="#id65" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>You should probably add a manual ROI to the background as well (ROI 21 in the figure below).</p>
+<figure class="align-center" id="id66">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_rois.png"><img alt="../../_images/calcium_sensing_rois.png" src="../../_images/calcium_sensing_rois.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Obtained ROIs (ROI 21 is the manual background)</span><a class="headerlink" href="#id66" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To transfer the ROIs to the original time series, we can activate the window where we loaded the original <code class="docutils literal notranslate"><span class="pre">Calcium</span> <span class="pre">Sensing.tif</span></code> image and click on <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">All</span></code> in the ROI Manager. The ROIs will now be associated to the <code class="docutils literal notranslate"><span class="pre">Calcium</span> <span class="pre">Sensing.tif</span></code> image. Alternatively, you could first hit <code class="docutils literal notranslate"><span class="pre">More</span> <span class="pre">&gt;&gt;</span> <span class="pre">Save...</span></code> in the ROI Manager to save the ROIs to disk and then load them from disk via <code class="docutils literal notranslate"><span class="pre">More</span> <span class="pre">&gt;&gt;</span> <span class="pre">Open...</span></code> (clear the listed ROIs first!).</p>
+<p>Finally, we can measure our calcium profiles via <code class="docutils literal notranslate"><span class="pre">More</span> <span class="pre">&gt;&gt;</span> <span class="pre">Multi</span> <span class="pre">Measure</span></code> (enable <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">row</span> <span class="pre">per</span> <span class="pre">slice</span></code>).</p>
+<figure class="align-center" id="id67">
+<a class="reference internal image-reference" href="../../_images/calcium_sensing_plot_values.png"><img alt="../../_images/calcium_sensing_plot_values.png" src="../../_images/calcium_sensing_plot_values.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Obtained ROIs (ROI 21 is the manual background)</span><a class="headerlink" href="#id67" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="image-arithmetics">
+<h2>Image arithmetics<a class="headerlink" href="#image-arithmetics" title="Link to this heading">#</a></h2>
+<p>Often, it is very useful to use arithmetic operations between images; for instance, to subtract the estimated background from the image to correct for <em>shading</em> artifacts; or to <strong>mask</strong> one channel with another.</p>
+<p>In this section, we will see an example of masking.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">data/fiji/arithmetics/cell_2_channels.tif</span></code>.</p>
+<figure class="align-center" id="id68">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels.png"><img alt="../../_images/cell_2_channels.png" src="../../_images/cell_2_channels.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">2-channel image</span><a class="headerlink" href="#id68" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>With <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Colors</span> <span class="pre">&gt;</span> <span class="pre">Split</span> <span class="pre">Channels</span></code> we extract each of the two channels to its own window. Make a copy of the red channel with <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Duplicate</span></code>: we will need it later.</p>
+<figure class="align-center" id="id69">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_split.png"><img alt="../../_images/cell_2_channels_split.png" src="../../_images/cell_2_channels_split.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Split channels</span><a class="headerlink" href="#id69" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now, we Gaussian filter (<code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Gaussian</span> <span class="pre">Blur</span></code>) both channels with <span class="math notranslate nohighlight">\(\sigma=1\)</span>  pixel.</p>
+<figure class="align-center" id="id70">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_gauss.png"><img alt="../../_images/cell_2_channels_gauss.png" src="../../_images/cell_2_channels_gauss.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Gaussian blur</span><a class="headerlink" href="#id70" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Then we apply the Otsu threshold <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Threshold...</span></code>  and close remaining holes inside the cell cytoplasm with <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Fill</span> <span class="pre">Holes</span></code>. We should now have two masks as depicted below.</p>
+<figure class="align-center" id="id71">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_split_masks.png"><img alt="../../_images/cell_2_channels_split_masks.png" src="../../_images/cell_2_channels_split_masks.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">The masks for each of the channels</span><a class="headerlink" href="#id71" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now, we would like to measure the signal intensity in the cell cytoplasm without taking into account the area covered by the nucleus. For this purpose, we can create a new mask that represents the difference of the two we just created. We can achieve this in two ways. The first way is by <strong>subtracting</strong> one image from the other. Open <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Image</span> <span class="pre">Calculator...</span></code>:</p>
+<figure class="align-center" id="id72">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_masks_subtract.png"><img alt="../../_images/cell_2_channels_masks_subtract.png" src="../../_images/cell_2_channels_masks_subtract.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Subtact one mask from the other</span><a class="headerlink" href="#id72" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The second way, is by running the <strong>logical operator XOR</strong> on the images. XOR, or <strong>exclusive OR</strong> is a binary operation that returns <strong>true</strong> only if the two operands have different values (<em>i.e.</em>, one is <strong>true</strong> and the other is <strong>false</strong>). In a binary mask, this means that if two pixels at a given location are both black or both white, the result will be black; only if two pixels have different values (which in our case is the area of the cell <strong>not</strong> covered by the nucleus) we will get a white pixel.</p>
+<p>Both operations return the same result:</p>
+<figure class="align-center" id="id73">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_result_mask.png"><img alt="../../_images/cell_2_channels_result_mask.png" src="../../_images/cell_2_channels_result_mask.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Result of the image arithmetics operation</span><a class="headerlink" href="#id73" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now we can use this mask to extract the mean intensity of the cell cytoplasm. Select the newly created mask and run <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Set</span> <span class="pre">Measurements</span></code>: make sure to redirect the measurements to the copy of the red channel we made in the beginning.</p>
+<figure class="align-center" id="id74">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_set_measurements.png"><img alt="../../_images/cell_2_channels_set_measurements.png" src="../../_images/cell_2_channels_set_measurements.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Configure measurements to act on the desired image</span><a class="headerlink" href="#id74" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>And now hit <code class="docutils literal notranslate"><span class="pre">Analyse</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Particles</span></code>. Make sure to <strong>disable</strong> <code class="docutils literal notranslate"><span class="pre">Include</span> <span class="pre">holes</span></code>.</p>
+<figure class="align-center" id="id75">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_analyze_particles.png"><img alt="../../_images/cell_2_channels_analyze_particles.png" src="../../_images/cell_2_channels_analyze_particles.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Analyze particles</span><a class="headerlink" href="#id75" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The mean intensity of the cytoplasm is returned.</p>
+<figure class="align-center" id="id76">
+<a class="reference internal image-reference" href="../../_images/cell_2_channels_final_result.png"><img alt="../../_images/cell_2_channels_final_result.png" src="../../_images/cell_2_channels_final_result.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Final result</span><a class="headerlink" href="#id76" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="programming-fiji">
+<h2>Programming Fiji<a class="headerlink" href="#programming-fiji" title="Link to this heading">#</a></h2>
+<p>There are fundamentally two ways of extending the functionality of Fiji:</p>
+<ul class="simple">
+<li><p><strong>Macros</strong> are simple programs stored as <code class="docutils literal notranslate"><span class="pre">.ijm</span></code> (<strong>I</strong>mage<strong>J</strong> <strong>M</strong>acro) files and written in a language similar to Java. Macros can contain control flow structures (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, …), operators (<code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, …) and built-in functions (or commands). Macros can call other macros.</p>
+<ul>
+<li><p>For a list of macro functions, pick <code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">&gt;</span> <span class="pre">Macro</span> <span class="pre">functions...</span></code> or go to <a class="reference external" href="https://imagej.nih.gov/ij/developer/macro/functions.html">https://imagej.nih.gov/ij/developer/macro/functions.html</a></p></li>
+<li><p>The official Reference guide can be found at <a class="reference external" href="https://imagej.nih.gov/ij/docs/macro_reference_guide.pdf">https://imagej.nih.gov/ij/docs/macro_reference_guide.pdf</a></p></li>
+</ul>
+</li>
+<li><p><strong>Plug-ins</strong> are faster, more flexible and more powerful than macros and are written in the Java programming language. They have much deeper access to the core of Fiji but are also much more complex to develop.</p></li>
+</ul>
+<p>In this course we will learn how to write macros.</p>
+<section id="macro-programming">
+<h3>Macro programming<a class="headerlink" href="#macro-programming" title="Link to this heading">#</a></h3>
+<p>A <strong>macro</strong> is a  simple program that automates a series of ImageJ commands. In its simplest form, we do not even need to write any code!</p>
+<p>Let’s open an image and proceed with creating our first macro! Make sure you have an image open in Fiji; if not, pick <code class="docutils literal notranslate"><span class="pre">data/fiji/programming/macro1/Nuclei.tif</span></code>.</p>
+<p>We can record a macro by choosing <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Macros</span> <span class="pre">&gt;</span> <span class="pre">Record…</span></code> and performing a series of operations in Fiji. Each operation (with its selected parameters) will be automatically added to the recorder.</p>
+<p>Lets pick <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Threshold...</span></code>. You should see the corresponding macro calls being added to the Recorder. Then, pick <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Set</span> <span class="pre">Measurements...</span></code> and uncheck everything but <code class="docutils literal notranslate"><span class="pre">Area</span></code>, <code class="docutils literal notranslate"><span class="pre">Mean</span> <span class="pre">gray</span> <span class="pre">value</span></code> and <code class="docutils literal notranslate"><span class="pre">Min</span> <span class="pre">&amp;</span> <span class="pre">Max</span> <span class="pre">gray</span> <span class="pre">value</span></code>. Also, set <code class="docutils literal notranslate"><span class="pre">Redirect</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">Decimal</span> <span class="pre">planes</span> <span class="pre">(0</span> <span class="pre">-</span> <span class="pre">9)</span></code> to <code class="docutils literal notranslate"><span class="pre">3</span></code>. Finally, run <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Particles…</span></code>.</p>
+<figure class="align-center" id="id77">
+<a class="reference internal image-reference" href="../../_images/macro_recorder.png"><img alt="../../_images/macro_recorder.png" src="../../_images/macro_recorder.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">The macro recorder</span><a class="headerlink" href="#id77" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Once we are done adding commands to the macro, we can give a <code class="docutils literal notranslate"><span class="pre">Name</span></code> to the macro (in this case <code class="docutils literal notranslate"><span class="pre">First_Macro.ijm</span></code>), hit the <code class="docutils literal notranslate"><span class="pre">Create</span></code> button and get the new macro script opened in the <strong>Script editor</strong>.</p>
+<figure class="align-center" id="id78">
+<a class="reference internal image-reference" href="../../_images/script_editor.png"><img alt="../../_images/script_editor.png" src="../../_images/script_editor.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text">The script editor</span><a class="headerlink" href="#id78" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The original macro is now listed in the script editor, but it is not yet saved! Before doing anything else, then, we hit <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Save</span> <span class="pre">as...</span></code> and write it to a folder of our choice.</p>
+<p>The scripting editor is very powerful and, at the time of writing, supports ten different programming languages! For our course, we will focus on the original <strong>ImageJ Macro Language</strong> (<code class="docutils literal notranslate"><span class="pre">IJ1</span> <span class="pre">Macro</span></code>).</p>
+<figure class="align-center" id="id79">
+<a class="reference internal image-reference" href="../../_images/scripting_languages.png"><img alt="../../_images/scripting_languages.png" src="../../_images/scripting_languages.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">The scripting languages</span><a class="headerlink" href="#id79" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Once we are ready with our first macro we have a few options:</p>
+<ul class="simple">
+<li><p>Hit the <strong>Run</strong> button and the macro will be run on the <strong>currently active window</strong>. If we haven’t touched anything in the meanwhile, it will be the same image we used to create the macro. You can open another image, and then run the macro on that one.</p></li>
+<li><p>To add it to Fiji, select  <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Macros</span> <span class="pre">&gt;</span> <span class="pre">Install</span></code> and choose the file you just saved. A new entry will be added to the <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Macros</span></code> menu. Notice, however, that by installing it this way it will be gone when you restart Fiji. To make it permanent, copy the macro file into <code class="docutils literal notranslate"><span class="pre">Fiji.app/plugins/Macros</span></code>, optionally in a subfolder.</p></li>
+</ul>
+<section id="a-simple-example">
+<h4>A simple example<a class="headerlink" href="#a-simple-example" title="Link to this heading">#</a></h4>
+<p>Let’s open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/programming/macro1/Nuclei.tif</span></code>.</p>
+<figure class="align-center" id="id80">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei.png"><img alt="../../_images/macro_nuclei.png" src="../../_images/macro_nuclei.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 80 </span><span class="caption-text">The ‘Nuclei.tif’ image</span><a class="headerlink" href="#id80" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Then, we start recording our macro: <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Macros</span> <span class="pre">&gt;</span> <span class="pre">Record...</span></code>.</p>
+<section id="apply-threshold">
+<h5>Apply threshold<a class="headerlink" href="#apply-threshold" title="Link to this heading">#</a></h5>
+<p>Launch the Threshold tool via <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Threshold</span></code>. Pick the <em>Li</em> algorithm, since it works robustly with images with a broader range of intensities, check the <code class="docutils literal notranslate"><span class="pre">Dark</span> <span class="pre">background</span></code> option, and hit the <code class="docutils literal notranslate"><span class="pre">Apply</span></code> button. The Recorder window should look more or less like this:</p>
+<figure class="align-center" id="id81">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_threshold.png"><img alt="../../_images/macro_nuclei_threshold.png" src="../../_images/macro_nuclei_threshold.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 81 </span><span class="caption-text">The thresholding steps</span><a class="headerlink" href="#id81" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="apply-watershed">
+<h5>Apply watershed<a class="headerlink" href="#apply-watershed" title="Link to this heading">#</a></h5>
+<p>Some of the nuclei are fused into individual objects. To separate them, we run <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Binary</span> <span class="pre">&gt;</span> <span class="pre">Watershed</span></code>. This will add the <code class="docutils literal notranslate"><span class="pre">run(&quot;Watershed&quot;);</span></code> command to the Recorder:</p>
+<figure class="align-center" id="id82">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_watershed.png"><img alt="../../_images/macro_nuclei_watershed.png" src="../../_images/macro_nuclei_watershed.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 82 </span><span class="caption-text">The watershed command is added</span><a class="headerlink" href="#id82" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="perform-measurements">
+<h5>Perform measurements<a class="headerlink" href="#perform-measurements" title="Link to this heading">#</a></h5>
+<p>Launch the measurement selection tool from <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Set</span> <span class="pre">measurements...</span></code> and enable <code class="docutils literal notranslate"><span class="pre">Area</span></code> and <code class="docutils literal notranslate"><span class="pre">Display</span> <span class="pre">label</span></code> as follows:</p>
+<figure class="align-center" id="id83">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_measurements.png"><img alt="../../_images/macro_nuclei_measurements.png" src="../../_images/macro_nuclei_measurements.png" style="height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 83 </span><span class="caption-text">Set measurements</span><a class="headerlink" href="#id83" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now launch <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Particles...</span></code>  and configure it as in the figure below:</p>
+<figure class="align-center" id="id84">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_analyze_particles.png"><img alt="../../_images/macro_nuclei_analyze_particles.png" src="../../_images/macro_nuclei_analyze_particles.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 84 </span><span class="caption-text">Analyze particles</span><a class="headerlink" href="#id84" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>At this stage, the Recorder window should look like this:</p>
+<figure class="align-center" id="id85">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_final_macro.png"><img alt="../../_images/macro_nuclei_final_macro.png" src="../../_images/macro_nuclei_final_macro.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 85 </span><span class="caption-text">Updated Recorder window</span><a class="headerlink" href="#id85" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If you have any calls to <code class="docutils literal notranslate"><span class="pre">selectWindow()</span></code>, please remove them.</p>
+</section>
+<section id="save-the-macro-and-re-run-it">
+<h5>Save the macro and re-run it<a class="headerlink" href="#save-the-macro-and-re-run-it" title="Link to this heading">#</a></h5>
+<p>Now give a name to the macro (such as <code class="docutils literal notranslate"><span class="pre">Cell_Count.ijm</span></code>) and hit <code class="docutils literal notranslate"><span class="pre">Create</span></code> to open it in the Script Editor. Save it to a place of your liking.</p>
+<figure class="align-center" id="id86">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_final_script.png"><img alt="../../_images/macro_nuclei_final_script.png" src="../../_images/macro_nuclei_final_script.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 86 </span><span class="caption-text">Updated Recorder window</span><a class="headerlink" href="#id86" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>You are now ready to run the macro. Make sure the <code class="docutils literal notranslate"><span class="pre">Nuclei-1</span></code> image is the one selected and hit <code class="docutils literal notranslate"><span class="pre">Run</span></code>. You should get a <code class="docutils literal notranslate"><span class="pre">Summary</span></code> table like this:</p>
+<figure class="align-center" id="id87">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_measurements_summary.png"><img alt="../../_images/macro_nuclei_measurements_summary.png" src="../../_images/macro_nuclei_measurements_summary.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 87 </span><span class="caption-text">Summary of the measurements on <code class="docutils literal notranslate"><span class="pre">Nuclei-1</span></code></span><a class="headerlink" href="#id87" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now open the image <code class="docutils literal notranslate"><span class="pre">data/fiji/programming/macro1/Nuclei</span> <span class="pre">02.tif</span></code> and <code class="docutils literal notranslate"><span class="pre">Run</span></code> the macro again. You should get an additional entry in the Results table:</p>
+<figure class="align-center" id="id88">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_measurements_summary_2.png"><img alt="../../_images/macro_nuclei_measurements_summary_2.png" src="../../_images/macro_nuclei_measurements_summary_2.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 88 </span><span class="caption-text">Summary after running the macro again</span><a class="headerlink" href="#id88" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="a-more-complex-example-with-some-coding">
+<h4>A more complex example with some coding<a class="headerlink" href="#a-more-complex-example-with-some-coding" title="Link to this heading">#</a></h4>
+<p>Often, one can record a macro with a series of operations performed on one image, and then apply that same series of operations on another image and everything will work as expected. In some cases, however, the steps that are performed on the images might need to be somewhat changed or adapted and cannot be applied unmodified on different images.</p>
+<p>The ImageJ macro language allows us to introduce some intelligence in our code to cope with these situations.</p>
+<p>To keep track of pieces of information or values that could be different in different runs of a macro, we need to use <strong>variables</strong>. A variable is a named tag for a value that can change (it’s supposed to be variable, after all) across runs of a macro or even within the same run.</p>
+<p>Let’s open the <strong>Script Editor</strong> via <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">New</span> <span class="pre">&gt;</span> <span class="pre">Macro</span></code> or <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">New</span> <span class="pre">&gt;</span> <span class="pre">Script</span></code> (in this case, make sure to set the <code class="docutils literal notranslate"><span class="pre">Language</span></code> to <code class="docutils literal notranslate"><span class="pre">IJ1</span> <span class="pre">Macro</span></code>).</p>
+<p>We will replicate the example from the <strong>Fiji Training Notes</strong> to merge three images into an RGB image.</p>
+<p>First, we will write some <strong>comment</strong> at the top of the file to document what the macro is supposed to do. We write comments by prepending them with a double slash: <code class="docutils literal notranslate"><span class="pre">//</span></code>. This informs the macro interpreter that this is not code, and should not be executed. It is there for us, to remember what the code is going to do.</p>
+<figure class="align-center" id="id89">
+<a class="reference internal image-reference" href="../../_images/macro2_comments.png"><img alt="../../_images/macro2_comments.png" src="../../_images/macro2_comments.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 89 </span><span class="caption-text">Code comments</span><a class="headerlink" href="#id89" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Notice that the interpreter paints the comments green to easily distinguish them from the rest of the code.</p>
+<section id="prompt-the-user-to-pick-an-image">
+<h5>Prompt the user to pick an image<a class="headerlink" href="#prompt-the-user-to-pick-an-image" title="Link to this heading">#</a></h5>
+<p>In contrast to the previous macro, this time we need additional information to successfully process the sequence of operations. We need to know which (open) images to assign to the <code class="docutils literal notranslate"><span class="pre">DAPI</span></code>, the <code class="docutils literal notranslate"><span class="pre">FITC</span></code> and <code class="docutils literal notranslate"><span class="pre">DIC</span></code> channels of our RGB image.</p>
+<p>As our first operation, we will ask the user to pick the DAPI image (<em>i.e.</em>, to click on it, so that it becomes the active image).</p>
+<figure class="align-center" id="id90">
+<a class="reference internal image-reference" href="../../_images/macro2_select_image.png"><img alt="../../_images/macro2_select_image.png" src="../../_images/macro2_select_image.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 90 </span><span class="caption-text">Prompt the user</span><a class="headerlink" href="#id90" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Notice that the interpreter painted <code class="docutils literal notranslate"><span class="pre">waitForUser</span></code> in yellow and <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">DAPI</span> <span class="pre">image</span></code> in purple. Yellow indicates Fiji commands recognized by the interpreter; purple is used for <strong>strings</strong> of text. Strings usually convey information for the user of the program: in this case it explains what to do.</p>
+<figure class="align-center" id="id91">
+<a class="reference internal image-reference" href="../../_images/macro2_select_image_dialog.png"><img alt="../../_images/macro2_select_image_dialog.png" src="../../_images/macro2_select_image_dialog.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 91 </span><span class="caption-text">The select image Dialog</span><a class="headerlink" href="#id91" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>How do we pass the information on which image should be assigned to the <code class="docutils literal notranslate"><span class="pre">DAPI</span></code> channel to the program? We need to store the window title into a <strong>variable</strong>.</p>
+<figure class="align-center" id="id92">
+<a class="reference internal image-reference" href="../../_images/macro2_get_image_title.png"><img alt="../../_images/macro2_get_image_title.png" src="../../_images/macro2_get_image_title.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 92 </span><span class="caption-text">Store the image title into a variable</span><a class="headerlink" href="#id92" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Notice that the variable is painted black.</p>
+<p>Now we can do the same for the other two images:</p>
+<figure class="align-center" id="id93">
+<a class="reference internal image-reference" href="../../_images/macro2_select_other_images.png"><img alt="../../_images/macro2_select_other_images.png" src="../../_images/macro2_select_other_images.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 93 </span><span class="caption-text">Picking the other two images</span><a class="headerlink" href="#id93" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Open the images  <code class="docutils literal notranslate"><span class="pre">DAPI.tif</span></code>, <code class="docutils literal notranslate"><span class="pre">DIC.tif</span></code> and <code class="docutils literal notranslate"><span class="pre">FITC.tif</span></code> from <code class="docutils literal notranslate"><span class="pre">data/fiji/programming/macro2</span></code> and then <code class="docutils literal notranslate"><span class="pre">Run</span></code> the macro.</p>
+<p>You should be able to select each of the three images, but then nothing will happen! We still haven’t added any action to perform on the images!</p>
+</section>
+<section id="merge-the-images">
+<h5>Merge the images<a class="headerlink" href="#merge-the-images" title="Link to this heading">#</a></h5>
+<p>To conclude our macro, we need to pass the three selected image names to the <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">Channels</span></code> command as <strong>input arguments</strong> as follows:</p>
+<figure class="align-center" id="id94">
+<a class="reference internal image-reference" href="../../_images/macro2_completed.png"><img alt="../../_images/macro2_completed.png" src="../../_images/macro2_completed.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 94 </span><span class="caption-text">Merging the channels</span><a class="headerlink" href="#id94" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <code class="docutils literal notranslate"><span class="pre">run()</span></code> function runs any of the command that are listed in the various Fiji menus. After the command name, in this case <code class="docutils literal notranslate"><span class="pre">&quot;Merge</span> <span class="pre">Channels...&quot;</span></code> (from the <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Color</span></code> menu), we must specify the list of parameters the command takes. When running those commands from the menus, a <strong>dialog</strong> will open for the interactive setting of the requested values. When running the command in a macro via the <code class="docutils literal notranslate"><span class="pre">run()</span></code> function, those same parameters  must be explicitly added to the call.</p>
+<p>How do we know which parameters are to be passed? The simplest way is to launch a command from the Fiji menus while recording a macro. The command will be added to the macro, and its parameters can then be adapted.</p>
+<p>For instance, recording <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Color</span> <span class="pre">&gt;</span> <span class="pre">Merge</span> <span class="pre">Channels...</span></code> and passing the following parameters:</p>
+<figure class="align-center" id="id95">
+<a class="reference internal image-reference" href="../../_images/macro2_merge_channels_dialog.png"><img alt="../../_images/macro2_merge_channels_dialog.png" src="../../_images/macro2_merge_channels_dialog.png" style="width: 150px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 95 </span><span class="caption-text">Recording Merge Channels…</span><a class="headerlink" href="#id95" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>adds this to the macro:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="s2">"Merge Channels..."</span><span class="p">,</span> <span class="s2">"c2=FITC.tif c3=DAPI.tif c4=DIC.tif ignore"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The argument is one long string: <code class="docutils literal notranslate"><span class="pre">&quot;c2=FITC.tif</span> <span class="pre">c3=DAPI.tif</span> <span class="pre">c4=DIC.tif</span> <span class="pre">ignore&quot;</span></code>. How can we build the same string in our macro when the file names are stored in variables? We need to build the string by <strong>concatenating</strong> string and variables.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">nameDAPI</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;FITC.tif&quot;</span></code>, the <strong>string concatenation</strong> (with the operator <code class="docutils literal notranslate"><span class="pre">+</span></code>) <code class="docutils literal notranslate"><span class="pre">&quot;c2=&quot;</span> <span class="pre">+</span> <span class="pre">nameFITC</span></code> results in the string <code class="docutils literal notranslate"><span class="pre">&quot;c2=FITC.tif&quot;</span></code>. The complete command then looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="s2">"Merge Channels..."</span><span class="p">,</span> <span class="s2">"c2="</span><span class="o">+</span><span class="n">nameFITC</span><span class="o">+</span><span class="s2">" c3="</span><span class="o">+</span><span class="n">nameDAPI</span><span class="o">+</span><span class="s2">" c4="</span><span class="o">+</span><span class="n">nameDIC</span><span class="o">+</span><span class="s2">" ignore"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This is <strong>almost</strong> the final version and it will work as long as the names of the images do not contain blank spaces. To be robust against this case, we enclose the image names within square brackets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="s2">"Merge Channels..."</span><span class="p">,</span> <span class="s2">"c2=["</span><span class="o">+</span><span class="n">nameFITC</span><span class="o">+</span><span class="s2">"] c3=["</span><span class="o">+</span><span class="n">nameDAPI</span><span class="o">+</span><span class="s2">"] c4=["</span><span class="o">+</span><span class="n">nameDIC</span><span class="o">+</span><span class="s2">"] ignore"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Try!</p>
+</section>
+</section>
+<section id="batch-processing">
+<h4>Batch processing<a class="headerlink" href="#batch-processing" title="Link to this heading">#</a></h4>
+<p>Batch processing allows to analyze many images without user intervention. Images are automatically loaded and processed from a user-specified directory and the results are stored in another folder.</p>
+<p>Let’s consider the <code class="docutils literal notranslate"><span class="pre">Cell_Count.ijm</span></code> macro we created earlier.</p>
+<figure class="align-center" id="id96">
+<a class="reference internal image-reference" href="../../_images/macro_nuclei_final_script.png"><img alt="../../_images/macro_nuclei_final_script.png" src="../../_images/macro_nuclei_final_script.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 96 </span><span class="caption-text">The original Cell_Count.ijm macro</span><a class="headerlink" href="#id96" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>How should we modify it so that we can run it in batch mode over a directory full of images?</p>
+<p>Let’s open the original <code class="docutils literal notranslate"><span class="pre">Cell_Count.ijm</span></code> macro and save it as <code class="docutils literal notranslate"><span class="pre">Cell_Count_Batch.ijm</span></code>.</p>
+<p>At the very top of the macro, we add code to ask the user to pick the source directory to process:</p>
+<figure class="align-center" id="id97">
+<a class="reference internal image-reference" href="../../_images/macro3_pick_directory.png"><img alt="../../_images/macro3_pick_directory.png" src="../../_images/macro3_pick_directory.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 97 </span><span class="caption-text">Pick the source directory</span><a class="headerlink" href="#id97" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Detailed instructions on how the <code class="docutils literal notranslate"><span class="pre">getDirectory()</span></code> function can be used are found in the macro functions help at <a class="reference external" href="https://imagej.nih.gov/ij/developer/macro/functions.html#G">https://imagej.nih.gov/ij/developer/macro/functions.html#G</a> (or by picking <code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">&gt;</span> <span class="pre">Macro</span> <span class="pre">Functions...</span></code> and changing to the letter <code class="docutils literal notranslate"><span class="pre">G</span></code>).</p>
+<p>Then we get all files in the directory and we sort them.</p>
+<figure class="align-center" id="id98">
+<a class="reference internal image-reference" href="../../_images/macro3_get_sorted_files.png"><img alt="../../_images/macro3_get_sorted_files.png" src="../../_images/macro3_get_sorted_files.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 98 </span><span class="caption-text">Get the sorted file list</span><a class="headerlink" href="#id98" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>After <strong>variables</strong>, we are now going to use another fundamental tool of the macro (and any other) programming language: <strong>control flow</strong>. In particular, we will look at the <strong>for loop</strong>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="n">statements</span><span class="w"> </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The for loop repeats a series of <strong>statements</strong> a certain number of times. The statements that belong to the for loop are contained between the two <strong>curly braces</strong> <code class="docutils literal notranslate"><span class="pre">{</span></code> and <code class="docutils literal notranslate"><span class="pre">}</span></code>. At each iteration of the loop, a <strong>counter</strong> is updated (in our example, the counter is the variable <code class="docutils literal notranslate"><span class="pre">i</span></code>). The counter is initialized to a certain value (here, at <code class="docutils literal notranslate"><span class="pre">i=0</span></code>) and is incremented at the end of each iteration (the strange notation <code class="docutils literal notranslate"><span class="pre">i++</span></code> means ‘add one to <code class="docutils literal notranslate"><span class="pre">i</span></code>’) until it reaches a certain stopping value (in our case 9, since the loop can only run as long as <code class="docutils literal notranslate"><span class="pre">i</span></code> is <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">10</span></code>).</p>
+<p>It is common to see for loops with counters initialized at 0, since many data structures (such as lists or array) have an internal counter that starts at 0. To access the first element in a list, indeed, one uses the index 0 (and not 1!).</p>
+<p>To process all files in the list, we use a for loop that iterates from 0 to the length of the file list minus 1 (since we start from zero!):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">list</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="n">statements</span><span class="w"> </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each entry in the list corresponds to a file name from the picked directory. We now want to open each file in Fiji. For this we can use the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function, that takes the full path of the file as an argument. In each iteration of the loop, we must then build the full path from the <code class="docutils literal notranslate"><span class="pre">dir</span></code> variable and the current list entry, like this:</p>
+<figure class="align-center" id="id99">
+<a class="reference internal image-reference" href="../../_images/macro3_loop_over_files.png"><img alt="../../_images/macro3_loop_over_files.png" src="../../_images/macro3_loop_over_files.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 99 </span><span class="caption-text">Loop over files and open them</span><a class="headerlink" href="#id99" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If you run this macro on a directory full of images, you will open them all! Still, nothing will be done to those images. We need to move the original code that we wrote to process just on image into the for loop, so that the operations will be run on all images. We conclude the for loop by adding a <code class="docutils literal notranslate"><span class="pre">run(&quot;Close</span> <span class="pre">All&quot;);</span></code> call to make sure that all windows opened within one iteration of the loop are closed before the next iteration is started.</p>
+<figure class="align-center" id="id100">
+<a class="reference internal image-reference" href="../../_images/macro3_complete.png"><img alt="../../_images/macro3_complete.png" src="../../_images/macro3_complete.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 100 </span><span class="caption-text">Completed macro</span><a class="headerlink" href="#id100" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Run the macro and pick the folder <code class="docutils literal notranslate"><span class="pre">data/fiji/programming/macro3</span></code>. You should get the following output:</p>
+<figure class="align-center" id="id101">
+<a class="reference internal image-reference" href="../../_images/macro3_result.png"><img alt="../../_images/macro3_result.png" src="../../_images/macro3_result.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 101 </span><span class="caption-text">Output of the cell count batch macro</span><a class="headerlink" href="#id101" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/fiji"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../python_basics_ex.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Python Basics: Exercises</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fiji practical</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-fiji">About Fiji</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgments">Acknowledgments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-user-interface">The user interface</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menu">Menu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolbar">Toolbar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-commands">Finding commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-functionality">Basic functionality</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-files">Opening files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-files">Saving files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-images">Navigating images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-calibration">Image calibration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-of-interest-rois">Regions of interest (ROIs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roi-manager">ROI Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">Data types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#look-up-tables-luts">Look-up tables (LUTs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-histogram">Image histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusting-brightness-and-contrast">Adjusting brightness and contrast</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-stretch">Histogram stretch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-equalization">Histogram equalization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filters">Filters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-filters">Spatial filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-filters">Linear filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#average-filter">Average filter</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-filter">Gaussian filter</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#laplacian-filter">Laplacian filter</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#laplacian-of-gaussian-filter">Laplacian of Gaussian filter</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-filters">Non-linear filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#order-filters">Order filters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-filters">Frequency filters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-subtraction">Background subtraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation">Segmentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-threshold-based-segmentation">Simple threshold-based segmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing-for-segmentation">Pre-processing for segmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-of-segmentation-results">Post-processing of segmentation results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-based-segmentation">Machine-learning based segmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-maxima-detection">Local maxima detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphology">Morphology</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dilation">Dilation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hole-filling">Hole filling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erosion">Erosion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurements">Measurements</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-from-manual-rois">Time series analysis from manual ROIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-from-automatic-rois">Time series analysis from automatic ROIs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-arithmetics">Image arithmetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-fiji">Programming Fiji</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-programming">Macro programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-threshold">Apply threshold</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-watershed">Apply watershed</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-measurements">Perform measurements</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-macro-and-re-run-it">Save the macro and re-run it</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complex-example-with-some-coding">A more complex example with some coding</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-the-user-to-pick-an-image">Prompt the user to pick an image</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-the-images">Merge the images</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-processing">Batch processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marvin Albert and Andreas Cuny. Large parts of the content were adapted with permission from teaching material developed by Aaron Ponti.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026 ETH Zurich.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
