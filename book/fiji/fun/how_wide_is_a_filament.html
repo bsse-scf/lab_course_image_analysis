@@ -409,11 +409,11 @@
 <p><strong>~15 min.</strong> Measure a filament profile and consider the resolution limit.</p>
 <section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">#</a></h2>
-<p>Open <code class="docutils literal notranslate"><span class="pre">data/misc/actin.tif</span></code>: actin filaments, 200×200 pixels.</p>
-<p>It will look almost black when it opens: half the pixels have a value of 1 or
-less, and only about 5% are bright. Press Ctrl/Cmd+Shift+C and click <strong>Auto</strong> to
-see anything. That is a display change only: the values you measure are
-unaffected.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">data/misc/microtubules.tif</span></code>: microtubules in a cultured cell, labelled
+with a fluorescent antibody against tubulin. The image is calibrated: check
+<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Properties</span></code> (Ctrl/Cmd+Shift+P) for the pixel size.</p>
+<p>The left half of the image has isolated filaments on a dark background. Use
+those. On the right they overlap, which makes a clean profile hard to get.</p>
 </section>
 <section id="the-task">
 <h2>The task<a class="headerlink" href="#the-task" title="Link to this heading">#</a></h2>
@@ -423,7 +423,7 @@ perpendicular to it. Keep it short.</p></li>
 <li><p>Press Ctrl/Cmd+K (<code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Plot</span> <span class="pre">Profile</span></code>). You get a plot of intensity along
 your line, with a peak where it crossed the filament.</p></li>
 <li><p><strong>How wide is that peak?</strong> Click <strong>List</strong> in the plot window to see the
-numbers.</p></li>
+numbers. Because the image is calibrated, the distance column is in nm.</p></li>
 </ol>
 <p>A width depends on where you place the boundaries of the peak.</p>
 <ol class="arabic simple" start="4">
@@ -437,7 +437,8 @@ numbers.</p></li>
 </li>
 <li><p><strong>How much do they differ?</strong> Which would you put in a paper?</p></li>
 <li><p>Measure the same filament again with a slightly different line: a bit more
-angled, or a bit further along. <strong>How reproducible is your answer?</strong></p></li>
+angled, or a bit further along. Then measure a <em>different</em> filament. <strong>How
+reproducible is your answer?</strong> Do all the filaments have the same width?</p></li>
 </ol>
 </section>
 <section id="the-catch">
@@ -446,18 +447,18 @@ angled, or a bit further along. <strong>How reproducible is your answer?</strong
 <li><p>Draw a line across the <em>background</em>: no filament. <strong>Is the profile flat?</strong>
 Whatever wobble you see there is the noise floor, and it sets a limit on how
 precisely any of the above can be measured.</p></li>
-<li><p>Finally, consider the resolution limit. This image is uncalibrated, so your answer is
-in pixels. Suppose a pixel is 100 nm, and your filament measures 4 pixels
-FWHM: 400 nm. <strong>An actin filament is about 7 nm across.</strong> So what did you
-actually measure?</p></li>
+<li><p>Finally, consider the resolution limit. Your FWHM is probably around 400 nm.
+<strong>A microtubule is 25 nm across.</strong> So what did you actually measure?</p></li>
 </ol>
 <div class="dropdown admonition">
 <p class="admonition-title">What you measured</p>
 <p>The <strong>point spread function</strong> of the microscope, near enough. Anything smaller
 than roughly half the wavelength of light, about 200-250 nm for visible light,
 is imaged as a blur of that size regardless of how small it really is.</p>
-<p>A single actin filament is fifty times finer than that. What you measured was the
-optics, not the filament.</p>
+<p>A single microtubule is more than ten times finer than that. What you measured
+was the optics, not the filament. That is also why every filament in the image
+has the same width: they are all far below the resolution limit, so they all
+show the same blur.</p>
 <p>When the measured width is close to the resolution limit, it mainly reflects
 the microscope’s response rather than the filament’s physical width. State that
 limit when reporting the measurement.</p>

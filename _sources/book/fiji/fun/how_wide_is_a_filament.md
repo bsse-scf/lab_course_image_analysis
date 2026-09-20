@@ -4,12 +4,12 @@
 
 ## Preparation
 
-Open `data/misc/actin.tif`: actin filaments, 200×200 pixels.
+Open `data/misc/microtubules.tif`: microtubules in a cultured cell, labelled
+with a fluorescent antibody against tubulin. The image is calibrated: check
+`Image ▸ Properties` (Ctrl/Cmd+Shift+P) for the pixel size.
 
-It will look almost black when it opens: half the pixels have a value of 1 or
-less, and only about 5% are bright. Press Ctrl/Cmd+Shift+C and click **Auto** to
-see anything. That is a display change only: the values you measure are
-unaffected.
+The left half of the image has isolated filaments on a dark background. Use
+those. On the right they overlap, which makes a clean profile hard to get.
 
 ## The task
 
@@ -20,7 +20,7 @@ unaffected.
    your line, with a peak where it crossed the filament.
 
 3. **How wide is that peak?** Click **List** in the plot window to see the
-   numbers.
+   numbers. Because the image is calibrated, the distance column is in nm.
 
 A width depends on where you place the boundaries of the peak.
 
@@ -33,7 +33,8 @@ A width depends on where you place the boundaries of the peak.
 5. **How much do they differ?** Which would you put in a paper?
 
 6. Measure the same filament again with a slightly different line: a bit more
-   angled, or a bit further along. **How reproducible is your answer?**
+   angled, or a bit further along. Then measure a *different* filament. **How
+   reproducible is your answer?** Do all the filaments have the same width?
 
 ## The catch
 
@@ -41,19 +42,19 @@ A width depends on where you place the boundaries of the peak.
    Whatever wobble you see there is the noise floor, and it sets a limit on how
    precisely any of the above can be measured.
 
-8. Finally, consider the resolution limit. This image is uncalibrated, so your answer is
-   in pixels. Suppose a pixel is 100 nm, and your filament measures 4 pixels
-   FWHM: 400 nm. **An actin filament is about 7 nm across.** So what did you
-   actually measure?
+8. Finally, consider the resolution limit. Your FWHM is probably around 400 nm.
+   **A microtubule is 25 nm across.** So what did you actually measure?
 
 ```{admonition} What you measured
 :class: dropdown
 The **point spread function** of the microscope, near enough. Anything smaller
-than roughly half the wavelength of light, about 200-250 nm for visible light, 
+than roughly half the wavelength of light, about 200-250 nm for visible light,
 is imaged as a blur of that size regardless of how small it really is.
 
-A single actin filament is fifty times finer than that. What you measured was the
-optics, not the filament.
+A single microtubule is more than ten times finer than that. What you measured
+was the optics, not the filament. That is also why every filament in the image
+has the same width: they are all far below the resolution limit, so they all
+show the same blur.
 
 When the measured width is close to the resolution limit, it mainly reflects
 the microscope's response rather than the filament's physical width. State that

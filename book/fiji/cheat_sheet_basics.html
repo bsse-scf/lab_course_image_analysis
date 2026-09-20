@@ -367,9 +367,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -385,18 +383,6 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-and-looking">Opening and looking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#channels">Channels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation">Segmentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring">Measuring</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-unstuck">Getting unstuck</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -408,155 +394,12 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="cheat-sheet-fiji-basics">
 <h1>Cheat sheet: Fiji basics<a class="headerlink" href="#cheat-sheet-fiji-basics" title="Link to this heading">#</a></h1>
-<p>Keyboard shortcuts use Ctrl on Windows/Linux and Cmd on macOS.</p>
-<section id="opening-and-looking">
-<h2>Opening and looking<a class="headerlink" href="#opening-and-looking" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Open a file</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">▸</span> <span class="pre">Open…</span></code> (Ctrl+O), or drag onto the toolbar</p></td>
-</tr>
-<tr class="row-odd"><td><p>Duplicate before you edit</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Duplicate…</span></code> (Ctrl+Shift+D)</p></td>
-</tr>
-<tr class="row-even"><td><p>Image type and bit depth</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Type</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Pixel size / calibration</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Properties…</span></code> (Ctrl+Shift+P)</p></td>
-</tr>
-<tr class="row-even"><td><p>Zoom in / out</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">+</span></code> / <code class="docutils literal notranslate"><span class="pre">-</span></code>; scroll to pan</p></td>
-</tr>
-<tr class="row-odd"><td><p>Pixel value under cursor</p></td>
-<td><p>read the Fiji status bar</p></td>
-</tr>
-<tr class="row-even"><td><p>Brightness/contrast</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Adjust</span> <span class="pre">▸</span> <span class="pre">Brightness/Contrast…</span></code> (Ctrl+Shift+C)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Histogram</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Histogram</span></code> (Ctrl+H)</p></td>
-</tr>
-<tr class="row-even"><td><p>Line profile</p></td>
-<td><p>straight-line tool, then Ctrl+K</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Brightness/contrast changes <strong>how the image is displayed</strong>, not the pixel values.
-Applying a threshold, a filter or <code class="docutils literal notranslate"><span class="pre">Convert</span> <span class="pre">to</span> <span class="pre">Mask</span></code> changes the <strong>data</strong>. Always
-duplicate first.</p>
-</div>
-</section>
-<section id="channels">
-<h2>Channels<a class="headerlink" href="#channels" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Combine channels</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Color</span> <span class="pre">▸</span> <span class="pre">Merge</span> <span class="pre">Channels…</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Split a composite</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Color</span> <span class="pre">▸</span> <span class="pre">Split</span> <span class="pre">Channels</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Show/hide channels</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Color</span> <span class="pre">▸</span> <span class="pre">Channels</span> <span class="pre">Tool…</span></code> (Ctrl+Shift+Z)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Change the colour (LUT)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Lookup</span> <span class="pre">Tables</span> <span class="pre">▸</span> <span class="pre">…</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="segmentation">
-<h2>Segmentation<a class="headerlink" href="#segmentation" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Blur</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Filters</span> <span class="pre">▸</span> <span class="pre">Gaussian</span> <span class="pre">Blur…</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Median (salt &amp; pepper)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Filters</span> <span class="pre">▸</span> <span class="pre">Median…</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Subtract background</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Subtract</span> <span class="pre">Background…</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Threshold</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">▸</span> <span class="pre">Adjust</span> <span class="pre">▸</span> <span class="pre">Threshold…</span></code> (Ctrl+Shift+T)</p></td>
-</tr>
-<tr class="row-even"><td><p>Fill holes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Binary</span> <span class="pre">▸</span> <span class="pre">Fill</span> <span class="pre">Holes</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Remove specks</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">▸</span> <span class="pre">Binary</span> <span class="pre">▸</span> <span class="pre">Open</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="measuring">
-<h2>Measuring<a class="headerlink" href="#measuring" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Choose what to measure</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Set</span> <span class="pre">Measurements…</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Measure the selection</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Measure</span></code> (Ctrl+M)</p></td>
-</tr>
-<tr class="row-even"><td><p>Count and measure objects</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Analyze</span> <span class="pre">Particles…</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Manage regions of interest</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Tools</span> <span class="pre">▸</span> <span class="pre">ROI</span> <span class="pre">Manager…</span></code> (T to add)</p></td>
-</tr>
-<tr class="row-even"><td><p>Scale bar</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">▸</span> <span class="pre">Tools</span> <span class="pre">▸</span> <span class="pre">Scale</span> <span class="pre">Bar…</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles…</span></code> counts <strong>connected</strong> runs of foreground pixels, so two
-objects that touch are counted once. Separating them is a Python topic in this
-course: see <code class="docutils literal notranslate"><span class="pre">02_image_processing</span></code>.</p>
-<p><strong>Redirect to:</strong> in <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Measurements…</span></code> uses regions selected in one image to
-measure intensities in another image.</p>
-<p><strong>Summarize</strong> in <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Particles…</span></code> puts per-image counts in the <strong>Summary</strong>
-window. <strong>Results</strong> contains per-object measurements; check which table you
-need before saving.</p>
-</section>
-<section id="getting-unstuck">
-<h2>Getting unstuck<a class="headerlink" href="#getting-unstuck" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">▸</span> <span class="pre">Undo</span></code> (Ctrl+Z) undoes exactly one step, and not every step.
-Re-duplicating from the original is usually faster.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">▸</span> <span class="pre">Macros</span> <span class="pre">▸</span> <span class="pre">Record…</span></code> shows the command for whatever you just clicked:
-the quickest way to find out what something is called.</p></li>
-<li><p>The Fiji search bar (press <code class="docutils literal notranslate"><span class="pre">L</span></code>) finds any command by name.</p></li>
-</ul>
-</section>
+<p>An overview of the most important Fiji / ImageJ basics. For more details, see the <a class="reference external" href="https://imagej.net/software/fiji/">Fiji documentation</a>.</p>
+<figure class="align-default">
+<a class="reference external image-reference" href="../../_images/ImageJ_basic_cheatsheet.png"><img alt="../../_images/ImageJ_basic_cheatsheet.png" src="../../_images/ImageJ_basic_cheatsheet.png" style="width: 100%;" />
+</a>
+</figure>
+<p>Cheatsheet by Helena Jambor and Christopher Schmied.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -613,27 +456,6 @@ the quickest way to find out what something is called.</p></li>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item"><div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-and-looking">Opening and looking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#channels">Channels</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation">Segmentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring">Measuring</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-unstuck">Getting unstuck</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
