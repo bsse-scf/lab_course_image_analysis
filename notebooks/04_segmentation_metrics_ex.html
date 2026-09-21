@@ -417,6 +417,7 @@ cells that are really there.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tifffile</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="p">;</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DISPLAY"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">":1"</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">label2rgb</span>
@@ -545,10 +546,14 @@ claim the same cell.</p>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> do the pixel scores and the object scores rank the two methods
-the same way? If they disagree, which would you report, and why does the answer
-depend on what you are trying to measure?</p>
-<p><em>(edit this cell)</em></p>
+<p>Let’s analyze the table.</p>
+<ul class="simple">
+<li><p>Do the pixel scores and the object scores rank the two methods
+the same way?</p></li>
+<li><p>If they disagree, which would you report, and why does the answer
+depend on what you are trying to measure?</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
 </section>
 <section id="task-4-how-strict-should-the-matching-be">
 <h2>Task 4: how strict should the matching be?<a class="headerlink" href="#task-4-how-strict-should-the-matching-be" title="Link to this heading">#</a></h2>
@@ -572,9 +577,11 @@ collect the F1 values, and use <code class="docutils literal notranslate"><span 
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> every curve falls as the threshold rises. What would it mean if
-one method’s curve fell much faster than another’s?</p>
-<p><em>(edit this cell)</em></p>
+<p>The plot shows that every curve falls as the threshold rises.</p>
+<ul class="simple">
+<li><p>What would it mean if one method’s curve fell much faster than another’s?</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
 </section>
 </section>
 

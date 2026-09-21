@@ -397,7 +397,6 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-check-the-residuals">Task 5: check the residuals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-the-same-model-fitted-two-ways">Task 6: the same model, fitted two ways</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-a-model-that-fits">Task 7: a model that fits</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-finish-early">If you finish early</a></li>
 </ul>
             </nav>
         </div>
@@ -424,9 +423,11 @@ walkthrough.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">label2rgb</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.morphology</span><span class="w"> </span><span class="kn">import</span> <span class="n">remove_small_objects</span><span class="p">,</span> <span class="n">closing</span><span class="p">,</span> <span class="n">disk</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">binary_fill_holes</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">curve_fit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="p">;</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DISPLAY"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">":1"</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">course</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">iaf.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">show_labels</span>
@@ -463,9 +464,10 @@ then try an Otsu threshold on each and count the objects.</p>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> Otsu splits the histogram into two groups whatever it is given.
+<p>Otsu always splits the histogram into two groups whatever it is given.
 Look at the standard deviations. Why does it fail here, and what is different
-about phase-contrast images? <em>(edit this cell)</em></p>
+about phase-contrast images?</p>
+<p><em>(edit this cell to add your answer)</em></p>
 <details>
 <summary>If you are stuck</summary>
 <p>In fluorescence, objects are <em>bright</em> and background is <em>dark</em>, so one threshold
@@ -508,28 +510,35 @@ join a cell body to its halo, <code class="docutils literal notranslate"><span c
 <h2>Task 3: check the parameter is not doing the work<a class="headerlink" href="#task-3-check-the-parameter-is-not-doing-the-work" title="Link to this heading">#</a></h2>
 <p>Before trusting the counts, vary the <code class="docutils literal notranslate"><span class="pre">deviation</span></code> cut-off and confirm the answer
 does not depend on it. A result that swings with an arbitrary parameter is not a
-measurement.</p>
+measurement. Visualize the masks you found to identify the appropriate deviation parameters</p>
 <details>
 <summary>Hint</summary>
-<p>Loop over <code class="docutils literal notranslate"><span class="pre">deviation</span></code> in <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6)</span></code> and print the count for each frame.</p>
+<p>Loop over <code class="docutils literal notranslate"><span class="pre">deviation</span></code> in <code class="docutils literal notranslate"><span class="pre">(0.5,</span> <span class="pre">1,</span> <span class="pre">1.5,</span> <span class="pre">2,</span> <span class="pre">2.5,</span> <span class="pre">3,</span> <span class="pre">3.5)</span></code> and print the count for each frame. Additionally overlay the mask with the raw image of timepoint 4</p>
 </details><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
+<span class="n">deviations</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+<span class="n">lbl</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">img3_counts</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">]</span>
 
-<span class="k">for</span> <span class="n">deviation</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">deviation</span> <span class="ow">in</span> <span class="n">deviations</span><span class="p">:</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: count every frame at this cut-off</span>
     <span class="nb">print</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> how much do the counts move as the cut-off changes? Would you
-be comfortable reporting these numbers? <em>(edit this cell)</em></p>
+<p>At this point you should have a table summarizing the counts for all image frames and thresholds.</p>
+<ul class="simple">
+<li><p>How much do the counts move as the cut-off changes?</p></li>
+<li><p>Would you be comfortable reporting these numbers in a publication?</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
 </section>
 <section id="task-4-fit-the-growth-curve">
 <h2>Task 4: fit the growth curve<a class="headerlink" href="#task-4-fit-the-growth-curve" title="Link to this heading">#</a></h2>
-<p>Count every frame, and fit an exponential. The frames are <strong>30 minutes</strong> apart.</p>
+<p>Count every frame, and fit an exponential. From the microscopist who took the images, you know the image frames are <strong>30 minutes</strong> apart.</p>
 <details>
 <summary>Hint 1: the model</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">exponential</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -571,8 +580,17 @@ uncertainties from <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> are the residuals random, or is there structure? What does that
-tell you about the model? <em>(edit this cell)</em></p>
+<p>Try to interpret the plot.</p>
+<ul class="simple">
+<li><p>Are the residuals random, or is there structure?</p></li>
+<li><p>What does that tell you about the model?</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
+<p><strong>Answer:</strong></p>
+<ul class="simple">
+<li><p>Structure, not random: The residuals show a distinct pattern (four negative values, followed by two strong positive values, ending with a negative drop). They are not randomly distributed around zero.</p></li>
+<li><p>What it tells you: The model is misspecified and systematically under- or overestimating specific segments of your data. This indicates that your current model is failing to capture the true underlying trend, likely requiring a non-linear approach (such as adding a quadratic term) or a missing variable.</p></li>
+</ul>
 </section>
 <section id="task-6-the-same-model-fitted-two-ways">
 <h2>Task 6: the same model, fitted two ways<a class="headerlink" href="#task-6-the-same-model-fitted-two-ways" title="Link to this heading">#</a></h2>
@@ -597,15 +615,20 @@ returns the highest-order coefficient first.</p>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> the two doubling times differ by several minutes, from the same
-data and the same model. Which would you report?</p>
+<p>You found that the two doubling times differ by several minutes, from the same
+data and the same model.</p>
+<ul class="simple">
+<li><p>Which would you report?</p></li>
+</ul>
 <p>Look at the two panels before answering. On the linear scale, squared error is
 dominated by the last few points, because they are the largest, so that fit
 prioritises the end of the curve. On the log scale every point contributes
 equally in <em>relative</em> terms, so the early points matter as much as the late ones.</p>
-<p>Neither is wrong. They are answers to slightly different questions, and the
+<p><em>(edit this cell to add your answer)</em></p>
+<p><strong>Answer</strong>:
+Neither is wrong. They are answers to slightly different questions, and the
 disagreement is only large because the exponential model does not fit this data
-well in the first place. <em>(edit this cell)</em></p>
+well in the first place.</p>
 </section>
 <section id="task-7-a-model-that-fits">
 <h2>Task 7: a model that fits<a class="headerlink" href="#task-7-a-model-that-fits" title="Link to this heading">#</a></h2>
@@ -631,28 +654,21 @@ count, <code class="docutils literal notranslate"><span class="pre">n0</span></c
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> the logistic model fits better. Does that make it the right
-choice here? Consider that it has three parameters against the exponential’s two,
+<p>The logistic model fits better.</p>
+<ul class="simple">
+<li><p>Does that make it the right choice here? Consider that it has three parameters against the exponential’s two,
 and that the fitted carrying capacity is an extrapolation well beyond the last
-frame you actually observed. <em>(edit this cell)</em></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A more flexible model will almost always fit better. That is not, by itself, a
+frame you actually observed.</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
+<p><strong>Answer</strong>:
+A more flexible model will almost always fit better. That is not, by itself, a
 reason to prefer it. The questions worth asking are whether the extra parameter
 is biologically motivated, a carrying capacity is, and whether it is
 <em>constrained by data you actually have</em>. Here it is not: the cells are still
 growing in the last frame, so <code class="docutils literal notranslate"><span class="pre">K</span></code> is being inferred from curvature alone. Report
 it with that caveat, or not at all.</p>
-</div>
-</section>
-<section id="if-you-finish-early">
-<h2>If you finish early<a class="headerlink" href="#if-you-finish-early" title="Link to this heading">#</a></h2>
-<p>Your counts came from your own segmentation, and task 3 showed they shift with
-the <code class="docutils literal notranslate"><span class="pre">deviation</span></code> cut-off. Refit the exponential using counts from the extreme
-cut-offs and see how much the doubling time moves.</p>
-<p>That range is the honest uncertainty on your answer, and it is almost certainly
-larger than the <code class="docutils literal notranslate"><span class="pre">+/-</span></code> that <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code> reported, which only knows about scatter
-around the curve and nothing about how the numbers were produced.</p>
+<p>To evaluate this choice objectively, we should look at a quantitative metric like the Bayesian Information Criterion (BIC). BIC mathematically penalizes models for adding extra parameters (3 vs. 2) to prevent overfitting. If the logistic model yields a significantly lower BIC despite this penalty, it suggests the improvement in fit justifies the extra complexity. However, if the BIC values are close, the simpler exponential model remains the safer, more parsimonious choice due to the dangerous extrapolation of</p>
 </section>
 </section>
 
@@ -729,7 +745,6 @@ around the curve and nothing about how the numbers were produced.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-check-the-residuals">Task 5: check the residuals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-6-the-same-model-fitted-two-ways">Task 6: the same model, fitted two ways</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-7-a-model-that-fits">Task 7: a model that fits</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-finish-early">If you finish early</a></li>
 </ul>
   </nav></div>
 

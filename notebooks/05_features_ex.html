@@ -438,6 +438,7 @@ segmentation errors.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tifffile</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="p">;</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DISPLAY"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">":1"</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">regionprops_table</span>
@@ -461,8 +462,10 @@ segmentation errors.</p>
 <section id="task-1-rescue-the-visual-clue">
 <h2>Task 1: rescue the visual clue<a class="headerlink" href="#task-1-rescue-the-visual-clue" title="Link to this heading">#</a></h2>
 <p>Before measuring anything, look at one image from each group and its object labels.</p>
-<p><strong>Question:</strong> What makes the two groups look different? Describe the difference in
-terms of <strong>shape</strong>, not brightness.</p>
+<p>What makes the two groups look different?</p>
+<ul class="simple">
+<li><p>Describe the difference in terms of <strong>shape</strong>, not brightness.</p></li>
+</ul>
 <details>
 <summary>Hint</summary>
 <p>Display the first and second image in the folder and inspect the data.</p>
@@ -474,10 +477,12 @@ terms of <strong>shape</strong>, not brightness.</p>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> Which two morphological features could capture
-“curled” versus “round”? For each feature, predict which group should have the
-larger value.</p>
-<p><em>(edit this cell)</em></p>
+<p>After inspecting the images, which two morphological features could capture
+“curled” versus “round”?</p>
+<ul class="simple">
+<li><p>For each feature, predict which group should have the larger value.</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
 </section>
 <section id="task-2-turn-shapes-into-numbers">
 <h2>Task 2: turn shapes into numbers<a class="headerlink" href="#task-2-turn-shapes-into-numbers" title="Link to this heading">#</a></h2>
@@ -486,7 +491,7 @@ each object and turn the image into a table.</p>
 <p>Build one table with <strong>one row per worm</strong>. Keep the image (<code class="docutils literal notranslate"><span class="pre">well</span></code>) and the known
 group (<code class="docutils literal notranslate"><span class="pre">kind</span></code>) so that we can later ask whether the measurements actually separate
 the two groups.</p>
-<p>Use <strong>morphological features only</strong> — no GFP intensity.</p>
+<p>Use <strong>morphological features only</strong> and not any fluorescent channel intensity.</p>
 <details>
 <summary>Hint 1: useful measurements</summary>
 <p>Try <code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">perimeter</span></code>, <code class="docutils literal notranslate"><span class="pre">eccentricity</span></code>, <code class="docutils literal notranslate"><span class="pre">solidity</span></code>, <code class="docutils literal notranslate"><span class="pre">extent</span></code>,
@@ -539,10 +544,13 @@ learn how a morphological measurement can become a decision rule.</p>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> Which morphological feature gives the strongest
-split? Look at the <code class="docutils literal notranslate"><span class="pre">solidity</span></code> distributions below. Why can a good shape feature
-still fail to classify every individual object?</p>
-<p><em>(edit this cell)</em></p>
+<p>After inspecting the histogram, which morphological feature gives the strongest
+split?</p>
+<ul class="simple">
+<li><p>Look at the <code class="docutils literal notranslate"><span class="pre">solidity</span></code> distributions. Why can a good shape feature
+still fail to classify every individual object?</p></li>
+</ul>
+<p><em>(edit this cell to add your answer)</em></p>
 </section>
 <section id="task-4-split-the-data-using-each-feature-into-subfolders">
 <h2>Task 4: Split the data using each feature into subfolders<a class="headerlink" href="#task-4-split-the-data-using-each-feature-into-subfolders" title="Link to this heading">#</a></h2>
@@ -557,16 +565,19 @@ still fail to classify every individual object?</p>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> Each feature classification gave different results. Which one is correct? How could you check it quickly?</p>
+<p>The feature classification likely gave different results per class and feature.</p>
+<ul class="simple">
+<li><p>Which one is correct? How could you check this quickly?</p></li>
+</ul>
 <details>
 <summary>Hint</summary>
 <p>You learned how to use napari to display images:</p>
 <ul class="simple">
-<li><p>load group A as one stack</p></li>
-<li><p>load group B as another stack</p></li>
+<li><p>load all images you classified as <em>C.elegans</em> cells as one stack</p></li>
+<li><p>load all images you classified as CHO cells as another stack</p></li>
 </ul>
 </details>
-<p><em>(edit this cell)</em></p>
+<p><em>(edit this cell to add your answer)</em></p>
 </section>
 </section>
 
