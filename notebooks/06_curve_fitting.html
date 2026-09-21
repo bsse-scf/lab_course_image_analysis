@@ -393,7 +393,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-measurement-with-a-known-answer">1. A measurement with a known answer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-best-fit-mean">2. What does ‘best fit’ mean?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seeing-the-landscape">3. Seeing the landscape</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#doing-it-properly">4. Doing it properly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-curve-fitting-using-an-optimiser">4. Iterative curve fitting using an optimiser</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-parameters-to-something-meaningful">5. From parameters to something meaningful</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-model-right">6. Is the model right?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
@@ -560,8 +560,8 @@ several local minima, and an optimiser started in the wrong place will settle in
 the wrong one, which is why <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code> accepts an initial guess, and why a
 sensible one matters.</p>
 </section>
-<section id="doing-it-properly">
-<h2>4. Doing it properly<a class="headerlink" href="#doing-it-properly" title="Link to this heading">#</a></h2>
+<section id="iterative-curve-fitting-using-an-optimiser">
+<h2>4. Iterative curve fitting using an optimiser<a class="headerlink" href="#iterative-curve-fitting-using-an-optimiser" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">curve_fit</span>
@@ -805,7 +805,7 @@ the model turns out not to fit as neatly as this one did.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-measurement-with-a-known-answer">1. A measurement with a known answer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-best-fit-mean">2. What does ‘best fit’ mean?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seeing-the-landscape">3. Seeing the landscape</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#doing-it-properly">4. Doing it properly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-curve-fitting-using-an-optimiser">4. Iterative curve fitting using an optimiser</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-parameters-to-something-meaningful">5. From parameters to something meaningful</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-model-right">6. Is the model right?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>

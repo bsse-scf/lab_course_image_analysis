@@ -468,13 +468,16 @@ number is not enough.</p>
 <span class="n">prediction</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">35</span><span class="p">:</span><span class="mi">75</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">show_labels</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Ground truth"</span><span class="p">)</span>
-<span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Prediction"</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">'green'</span><span class="p">]),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Ground truth"</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">'blue'</span><span class="p">]),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Prediction"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b1be8103279ea516fe9990a230ad46adef84ed65914897fe70141c42c2f344c8.png" src="../_images/b1be8103279ea516fe9990a230ad46adef84ed65914897fe70141c42c2f344c8.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x12c732490&gt;
+</pre></div>
+</div>
+<img alt="../_images/d567dea8a60cd0d57e3ad4af3a16667f7a89f5388232931d0a71edbce534c252.png" src="../_images/d567dea8a60cd0d57e3ad4af3a16667f7a89f5388232931d0a71edbce534c252.png" />
 </div>
 </div>
 </section>
@@ -486,6 +489,7 @@ two quantities: the pixels they <strong>share</strong>, and the pixels either on
 \[\text{IoU} = \frac{|A \cap B|}{|A \cup B|}
 \qquad
 \text{Dice} = \frac{2|A \cap B|}{|A| + |B|}\]</div>
+<p><img alt="image.png" src="notebooks/attachment:image.png" /></p>
 <p>IoU is also called the <strong>Jaccard index</strong>: same formula, different name,
 depending on the field.</p>
 <p>They always agree on ordering (if one says a result is better, so does the
