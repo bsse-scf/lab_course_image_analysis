@@ -394,7 +394,7 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-gaussian-vs-median">3. Denoising: Gaussian vs median</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphology-cleaning-up-a-binary-image">4. Morphology: cleaning up a binary image</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watershed-a-second-route-from-semantic-to-instance">6. Watershed: a second route from semantic to instance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watershed-a-second-route-from-semantic-to-instance">5. Watershed: a second route from semantic to instance</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-separate-touching-objects-the-watershed-algorithm">How to separate touching objects? The watershed algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-the-touching-nuclei-with-watershed">Separating the touching nuclei with watershed</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-seeds-from-local-maxima">Finding seeds from local maxima</a></li>
@@ -674,7 +674,7 @@ the <em>shape</em> of a binary image. <strong>Important</strong> morphological o
 </div>
 </section>
 <section id="watershed-a-second-route-from-semantic-to-instance">
-<h2>6. Watershed: a second route from semantic to instance<a class="headerlink" href="#watershed-a-second-route-from-semantic-to-instance" title="Link to this heading">#</a></h2>
+<h2>5. Watershed: a second route from semantic to instance<a class="headerlink" href="#watershed-a-second-route-from-semantic-to-instance" title="Link to this heading">#</a></h2>
 <p>Let’s get back to the nuclei image. We have a semantic segmentation (nuclei vs background), but we want an instance segmentation (each nucleus separately). The watershed algorithm is a way to do that.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1046,7 +1046,7 @@ sigma = 3  -&gt;  2 seed(s)  -&gt;  2 object(s)
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-gaussian-vs-median">3. Denoising: Gaussian vs median</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphology-cleaning-up-a-binary-image">4. Morphology: cleaning up a binary image</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watershed-a-second-route-from-semantic-to-instance">6. Watershed: a second route from semantic to instance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watershed-a-second-route-from-semantic-to-instance">5. Watershed: a second route from semantic to instance</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-separate-touching-objects-the-watershed-algorithm">How to separate touching objects? The watershed algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-the-touching-nuclei-with-watershed">Separating the touching nuclei with watershed</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-seeds-from-local-maxima">Finding seeds from local maxima</a></li>

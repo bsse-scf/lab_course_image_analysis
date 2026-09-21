@@ -445,15 +445,16 @@ analysis stops being about images and becomes ordinary data analysis.</p>
 <span class="n">imshow</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Cell intensities (raw data, ch1=CD11b/APC)"</span><span class="p">)</span>
 <span class="n">imshow</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Nuceli intensities (raw data, ch5=DAPI)"</span><span class="p">)</span>
 <span class="n">show_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Nuceli GT labels"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"label image:"</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="s2">"|"</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s2">"objects"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label image: (1040, 1388) uint32 | 36 objects
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label image: (384, 512) uint16 | 65535 objects
 </pre></div>
 </div>
-<img alt="../_images/f293d7560d7ee36ba3b89e57cedfa7695971cfe59d5fc2da867590163c7a280c.png" src="../_images/f293d7560d7ee36ba3b89e57cedfa7695971cfe59d5fc2da867590163c7a280c.png" />
+<img alt="../_images/addab3e1d8c3c2d9c9217596d6f7ea4a0cec6ea5e7654cc3d4193bfbffc90ce7.png" src="../_images/addab3e1d8c3c2d9c9217596d6f7ea4a0cec6ea5e7654cc3d4193bfbffc90ce7.png" />
 </div>
 </div>
 <p>We are using the <em>annotated</em> labels (ground truth) here rather than our own segmentation, so

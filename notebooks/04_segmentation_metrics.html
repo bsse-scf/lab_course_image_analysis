@@ -391,8 +391,12 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-ground-truth">1. What is a ground truth?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-methods">3. Scoring the three methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intersection-over-union-iou">Intersection over Union (IoU)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dice">Dice</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-segementation-algorithms">3. Scoring the three segementation algorithms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">4. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-two-weka-rows-against-each-other">Read the two Weka rows against each other</a></li>
 </ul>
@@ -444,21 +448,7 @@ number is not enough.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">course</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA</span><span class="p">,</span> <span class="n">show</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">iaf.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">show_labels</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">iou</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Intersection over union of two masks (or label images)."""</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="n">union</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">union</span> <span class="k">if</span> <span class="n">union</span> <span class="k">else</span> <span class="mf">0.0</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">dice</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Dice coefficient of two masks."""</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total</span> <span class="k">if</span> <span class="n">total</span> <span class="k">else</span> <span class="mf">0.0</span>
-    
-
+   
 <span class="c1"># A small synthetic ground-truth object</span>
 <span class="n">gt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
 <span class="n">gt</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
@@ -474,7 +464,7 @@ number is not enough.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x12c732490&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2061aae4c90&gt;
 </pre></div>
 </div>
 <img alt="../_images/d567dea8a60cd0d57e3ad4af3a16667f7a89f5388232931d0a71edbce534c252.png" src="../_images/d567dea8a60cd0d57e3ad4af3a16667f7a89f5388232931d0a71edbce534c252.png" />
@@ -483,15 +473,27 @@ number is not enough.</p>
 </section>
 <section id="the-two-pixel-scores">
 <h2>2. The two pixel scores<a class="headerlink" href="#the-two-pixel-scores" title="Link to this heading">#</a></h2>
-<p>Both compare a predicted mask with a reference, and both are built from the same
-two quantities: the pixels they <strong>share</strong>, and the pixels either one covers.</p>
+<p>In computer vision two of the statistical metrics used to measure the overlap between a predicted region and the ground-truth region are:</p>
+<section id="intersection-over-union-iou">
+<h3>Intersection over Union (IoU)<a class="headerlink" href="#intersection-over-union-iou" title="Link to this heading">#</a></h3>
+<p>Strict penalty for mismatches; scales linearly with error. Commonly used for object detection and semantic segmentation</p>
 <div class="math notranslate nohighlight">
-\[\text{IoU} = \frac{|A \cap B|}{|A \cup B|}
-\qquad
-\text{Dice} = \frac{2|A \cap B|}{|A| + |B|}\]</div>
+\[\text{IoU} = \frac{|A \cap B|}{|A \cup B|} \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\cap\)</span> (intersection): The pixels that are present in both A <strong>and</strong> B.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\cup\)</span> (union): The pixels that are present in A <strong>or</strong> B <strong>or</strong> in both.</p></li>
+</ul>
 <p><img alt="image.png" src="notebooks/attachment:image.png" /></p>
 <p>IoU is also called the <strong>Jaccard index</strong>: same formula, different name,
 depending on the field.</p>
+</section>
+<section id="dice">
+<h3>Dice<a class="headerlink" href="#dice" title="Link to this heading">#</a></h3>
+<p>Equivalates to the F1-score; weights the intersection more heavily, yielding higher scores for partial matches. Commonly used in medical image segmentation and fine pixel-level mask evaluations.</p>
+<div class="math notranslate nohighlight">
+\[ \text{Dice} = \frac{2|A \cap B|}{|A| + |B|}\]</div>
+<p>Both compare a predicted mask with a reference, and both are built from the same
+two quantities: the pixels they <strong>share</strong>, and the pixels either one covers.</p>
 <p>They always agree on ordering (if one says a result is better, so does the
 other), but Dice is always the larger number for an imperfect overlap. Quoting
 Dice therefore flatters a result slightly, which is worth knowing when reading
@@ -499,41 +501,88 @@ someone else’s paper.</p>
 <p>Now lets implement the two metrics and test it on <em>in silico</em> data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A quick sanity check on shapes we can reason about by hand.</span>
-<span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="nb">bool</span><span class="p">)</span>
-<span class="n">square</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>          <span class="c1"># 40 x 40 = 1600 px</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">iou</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Intersection over union of two masks (or label images)."""</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">union</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">union</span> <span class="k">if</span> <span class="n">union</span> <span class="k">else</span> <span class="mf">0.0</span>
 
-<span class="n">shifted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="nb">bool</span><span class="p">)</span>
-<span class="n">shifted</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>         <span class="c1"># same size, moved down by 20</span>
-<span class="n">empty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="nb">bool</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">show_labels</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Square"</span><span class="p">)</span>
-<span class="n">show_labels</span><span class="p">(</span><span class="n">shifted</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Square shifted by 20 pixel"</span><span class="p">)</span>
-<span class="n">show_labels</span><span class="p">(</span><span class="n">empty</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Empty"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dice</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Dice coefficient of two masks."""</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total</span> <span class="k">if</span> <span class="n">total</span> <span class="k">else</span> <span class="mf">0.0</span>
+    
+<span class="c1"># A quick sanity check on shapes we can reason about by hand.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_single_rgb</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Creates RGB image for a single mask (red or green)"""</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s1">'red'</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s1">'green'</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span>
+    <span class="k">return</span> <span class="n">rgb</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"identical      : IoU </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">square</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Dice </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">square</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"half-overlapping: IoU </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">shifted</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Dice </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">shifted</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no overlap     : IoU </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">empty</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Dice </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="n">empty</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_composite_rgb</span><span class="p">(</span><span class="n">mask_a</span><span class="p">,</span> <span class="n">mask_b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Combines A (red) and B (green). Overlapp turns yellow."""</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">mask_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mask_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask_a</span>  
+    <span class="n">rgb</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask_b</span>
+    <span class="k">return</span> <span class="n">rgb</span>
+
+<span class="n">grid_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">sq_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">sq_A</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">70</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sq_B1</span> <span class="o">=</span> <span class="n">sq_A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sq_B2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">sq_B2</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">70</span><span class="p">,</span> <span class="mi">50</span><span class="p">:</span><span class="mi">90</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sq_B3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">sq_B3</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">70</span><span class="p">,</span> <span class="mi">85</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>  
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span> <span class="s1">'red'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Square A"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">sq_B1</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Square B (Identical)"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_composite_rgb</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span> <span class="n">sq_B1</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Composite</span><span class="se">\n</span><span class="s2">IoU: </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span><span class="w"> </span><span class="n">sq_B1</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Dice: </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span><span class="w"> </span><span class="n">sq_B1</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span> <span class="s1">'red'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Square A"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">sq_B2</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Square B (Shifted 20px)"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_composite_rgb</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span> <span class="n">sq_B2</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Composite</span><span class="se">\n</span><span class="s2">IoU: </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span><span class="w"> </span><span class="n">sq_B2</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Dice: </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span><span class="w"> </span><span class="n">sq_B2</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span> <span class="s1">'red'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Square A"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">sq_B3</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Square B (No Overlap)"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_composite_rgb</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span> <span class="n">sq_B3</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Composite</span><span class="se">\n</span><span class="s2">IoU: </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span><span class="w"> </span><span class="n">sq_B3</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Dice: </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">sq_A</span><span class="p">,</span><span class="w"> </span><span class="n">sq_B3</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axs</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>identical      : IoU 1.000  Dice 1.000
-half-overlapping: IoU 0.333  Dice 0.500
-no overlap     : IoU 0.000  Dice 0.000
-</pre></div>
-</div>
-<img alt="../_images/8a0ca63e382467a7e15326a2a4e92159d662c3751bf573986b848a69a4bf834b.png" src="../_images/8a0ca63e382467a7e15326a2a4e92159d662c3751bf573986b848a69a4bf834b.png" />
+<img alt="../_images/28613e8085cb9172da7e906fcfe14263e22628d3fc71a208b087013d7c5e115b.png" src="../_images/28613e8085cb9172da7e906fcfe14263e22628d3fc71a208b087013d7c5e115b.png" />
 </div>
 </div>
 <p>The half-overlapping case is the one to remember: the two squares share exactly
 half their area, and IoU says 0.33 while Dice says 0.50. Same picture, two
 different numbers, so the one used should always be stated.</p>
 </section>
-<section id="scoring-the-three-methods">
-<h2>3. Scoring the three methods<a class="headerlink" href="#scoring-the-three-methods" title="Link to this heading">#</a></h2>
+</section>
+<section id="scoring-the-three-segementation-algorithms">
+<h2>3. Scoring the three segementation algorithms<a class="headerlink" href="#scoring-the-three-segementation-algorithms" title="Link to this heading">#</a></h2>
 <p>To test how “good” our segmentation algorithms and efforts were so far we can compare it to a ground truth using the metrics we just learned.</p>
+<p>We will compare, <strong>simple thresholding</strong>, <strong>WEKA</strong>, <strong>WEKA with watershed</strong> and <strong>cellpose</strong> segmentation results to a ground truth.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_otsu</span><span class="p">,</span> <span class="n">gaussian</span>
@@ -579,7 +628,7 @@ different numbers, so the one used should always be stated.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'IoU'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Dice'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'objects'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2">   (truth: </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'IoU'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Dice'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'objects'</span><span class="si">:</span><span class="s2">&gt;9s</span><span class="si">}</span><span class="s2">   (truth: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">truth</span><span class="p">))</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">44</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">9d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -587,12 +636,12 @@ different numbers, so the one used should always be stated.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method               IoU    Dice   objects   (truth: 38)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method               IoU    Dice   objects   (truth: 34)
 --------------------------------------------
-threshold          0.509   0.675        89
-Weka               0.878   0.935       307
-Weka+watershed     0.880   0.936       162
-Cellpose           0.909   0.953        52
+threshold          0.506   0.672        39
+Weka               0.905   0.950        45
+Weka+watershed     0.904   0.950        66
+Cellpose           0.915   0.955        42
 </pre></div>
 </div>
 </div>
@@ -600,9 +649,23 @@ Cellpose           0.909   0.953        52
 <p>By pixel score the ranking is clear: Cellpose, then Weka, then the threshold.</p>
 <p>Now look at the object counts beside those scores. <strong>Weka scores a Dice of 0.94
 , within a whisker of Cellpose, while producing 307 objects for
-38 cells.</strong> For an experiment that counts cells, those two methods are
-not remotely comparable. The pixel score cannot see the difference, because
+38 actual cells.</strong> For an experiment that counts cells, those two methods are
+not remotely comparable. The <strong>pixel score</strong> cannot see the difference, because
 it never asks how the pixels are grouped.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">truth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  0,   7,  13,  20,  27,  34,  40,  47,  54,  61,  67,  74,  81,
+        88,  94, 101, 108, 115, 121, 128, 135, 141, 148, 155, 162, 182,
+       189, 195, 202, 209, 236, 243, 249, 255], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -621,7 +684,7 @@ it never asks how the pixels are grouped.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/37468a2ba2767ed2080898990e4a4f7a306aed6981151af071baa74da30239fe.png" src="../_images/37468a2ba2767ed2080898990e4a4f7a306aed6981151af071baa74da30239fe.png" />
+<img alt="../_images/bb95fdc6bf03ce356c78e48e78227a7b03442d8cc13021c63ac78ac06a68aa53.png" src="../_images/bb95fdc6bf03ce356c78e48e78227a7b03442d8cc13021c63ac78ac06a68aa53.png" />
 </div>
 </div>
 </section>
@@ -637,6 +700,15 @@ threshold: conventionally <strong>0.5</strong>.</p>
 <li><p><strong>false positive</strong>: a prediction matched to nothing (invented)</p></li>
 <li><p><strong>false negative</strong>: a reference object nothing matched (missed)</p></li>
 </ul>
+<ul class="simple">
+<li><p><strong>Precision</strong> (Exactness): The ratio of correctly predicted positive pixels to the total predicted positive pixels. It answers: <em>Of all pixels the model predicted as positive, how many were actually correct?</em>
+<span class="math notranslate nohighlight">\(Precision = \frac{TP}{TP + FP}\)</span></p></li>
+<li><p><strong>Recall</strong> (Sensitivity / Completeness): The ratio of correctly predicted positive pixels to all pixels in the actual ground truth. It answers: <em>Of all actual positive pixels, how many did the model find?</em>
+<span class="math notranslate nohighlight">\(Recall = \frac{TP}{TP + FN}\)</span></p></li>
+<li><p><strong>F1-Score</strong>: The harmonic mean of Precision and Recall, providing a balance between the two. In image segmentation, the F1-Score is mathematically identical to the <strong>Dice Coefficient</strong> that we seen before.
+<span class="math notranslate nohighlight">\(F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} = \frac{2TP}{2TP + FP + FN}\)</span></p></li>
+</ul>
+<p>An F1-score near 1 means near-perfect balance with high accuracy and completeness, while a value near 0 means poor performance due to massive missed areas or excessive false alarms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">match_objects</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">min_iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
@@ -689,18 +761,29 @@ threshold: conventionally <strong>0.5</strong>.</p>
     <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">scores</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">iou</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dice</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="p">)</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> | "</span>
           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">tp</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">fp</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">fn</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">normalized_gt</span> <span class="o">=</span> <span class="p">(</span><span class="n">truth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">normalized_cp</span> <span class="o">=</span> <span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"Cellpose"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">normalized_gt</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"GT"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_single_rgb</span><span class="p">(</span><span class="n">normalized_cp</span><span class="p">,</span> <span class="s1">'red'</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Cellpose"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">make_composite_rgb</span><span class="p">(</span><span class="n">normalized_gt</span><span class="p">,</span> <span class="n">normalized_cp</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Composite GT (green) and Cellpose (red)"</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method              IoU   Dice |   TP   FP   FN |   prec  recall     F1
 -----------------------------------------------------------------------
-threshold         0.509  0.675 |   13   76   25 |  0.146   0.342  0.205
-Weka              0.878  0.935 |   10  297   28 |  0.033   0.263  0.058
-Weka+watershed    0.880  0.936 |   29  133    9 |  0.179   0.763  0.290
-Cellpose          0.909  0.953 |   34   18    4 |  0.654   0.895  0.756
+threshold         0.506  0.672 |    7   32  248 |  0.179   0.027  0.048
+Weka              0.905  0.950 |    6   39  249 |  0.133   0.024  0.040
+Weka+watershed    0.904  0.950 |   27   39  228 |  0.409   0.106  0.168
+Cellpose          0.915  0.955 |   30   12  225 |  0.714   0.118  0.202
 </pre></div>
 </div>
+<img alt="../_images/6cbb645399fb35d16ceb72b5ea6724cc435549926a21908d09b71e92666341c5.png" src="../_images/6cbb645399fb35d16ceb72b5ea6724cc435549926a21908d09b71e92666341c5.png" />
 </div>
 </div>
 <section id="read-the-two-weka-rows-against-each-other">
@@ -742,9 +825,9 @@ cells and missed one.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>annotated nuclei : 36
-annotated cells  : 38
-Cellpose objects : 52
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>annotated nuclei : 255
+annotated cells  : 255
+Cellpose objects : 42
 </pre></div>
 </div>
 </div>
@@ -786,10 +869,10 @@ conventions.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method                 0.3       0.5       0.7       0.9
 --------------------------------------------------------
-threshold            0.283     0.205     0.110     0.016
-Weka                 0.070     0.058     0.052     0.029
-Weka+watershed       0.330     0.290     0.200     0.020
-Cellpose             0.800     0.756     0.600     0.333
+threshold            0.102     0.048     0.027     0.000
+Weka                 0.047     0.040     0.033     0.007
+Weka+watershed       0.206     0.168     0.106     0.000
+Cellpose             0.222     0.202     0.189     0.047
 
 (F1 at each matching IoU threshold)
 </pre></div>
@@ -918,8 +1001,12 @@ starting point for measuring the objects that were found.</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-ground-truth">1. What is a ground truth?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-methods">3. Scoring the three methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-pixel-scores">2. The two pixel scores</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intersection-over-union-iou">Intersection over Union (IoU)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dice">Dice</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scoring-the-three-segementation-algorithms">3. Scoring the three segementation algorithms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching-objects-instead-of-pixels">4. Matching objects instead of pixels</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-two-weka-rows-against-each-other">Read the two Weka rows against each other</a></li>
 </ul>
