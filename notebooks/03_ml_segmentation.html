@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Machine learning for segmentation &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
+    <title>Machine learning for cell segmentation &#8212; Methods in Cell Analysis and Laboratory Automation: Image Analysis</title>
   
   
   
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="02_image_processing_ex.html">Exercise: image processing</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Machine learning for segmentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Machine learning for cell segmentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="03_ml_segmentation_ex.html">Exercise: machine learning for segmentation</a></li>
 </ul>
 </details></li>
@@ -378,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Machine learning for segmentation</h1>
+    <h1>Machine learning for cell segmentation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -388,12 +388,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fiji-classifier-in-python">1. The Fiji classifier, in Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-and-instance-segmentation">2. Semantic and instance segmentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">3. Cellpose</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-one-parameter-that-matters">4. The one parameter that matters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-methods-side-by-side">5. Three methods, side by side</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-hard-channel-need-all-this">6. Does the hard channel need all this?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-weka-probability-map-in-python">1. Loading a Weka probability map in Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-use-watershed-to-separate-touching-cells">Can we use watershed to separate touching cells?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-about-using-a-nuclear-segmentation-as-a-seed-for-watershed">How about using a nuclear segmentation as a seed for Watershed?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">3. Cellpose</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-cellpose-output">Inspecting the Cellpose output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose-with-both-channels-nuclei-cytoplasm">Cellpose with both channels (nuclei + cytoplasm)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
             </nav>
@@ -406,24 +410,18 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-for-segmentation">
-<h1>Machine learning for segmentation<a class="headerlink" href="#machine-learning-for-segmentation" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-for-cell-segmentation">
+<h1>Machine learning for cell segmentation<a class="headerlink" href="#machine-learning-for-cell-segmentation" title="Link to this heading">#</a></h1>
 <p><strong>Duration</strong> ~50 min  ·  <strong>Session</strong> Day 2, Python notebooks</p>
-<p>On day 1, a threshold worked reasonably well for nuclei but struggled with the
-cell channel. In Fiji, you trained a pixel classifier from pixels marked as cell or background.
-Here we will inspect its output in Python and compare it with Cellpose, a model
-trained on a larger collection of cell images.</p>
 <p><strong>This notebook covers</strong></p>
 <ul class="simple">
 <li><p>loading and interpreting a Weka probability map</p></li>
 <li><p>what a <em>pixel</em> classifier fundamentally cannot do</p></li>
 <li><p>running Cellpose, and tuning its one important parameter</p></li>
-<li><p>when deep learning is worth the trouble, and when it is not</p></li>
 </ul>
-<p><strong>Data</strong>: <code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code>, and the exports from the Fiji practical in
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/weka/</span></code>.</p>
-<section id="the-fiji-classifier-in-python">
-<h2>1. The Fiji classifier, in Python<a class="headerlink" href="#the-fiji-classifier-in-python" title="Link to this heading">#</a></h2>
+<p><strong>Data</strong>: <code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code> and Weka segmentations in <code class="docutils literal notranslate"><span class="pre">data/bbbc020/weka/</span></code>.</p>
+<section id="loading-a-weka-probability-map-in-python">
+<h2>1. Loading a Weka probability map in Python<a class="headerlink" href="#loading-a-weka-probability-map-in-python" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -437,198 +435,119 @@ trained on a larger collection of cell images.</p>
 
 <span class="n">FIELD</span> <span class="o">=</span> <span class="s2">"24h_2"</span>
 
-<span class="n">image</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells.tif"</span><span class="p">)</span>
+<span class="n">cells</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells.tif"</span><span class="p">)</span>
 <span class="n">truth</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"gt"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells_labels.tif"</span><span class="p">)</span>
 
 <span class="c1"># If you exported your own in E4, point this at results/weka/ instead.</span>
 <span class="n">weka_dir</span> <span class="o">=</span> <span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"weka"</span>
-<span class="n">probability</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">weka_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells_probability.tif"</span><span class="p">)</span>
-<span class="n">classified</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">weka_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells_classified.tif"</span><span class="p">)</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">weka_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells_probability_2.tif"</span><span class="p">)</span>
+<span class="n">binary_image</span> <span class="o">=</span> <span class="n">probability</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.3</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"image        :"</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"probability  :"</span><span class="p">,</span> <span class="n">probability</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">probability</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"range </span><span class="si">{</span><span class="n">probability</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">probability</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"classified   :"</span><span class="p">,</span> <span class="n">classified</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">classified</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="s2">"values"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">classified</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"image"</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">probability</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Weka probability map"</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Weka thresholded"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>image        : (348, 512) uint8
-probability  : (2, 348, 512) float32 range 0.00-1.00
-classified   : (348, 512) uint8 values [0 1]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x302218290&gt;
 </pre></div>
 </div>
+<img alt="../_images/4d484fb24ff644eff082fc152eacf944b6b850b2d9b3e62f2f686b140484b9d6.png" src="../_images/4d484fb24ff644eff082fc152eacf944b6b850b2d9b3e62f2f686b140484b9d6.png" />
 </div>
 </div>
-<p>The probability map has an <strong>extra first axis of length 2</strong>: one map per class.
-Weka reports, for every pixel, its confidence that the pixel belongs to each
-class. The classified image is just that, argmaxed: whichever class won.</p>
-<p>Before using the probability map, check <strong>which index represents which class</strong>.</p>
+<section id="can-we-use-watershed-to-separate-touching-cells">
+<h3>Can we use watershed to separate touching cells?<a class="headerlink" href="#can-we-use-watershed-to-separate-touching-cells" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Do NOT assume index 0 is the class you care about. Check it against something</span>
-<span class="c1"># you already know - here, that stained cells are brighter than background.</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">probability</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-    <span class="n">predicted</span> <span class="o">=</span> <span class="n">probability</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"probability[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]: covers </span><span class="si">{</span><span class="n">predicted</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">5.1%</span><span class="si">}</span><span class="s2"> of pixels, "</span>
-          <span class="sa">f</span><span class="s2">"mean image intensity there = </span><span class="si">{</span><span class="n">image</span><span class="p">[</span><span class="n">predicted</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"whole-image mean intensity = </span><span class="si">{</span><span class="n">image</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>probability[0]: covers 29.7% of pixels, mean image intensity there =   9.9
-probability[1]: covers 70.3% of pixels, mean image intensity there =  72.2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">maximum_filter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">watershed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance_transform_edt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian</span>
 
-whole-image mean intensity = 53.6
-</pre></div>
-</div>
-</div>
-</div>
-<p>Index <strong>1</strong> sits on the bright pixels, so that is the cell class. Assuming index 0
-would invert every result from here on, and would still produce perfectly
-reasonable-looking plots, which is the dangerous part.</p>
-<p>Class order comes from the order the classes were created in Fiji, and nothing in
-the file records which is which. <strong>It has to be checked against something already known.</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CELL</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seeds_from_peaks</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return a labeled array of seeds, one for each local maximum in `distance`."""</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input: CD11b channel"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">im1</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">probability</span><span class="p">[</span><span class="n">CELL</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"magma"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">();</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Weka probability of 'cell'"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.046</span><span class="p">)</span>
-<span class="n">show</span><span class="p">(</span><span class="n">classified</span> <span class="o">==</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Weka classification"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="c1"># maximum filter: replace pixels with the maximum value in a neighborhood</span>
+    <span class="n">seeds</span> <span class="o">=</span> <span class="n">maximum_filter</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># Compare the maximum-filtered image with the original distance transform: only keep pixels that are equal to the maximum in their neighborhood.</span>
+    <span class="n">seeds</span> <span class="o">=</span> <span class="p">(</span><span class="n">seeds</span> <span class="o">==</span> <span class="n">distance</span><span class="p">)</span>  <span class="c1"># True where the pixel is a local maximum</span>
+    <span class="n">seeds</span> <span class="o">=</span> <span class="n">seeds</span> <span class="o">*</span> <span class="n">mask</span>  <span class="c1"># only keep seeds that are in the mask</span>
+    <span class="n">seeds</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">seeds</span><span class="p">)</span>  <span class="c1"># label the seeds so that each gets a unique integer</span>
+
+    <span class="k">return</span> <span class="n">seeds</span>
+
+<span class="n">distance</span> <span class="o">=</span> <span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">binary_image</span><span class="p">)</span>
+<span class="n">smoothed_distance</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="n">seeds</span> <span class="o">=</span> <span class="n">seeds_from_peaks</span><span class="p">(</span><span class="n">smoothed_distance</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">smoothed_distance</span><span class="p">,</span> <span class="n">seeds</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">binary_image</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">cells</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">"segmentation of shaded image after watershed"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7814c93a788c1e7175295223d68961cddb5d2a348cd34454eb5acb10e6df4fca.png" src="../_images/7814c93a788c1e7175295223d68961cddb5d2a348cd34454eb5acb10e6df4fca.png" />
-</div>
-</div>
-<p>The probability map is the more informative of the two. Bright means “confident
-this is cell”, dark means “confident this is background”, and values around 0.5 near cell edges indicate uncertainty. A binary mask no longer
-shows that uncertainty.</p>
-<p>The classified image throws that away by taking whichever class scored above
-0.5. Keeping the probability leaves the cut-off open to be chosen later.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The cut-off is yours to choose. It is not automatically 0.5.</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]):</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">probability</span><span class="p">[</span><span class="n">CELL</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t</span>
-    <span class="n">show</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"p &gt; </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">mask</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2"> of pixels)"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x302377210&gt;
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/0fc46dce6f13c3207967d709d615420ac2623733e5dc249c375071d71470fd9e.png" src="../_images/0fc46dce6f13c3207967d709d615420ac2623733e5dc249c375071d71470fd9e.png" />
+<img alt="../_images/0565df78317b0f762836653fcbb58557f8bfc8faa717c0cc969dac996062bde3.png" src="../_images/0565df78317b0f762836653fcbb58557f8bfc8faa717c0cc969dac996062bde3.png" />
 </div>
 </div>
 </section>
-<section id="semantic-and-instance-segmentation">
-<h2>2. Semantic and instance segmentation<a class="headerlink" href="#semantic-and-instance-segmentation" title="Link to this heading">#</a></h2>
+<section id="how-about-using-a-nuclear-segmentation-as-a-seed-for-watershed">
+<h3>How about using a nuclear segmentation as a seed for Watershed?<a class="headerlink" href="#how-about-using-a-nuclear-segmentation-as-a-seed-for-watershed" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weka_mask</span> <span class="o">=</span> <span class="n">classified</span> <span class="o">==</span> <span class="n">CELL</span>
-<span class="n">weka_labels</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">weka_mask</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuclei</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_nuclei.tif"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"annotated cells    :"</span><span class="p">,</span> <span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Weka objects       :"</span><span class="p">,</span> <span class="n">weka_labels</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_otsu</span>
+<span class="c1"># watershed on gaussian blurred nuclei image</span>
+<span class="n">filtered_nuclei</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">filtered_nuclei</span><span class="p">)</span>
+<span class="n">binary_image_nuclei</span> <span class="o">=</span> <span class="n">filtered_nuclei</span> <span class="o">&gt;</span> <span class="n">t</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">show</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"nuclear image"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">filtered_nuclei</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"filtered nuclear image"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">binary_image_nuclei</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"binary nuclear image"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>annotated cells    : 23
-Weka objects       : 16
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x302243c50&gt;
+</pre></div>
+</div>
+<img alt="../_images/58c0f01f6105dae4efd5575e7a0ae934296affbcebcd6db382f1de84af48e49c.png" src="../_images/58c0f01f6105dae4efd5575e7a0ae934296affbcebcd6db382f1de84af48e49c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">binary_image</span><span class="p">)</span>
+<span class="n">smoothed_distance</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="n">seeds</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">binary_image_nuclei</span><span class="p">)</span>  <span class="c1"># use the nuclei as seeds</span>
+<span class="n">watershed_nuclear_seeds</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">smoothed_distance</span><span class="p">,</span> <span class="n">seeds</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">binary_image</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">cells</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Watershed on distance transform"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">watershed_nuclear_seeds</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">cells</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Watershed on nuclear seeds"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x302c77d10&gt;
+</pre></div>
 </div>
-<p>Twenty-three cells in the annotation. <strong>Sixteen</strong> objects from Weka.</p>
-<p>This is worth naming properly, because the distinction runs through the rest of
-the course:</p>
+<img alt="../_images/c615511240ac5e837431bc35923125641f7a7ed7da786ab9c132feeae4e63fe3.png" src="../_images/c615511240ac5e837431bc35923125641f7a7ed7da786ab9c132feeae4e63fe3.png" />
+</div>
+</div>
+<p>Watershed on nuclear is a good way to combine the two types of complementary informations:</p>
 <ul class="simple">
-<li><p><strong>Semantic segmentation</strong> answers <em>“what kind of thing is this pixel?”</em>. Weka
-gives exactly this: every pixel is labeled cell or background, and that
-is all.</p></li>
-<li><p><strong>Instance segmentation</strong> answers <em>“which object is this pixel part of?”</em>:
-cell number 7 rather than merely “a cell”.</p></li>
+<li><p>the foreground / background cell segmentation</p></li>
+<li><p>cell identity based on the nuclear segmentation</p></li>
 </ul>
-<p>Weka is a <em>pixel</em> classifier. It considers each pixel more or less on its own, so
-it has no concept of an object at all. When two cells touch, every pixel in both
-is correctly labeled “cell”, and connected-component labeling then quite
-reasonably calls the result one object. The classifier did its job; its job is
-just not the one needed here.</p>
-<p>The tool for turning semantic into instance has already appeared: the
-<strong>watershed</strong> from <code class="docutils literal notranslate"><span class="pre">02_image_processing</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance_transform_edt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">watershed</span>
-
-<span class="n">distance</span> <span class="o">=</span> <span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">weka_mask</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"largest distance-to-edge:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">distance</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"px"</span><span class="p">)</span>
-
-<span class="c1"># Same recipe as notebook 02: seeds are the cores of the mask, and the cut-off</span>
-<span class="c1"># is roughly the minimum object radius we insist on. These cells are far larger</span>
-<span class="c1"># than nuclei, so the cut-off has to be far larger too.</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"distance &gt; </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">  -&gt;  </span><span class="si">{</span><span class="n">label</span><span class="p">(</span><span class="n">distance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> seed(s)"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>largest distance-to-edge: 59.2 px
-distance &gt;  5  -&gt;  17 seed(s)
-distance &gt; 10  -&gt;  29 seed(s)
-distance &gt; 15  -&gt;  40 seed(s)
-distance &gt; 20  -&gt;  30 seed(s)
-distance &gt; 25  -&gt;  15 seed(s)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seeds</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">weka_instances</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span><span class="p">,</span> <span class="n">seeds</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">weka_mask</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">weka_labels</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Weka, semantic: </span><span class="si">{</span><span class="n">weka_labels</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">weka_instances</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"+ watershed: </span><span class="si">{</span><span class="n">weka_instances</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span> <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"truth: </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> cells"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/7691c664f0cfcca556d7054856fe9fc2a79c749270c81d444607d21babf5da9f.png" src="../_images/7691c664f0cfcca556d7054856fe9fc2a79c749270c81d444607d21babf5da9f.png" />
-</div>
-</div>
-<p>The watershed pulls the merged blobs apart, and promptly overshoots, landing
-above the annotation rather than below it.</p>
-<p>Notice how sensitive it is. For the nuclei in notebook 02 any cut-off from 5 to 8
-gave the same answer; here the count swings between 15 and 40 as the cut-off
-moves, and not even monotonically. <strong>There is no plateau to sit on</strong>, which means
-any value chosen here is a choice rather than something the data supports.</p>
-<p>A pixel classifier followed by a watershed can give a plausible count, but here
-the result depends strongly on the seed parameter. We will now try a method that
-produces object labels directly.</p>
-<div class="admonition-shallow-vs-deep-in-one-paragraph admonition">
-<p class="admonition-title">Shallow vs deep, in one paragraph</p>
-<p>Weka is <em>shallow</em> learning: <strong>the features are chosen by hand</strong> (Gaussian blur, edges,
-texture at various scales) and it learns how to weigh them. A <em>deep</em> network
-learns the features too, from data, which is why it needs a great deal of data,
-and why using one someone else already trained is usually the sensible move.</p>
-</div>
+</section>
 </section>
 <section id="cellpose">
 <h2>3. Cellpose<a class="headerlink" href="#cellpose" title="Link to this heading">#</a></h2>
@@ -644,7 +563,7 @@ additional training.</p></li>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cellpose</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
 
 <span class="c1"># `cyto` is the general cell model; there is also a `nuclei` model.</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">"cyto"</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">"cyto3"</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -652,7 +571,7 @@ additional training.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># diameter=None asks Cellpose to estimate object size itself.</span>
-<span class="n">masks</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">masks</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"estimated diameter : </span><span class="si">{</span><span class="n">diameter</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> px"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"objects found      : </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -661,204 +580,117 @@ additional training.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>estimated diameter : 65 px
-objects found      : 28
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>estimated diameter : 62 px
+objects found      : 26
 annotated          : 23
 </pre></div>
 </div>
 </div>
 </div>
+<section id="inspecting-the-cellpose-output">
+<h3>Inspecting the Cellpose output<a class="headerlink" href="#inspecting-the-cellpose-output" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cellpose: </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"truth: </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> cells"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">show</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">flows</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Cellpose foreground prediction"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">flows</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Cellpose flow field"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e70fd735be91bc3b37e0efe05e60d45b6d24c0f4cc3539fc40583e9c4639718f.png" src="../_images/e70fd735be91bc3b37e0efe05e60d45b6d24c0f4cc3539fc40583e9c4639718f.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x34d54b510&gt;
+</pre></div>
+</div>
+<img alt="../_images/64b3c9b6457002e04a25e23755c4dafe0b72461f89799f34169036e101a7b991.png" src="../_images/64b3c9b6457002e04a25e23755c4dafe0b72461f89799f34169036e101a7b991.png" />
 </div>
 </div>
-<p>The cells are separated: that is the thing Weka could not do.</p>
-<p>But look at the count. Cellpose found considerably more objects than the
-annotation has, and the reason <em>why</em> matters. Two possibilities, and they call
-for opposite responses:</p>
-<ol class="arabic simple">
-<li><p>Cellpose is over-segmenting, splitting single cells in two.</p></li>
-<li><p>Cellpose is finding real cells that the annotator did not outline.</p></li>
-</ol>
-<p><strong>Both are happening here.</strong> The BBBC020 cell annotations are known to be
-incomplete: on this field about 83% of the nuclei have a corresponding cell
-outline, and the rest of the cells are simply unlabelled. So some of that excess
-is real.</p>
-<p>A prediction without a matching annotation is not necessarily a false
-detection when annotations are incomplete. Inspect such objects in the image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">show</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">cells</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Cellpose: </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x3463ce690&gt;
+</pre></div>
+</div>
+<img alt="../_images/4363e2b50f50a6cf82d7c0fc4d43607ad1aad4676258c3e5089ed75736c26aad.png" src="../_images/4363e2b50f50a6cf82d7c0fc4d43607ad1aad4676258c3e5089ed75736c26aad.png" />
+</div>
+</div>
 </section>
-<section id="the-one-parameter-that-matters">
-<h2>4. The one parameter that matters<a class="headerlink" href="#the-one-parameter-that-matters" title="Link to this heading">#</a></h2>
+<section id="cellpose-with-both-channels-nuclei-cytoplasm">
+<h3>Cellpose with both channels (nuclei + cytoplasm)<a class="headerlink" href="#cellpose-with-both-channels-nuclei-cytoplasm" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">est</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="n">label_txt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"auto (</span><span class="si">{</span><span class="n">est</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">)"</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"diameter = </span><span class="si">{</span><span class="n">label_txt</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">  -&gt;  </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine the two images into one multichannel image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">cells</span><span class="p">,</span> <span class="n">nuclei</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Segment cells using both channels</span>
+<span class="n">masks</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">,</span>
+    <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">show</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">show</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">cells</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Cellpose: </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>diameter =  auto (65)  -&gt;   28 objects
-diameter =         20  -&gt;   36 objects
-diameter =         40  -&gt;   30 objects
-diameter =         80  -&gt;   27 objects
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x34d8de310&gt;
 </pre></div>
 </div>
+<img alt="../_images/c269ed4323aed3c389ddaf5aff8600694f40085bab5580a8b9cebb38e32c6ac0.png" src="../_images/c269ed4323aed3c389ddaf5aff8600694f40085bab5580a8b9cebb38e32c6ac0.png" />
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">diameter</span></code> tells Cellpose how big it should expect objects to be, and it rescales
-the image accordingly. Get it badly wrong and results collapse: too small and
-cells shatter into fragments, too large and neighbours merge.</p>
-<p>The automatic estimate is usually decent, but it is an estimate. <strong>If a Cellpose
-result looks wrong, this is the first thing to check</strong>, and it can be checked
-directly by measuring a few cells in Fiji and seeing whether the number is
-plausible.</p>
 </section>
-<section id="three-methods-side-by-side">
-<h2>5. Three methods, side by side<a class="headerlink" href="#three-methods-side-by-side" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_otsu</span><span class="p">,</span> <span class="n">gaussian</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.morphology</span><span class="w"> </span><span class="kn">import</span> <span class="n">remove_small_objects</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">binary_fill_holes</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">classical</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">seed_distance</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Yesterday's pipeline: smooth, threshold, clean, split."""</span>
-    <span class="n">smoothed</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">preserve_range</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">binary_fill_holes</span><span class="p">(</span><span class="n">smoothed</span> <span class="o">&gt;</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">smoothed</span><span class="p">))</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">remove_small_objects</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">)</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="n">label</span><span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">seed_distance</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-
-
-<span class="n">threshold_labels</span> <span class="o">=</span> <span class="n">classical</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'objects'</span><span class="si">:</span><span class="s2">&gt;8s</span><span class="si">}</span><span class="s2">   (truth: </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">34</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'threshold + watershed'</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">threshold_labels</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">8d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'Weka + watershed'</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">weka_instances</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">8d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'Cellpose'</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">8d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method                  objects   (truth: 23)
-----------------------------------
-threshold + watershed        19
-Weka + watershed             29
-Cellpose                     28
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"threshold + watershed"</span><span class="p">,</span> <span class="n">threshold_labels</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Weka + watershed"</span><span class="p">,</span> <span class="n">weka_instances</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Cellpose"</span><span class="p">,</span> <span class="n">masks</span><span class="p">),</span>
-<span class="p">]):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/6135361e59c50400d6c988e8f54209b5cd32d980eb515fd3bf4068b29ca8df8f.png" src="../_images/6135361e59c50400d6c988e8f54209b5cd32d980eb515fd3bf4068b29ca8df8f.png" />
-</div>
-</div>
-<p>Three plausible-looking results and three different counts, none of them equal to
-the annotation.</p>
-<p>Cellpose appears to separate neighbouring cells better, while the threshold
-result contains small specks. Object counts cannot establish which segmentation
-is better: two results can have the same count and label different cells.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">04_segmentation_metrics</span></code>, you will compare these results with annotations
-using pixel and object scores.</p>
-</section>
-<section id="does-the-hard-channel-need-all-this">
-<h2>6. Does the hard channel need all this?<a class="headerlink" href="#does-the-hard-channel-need-all-this" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The nuclei, for comparison - the channel that thresholded fine yesterday.</span>
-<span class="n">nuclei</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_nuclei.tif"</span><span class="p">)</span>
-<span class="n">nuclei_truth</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"gt"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_nuclei_labels.tif"</span><span class="p">)</span>
-
-<span class="n">nuclei_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">"nuclei"</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">nuclei_masks</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nuclei_model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">nuclei_classical</span> <span class="o">=</span> <span class="n">classical</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">seed_distance</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">''</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'threshold'</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Cellpose'</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'truth'</span><span class="si">:</span><span class="s2">&gt;7s</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'nuclei channel'</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nuclei_classical</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">10d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nuclei_masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">10d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nuclei_truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">7d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'cells channel'</span><span class="si">:</span><span class="s2">22s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">threshold_labels</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">10d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">10d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">7d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                        threshold   Cellpose   truth
-----------------------------------------------------
-nuclei channel                 21         21      22
-cells channel                  19         28      23
-</pre></div>
-</div>
-</div>
-</div>
-<p>The methods give similar counts for nuclei but differ on the cell channel.
-Nuclei are compact and bright against the background, so thresholding already
-works reasonably well. Cell boundaries are less distinct, and neighbouring
-cells often touch.</p>
-<p>Start with a method you can explain and check. If it misses objects or gives
-poor boundaries, try another method and compare the results with annotations.
-The next notebook makes that comparison.</p>
 </section>
 <section id="recap">
 <h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>learns</p></th>
-<th class="head"><p>outputs</p></th>
-<th class="head"><p>separates touching objects</p></th>
+<th class="head"><p>Training</p></th>
+<th class="head"><p>Output</p></th>
+<th class="head"><p>Separates touching objects</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>threshold</p></td>
-<td><p>nothing</p></td>
+<td><p>None</p></td>
 <td><p>pixels</p></td>
-<td><p>no (needs a watershed)</p></td>
+<td><p>no</p></td>
 </tr>
 <tr class="row-odd"><td><p>Weka</p></td>
-<td><p>weights on hand-chosen features</p></td>
-<td><p>pixels</p></td>
-<td><p><strong>no, structurally</strong></p></td>
+<td><p>Manual scribbles</p></td>
+<td><p>Semantic segmentation / pixel classes</p></td>
+<td><p>no</p></td>
 </tr>
-<tr class="row-even"><td><p>Cellpose</p></td>
-<td><p>features and weights, from data</p></td>
-<td><p><strong>objects</strong></p></td>
+<tr class="row-even"><td><p>Pixel classifier + Watershed</p></td>
+<td><p>Depends on the classifier</p></td>
+<td><p>Instance segmentation / objects</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cellpose</p></td>
+<td><p>Large ground truth dataset</p></td>
+<td><p>Instance segmentation / objects</p></td>
 <td><p>yes</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>These comparisons used images and object counts. Next, <code class="docutils literal notranslate"><span class="pre">04_segmentation_metrics</span></code>
-applies pixel and object metrics to the same results.</p>
+<p>For cells, Cellpose generally performs very well. However, for non-cell like objects which it has not been trained on, a pixel classifier might be a better choice.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -930,12 +762,16 @@ applies pixel and object metrics to the same results.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fiji-classifier-in-python">1. The Fiji classifier, in Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-and-instance-segmentation">2. Semantic and instance segmentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">3. Cellpose</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-one-parameter-that-matters">4. The one parameter that matters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-methods-side-by-side">5. Three methods, side by side</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-hard-channel-need-all-this">6. Does the hard channel need all this?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-weka-probability-map-in-python">1. Loading a Weka probability map in Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-use-watershed-to-separate-touching-cells">Can we use watershed to separate touching cells?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-about-using-a-nuclear-segmentation-as-a-seed-for-watershed">How about using a nuclear segmentation as a seed for Watershed?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">3. Cellpose</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-cellpose-output">Inspecting the Cellpose output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose-with-both-channels-nuclei-cytoplasm">Cellpose with both channels (nuclei + cytoplasm)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>

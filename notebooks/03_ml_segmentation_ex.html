@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Quality control: Segmentation metrics" href="04_segmentation_metrics.html" />
-    <link rel="prev" title="Machine learning for segmentation" href="03_ml_segmentation.html" />
+    <link rel="prev" title="Machine learning for cell segmentation" href="03_ml_segmentation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="02_image_processing_ex.html">Exercise: image processing</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="03_ml_segmentation.html">Machine learning for segmentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="03_ml_segmentation.html">Machine learning for cell segmentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercise: machine learning for segmentation</a></li>
 </ul>
 </details></li>
@@ -388,12 +388,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-load-the-classifier-output-and-find-the-cell-class">Task 1: load the classifier output and find the cell class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-semantic-to-instance">Task 2: semantic to instance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-split-them-with-a-watershed">Task 3: split them with a watershed</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-cellpose-and-the-diameter">Task 4: Cellpose, and the diameter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-put-the-three-side-by-side">Task 5: put the three side by side</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-finish-early">If you finish early</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-load-the-pixel-classifier-output-and-perform-a-watershed-segmentation">Task 1: Load the pixel classifier output and perform a watershed segmentation.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-segment-the-same-image-with-cellpose-once-using-only-the-cell-channel-and-once-using-both-the-cell-and-nuclei-channels">Task 2: Segment the same image with Cellpose, once using only the cell channel, and once using both the cell and nuclei channels.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-segment-the-cell-cytoplasm">Task 3: Segment the cell cytoplasm</a></li>
 </ul>
             </nav>
         </div>
@@ -408,120 +405,28 @@
   <section class="tex2jax_ignore mathjax_ignore" id="exercise-machine-learning-for-segmentation">
 <h1>Exercise: machine learning for segmentation<a class="headerlink" href="#exercise-machine-learning-for-segmentation" title="Link to this heading">#</a></h1>
 <p><strong>Duration</strong> ~40 min  ·  <strong>Session</strong> Day 2, Python notebooks</p>
-<p>A different field from the walkthrough, so your numbers will differ.</p>
+<p>Cell segmentation with a pixel classifier and Cellpose.</p>
 <p><strong>Data</strong>: <code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code> field <code class="docutils literal notranslate"><span class="pre">15min_1</span></code>, and the Weka export in
-<code class="docutils literal notranslate"><span class="pre">data/bbbc020/weka/</span></code>. If you exported your own in E4, use those
+<code class="docutils literal notranslate"><span class="pre">data/bbbc020/weka/15min_1_cells_probability_2.tif</span></code>. If you exported your own in E4, use those
 instead: point <code class="docutils literal notranslate"><span class="pre">WEKA</span></code> at <code class="docutils literal notranslate"><span class="pre">results/weka/</span></code> and the rest will work unchanged.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">tifffile</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">label2rgb</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance_transform_edt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">watershed</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tifffile</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">course</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA</span><span class="p">,</span> <span class="n">show</span>
-
-<span class="n">FIELD</span> <span class="o">=</span> <span class="s2">"15min_1"</span>
-<span class="n">WEKA</span> <span class="o">=</span> <span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"weka"</span>      <span class="c1"># or: Path("../results/weka")</span>
-
-<span class="n">image</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells.tif"</span><span class="p">)</span>
-<span class="n">truth</span> <span class="o">=</span> <span class="n">tifffile</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s2">"bbbc020"</span> <span class="o">/</span> <span class="s2">"gt"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">FIELD</span><span class="si">}</span><span class="s2">_cells_labels.tif"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"annotated cells:"</span><span class="p">,</span> <span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="task-1-load-the-classifier-output-and-find-the-cell-class">
-<h2>Task 1: load the classifier output and find the cell class<a class="headerlink" href="#task-1-load-the-classifier-output-and-find-the-cell-class" title="Link to this heading">#</a></h2>
-<p>Load <code class="docutils literal notranslate"><span class="pre">{FIELD}_cells_probability.tif</span></code> from the Weka folder. It has one map per
-class. Work out <strong>which index is the cell class</strong>, without looking at the ground
-truth.</p>
-<details>
-<summary>Hint 1: what shape is it?</summary>
-<p><code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">height,</span> <span class="pre">width)</span></code>: the first axis is the class. Print <code class="docutils literal notranslate"><span class="pre">.shape</span></code> to confirm.</p>
-</details>
-<details>
-<summary>Hint 2: how do I tell which is which?</summary>
-<p>Use something you already know about the image: stained cells are brighter than
-background. For each class, threshold its probability at 0.5 and take the mean
-of the <em>image</em> over those pixels.</p>
-</details><div class="cell docutils container">
+<section id="task-1-load-the-pixel-classifier-output-and-perform-a-watershed-segmentation">
+<h2>Task 1: Load the pixel classifier output and perform a watershed segmentation.<a class="headerlink" href="#task-1-load-the-pixel-classifier-output-and-perform-a-watershed-segmentation" title="Link to this heading">#</a></h2>
+<p>Use a nuclei segmentation to seed the watershed segmentation.</p>
+<p>Hint 1: First threshold the Weka output appropriately.</p>
+<p>Hint 2: In case the nuclei are not well separated, you could perform a distance transform based watershed segmentation on the nuclei, to then serve as seed for the watershed segmentation of the pixel classifier output.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
-<span class="n">probability</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: load the probability map</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"shape:"</span><span class="p">,</span> <span class="n">probability</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">probability</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-    <span class="n">predicted</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: this class's pixels</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"class </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: covers </span><span class="si">{</span><span class="n">predicted</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">5.1%</span><span class="si">}</span><span class="s2"> of pixels, "</span>
-          <span class="sa">f</span><span class="s2">"mean image intensity there = </span><span class="si">{</span><span class="o">...</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Your answer:</strong> which index is the cell class, and how do you know?
-<em>(edit this cell)</em></p>
-</section>
-<section id="task-2-semantic-to-instance">
-<h2>Task 2: semantic to instance<a class="headerlink" href="#task-2-semantic-to-instance" title="Link to this heading">#</a></h2>
-<p>Build the cell mask, label it, and report how many objects you get. Then say why
-that number is so far below the annotation.</p>
-<details>
-<summary>Hint</summary>
-<p><code class="docutils literal notranslate"><span class="pre">mask</span> <span class="pre">=</span> <span class="pre">probability[CELL]</span> <span class="pre">&gt;</span> <span class="pre">0.5</span></code>, then <code class="docutils literal notranslate"><span class="pre">label(mask).max()</span></code>.</p>
-</details><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CELL</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># set this from your answer to task 1</span>
-
-<span class="c1"># --- your turn ---</span>
-<span class="n">weka_mask</span> <span class="o">=</span> <span class="o">...</span>     <span class="c1"># TODO: the cell-class mask</span>
-<span class="n">weka_labels</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: label it</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Weka objects:"</span><span class="p">,</span> <span class="n">weka_labels</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"annotated   :"</span><span class="p">,</span> <span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Your answer:</strong> why does a pixel classifier under-count objects? Use the words
-<em>semantic</em> and <em>instance</em>. <em>(edit this cell)</em></p>
-</section>
-<section id="task-3-split-them-with-a-watershed">
-<h2>Task 3: split them with a watershed<a class="headerlink" href="#task-3-split-them-with-a-watershed" title="Link to this heading">#</a></h2>
-<p>Apply the watershed to the Weka mask, seeding it from a thresholded distance
-transform as in the walkthrough. Sweep the cut-off and pick a value.</p>
-<details>
-<summary>Hint 1: the three steps</summary>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
-<span class="n">seeds</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">distance</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span><span class="p">,</span> <span class="n">seeds</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-</pre></div>
-</div>
-</details>
-<details>
-<summary>Hint 2: what cut-off?</summary>
-<p>Print <code class="docutils literal notranslate"><span class="pre">distance.max()</span></code> first. The cut-off is roughly the smallest object
-“radius” you are prepared to accept, so it must be well below that maximum.
-Try a range and watch the object count.</p>
-</details>
-<details>
-<summary>Hint 3: why the minus sign?</summary>
-<p><code class="docutils literal notranslate"><span class="pre">watershed</span></code> floods upward from low ground, so the landscape has to be inverted:
-<code class="docutils literal notranslate"><span class="pre">-distance</span></code> turns each hilltop into a basin.</p>
-</details><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
-<span class="n">distance</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: distance transform of the mask</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"largest distance-to-edge:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">distance</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"px"</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
-    <span class="n">seeds</span> <span class="o">=</span> <span class="o">...</span>        <span class="c1"># TODO: label the cores above the cut-off</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"distance &gt; </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">seeds</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> seeds -&gt; "</span>
-          <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="o">...</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">)</span>   <span class="c1"># TODO: watershed, then .max()</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -529,82 +434,62 @@ Try a range and watch the object count.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
-<span class="n">weka_instances</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: watershed with your chosen cut-off</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="o">...</span> <span class="n">plot</span> <span class="n">semantic</span><span class="p">,</span> <span class="n">watershed</span> <span class="ow">and</span> <span class="n">truth</span> <span class="k">as</span> <span class="n">label2rgb</span> <span class="n">images</span> <span class="o">...</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="task-4-cellpose-and-the-diameter">
-<h2>Task 4: Cellpose, and the diameter<a class="headerlink" href="#task-4-cellpose-and-the-diameter" title="Link to this heading">#</a></h2>
-<p>Run Cellpose on the same image with <code class="docutils literal notranslate"><span class="pre">diameter=None</span></code>, then try several fixed
-diameters and see how much it matters.</p>
-<details>
-<summary>Hint 1: the call</summary>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cellpose</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">"cyto"</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">masks</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">diam</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>The first import takes a while: that is normal.</p>
-</details>
-<details>
-<summary>Hint 2: what does diameter do?</summary>
-<p>It tells Cellpose how large it should expect objects to be, and it rescales the
-image accordingly. Too small and cells shatter; too large and neighbours merge.</p>
-</details><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cellpose</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Cellpose</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">"cyto"</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
 
-<span class="c1"># --- your turn ---</span>
-<span class="n">masks</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">estimated</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># TODO: eval with diameter=None</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"estimated diameter: </span><span class="si">{</span><span class="n">estimated</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> px"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"objects found     : </span><span class="si">{</span><span class="n">masks</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">   (annotated: </span><span class="si">{</span><span class="n">truth</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">120</span><span class="p">]:</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="o">...</span>    <span class="c1"># TODO: eval with a fixed diameter</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"diameter = </span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">  -&gt;  </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> objects"</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">filtered_nuclei</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> how sensitive is the result to <code class="docutils literal notranslate"><span class="pre">diameter</span></code>? If a Cellpose result
-looked wrong, how would you check whether this was the cause?
-<em>(edit this cell)</em></p>
-</section>
-<section id="task-5-put-the-three-side-by-side">
-<h2>Task 5: put the three side by side<a class="headerlink" href="#task-5-put-the-three-side-by-side" title="Link to this heading">#</a></h2>
-<p>Plot the input, your Weka+watershed result, and your Cellpose result, with the
-annotation for reference. Then answer the question below.</p>
-<details>
-<summary>Hint</summary>
-<p>Reuse the four-panel figure from task 3, swapping in the Cellpose masks.</p>
-</details><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
-<span class="o">...</span> <span class="n">plot</span> <span class="nb">input</span><span class="p">,</span> <span class="n">Weka</span><span class="o">+</span><span class="n">watershed</span><span class="p">,</span> <span class="n">Cellpose</span> <span class="ow">and</span> <span class="n">truth</span> <span class="n">side</span> <span class="n">by</span> <span class="n">side</span> <span class="o">...</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Your answer:</strong> which result would you use, and, this is the harder half, how
-would you <em>demonstrate</em> to someone else that you were right? Note that you cannot
-yet, with only counts and pictures.
-<em>(edit this cell)</em></p>
-<p>That gap is what the next notebook fills.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="if-you-finish-early">
-<h2>If you finish early<a class="headerlink" href="#if-you-finish-early" title="Link to this heading">#</a></h2>
-<p>Try the <code class="docutils literal notranslate"><span class="pre">nuclei</span></code> model on <code class="docutils literal notranslate"><span class="pre">{FIELD}_nuclei.tif</span></code> and compare it with a plain
-threshold-and-watershed pipeline. Does the deep model earn its keep on the easy
-channel?</p>
+<section id="task-2-segment-the-same-image-with-cellpose-once-using-only-the-cell-channel-and-once-using-both-the-cell-and-nuclei-channels">
+<h2>Task 2: Segment the same image with Cellpose, once using only the cell channel, and once using both the cell and nuclei channels.<a class="headerlink" href="#task-2-segment-the-same-image-with-cellpose-once-using-only-the-cell-channel-and-once-using-both-the-cell-and-nuclei-channels" title="Link to this heading">#</a></h2>
+<p>Try varying the <code class="docutils literal notranslate"><span class="pre">diameter</span></code> parameter of Cellpose to see whether it improves the segmentation. It should be set to the approximate diameter of the cells in pixels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3-segment-the-cell-cytoplasm">
+<h2>Task 3: Segment the cell cytoplasm<a class="headerlink" href="#task-3-segment-the-cell-cytoplasm" title="Link to this heading">#</a></h2>
+<p>Hint: Use the result of applying different Cellpose models on different channel combinations for this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- your turn ---</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -644,7 +529,7 @@ channel?</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Machine learning for segmentation</p>
+        <p class="prev-next-title">Machine learning for cell segmentation</p>
       </div>
     </a>
     <a class="right-next"
@@ -674,12 +559,9 @@ channel?</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-load-the-classifier-output-and-find-the-cell-class">Task 1: load the classifier output and find the cell class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-semantic-to-instance">Task 2: semantic to instance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-split-them-with-a-watershed">Task 3: split them with a watershed</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-cellpose-and-the-diameter">Task 4: Cellpose, and the diameter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-5-put-the-three-side-by-side">Task 5: put the three side by side</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-finish-early">If you finish early</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-load-the-pixel-classifier-output-and-perform-a-watershed-segmentation">Task 1: Load the pixel classifier output and perform a watershed segmentation.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-segment-the-same-image-with-cellpose-once-using-only-the-cell-channel-and-once-using-both-the-cell-and-nuclei-channels">Task 2: Segment the same image with Cellpose, once using only the cell channel, and once using both the cell and nuclei channels.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-segment-the-cell-cytoplasm">Task 3: Segment the cell cytoplasm</a></li>
 </ul>
   </nav></div>
 
