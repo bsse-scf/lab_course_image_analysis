@@ -388,7 +388,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-labels-to-a-table">1. From labels to a table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-labels-to-a-table-of-measurements">1. From labels to a table of measurements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphology-features">2. Morphology features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-features">3. Intensity features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-across-a-whole-experiment">4. Measuring across a whole experiment</a></li>
@@ -421,9 +421,21 @@ analysis stops being about images and becomes ordinary data analysis.</p>
 <li><p>measuring one channel through another channel’s binary image</p></li>
 <li><p>comparing a measured population between conditions</p></li>
 </ul>
-<p><strong>Data</strong>: <code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code>, the nuclei and cells segmented so far. These images depict bone-marrow derived macrophages from C57BL/6 mice. Based on this experiment, the role of toll-like receptor 4 (TLR 4), Myd88 and MAPK for macrophage spreading was investigated. DAPI labels the nuclei and CD11b/APC the cell surface.</p>
-<section id="from-labels-to-a-table">
-<h2>1. From labels to a table<a class="headerlink" href="#from-labels-to-a-table" title="Link to this heading">#</a></h2>
+<p><strong>Data</strong>: <code class="docutils literal notranslate"><span class="pre">data/bbbc020/</span></code>, the nuclei and cells segmented so far. These images depict bone-marrow derived macrophages from C57BL/6 mice. Based on this experiment, the role of toll-like receptor 4 (TLR 4), Myd88 and MAPK for macrophage spreading was investigated. <strong>DAPI labels the nuclei and CD11b/APC the cell surface.</strong></p>
+<section id="from-labels-to-a-table-of-measurements">
+<h2>1. From labels to a table of measurements<a class="headerlink" href="#from-labels-to-a-table-of-measurements" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rp</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">DATA</span> <span class="o">/</span> <span class="s1">'misc'</span> <span class="o">/</span> <span class="s1">'sphx_glr_plot_regionprops_001.png'</span><span class="p">)</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">rp</span><span class="p">)</span>
+<span class="c1"># (image source: https://scikit-image.org/docs/stable/auto_examples/segmentation/plot_regionprops.html)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ab1f81d03903d90ff7ef8ef20ae783700e185df2bdf13bfa6e061a76d308e720.png" src="../_images/ab1f81d03903d90ff7ef8ef20ae783700e185df2bdf13bfa6e061a76d308e720.png" />
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
@@ -433,6 +445,7 @@ analysis stops being about images and becomes ordinary data analysis.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">course</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA</span><span class="p">,</span> <span class="n">show</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">rgb2gray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">iaf.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">show_labels</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">regionprops_table</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="p">;</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DISPLAY"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">":1"</span>
@@ -451,10 +464,10 @@ analysis stops being about images and becomes ordinary data analysis.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label image: (384, 512) uint16 | 65535 objects
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label image: (384, 512) uint16 | 33 objects
 </pre></div>
 </div>
-<img alt="../_images/addab3e1d8c3c2d9c9217596d6f7ea4a0cec6ea5e7654cc3d4193bfbffc90ce7.png" src="../_images/addab3e1d8c3c2d9c9217596d6f7ea4a0cec6ea5e7654cc3d4193bfbffc90ce7.png" />
+<img alt="../_images/a2652c48444d3be5cce42ecb3c3cc9f4d67d62736a7a11541f0121ee5128cf99.png" src="../_images/a2652c48444d3be5cce42ecb3c3cc9f4d67d62736a7a11541f0121ee5128cf99.png" />
 </div>
 </div>
 <p>We are using the <em>annotated</em> labels (ground truth) here rather than our own segmentation, so
@@ -467,14 +480,13 @@ would be the output of a segmentation pipeline or manual / expert ground truth.<
     <span class="n">properties</span><span class="o">=</span><span class="p">(</span><span class="s2">"label"</span><span class="p">,</span> <span class="s2">"area"</span><span class="p">,</span> <span class="s2">"perimeter"</span><span class="p">,</span> <span class="s2">"eccentricity"</span><span class="p">,</span> <span class="s2">"solidity"</span><span class="p">,</span> <span class="s2">"extent"</span><span class="p">),</span>
 <span class="p">)</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">features</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">features</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># we only show the first few elements of the table</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(36, 6)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(33, 6)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -507,47 +519,47 @@ would be the output of a segmentation pipeline or manual / expert ground truth.<
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>2683.0</td>
-      <td>211.296465</td>
-      <td>0.750343</td>
-      <td>0.926450</td>
-      <td>0.750490</td>
+      <td>367.0</td>
+      <td>74.284271</td>
+      <td>0.741365</td>
+      <td>0.933842</td>
+      <td>0.764583</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>5070.0</td>
-      <td>269.965512</td>
-      <td>0.635670</td>
-      <td>0.986381</td>
-      <td>0.804762</td>
+      <td>687.0</td>
+      <td>98.325902</td>
+      <td>0.625378</td>
+      <td>0.963534</td>
+      <td>0.748366</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>2519.0</td>
-      <td>204.752309</td>
-      <td>0.811341</td>
-      <td>0.937128</td>
-      <td>0.659597</td>
+      <td>334.0</td>
+      <td>73.012193</td>
+      <td>0.817711</td>
+      <td>0.922652</td>
+      <td>0.607273</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>4832.0</td>
-      <td>288.308658</td>
-      <td>0.827851</td>
-      <td>0.933720</td>
-      <td>0.683645</td>
+      <td>647.0</td>
+      <td>100.911688</td>
+      <td>0.831878</td>
+      <td>0.932277</td>
+      <td>0.660204</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>2806.0</td>
-      <td>200.545202</td>
-      <td>0.641503</td>
-      <td>0.980776</td>
-      <td>0.769189</td>
+      <td>373.0</td>
+      <td>72.183766</td>
+      <td>0.664171</td>
+      <td>0.953964</td>
+      <td>0.706439</td>
     </tr>
   </tbody>
 </table>
@@ -597,6 +609,7 @@ no intensities involved.</p>
 </div>
 <p>The last three are <strong>dimensionless ratios</strong>, which makes them far more portable
 than <code class="docutils literal notranslate"><span class="pre">area</span></code>: they do not change with magnification.</p>
+<p>Working with the measurement results table lets us summarize the data and calc the stats of all nuceli per feature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[[</span><span class="s2">"area"</span><span class="p">,</span> <span class="s2">"perimeter"</span><span class="p">,</span> <span class="s2">"eccentricity"</span><span class="p">,</span> <span class="s2">"solidity"</span><span class="p">,</span> <span class="s2">"extent"</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -714,10 +727,10 @@ than <code class="docutils literal notranslate"><span class="pre">area</span></c
 <img alt="../_images/ffba74c008ab8725e7905d44ada945e409803e068770b486d4c61d97c4200c97.png" src="../_images/ffba74c008ab8725e7905d44ada945e409803e068770b486d4c61d97c4200c97.png" />
 </div>
 </div>
-<p>Look at the spread. <code class="docutils literal notranslate"><span class="pre">area</span></code> ranges over a factor of nine, while <code class="docutils literal notranslate"><span class="pre">solidity</span></code> sits
+<p>It’s good practice to plot a histogram and look at the distribution of the data. For example, <code class="docutils literal notranslate"><span class="pre">area</span></code> ranges over a factor of five, while <code class="docutils literal notranslate"><span class="pre">solidity</span></code> sits
 between 0.93 and 0.98 for every single nucleus, because nuclei are convex blobs
 and solidity measures exactly that.</p>
-<p><strong>A feature with no variance carries no information.</strong> Solidity is useless for
+<p><strong>A feature with no variance carries no information.</strong> Therefore, solidity is useless for
 telling these nuclei apart.</p>
 </section>
 <section id="intensity-features">
@@ -1200,7 +1213,7 @@ preventing researchers from cherry-picking data that matches their assumptions.<
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-labels-to-a-table">1. From labels to a table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-labels-to-a-table-of-measurements">1. From labels to a table of measurements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morphology-features">2. Morphology features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intensity-features">3. Intensity features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-across-a-whole-experiment">4. Measuring across a whole experiment</a></li>
