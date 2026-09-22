@@ -948,10 +948,10 @@ conventions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">&gt;10.1f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'method'</span><span class="si">:</span><span class="s2">36s</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">&gt;10.1f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="p">(</span><span class="mi">16</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">36s</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
         <span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">match_objects</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">min_iou</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
         <span class="n">row</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scores</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">fn</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">10.3f</span><span class="si">}</span><span class="s2">"</span>
@@ -961,13 +961,13 @@ conventions.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method                 0.3       0.5       0.7       0.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method                                     0.3       0.5       0.7       0.9
 --------------------------------------------------------
-threshold            0.447     0.263     0.158     0.053
-Weka                 0.220     0.195     0.195     0.098
-Weka+watershed       0.680     0.602     0.427     0.058
-Cellpose             0.886     0.810     0.759     0.481
-Weka+processed+watershed+nuclei     0.917     0.861     0.750     0.222
+threshold                                0.447     0.263     0.158     0.053
+Weka                                     0.220     0.195     0.195     0.098
+Weka+watershed                           0.680     0.602     0.427     0.058
+Cellpose                                 0.886     0.810     0.759     0.481
+Weka+processed+watershed+nuclei          0.917     0.861     0.750     0.222
 
 (F1 at each matching IoU threshold)
 </pre></div>
