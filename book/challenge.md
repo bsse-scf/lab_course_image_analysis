@@ -30,7 +30,7 @@ The dataset is the file `plate01.zip` which you downloaded [earlier](./setup/dow
 
 ::::{dropdown} How to read wells from a ND2 file?
 
-On RRP, the dataset can be found under `openbis/data/20260819080658667-36/original/plate01.nd2`
+On RRP, the dataset can be found under `/home/jovyan/openbis/data/20260819080658667-36/original/plate01.nd2`
 
 Our image file is a `nd2` file which contains all wells of the experiment. It can be loaded using `iaf.io.readers.NikonND2Reader` as such:
 
