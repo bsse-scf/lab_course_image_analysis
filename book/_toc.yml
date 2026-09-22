@@ -23,6 +23,9 @@ parts:
                   - file: book/setup/setup_environment.md
                   - file: book/setup/download_data.md
               - file: book/setup/rrp.md
+                sections:
+                  - file: book/setup/rrp_using.md
+                  - file: book/setup/rrp_vpn.md
           - file: book/setup/swiss_ai.md
       - file: book/python_basics.md
         sections:
