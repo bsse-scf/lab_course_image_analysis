@@ -45,17 +45,17 @@ You can access the Nth series and DAPI channel as follows:
 series_0 = reader[0]  # get the first series
 data = series_0[0]
 ```
-
+::::
 
 ::::{dropdown} Downscaling the images
 
 For working on the challenge, processing will be much faster if you downscale the images before processing them. E.g.:
-```
+
+```python
 from skimage.transform import downscale_local_mean
 dapi_small = downscale_local_mean(dapi, (4, 4)) # downscale by 4 in x and y
-
-
-
+```
+::::
 
 ::::{dropdown} A Fiji macro starting point
 In case you decide to segment the images using Fiji, here is a starting point for a macro.
@@ -90,13 +90,14 @@ for (i = 1; i <= nSeries; i++) {
 
 setBatchMode(false);
 ```
-
+::::
 
 ::::{dropdown} Well ordering
 
 From looking at the different wells (called "series" in the ND2 file), how do you think the wells are ordered? Taking into account this order will be important when you calculate the dose-response curve, as you will need to know which series corresponds to which well.
-
+::::
 
 ::::{dropdown} Total cell numbers
 
 How many cells do you count after 48h of culture in the control wells (i.e. those without drug)? How does this compare to the expected number of cells (10240)?
+::::
