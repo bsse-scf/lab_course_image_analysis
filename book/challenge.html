@@ -490,35 +490,60 @@
 <h2>Hints<a class="headerlink" href="#hints" title="Link to this heading">#</a></h2>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">A Fiji macro starting point</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">In case you decide to segment the images using Fiji, here is a starting point for a macro.</p>
-<p class="sd-card-text">An ND2 file holds all 40 fields as separate <strong>series</strong>. Bio-Formats opens one
+<span class="sd-summary-text">How to read wells from a ND2 file?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">On RRP, the dataset can be found under <code class="docutils literal notranslate"><span class="pre">openbis/data/20260819080658667-36/original/plate01.nd2</span></code></p>
+<p class="sd-card-text">Our image file is a <code class="docutils literal notranslate"><span class="pre">nd2</span></code> file which contains all wells of the experiment. It can be loaded using <code class="docutils literal notranslate"><span class="pre">iaf.io.readers.NikonND2Reader</span></code> as such:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">iaf.io.readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">NikonND2Reader</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">NikonND2Reader</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sd-card-text">You can access the Nth series and DAPI channel as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">series_0</span> <span class="o">=</span> <span class="n">reader</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># get the first series</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">series_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Downscaling the images</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">For working on the challenge, processing will be much faster if you downscale the images before processing them. E.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>from skimage.transform import downscale_local_mean
+dapi_small = 
+
+
+
+
+::::{dropdown} A Fiji macro starting point
+In case you decide to segment the images using Fiji, here is a starting point for a macro.
+
+An ND2 file holds all 40 fields as separate **series**. Bio-Formats opens one
 series at a time, so the macro is a loop over series numbers with the processing
-inside it.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set this to your own copy of the file.</span>
-<span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"/path/to/plate01.nd2"</span><span class="p">;</span>
+inside it.
 
-<span class="n">nSeries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
-<span class="n">run</span><span class="p">(</span><span class="s">"Set Measurements..."</span><span class="p">,</span><span class="w"> </span><span class="s">"area mean redirect=None decimal=3"</span><span class="p">);</span>
+```java
+// Set this to your own copy of the file.
+path = "/path/to/plate01.nd2";
 
-<span class="n">setBatchMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-<span class="n">run</span><span class="p">(</span><span class="s">"Close All"</span><span class="p">);</span>
-<span class="n">run</span><span class="p">(</span><span class="s">"Clear Results"</span><span class="p">);</span>
+nSeries = 40;
+run("Set Measurements...", "area mean redirect=None decimal=3");
 
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">nSeries</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+setBatchMode(true);
+run("Close All");
+run("Clear Results");
 
-<span class="w">    </span><span class="n">run</span><span class="p">(</span><span class="s">"Bio-Formats Importer"</span><span class="p">,</span>
-<span class="w">        </span><span class="s">"open=["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"] autoscale color_mode=Default"</span><span class="w"> </span><span class="o">+</span>
-<span class="w">        </span><span class="s">" view=Hyperstack stack_order=XYCZT series_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+for (i = 1; i &lt;= nSeries; i++) {
 
-<span class="w">    </span><span class="c1">// The i-th series is now open.</span>
-<span class="w">    </span><span class="c1">// --&gt; your processing and Analyze Particles call go here.</span>
+    run("Bio-Formats Importer",
+        "open=[" + path + "] autoscale color_mode=Default" +
+        " view=Hyperstack stack_order=XYCZT series_" + i);
 
-<span class="w">    </span><span class="n">run</span><span class="p">(</span><span class="s">"Close All"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">"series "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" of "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nSeries</span><span class="p">);</span>
-<span class="p">}</span>
+    // The i-th series is now open.
+    // --&gt; your processing and Analyze Particles call go here.
 
-<span class="n">setBatchMode</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    run("Close All");
+    print("series " + i + " of " + nSeries);
+}
+
+setBatchMode(false);
 </pre></div>
 </div>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -530,6 +555,7 @@ inside it.</p>
 <span class="sd-summary-text">Total cell numbers</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">How many cells do you count after 48h of culture in the control wells (i.e. those without drug)? How does this compare to the expected number of cells (10240)?</p>
 </div>
+</details></div>
 </details></div>
 </details></div>
 </details></section>

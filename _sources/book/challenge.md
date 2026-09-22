@@ -28,6 +28,34 @@ The dataset is the file `plate01.zip` which you downloaded [earlier](./setup/dow
 
 ## Hints
 
+::::{dropdown} How to read wells from a ND2 file?
+
+On RRP, the dataset can be found under `openbis/data/20260819080658667-36/original/plate01.nd2`
+
+Our image file is a `nd2` file which contains all wells of the experiment. It can be loaded using `iaf.io.readers.NikonND2Reader` as such:
+
+```python
+from iaf.io.readers import NikonND2Reader
+reader = NikonND2Reader(file_path)
+```
+
+You can access the Nth series and DAPI channel as follows:
+
+```python
+series_0 = reader[0]  # get the first series
+data = series_0[0]
+```
+
+::::{dropdown} Downscaling the images
+
+For working on the challenge, processing will be much faster if you downscale the images before processing them. E.g.:
+```
+from skimage.transform import downscale_local_mean
+dapi_small = 
+
+
+
+
 ::::{dropdown} A Fiji macro starting point
 In case you decide to segment the images using Fiji, here is a starting point for a macro.
 
