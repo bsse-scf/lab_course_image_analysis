@@ -46,12 +46,13 @@ series_0 = reader[0]  # get the first series
 data = series_0[0]
 ```
 
+
 ::::{dropdown} Downscaling the images
 
 For working on the challenge, processing will be much faster if you downscale the images before processing them. E.g.:
 ```
 from skimage.transform import downscale_local_mean
-dapi_small = 
+dapi_small = downscale_local_mean(dapi, (4, 4)) # downscale by 4 in x and y
 
 
 
