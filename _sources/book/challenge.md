@@ -42,8 +42,8 @@ reader = NikonND2Reader(file_path)
 You can access the Nth series and DAPI channel as follows:
 
 ```python
-series_0 = reader[0]  # get the first series
-data = series_0[0]
+series_0 = reader[0]  # select the first series
+image_dapi = series_0[0] # select the first channel (DAPI)
 ```
 ::::
 

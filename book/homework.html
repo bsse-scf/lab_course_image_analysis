@@ -435,10 +435,10 @@
 <h2>Your tasks<a class="headerlink" href="#your-tasks" title="Link to this heading">#</a></h2>
 <p>Please mind that you are expected to work <strong>in pairs</strong> and that all the code you will submit should be in one or more <strong>Jupyter notebooks</strong>. In your solution, please perform the following tasks:</p>
 <ol class="arabic simple">
-<li><p>Register all <code class="docutils literal notranslate"><span class="pre">{DAPI,</span> <span class="pre">GFP,</span> <span class="pre">Cy3}</span></code> sets to get aligned images that can be processed for the purpose of quantifying the transfection efficiency. Pick the best template channel that gives you the best alignment. Which one is it? Why? Make sure to display the result of the registrations in you notebook.</p></li>
-<li><p>For each image triplet <code class="docutils literal notranslate"><span class="pre">{DAPI,</span> <span class="pre">GFP,</span> <span class="pre">Cy3}</span></code> , segment the nuclei and extract the corresponding (mean or median) GFP intensities. Which channel should you use for extracting nuclei and which for the GFP signal? Why?</p></li>
+<li><p>Register / align the channels <code class="docutils literal notranslate"><span class="pre">{DAPI,</span> <span class="pre">GFP,</span> <span class="pre">Cy3}</span></code> of each image to get aligned images that can be processed for the purpose of quantifying the transfection efficiency. The alignment function requires a template (or “fixed”) channel: Pick the most suitable one. Which one is it and why? Make sure to display the result of the registrations in you notebook.</p></li>
+<li><p>For each image, segment the nuclei and extract the corresponding (mean or median) GFP intensities.</p></li>
 <li><p>Pool all individual intensity results from each of the sets in a global list or array.</p></li>
-<li><p>Find a good approach to separate the positive from the negative nuclei and count the positive ones. You should expect to find an intensity distribution similar to this one (the function <a class="reference external" href="https://ia-res.ethz.ch/docs/iaf/stats/index.html#iaf.stats.prepare_histogram">iaf.stats.prepare_histogram()</a> can be used to calculate an histogram with optimal bin size):</p></li>
+<li><p>Find a good approach to separate the positive from the negative nuclei and count the positive ones. You’d expect to find an intensity distribution similar to this one (the function <a class="reference external" href="https://ia-res.ethz.ch/docs/iaf/stats/index.html#iaf.stats.prepare_histogram">iaf.stats.prepare_histogram()</a> can be used to calculate an histogram with optimal bin size):</p></li>
 </ol>
 <figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/populations.png"><img alt="../_images/populations.png" src="../_images/populations.png" style="width: 400px;" />
@@ -448,12 +448,12 @@
 </figcaption>
 </figure>
 <ol class="arabic simple" start="5">
-<li><p>Return the <strong>transfection efficiency</strong> as the ratio of positive nuclei to the total number of extracted nuclei.</p></li>
+<li><p>Return the <strong>transfection efficiency</strong> as the ratio of positive nuclei to the total number of extracted nuclei. If you don’t find a clear separation between the two populations, discuss the possible reasons and how you would improve the experiment to get a better separation.</p></li>
 </ol>
 </section>
 <section id="your-submission">
 <h2>Your submission<a class="headerlink" href="#your-submission" title="Link to this heading">#</a></h2>
-<p>Please upload a <strong>zip archive</strong> with your <strong>family names as part of the file name</strong> to <a class="reference external" href="https://u.ethz.ch/ZiBOJ">https://u.ethz.ch/ZiBOJ</a> containing the <strong>Jupyter notebook(s)</strong> with the code that implements all requested tasks and the corresponding results. You don’t need to submit any of the acquired images.</p>
+<p>Please upload a <strong>zip archive</strong> with your <strong>family names as part of the file name</strong> to <a class="reference external" href="https://u.ethz.ch/2Tymf">https://u.ethz.ch/2Tymf</a> containing the <strong>Jupyter notebook(s)</strong> with the code that implements all requested tasks and the corresponding results. You don’t need to submit any of the acquired images.</p>
 <p><strong>Deadline</strong> for submission is <strong>Sunday of the second week following the microscopy block</strong>. You may be required to resubmit your work for corrections or completion.</p>
 <p><strong>Have fun!</strong></p>
 </section>

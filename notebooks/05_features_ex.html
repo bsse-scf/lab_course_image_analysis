@@ -492,10 +492,8 @@ segmentation errors.</p>
 <h2>Task 2: turn shapes into numbers<a class="headerlink" href="#task-2-turn-shapes-into-numbers" title="Link to this heading">#</a></h2>
 <p>A labelled image is a collection of objects. <code class="docutils literal notranslate"><span class="pre">regionprops_table</span></code> lets us measure
 each object and turn the image into a table.</p>
-<p>Build one table with <strong>one row per worm</strong>. Keep the image (<code class="docutils literal notranslate"><span class="pre">well</span></code>) and the known
-group (<code class="docutils literal notranslate"><span class="pre">kind</span></code>) so that we can later ask whether the measurements actually separate
-the two groups.</p>
-<p>Use <strong>morphological features only</strong> and not any fluorescent channel intensity.</p>
+<p>Build one table with <strong>one row per object</strong>. Keep the source image in a column so that you can trace back each object to its original image.</p>
+<p>In terms of features, use <strong>morphological features only</strong> and not any fluorescent channel intensity.</p>
 <details>
 <summary>Hint 1: useful measurements</summary>
 <p>Try <code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">perimeter</span></code>, <code class="docutils literal notranslate"><span class="pre">eccentricity</span></code>, <code class="docutils literal notranslate"><span class="pre">solidity</span></code>, <code class="docutils literal notranslate"><span class="pre">extent</span></code>,
@@ -504,7 +502,7 @@ the two groups.</p>
 <details>
 <summary>Hint 2: the loop</summary>
 <p>For every path in <code class="docutils literal notranslate"><span class="pre">annotations</span></code>: read the labels, call <code class="docutils literal notranslate"><span class="pre">regionprops_table</span></code>, convert
-the result to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, add <code class="docutils literal notranslate"><span class="pre">well</span></code> and <code class="docutils literal notranslate"><span class="pre">kind</span></code>, and collect the tables. Finish
+the result to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, add <code class="docutils literal notranslate"><span class="pre">filename</span></code>, and collect the tables. Finish
 with <code class="docutils literal notranslate"><span class="pre">pd.concat</span></code>.</p>
 </details><div class="cell docutils container">
 <div class="cell_input docutils container">
