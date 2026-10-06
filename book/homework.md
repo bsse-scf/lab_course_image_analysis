@@ -25,13 +25,13 @@ As dataset you will use the pooled set of (approximately 10) image triplets (for
 
 Please mind that you are expected to work **in pairs** and that all the code you will submit should be in one or more **Jupyter notebooks**. In your solution, please perform the following tasks:
 
-1. Register all `{DAPI, GFP, Cy3}` sets to get aligned images that can be processed for the purpose of quantifying the transfection efficiency. Pick the best template channel that gives you the best alignment. Which one is it? Why? Make sure to display the result of the registrations in you notebook.
+1. Register / align the channels `{DAPI, GFP, Cy3}` of each image to get aligned images that can be processed for the purpose of quantifying the transfection efficiency. The alignment function requires a template (or "fixed") channel: Pick the most suitable one. Which one is it and why? Make sure to display the result of the registrations in you notebook.
 
-2. For each image triplet `{DAPI, GFP, Cy3}` , segment the nuclei and extract the corresponding (mean or median) GFP intensities. Which channel should you use for extracting nuclei and which for the GFP signal? Why?
+2. For each image, segment the nuclei and extract the corresponding (mean or median) GFP intensities.
 
 3. Pool all individual intensity results from each of the sets in a global list or array.
 
-4. Find a good approach to separate the positive from the negative nuclei and count the positive ones. You should expect to find an intensity distribution similar to this one (the function [iaf.stats.prepare_histogram()](https://ia-res.ethz.ch/docs/iaf/stats/index.html#iaf.stats.prepare_histogram) can be used to calculate an histogram with optimal bin size):
+4. Find a good approach to separate the positive from the negative nuclei and count the positive ones. You'd expect to find an intensity distribution similar to this one (the function [iaf.stats.prepare_histogram()](https://ia-res.ethz.ch/docs/iaf/stats/index.html#iaf.stats.prepare_histogram) can be used to calculate an histogram with optimal bin size):
 
 ```{figure} illustrations/populations.png
 :width: 400px
@@ -40,12 +40,11 @@ Please mind that you are expected to work **in pairs** and that all the code you
 Histogram of GFP intensities in the nuclei
 ```
 
-
-5. Return the **transfection efficiency** as the ratio of positive nuclei to the total number of extracted nuclei.
+5. Return the **transfection efficiency** as the ratio of positive nuclei to the total number of extracted nuclei. If you don't find a clear separation between the two populations, discuss the possible reasons and how you would improve the experiment to get a better separation.
 
 ## Your submission
 
-Please upload a **zip archive** with your **family names as part of the file name** to [https://u.ethz.ch/ZiBOJ](https://u.ethz.ch/ZiBOJ) containing the **Jupyter notebook(s)** with the code that implements all requested tasks and the corresponding results. You don't need to submit any of the acquired images.
+Please upload a **zip archive** with your **family names as part of the file name** to [https://u.ethz.ch/2Tymf](https://u.ethz.ch/2Tymf) containing the **Jupyter notebook(s)** with the code that implements all requested tasks and the corresponding results. You don't need to submit any of the acquired images.
 
 **Deadline** for submission is **Sunday of the second week following the microscopy block**. You may be required to resubmit your work for corrections or completion.
 
